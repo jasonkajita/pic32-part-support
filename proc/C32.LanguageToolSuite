@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<lti:LanguageToolSuite
+  lti:uuid="{2b27fef4-34b3-4ed4-9943-40459e639ae8}"
+  lti:name="MPLAB C for PIC32"
+  lti:version="1.12"
+  xmlns:lti="http://www.microchip.com/lti"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.microchip.com/lti lti/LanguageToolSuite.xsd">
+
+  <lti:BaseDir lti:dir=".."/>
+  <lti:DeviceFamily lti:family="pic32mx">
+    <lti:IncludeDir lti:dir="pic32mx/include"/>
+
+    <lti:Device lti:device="32M4KCORE"/>
+    <lti:Device lti:device="PIC32MX310F032H"/>
+    <lti:Device lti:device="PIC32MX320F032H"/>
+    <lti:Device lti:device="PIC32MX320F064H"/>
+    <lti:Device lti:device="PIC32MX320F128H"/>
+    <lti:Device lti:device="PIC32MX320F128L"/>
+    <lti:Device lti:device="PIC32MX340F128H"/>
+    <lti:Device lti:device="PIC32MX340F128L"/>
+    <lti:Device lti:device="PIC32MX340F256H"/>
+    <lti:Device lti:device="PIC32MX340F512H"/>
+    <lti:Device lti:device="PIC32MX360F256L"/>
+    <lti:Device lti:device="PIC32MX360F512L"/>
+    <lti:Device lti:device="PIC32MX420F032H"/>
+    <lti:Device lti:device="PIC32MX440F128H"/>
+    <lti:Device lti:device="PIC32MX440F128L"/>
+    <lti:Device lti:device="PIC32MX440F256H"/>
+    <lti:Device lti:device="PIC32MX440F512H"/>
+    <lti:Device lti:device="PIC32MX460F256L"/>
+    <lti:Device lti:device="PIC32MX460F512L"/>
+    <lti:Device lti:device="PIC32MX534F064H"/>
+    <lti:Device lti:device="PIC32MX534F064L"/>
+    <lti:Device lti:device="PIC32MX564F064H"/>
+    <lti:Device lti:device="PIC32MX564F064L"/>
+    <lti:Device lti:device="PIC32MX564F128H"/>
+    <lti:Device lti:device="PIC32MX564F128L"/>
+    <lti:Device lti:device="PIC32MX575F256H"/>
+    <lti:Device lti:device="PIC32MX575F256L"/>
+    <lti:Device lti:device="PIC32MX575F512H"/>
+    <lti:Device lti:device="PIC32MX575F512L"/>
+    <lti:Device lti:device="PIC32MX664F064H"/>
+    <lti:Device lti:device="PIC32MX664F064L"/>
+    <lti:Device lti:device="PIC32MX664F128H"/>
+    <lti:Device lti:device="PIC32MX664F128L"/>
+    <lti:Device lti:device="PIC32MX675F256H"/>
+    <lti:Device lti:device="PIC32MX675F256L"/>
+    <lti:Device lti:device="PIC32MX675F512H"/>
+    <lti:Device lti:device="PIC32MX675F512L"/>
+    <lti:Device lti:device="PIC32MX695F512H"/>
+    <lti:Device lti:device="PIC32MX695F512L"/>
+    <lti:Device lti:device="PIC32MX764F128H"/>
+    <lti:Device lti:device="PIC32MX764F128L"/>
+    <lti:Device lti:device="PIC32MX775F256H"/>
+    <lti:Device lti:device="PIC32MX775F256L"/>
+    <lti:Device lti:device="PIC32MX775F512H"/>
+    <lti:Device lti:device="PIC32MX775F512L"/>
+    <lti:Device lti:device="PIC32MX795F512H"/>
+    <lti:Device lti:device="PIC32MX795F512L"/>
+    <lti:Device lti:device="PIC32MXGENERIC"/>
+
+  </lti:DeviceFamily>
+</lti:LanguageToolSuite>
+
+
