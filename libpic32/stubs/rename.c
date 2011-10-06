@@ -1,9 +1,4 @@
 /*********************************************************************
- * Processor:       PIC32
- *
- * Compiler:        MPLAB C Compiler for PIC32 MCUs
- * Company:         Microchip Technology Inc.
- *
  * Software License Agreement
  *
  * The software supplied herewith by Microchip Technology Incorporated

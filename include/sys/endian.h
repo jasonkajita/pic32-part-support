@@ -1,5 +1,3 @@
-/*	$OpenBSD: endian.h,v 1.5 2000/10/25 21:43:29 deraadt Exp $	*/
-
 /*-
  * Copyright (c) 1997 Niklas Hallqvist.  All rights reserved.
  *
