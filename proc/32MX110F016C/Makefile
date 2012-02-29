@@ -16,5 +16,5 @@ install-src:
 clean:
 	rm -rf $(OUTPUTFILE)
 
-$(OUTPUTFILE): p32mx310f032h.S
+$(OUTPUTFILE): p32mx110f016c.S
 	$(CC) -c -o $@ $(SIZE_OPTION) $?
