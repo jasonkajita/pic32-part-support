@@ -44,8 +44,6 @@ extern "C" {
 #include <stdint.h>
 #define __SFR_t uint32_t
 #endif
-
-
 extern volatile __SFR_t        WDTCON __attribute__((section("sfrs")));
 typedef union {
   struct {
@@ -3683,14 +3681,11 @@ typedef union {
   };
 } __DEVCFG0bits_t;
 extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((section("sfrs")));
-
 #ifdef __cplusplus
 }
 #endif
 
 #elif defined (__LANGUAGE_ASSEMBLY__)
-
-
   .extern WDTCON           /* 0xBF800000 */
   .extern WDTCONCLR        /* 0xBF800004 */
   .extern WDTCONSET        /* 0xBF800008 */

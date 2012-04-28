@@ -44,8 +44,6 @@ extern "C" {
 #include <stdint.h>
 #define __SFR_t uint32_t
 #endif
-
-
 extern volatile __SFR_t        WDTCON __attribute__((section("sfrs")));
 typedef union {
   struct {
@@ -4735,6 +4733,8 @@ typedef union {
     unsigned BWP:1;
     unsigned :3;
     unsigned CP:1;
+    unsigned :2;
+    unsigned RESERVED:1;
   };
   struct {
     unsigned FDEBUG:2;
@@ -4744,14 +4744,11 @@ typedef union {
   };
 } __DEVCFG0bits_t;
 extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((section("sfrs")));
-
 #ifdef __cplusplus
 }
 #endif
 
 #elif defined (__LANGUAGE_ASSEMBLY__)
-
-
   .extern WDTCON           /* 0xBF800000 */
   .extern WDTCONCLR        /* 0xBF800004 */
   .extern WDTCONSET        /* 0xBF800008 */
@@ -13372,6 +13369,10 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DEVCFG0_CP_POSITION                     0x0000001C
 #define _DEVCFG0_CP_MASK                         0x10000000
 #define _DEVCFG0_CP_LENGTH                       0x00000001
+
+#define _DEVCFG0_RESERVED_POSITION               0x0000001F
+#define _DEVCFG0_RESERVED_MASK                   0x80000000
+#define _DEVCFG0_RESERVED_LENGTH                 0x00000001
 
 #define _DEVCFG0_FDEBUG_POSITION                 0x00000000
 #define _DEVCFG0_FDEBUG_MASK                     0x00000003

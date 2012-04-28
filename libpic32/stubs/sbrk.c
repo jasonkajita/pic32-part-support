@@ -66,15 +66,15 @@ static pthread_mutex_t sbmx = PTHREAD_MUTEX_INITIALIZER;
 static void *	curbrk = 0;
 
 #ifndef MINHEAP
-#define MINHEAP		(64 * 1024)
+#define MINHEAP		(2 * 1024)
 #endif
 
 #ifndef MAXSTACK
-#define MAXSTACK	(32 * 1024)
+#define MAXSTACK	(2 * 1024)
 #endif
 
 #ifndef PAGESIZE
-#define PAGESIZE 32
+#define PAGESIZE 128
 #endif
 
 #define SBD_MEM_END     0

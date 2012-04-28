@@ -44,8 +44,6 @@ extern "C" {
 #include <stdint.h>
 #define __SFR_t uint32_t
 #endif
-
-
 extern volatile __SFR_t        WDTCON __attribute__((section("sfrs")));
 typedef union {
   struct {
@@ -1711,7 +1709,7 @@ typedef struct {
   unsigned JTAGEN:1;
 } __DDPCONbits_t;
 extern volatile __DDPCONbits_t DDPCONbits __asm__ ("DDPCON") __attribute__((section("sfrs")));
-extern          unsigned int        DEVID __attribute__((section("sfrs")));
+extern          __SFR_t        DEVID __attribute__((section("sfrs")));
 extern volatile __SFR_t        SYSKEY __attribute__((section("sfrs")));
 extern volatile __SFR_t        NVMCON __attribute__((section("sfrs")));
 typedef union {
@@ -4052,14 +4050,11 @@ extern volatile __CNPUEbits_t CNPUEbits __asm__ ("CNPUE") __attribute__((section
 extern volatile __SFR_t        CNPUECLR __attribute__((section("sfrs")));
 extern volatile __SFR_t        CNPUESET __attribute__((section("sfrs")));
 extern volatile __SFR_t        CNPUEINV __attribute__((section("sfrs")));
-
 #ifdef __cplusplus
 }
 #endif
 
 #elif defined (__LANGUAGE_ASSEMBLY__)
-
-
   .extern WDTCON           /* 0xBF800000 */
   .extern WDTCONCLR        /* 0xBF800004 */
   .extern WDTCONSET        /* 0xBF800008 */
