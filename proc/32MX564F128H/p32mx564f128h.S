@@ -1,33 +1,34 @@
 #-------------------------------------------------------------------------
-# chipKIT for Microchip PIC32 MCUs -- PIC32MX564F128H definition module
-#
+# chipKIT for Microchip PIC32 MCUs -  PIC32MX564F128H MCU definition module
+# 
 # This software is developed by Microchip Technology Inc. and its
 # subsidiaries ("Microchip").
-#
+# 
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#
+# modification, are permitted provided that the following conditions are 
+# met:
+# 
 # 1.      Redistributions of source code must retain the above copyright
-# notice, this list of conditions and the following disclaimer.
-#
-# 2.      Redistributions in binary form must reproduce the above copyright
-# notice, this list of conditions and the following disclaimer in the
-# documentation and/or other materials provided with the distribution.
-#
+#         notice, this list of conditions and the following disclaimer.
+# 2.      Redistributions in binary form must reproduce the above 
+#         copyright notice, this list of conditions and the following 
+#         disclaimer in the documentation and/or other materials provided 
+#         with the distribution.
 # 3.      Microchip's name may not be used to endorse or promote products
-# derived from this software without specific prior written permission.
-#
+#         derived from this software without specific prior written 
+#         permission.
+# 
 # THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED
 # WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-# MERCHANTABILITY AND FITNESS FOR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL
-# MICROCHIP BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# MERCHANTABILITY AND FITNESS FOR PURPOSE ARE DISCLAIMED. IN NO EVENT 
+# SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
 # EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
 # PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS;
 # OR BUSINESS INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
+# 
 #-------------------------------------------------------------------------
 
 WDTCON = 0xBF800000
@@ -1408,6 +1409,12 @@ DEVID = 0xBF80F220
   .global DEVID
 SYSKEY = 0xBF80F230
   .global SYSKEY
+SYSKEYCLR = 0xBF80F234
+  .global SYSKEYCLR
+SYSKEYSET = 0xBF80F238
+  .global SYSKEYSET
+SYSKEYINV = 0xBF80F23C
+  .global SYSKEYINV
 NVMCON = 0xBF80F400
   .global NVMCON
 NVMCONCLR = 0xBF80F404
@@ -1612,6 +1619,14 @@ IPC9SET = 0xBF881128
   .global IPC9SET
 IPC9INV = 0xBF88112C
   .global IPC9INV
+IPC10 = 0xBF881130
+  .global IPC10
+IPC10CLR = 0xBF881134
+  .global IPC10CLR
+IPC10SET = 0xBF881138
+  .global IPC10SET
+IPC10INV = 0xBF88113C
+  .global IPC10INV
 IPC11 = 0xBF881140
   .global IPC11
 IPC11CLR = 0xBF881144
@@ -2424,38 +2439,6 @@ U1EP15SET = 0xBF8853F8
   .global U1EP15SET
 U1EP15INV = 0xBF8853FC
   .global U1EP15INV
-TRISA = 0xBF886000
-  .global TRISA
-TRISACLR = 0xBF886004
-  .global TRISACLR
-TRISASET = 0xBF886008
-  .global TRISASET
-TRISAINV = 0xBF88600C
-  .global TRISAINV
-PORTA = 0xBF886010
-  .global PORTA
-PORTACLR = 0xBF886014
-  .global PORTACLR
-PORTASET = 0xBF886018
-  .global PORTASET
-PORTAINV = 0xBF88601C
-  .global PORTAINV
-LATA = 0xBF886020
-  .global LATA
-LATACLR = 0xBF886024
-  .global LATACLR
-LATASET = 0xBF886028
-  .global LATASET
-LATAINV = 0xBF88602C
-  .global LATAINV
-ODCA = 0xBF886030
-  .global ODCA
-ODCACLR = 0xBF886034
-  .global ODCACLR
-ODCASET = 0xBF886038
-  .global ODCASET
-ODCAINV = 0xBF88603C
-  .global ODCAINV
 TRISB = 0xBF886040
   .global TRISB
 TRISBCLR = 0xBF886044

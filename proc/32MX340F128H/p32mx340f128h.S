@@ -1,33 +1,34 @@
 #-------------------------------------------------------------------------
-# chipKIT for Microchip PIC32 MCUs -- PIC32MX340F128H definition module
-#
+# chipKIT for Microchip PIC32 MCUs -  PIC32MX340F128H MCU definition module
+# 
 # This software is developed by Microchip Technology Inc. and its
 # subsidiaries ("Microchip").
-#
+# 
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#
+# modification, are permitted provided that the following conditions are 
+# met:
+# 
 # 1.      Redistributions of source code must retain the above copyright
-# notice, this list of conditions and the following disclaimer.
-#
-# 2.      Redistributions in binary form must reproduce the above copyright
-# notice, this list of conditions and the following disclaimer in the
-# documentation and/or other materials provided with the distribution.
-#
+#         notice, this list of conditions and the following disclaimer.
+# 2.      Redistributions in binary form must reproduce the above 
+#         copyright notice, this list of conditions and the following 
+#         disclaimer in the documentation and/or other materials provided 
+#         with the distribution.
 # 3.      Microchip's name may not be used to endorse or promote products
-# derived from this software without specific prior written permission.
-#
+#         derived from this software without specific prior written 
+#         permission.
+# 
 # THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED
 # WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-# MERCHANTABILITY AND FITNESS FOR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL
-# MICROCHIP BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# MERCHANTABILITY AND FITNESS FOR PURPOSE ARE DISCLAIMED. IN NO EVENT 
+# SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
 # EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
 # PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS;
 # OR BUSINESS INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
+# 
 #-------------------------------------------------------------------------
 
 WDTCON = 0xBF800000
@@ -774,6 +775,12 @@ DEVID = 0xBF80F220
   .global DEVID
 SYSKEY = 0xBF80F230
   .global SYSKEY
+SYSKEYCLR = 0xBF80F234
+  .global SYSKEYCLR
+SYSKEYSET = 0xBF80F238
+  .global SYSKEYSET
+SYSKEYINV = 0xBF80F23C
+  .global SYSKEYINV
 NVMCON = 0xBF80F400
   .global NVMCON
 NVMCONCLR = 0xBF80F404
@@ -812,6 +819,26 @@ RSWRSTSET = 0xBF80F618
   .global RSWRSTSET
 RSWRSTINV = 0xBF80F61C
   .global RSWRSTINV
+_DDPSTAT = 0xBF880140
+  .global _DDPSTAT
+_STRO = 0xBF880170
+  .global _STRO
+_STROCLR = 0xBF880174
+  .global _STROCLR
+_STROSET = 0xBF880178
+  .global _STROSET
+_STROINV = 0xBF88017C
+  .global _STROINV
+_APPO = 0xBF880180
+  .global _APPO
+_APPOCLR = 0xBF880184
+  .global _APPOCLR
+_APPOSET = 0xBF880188
+  .global _APPOSET
+_APPOINV = 0xBF88018C
+  .global _APPOINV
+_APPI = 0xBF880190
+  .global _APPI
 INTCON = 0xBF881000
   .global INTCON
 INTCONCLR = 0xBF881004
@@ -846,14 +873,6 @@ IFS1SET = 0xBF881048
   .global IFS1SET
 IFS1INV = 0xBF88104C
   .global IFS1INV
-IFS2 = 0xBF881050
-  .global IFS2
-IFS2CLR = 0xBF881054
-  .global IFS2CLR
-IFS2SET = 0xBF881058
-  .global IFS2SET
-IFS2INV = 0xBF88105C
-  .global IFS2INV
 IEC0 = 0xBF881060
   .global IEC0
 IEC0CLR = 0xBF881064
@@ -870,14 +889,6 @@ IEC1SET = 0xBF881078
   .global IEC1SET
 IEC1INV = 0xBF88107C
   .global IEC1INV
-IEC2 = 0xBF881080
-  .global IEC2
-IEC2CLR = 0xBF881084
-  .global IEC2CLR
-IEC2SET = 0xBF881088
-  .global IEC2SET
-IEC2INV = 0xBF88108C
-  .global IEC2INV
 IPC0 = 0xBF881090
   .global IPC0
 IPC0CLR = 0xBF881094

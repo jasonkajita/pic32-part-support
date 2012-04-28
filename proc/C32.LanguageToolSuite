@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <lti:LanguageToolSuite
-  lti:uuid="{2b27fef4-34b3-4ed4-9943-40459e639ae8}"
-  lti:name="MPLAB C for PIC32"
-  lti:version="1.12"
+  lti:uuid="{ec0473c6-f276-4a29-9b4a-41f899a460a2}"
+  lti:name="chipKIT for PIC32"
+  lti:version="1.31"
+  lti:partsupportversion="A"
   xmlns:lti="http://www.microchip.com/lti"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.microchip.com/lti lti/LanguageToolSuite.xsd">
@@ -12,7 +13,30 @@
     <lti:IncludeDir lti:dir="pic32mx/include"/>
 
     <lti:Device lti:device="32M4KCORE"/>
-    <lti:Device lti:device="PIC32MX310F032H"/>
+    <lti:Device lti:device="PIC32MX110F016B"/>
+    <lti:Device lti:device="PIC32MX110F016C"/>
+    <lti:Device lti:device="PIC32MX110F016D"/>
+    <lti:Device lti:device="PIC32MX120F032B"/>
+    <lti:Device lti:device="PIC32MX120F032C"/>
+    <lti:Device lti:device="PIC32MX120F032D"/>
+    <lti:Device lti:device="PIC32MX130F064B"/>
+    <lti:Device lti:device="PIC32MX130F064C"/>
+    <lti:Device lti:device="PIC32MX130F064D"/>
+    <lti:Device lti:device="PIC32MX150F128B"/>
+    <lti:Device lti:device="PIC32MX150F128C"/>
+    <lti:Device lti:device="PIC32MX150F128D"/>
+    <lti:Device lti:device="PIC32MX210F016B"/>
+    <lti:Device lti:device="PIC32MX210F016C"/>
+    <lti:Device lti:device="PIC32MX210F016D"/>
+    <lti:Device lti:device="PIC32MX220F032B"/>
+    <lti:Device lti:device="PIC32MX220F032C"/>
+    <lti:Device lti:device="PIC32MX220F032D"/>
+    <lti:Device lti:device="PIC32MX230F064B"/>
+    <lti:Device lti:device="PIC32MX230F064C"/>
+    <lti:Device lti:device="PIC32MX230F064D"/>
+    <lti:Device lti:device="PIC32MX250F128B"/>
+    <lti:Device lti:device="PIC32MX250F128C"/>
+    <lti:Device lti:device="PIC32MX250F128D"/>
     <lti:Device lti:device="PIC32MX320F032H"/>
     <lti:Device lti:device="PIC32MX320F064H"/>
     <lti:Device lti:device="PIC32MX320F128H"/>
