@@ -35,6 +35,10 @@
 /* only one prcess support, as this is OS dependant */
 #define __MYPID 1
 
+int kill (int pid,
+          int sig);
+int _exit (int);
+
 int
 kill (int pid,
       int sig)

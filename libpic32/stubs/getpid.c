@@ -35,6 +35,9 @@
 /* only one prcess support, as this is OS dependant */
 #define __MYPID 1
 
+int
+getpid ();
+
 /*
  * getpid -- only one process, so just return 1.
  */
