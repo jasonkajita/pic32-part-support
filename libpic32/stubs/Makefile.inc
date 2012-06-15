@@ -16,6 +16,8 @@ LIBOBJ += getenv.o
 LIBOBJ += rename.o
 LIBOBJ += fstat.o
 LIBOBJ += c32_uart.o
+LIBOBJ += kill.o
+LIBOBJ += getpid.o
 
 # LIBOBJ += stubs.o
 #LIBOBJ += getenv.o
