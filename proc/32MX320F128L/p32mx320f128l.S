@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------
-# chipKIT for Microchip PIC32 MCUs -  PIC32MX320F128L MCU definition module
+# MPLAB XC Compiler -  PIC32MX320F128L processor definition module
 # 
 # This software is developed by Microchip Technology Inc. and its
 # subsidiaries ("Microchip").
@@ -1319,4 +1319,5 @@ DEVCFG1 = 0xBFC02FF8
   .global DEVCFG1
 DEVCFG0 = 0xBFC02FFC
   .global DEVCFG0
+
 

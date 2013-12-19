@@ -1,26 +1,26 @@
 /*-------------------------------------------------------------------------
- * chipKIT for Microchip PIC32 MCUs
  *
  * This software is developed by Microchip Technology Inc. and its
  * subsidiaries ("Microchip").
  *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * modification, are permitted provided that the following conditions are
+ * met:
  *
  * 1.      Redistributions of source code must retain the above copyright
- * notice, this list of conditions and the following disclaimer.
- *
- * 2.      Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * documentation and/or other materials provided with the distribution.
- *
+ *         notice, this list of conditions and the following disclaimer.
+ * 2.      Redistributions in binary form must reproduce the above
+ *         copyright notice, this list of conditions and the following
+ *         disclaimer in the documentation and/or other materials provided
+ *         with the distribution.
  * 3.      Microchip's name may not be used to endorse or promote products
- * derived from this software without specific prior written permission.
+ *         derived from this software without specific prior written
+ *         permission.
  *
  * THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS FOR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL
- * MICROCHIP BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * MERCHANTABILITY AND FITNESS FOR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS;
  * OR BUSINESS INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY,
@@ -30,35 +30,64 @@
  *
  *-------------------------------------------------------------------------*/
 
+#pragma once
+
 #ifndef __CP0DEFS__H__
 #define __CP0DEFS__H__
 /*
  * Contains register definitions for the CP0 registers and bits and macros
- * to access the CP0 registers.  This file is included in p32xxxx.h and
+ * to access the CP0 registers.  This file is included in xc.h and
  * depends on macro definitions found in that file.  To use this file
- * include p32xxxx.h
+ * include xc.h
  */
 
 #ifdef __LANGUAGE_ASSEMBLY__
 /* CP0 Register Defines
  * #define _CP0_<register_name> <register_number>, <select_number>
  */
+#define _CP0_INDEX                             $0, 0
+#define _CP0_INX                               $0, 0
+#define _CP0_RANDOM                            $1, 0
+#define _CP0_RAND                              $1, 0
+#define _CP0_ENTRYLO0                          $2, 0
+#define _CP0_TLBLO0                            $2, 0
+#define _CP0_ENTRYLO1                          $3, 0
+#define _CP0_TLBLO1                            $3, 0
+#define _CP0_CONTEXT                           $4, 0
+#define _CP0_CTXT                              $4, 0
+#define _CP0_USERLOCAL                         $4, 2
+#define _CP0_PAGEMASK                          $5, 0
+#define _CP0_PAGEGRAIN                         $5, 1
+#define _CP0_WIRED                             $6, 0
 #define _CP0_HWRENA                            $7, 0
 #define _CP0_BADVADDR                          $8, 0
 #define _CP0_COUNT                             $9, 0
+#define _CP0_ENTRYHI                           $10, 0
 #define _CP0_COMPARE                           $11, 0
 #define _CP0_STATUS                            $12, 0
 #define _CP0_INTCTL                            $12, 1
 #define _CP0_SRSCTL                            $12, 2
 #define _CP0_SRSMAP                            $12, 3
+#define _CP0_VIEW_IPL                          $12, 4
+#define _CP0_SRSMAP2                           $12, 5
 #define _CP0_CAUSE                             $13, 0
+#define _CP0_VIEW_RIPL                         $13, 1
+#define _CP0_NESTEDEXC                         $13, 2
 #define _CP0_EPC                               $14, 0
+#define _CP0_NESTEDEPC                         $14, 1
 #define _CP0_PRID                              $15, 0
 #define _CP0_EBASE                             $15, 1
+#define _CP0_CDMMBASE                          $15, 2
 #define _CP0_CONFIG                            $16, 0
 #define _CP0_CONFIG1                           $16, 1
 #define _CP0_CONFIG2                           $16, 2
 #define _CP0_CONFIG3                           $16, 3
+#define _CP0_CONFIG4                           $16, 4
+#define _CP0_CONFIG5                           $16, 5
+#define _CP0_CONFIG7                           $16, 7
+#define _CP0_LLADDR                            $17, 0
+#define _CP0_WATCHLO                           $18, 0
+#define _CP0_WATCHHI                           $19, 0
 #define _CP0_DEBUG                             $23, 0
 #define _CP0_TRACECONTROL                      $23, 1
 #define _CP0_TRACECONTROL2                     $23, 2
@@ -66,17 +95,55 @@
 #define _CP0_TRACEBPC                          $23, 4
 #define _CP0_DEBUG2                            $23, 5
 #define _CP0_DEPC                              $24, 0
+#define _CP0_USERTRACEDATA2                    $24, 1
+#define _CP0_PERFCNT0_CONTROL                  $25, 0
+#define _CP0_PERFCNT0_COUNT                    $25, 1
+#define _CP0_PERFCNT1_CONTROL                  $25, 2
+#define _CP0_PERFCNT1_COUNT                    $25, 3
+#define _CP0_ERRCTL                            $26, 0
+#define _CP0_CACHEERR                          $27, 0
+#define _CP0_TAGLO                             $28, 0
+#define _CP0_DATALO                            $28, 1
 #define _CP0_ERROREPC                          $30, 0
 #define _CP0_DESAVE                            $31, 0
 
 #else
-
+#define _CP0_INDEX                             0
+#define _CP0_INDEX_SELECT                      0
+#define _CP0_INX                               0
+#define _CP0_INX_SELECT                        0
+#define _CP0_RANDOM                            1
+#define _CP0_RANDOM_SELECT                     0
+#define _CP0_RAND                              1
+#define _CP0_RAND_SELECT                       0
+#define _CP0_ENTRYLO0                          2
+#define _CP0_ENTRYLO0_SELECT                   0
+#define _CP0_TLBLO0                            2
+#define _CP0_TLBLO0_SELECT                     0
+#define _CP0_ENTRYLO1                          3
+#define _CP0_ENTRYLO1_SELECT                   0
+#define _CP0_TLBLO1                            3
+#define _CP0_TLBLO1_SELECT                     0
+#define _CP0_CONTEXT                           4
+#define _CP0_CONTEXT_SELECT                    0
+#define _CP0_CTXT                              4
+#define _CP0_CTXT_SELECT                       0
+#define _CP0_USERLOCAL                         4
+#define _CP0_USERLOCAL_SELECT                  2
+#define _CP0_PAGEMASK                          5
+#define _CP0_PAGEMASK_SELECT                   0
+#define _CP0_PAGEGRAIN                         5
+#define _CP0_PAGEGRAIN_SELECT                  1
+#define _CP0_WIRED                             6
+#define _CP0_WIRED_SELECT                      0
 #define _CP0_HWRENA                            7
 #define _CP0_HWRENA_SELECT                     0
 #define _CP0_BADVADDR                          8
 #define _CP0_BADVADDR_SELECT                   0
 #define _CP0_COUNT                             9
 #define _CP0_COUNT_SELECT                      0
+#define _CP0_ENTRYHI                           10
+#define _CP0_ENTRYHI_SELECT                    0
 #define _CP0_COMPARE                           11
 #define _CP0_COMPARE_SELECT                    0
 #define _CP0_STATUS                            12
@@ -87,14 +154,26 @@
 #define _CP0_SRSCTL_SELECT                     2
 #define _CP0_SRSMAP                            12
 #define _CP0_SRSMAP_SELECT                     3
+#define _CP0_VIEW_IPL                          12
+#define _CP0_VIEW_IPL_SELECT                   4
+#define _CP0_SRSMAP2                           12
+#define _CP0_SRSMAP2_SELECT                    5
 #define _CP0_CAUSE                             13
 #define _CP0_CAUSE_SELECT                      0
+#define _CP0_VIEW_RIPL                         13
+#define _CP0_VIEW_RIPL_SELECT                  1
+#define _CP0_NESTEDEXC                         13
+#define _CP0_NESTEDEXC_SELECT                  2
 #define _CP0_EPC                               14
 #define _CP0_EPC_SELECT                        0
+#define _CP0_NESTEDEPC                         14
+#define _CP0_NESTEDEPC_SELECT                  1
 #define _CP0_PRID                              15
 #define _CP0_PRID_SELECT                       0
 #define _CP0_EBASE                             15
 #define _CP0_EBASE_SELECT                      1
+#define _CP0_CDMMBASE                          15
+#define _CP0_CDMMBASE_SELECT                   2
 #define _CP0_CONFIG                            16
 #define _CP0_CONFIG_SELECT                     0
 #define _CP0_CONFIG1                           16
@@ -103,6 +182,18 @@
 #define _CP0_CONFIG2_SELECT                    2
 #define _CP0_CONFIG3                           16
 #define _CP0_CONFIG3_SELECT                    3
+#define _CP0_CONFIG4                           16
+#define _CP0_CONFIG4_SELECT                    4
+#define _CP0_CONFIG5                           16
+#define _CP0_CONFIG5_SELECT                    5
+#define _CP0_CONFIG7                           16
+#define _CP0_CONFIG7_SELECT                    7
+#define _CP0_LLADDR                            17
+#define _CP0_LLADDR_SELECT                     0
+#define _CP0_WATCHLO                           18
+#define _CP0_WATCHLO_SELECT                    0
+#define _CP0_WATCHHI                           19
+#define _CP0_WATCHHI_SELECT                    0
 #define _CP0_DEBUG                             23
 #define _CP0_DEBUG_SELECT                      0
 #define _CP0_TRACECONTROL                      23
@@ -117,10 +208,105 @@
 #define _CP0_DEBUG2_SELEECT                    5
 #define _CP0_DEPC                              24
 #define _CP0_DEPC_SELECT                       0
+#define _CP0_USERTRACEDATA2                    24
+#define _CP0_USERTRACEDATA2_SELECT             1
+#define _CP0_PERFCNT                           25
+#define _CP0_PERFCNT0_CONTROL                  25
+#define _CP0_PERFCNT0_CONTROL_SELECT           0
+#define _CP0_PERFCNT0_COUNT                    25
+#define _CP0_PERFCNT0_COUNT_SELECT             1
+#define _CP0_PERFCNT1_CONTROL                  25
+#define _CP0_PERFCNT1_CONTROL_SELECT           2
+#define _CP0_PERFCNT1_COUNT                    25
+#define _CP0_PERFCNT1_COUNT_SELECT             3
+#define _CP0_ERRCTL                            26
+#define _CP0_ERRCTL_SELECT                     0
+#define _CP0_CACHEERR                          27
+#define _CP0_CACHEERR_SELECT                   0
+#define _CP0_TAGLO                             28
+#define _CP0_TAGLO_SELECT                      0
+#define _CP0_DATALO                            28
+#define _CP0_DATALO_SELECT                     1
 #define _CP0_ERROREPC                          30
 #define _CP0_ERROREPC_SELECT                   0
 #define _CP0_DESAVE                            31
 #define _CP0_DESAVE_SELECT                     0
+
+#define _CP0_GET_INDEX()      _mfc0 (_CP0_INDEX, _CP0_INDEX_SELECT)
+#define _CP0_SET_INDEX(val)   _mtc0 (_CP0_INDEX, _CP0_INDEX_SELECT, val)
+#define _CP0_XCH_INDEX(val)   _mxc0 (_CP0_INDEX, _CP0_INDEX_SELECT, val)
+#define _CP0_BIC_INDEX(clr)   _bcc0 (_CP0_INDEX, _CP0_INDEX_SELECT, clr)
+#define _CP0_BIS_INDEX(set)   _bsc0 (_CP0_INDEX, _CP0_INDEX_SELECT, set)
+#define _CP0_BCS_INDEX(c,s)   _bcsc0(_CP0_INDEX, _CP0_INDEX_SELECT, c, s)
+
+#define _CP0_GET_INX()      _mfc0 (_CP0_INX, _CP0_INX_SELECT)
+#define _CP0_SET_INX(val)   _mtc0 (_CP0_INX, _CP0_INX_SELECT, val)
+#define _CP0_XCH_INX(val)   _mxc0 (_CP0_INX, _CP0_INX_SELECT, val)
+#define _CP0_BIC_INX(clr)   _bcc0 (_CP0_INX, _CP0_INX_SELECT, clr)
+#define _CP0_BIS_INX(set)   _bsc0 (_CP0_INX, _CP0_INX_SELECT, set)
+#define _CP0_BCS_INX(c,s)   _bcsc0(_CP0_INX, _CP0_INX_SELECT, c, s)
+
+#define _CP0_GET_RANDOM()    _mfc0 (_CP0_RANDOM, _CP0_RANDOM_SELECT)
+
+#define _CP0_GET_RAND()    _mfc0 (_CP0_RAND, _CP0_RAND_SELECT)
+
+#define _CP0_GET_ENTRYLO0()      _mfc0 (_CP0_ENTRYLO0, _CP0_ENTRYLO0_SELECT)
+#define _CP0_SET_ENTRYLO0(val)   _mtc0 (_CP0_ENTRYLO0, _CP0_ENTRYLO0_SELECT, val)
+#define _CP0_XCH_ENTRYLO0(val)   _mxc0 (_CP0_ENTRYLO0, _CP0_ENTRYLO0_SELECT, val)
+#define _CP0_BIC_ENTRYLO0(clr)   _bcc0 (_CP0_ENTRYLO0, _CP0_ENTRYLO0_SELECT, clr)
+#define _CP0_BIS_ENTRYLO0(set)   _bsc0 (_CP0_ENTRYLO0, _CP0_ENTRYLO0_SELECT, set)
+#define _CP0_BCS_ENTRYLO0(c,s)   _bcsc0(_CP0_ENTRYLO0, _CP0_ENTRYLO0_SELECT, c, s)
+
+#define _CP0_GET_TLBLO0()      _mfc0 (_CP0_TLBLO0, _CP0_TLBLO0_SELECT)
+#define _CP0_SET_TLBLO0(val)   _mtc0 (_CP0_TLBLO0, _CP0_TLBLO0_SELECT, val)
+#define _CP0_XCH_TLBLO0(val)   _mxc0 (_CP0_TLBLO0, _CP0_TLBLO0_SELECT, val)
+#define _CP0_BIC_TLBLO0(clr)   _bcc0 (_CP0_TLBLO0, _CP0_TLBLO0_SELECT, clr)
+#define _CP0_BIS_TLBLO0(set)   _bsc0 (_CP0_TLBLO0, _CP0_TLBLO0_SELECT, set)
+#define _CP0_BCS_TLBLO0(c,s)   _bcsc0(_CP0_TLBLO0, _CP0_TLBLO0_SELECT, c, s)
+
+#define _CP0_GET_ENTRYLO1()      _mfc0 (_CP0_ENTRYLO1, _CP0_ENTRYLO1_SELECT)
+#define _CP0_SET_ENTRYLO1(val)   _mtc0 (_CP0_ENTRYLO1, _CP0_ENTRYLO1_SELECT, val)
+#define _CP0_XCH_ENTRYLO1(val)   _mxc0 (_CP0_ENTRYLO1, _CP0_ENTRYLO1_SELECT, val)
+#define _CP0_BIC_ENTRYLO1(clr)   _bcc0 (_CP0_ENTRYLO1, _CP0_ENTRYLO1_SELECT, clr)
+#define _CP0_BIS_ENTRYLO1(set)   _bsc0 (_CP0_ENTRYLO1, _CP0_ENTRYLO1_SELECT, set)
+#define _CP0_BCS_ENTRYLO1(c,s)   _bcsc0(_CP0_ENTRYLO1, _CP0_ENTRYLO1_SELECT, c, s)
+
+#define _CP0_GET_TLBLO1()      _mfc0 (_CP0_TLBLO1, _CP0_TLBLO1_SELECT)
+#define _CP0_SET_TLBLO1(val)   _mtc0 (_CP0_TLBLO1, _CP0_TLBLO1_SELECT, val)
+#define _CP0_XCH_TLBLO1(val)   _mxc0 (_CP0_TLBLO1, _CP0_TLBLO1_SELECT, val)
+#define _CP0_BIC_TLBLO1(clr)   _bcc0 (_CP0_TLBLO1, _CP0_TLBLO1_SELECT, clr)
+#define _CP0_BIS_TLBLO1(set)   _bsc0 (_CP0_TLBLO1, _CP0_TLBLO1_SELECT, set)
+#define _CP0_BCS_TLBLO1(c,s)   _bcsc0(_CP0_TLBLO1, _CP0_TLBLO1_SELECT, c, s)
+
+#define _CP0_GET_CONTEXT()      _mfc0 (_CP0_CONTEXT, _CP0_CONTEXT_SELECT)
+#define _CP0_SET_CONTEXT(val)   _mtc0 (_CP0_CONTEXT, _CP0_CONTEXT_SELECT, val)
+#define _CP0_XCH_CONTEXT(val)   _mxc0 (_CP0_CONTEXT, _CP0_CONTEXT_SELECT, val)
+#define _CP0_BIC_CONTEXT(clr)   _bcc0 (_CP0_CONTEXT, _CP0_CONTEXT_SELECT, clr)
+#define _CP0_BIS_CONTEXT(set)   _bsc0 (_CP0_CONTEXT, _CP0_CONTEXT_SELECT, set)
+#define _CP0_BCS_CONTEXT(c,s)   _bcsc0(_CP0_CONTEXT, _CP0_CONTEXT_SELECT, c, s)
+
+#define _CP0_GET_CTXT()      _mfc0 (_CP0_CTXT, _CP0_CTXT_SELECT)
+#define _CP0_SET_CTXT(val)   _mtc0 (_CP0_CTXT, _CP0_CTXT_SELECT, val)
+#define _CP0_XCH_CTXT(val)   _mxc0 (_CP0_CTXT, _CP0_CTXT_SELECT, val)
+#define _CP0_BIC_CTXT(clr)   _bcc0 (_CP0_CTXT, _CP0_CTXT_SELECT, clr)
+#define _CP0_BIS_CTXT(set)   _bsc0 (_CP0_CTXT, _CP0_CTXT_SELECT, set)
+#define _CP0_BCS_CTXT(c,s)   _bcsc0(_CP0_CTXT, _CP0_CTXT_SELECT, c, s)
+
+#define _CP0_GET_USERLOCAL()      _mfc0 (_CP0_USERLOCAL, _CP0_USERLOCAL_SELECT)
+#define _CP0_SET_USERLOCAL(val)   _mtc0 (_CP0_USERLOCAL, _CP0_USERLOCAL_SELECT, val)
+
+#define _CP0_GET_PAGEMASK()       _mfc0 (_CP0_PAGEMASK, _CP0_PAGEMASK_SELECT)
+#define _CP0_SET_PAGEMASK(val)    _mtc0 (_CP0_PAGEMASK, _CP0_PAGEMASK_SELECT, val)
+
+#define _CP0_GET_PAGEGRAIN()      _mfc0 (_CP0_PAGEGRAIN, _CP0_PAGEGRAIN_SELECT)
+#define _CP0_SET_PAGEGRAIN(val)   _mtc0 (_CP0_PAGEGRAIN, _CP0_PAGEGRAIN_SELECT, val)
+#define _CP0_XCH_PAGEGRAIN(val)   _mxc0 (_CP0_PAGEGRAIN, _CP0_PAGEGRAIN_SELECT, val)
+#define _CP0_BIC_PAGEGRAIN(clr)   _bcc0 (_CP0_PAGEGRAIN, _CP0_PAGEGRAIN_SELECT, clr)
+#define _CP0_BIS_PAGEGRAIN(set)   _bsc0 (_CP0_PAGEGRAIN, _CP0_PAGEGRAIN_SELECT, set)
+#define _CP0_BCS_PAGEGRAIN(c,s)   _bcsc0(_CP0_PAGEGRAIN, _CP0_PAGEGRAIN_SELECT, c, s)
+
+#define _CP0_GET_WIRED()       _mfc0 (_CP0_WIRED, _CP0_WIRED_SELECT)
+#define _CP0_SET_WIRED(val)    _mtc0 (_CP0_WIRED, _CP0_WIRED_SELECT, val)
 
 #define _CP0_GET_HWRENA()      _mfc0 (_CP0_HWRENA, _CP0_HWRENA_SELECT)
 #define _CP0_SET_HWRENA(val)   _mtc0 (_CP0_HWRENA, _CP0_HWRENA_SELECT, val)
@@ -133,6 +319,16 @@
 
 #define _CP0_GET_COUNT()       _mfc0 (_CP0_COUNT, _CP0_COUNT_SELECT)
 #define _CP0_SET_COUNT(val)    _mtc0 (_CP0_COUNT, _CP0_COUNT_SELECT, val)
+
+#define _CP0_GET_COUNT()       _mfc0 (_CP0_COUNT, _CP0_COUNT_SELECT)
+#define _CP0_SET_COUNT(val)    _mtc0 (_CP0_COUNT, _CP0_COUNT_SELECT, val)
+
+#define _CP0_GET_ENTRYHI()      _mfc0 (_CP0_ENTRYHI, _CP0_ENTRYHI_SELECT)
+#define _CP0_SET_ENTRYHI(val)   _mtc0 (_CP0_ENTRYHI, _CP0_ENTRYHI_SELECT, val)
+#define _CP0_XCH_ENTRYHI(val)   _mxc0 (_CP0_ENTRYHI, _CP0_ENTRYHI_SELECT, val)
+#define _CP0_BIC_ENTRYHI(clr)   _bcc0 (_CP0_ENTRYHI, _CP0_ENTRYHI_SELECT, clr)
+#define _CP0_BIS_ENTRYHI(set)   _bsc0 (_CP0_ENTRYHI, _CP0_ENTRYHI_SELECT, set)
+#define _CP0_BCS_ENTRYHI(c,s)   _bcsc0(_CP0_ENTRYHI, _CP0_ENTRYHI_SELECT, c, s)
 
 #define _CP0_GET_COMPARE()     _mfc0 (_CP0_COMPARE, _CP0_COMPARE_SELECT)
 #define _CP0_SET_COMPARE(val)  _mtc0 (_CP0_COMPARE, _CP0_COMPARE_SELECT, val)
@@ -156,6 +352,17 @@
 #define _CP0_SET_SRSMAP(val)   _mtc0 (_CP0_SRSMAP, _CP0_SRSMAP_SELECT, val)
 #define _CP0_XCH_SRSMAP(val)   _mxc0 (_CP0_SRSMAP, _CP0_SRSMAP_SELECT, val)
 
+#define _CP0_GET_VIEW_IPL()      _mfc0 (_CP0_VIEW_IPL, _CP0_VIEW_IPL_SELECT)
+#define _CP0_SET_VIEW_IPL(val)   _mtc0 (_CP0_VIEW_IPL, _CP0_VIEW_IPL_SELECT, val)
+#define _CP0_XCH_VIEW_IPL(val)   _mxc0 (_CP0_VIEW_IPL, _CP0_VIEW_IPL_SELECT, val)
+#define _CP0_BIC_VIEW_IPL(clr)   _bcc0 (_CP0_VIEW_IPL, _CP0_VIEW_IPL_SELECT, clr)
+#define _CP0_BIS_VIEW_IPL(set)   _bsc0 (_CP0_VIEW_IPL, _CP0_VIEW_IPL_SELECT, set)
+#define _CP0_BCS_VIEW_IPL(c,s)   _bcsc0(_CP0_VIEW_IPL, _CP0_VIEW_IPL_SELECT, c, s)
+
+#define _CP0_GET_SRSMAP2()      _mfc0 (_CP0_SRSMAP2, _CP0_SRSMAP2_SELECT)
+#define _CP0_SET_SRSMAP2(val)   _mtc0 (_CP0_SRSMAP2, _CP0_SRSMAP2_SELECT, val)
+#define _CP0_XCH_SRSMAP2(val)   _mxc0 (_CP0_SRSMAP2, _CP0_SRSMAP2_SELECT, val)
+
 #define _CP0_GET_CAUSE()       _mfc0 (_CP0_CAUSE, _CP0_CAUSE_SELECT)
 #define _CP0_SET_CAUSE(val)    _mtc0 (_CP0_CAUSE, _CP0_CAUSE_SELECT, val)
 #define _CP0_XCH_CAUSE(val)    _mxc0 (_CP0_CAUSE, _CP0_CAUSE_SELECT, val)
@@ -163,8 +370,25 @@
 #define _CP0_BIS_CAUSE(set)    _bsc0 (_CP0_CAUSE, _CP0_CAUSE_SELECT, set)
 #define _CP0_BCS_CAUSE(c,s)    _bcsc0(_CP0_CAUSE, _CP0_CAUSE_SELECT, c, s)
 
+#define _CP0_GET_VIEW_RIPL()      _mfc0 (_CP0_VIEW_RIPL, _CP0_VIEW_RIPL_SELECT)
+#define _CP0_SET_VIEW_RIPL(val)   _mtc0 (_CP0_VIEW_RIPL, _CP0_VIEW_RIPL_SELECT, val)
+#define _CP0_XCH_VIEW_RIPL(val)   _mxc0 (_CP0_VIEW_RIPL, _CP0_VIEW_RIPL_SELECT, val)
+#define _CP0_BIC_VIEW_RIPL(clr)   _bcc0 (_CP0_VIEW_RIPL, _CP0_VIEW_RIPL_SELECT, clr)
+#define _CP0_BIS_VIEW_RIPL(set)   _bsc0 (_CP0_VIEW_RIPL, _CP0_VIEW_RIPL_SELECT, set)
+#define _CP0_BCS_VIEW_RIPL(c,s)   _bcsc0(_CP0_VIEW_RIPL, _CP0_VIEW_RIPL_SELECT, c, s)
+
+#define _CP0_GET_NESTEDEXC()      _mfc0 (_CP0_NESTEDEXC, _CP0_NESTEDEXC_SELECT)
+#define _CP0_SET_NESTEDEXC(val)   _mtc0 (_CP0_NESTEDEXC, _CP0_NESTEDEXC_SELECT, val)
+#define _CP0_XCH_NESTEDEXC(val)   _mxc0 (_CP0_NESTEDEXC, _CP0_NESTEDEXC_SELECT, val)
+#define _CP0_BIC_NESTEDEXC(clr)   _bcc0 (_CP0_NESTEDEXC, _CP0_NESTEDEXC_SELECT, clr)
+#define _CP0_BIS_NESTEDEXC(set)   _bsc0 (_CP0_NESTEDEXC, _CP0_NESTEDEXC_SELECT, set)
+#define _CP0_BCS_NESTEDEXC(c,s)   _bcsc0(_CP0_NESTEDEXC, _CP0_NESTEDEXC_SELECT, c, s)
+
 #define _CP0_GET_EPC()         _mfc0 (_CP0_EPC, _CP0_EPC_SELECT)
 #define _CP0_SET_EPC(val)      _mtc0 (_CP0_EPC, _CP0_EPC_SELECT, val)
+
+#define _CP0_GET_NESTEDEPC()    _mfc0 (_CP0_NESTEDEPC, _CP0_NESTEDEPC_SELECT)
+#define _CP0_SET_NESTEDEPC(val) _mtc0 (_CP0_NESTEDEPC, _CP0_NESTEDEPC_SELECT, val)
 
 #define _CP0_GET_PRID()        _mfc0 (_CP0_PRID, _CP0_PRID_SELECT)
 
@@ -172,10 +396,36 @@
 #define _CP0_SET_EBASE(val)    _mtc0 (_CP0_EBASE, _CP0_EBASE_SELECT, val)
 #define _CP0_XCH_EBASE(val)    _mxc0 (_CP0_EBASE, _CP0_EBASE_SELECT, val)
 
+#define _CP0_GET_CDMMBASE()      _mfc0 (_CP0_CDMMBASE, _CP0_CDMMBASE_SELECT)
+#define _CP0_SET_CDMMBASE(val)   _mtc0 (_CP0_CDMMBASE, _CP0_CDMMBASE_SELECT, val)
+#define _CP0_XCH_CDMMBASE(val)   _mxc0 (_CP0_CDMMBASE, _CP0_CDMMBASE_SELECT, val)
+#define _CP0_BIC_CDMMBASE(clr)   _bcc0 (_CP0_CDMMBASE, _CP0_CDMMBASE_SELECT, clr)
+#define _CP0_BIS_CDMMBASE(set)   _bsc0 (_CP0_CDMMBASE, _CP0_CDMMBASE_SELECT, set)
+#define _CP0_BCS_CDMMBASE(c,s)   _bcsc0(_CP0_CDMMBASE, _CP0_CDMMBASE_SELECT, c, s)
+
 #define _CP0_GET_CONFIG()      _mfc0 (_CP0_CONFIG, _CP0_CONFIG_SELECT)
 #define _CP0_GET_CONFIG1()     _mfc0 (_CP0_CONFIG1, _CP0_CONFIG1_SELECT)
 #define _CP0_GET_CONFIG2()     _mfc0 (_CP0_CONFIG2, _CP0_CONFIG2_SELECT)
 #define _CP0_GET_CONFIG3()     _mfc0 (_CP0_CONFIG3, _CP0_CONFIG3_SELECT)
+#define _CP0_GET_CONFIG4()     _mfc0 (_CP0_CONFIG4, _CP0_CONFIG4_SELECT)
+#define _CP0_GET_CONFIG5()     _mfc0 (_CP0_CONFIG5, _CP0_CONFIG5_SELECT)
+#define _CP0_GET_CONFIG7()     _mfc0 (_CP0_CONFIG7, _CP0_CONFIG7_SELECT)
+
+#define _CP0_GET_LLADDR()     _mfc0 (_CP0_LLADDR, _CP0_LLADDR_SELECT)
+
+#define _CP0_GET_WATCHLO()      _mfc0 (_CP0_WATCHLO, _CP0_WATCHLO_SELECT)
+#define _CP0_SET_WATCHLO(val)   _mtc0 (_CP0_WATCHLO, _CP0_WATCHLO_SELECT, val)
+#define _CP0_XCH_WATCHLO(val)   _mxc0 (_CP0_WATCHLO, _CP0_WATCHLO_SELECT, val)
+#define _CP0_BIC_WATCHLO(clr)   _bcc0 (_CP0_WATCHLO, _CP0_WATCHLO_SELECT, clr)
+#define _CP0_BIS_WATCHLO(set)   _bsc0 (_CP0_WATCHLO, _CP0_WATCHLO_SELECT, set)
+#define _CP0_BCS_WATCHLO(c,s)   _bcsc0(_CP0_WATCHLO, _CP0_WATCHLO_SELECT, c, s)
+
+#define _CP0_GET_WATCHHI()      _mfc0 (_CP0_WATCHHI, _CP0_WATCHHI_SELECT)
+#define _CP0_SET_WATCHHI(val)   _mtc0 (_CP0_WATCHHI, _CP0_WATCHHI_SELECT, val)
+#define _CP0_XCH_WATCHHI(val)   _mxc0 (_CP0_WATCHHI, _CP0_WATCHHI_SELECT, val)
+#define _CP0_BIC_WATCHHI(clr)   _bcc0 (_CP0_WATCHHI, _CP0_WATCHHI_SELECT, clr)
+#define _CP0_BIS_WATCHHI(set)   _bsc0 (_CP0_WATCHHI, _CP0_WATCHHI_SELECT, set)
+#define _CP0_BCS_WATCHHI(c,s)   _bcsc0(_CP0_WATCHHI, _CP0_WATCHHI_SELECT, c, s)
 
 #define _CP0_GET_DEBUG()       _mfc0 (_CP0_DEBUG, _CP0_DEBUG_SELECT)
 #define _CP0_SET_DEBUG(val)    _mtc0 (_CP0_DEBUG, _CP0_DEBUG_SELECT, val)
@@ -207,6 +457,13 @@
 #define _CP0_XCH_USERTRACEDATA(val) \
         _mxc0 (_CP0_USERTRACEDATA, _CP0_USERTRACEDATA_SELECT, val)
 
+#define _CP0_GET_USERTRACEDATA2() \
+        _mfc0 (_CP0_USERTRACEDATA2, _CP0_USERTRACEDATA2_SELECT)
+#define _CP0_SET_USERTRACEDATA2(val) \
+        _mtc0 (_CP0_USERTRACEDATA2, _CP0_USERTRACEDATA2_SELECT, val)
+#define _CP0_XCH_USERTRACEDATA2(val) \
+        _mxc0 (_CP0_USERTRACEDATA2, _CP0_USERTRACEDATA2_SELECT, val)
+
 #define _CP0_GET_TRACEBPC()    _mfc0 (_CP0_TRACEBPC, _CP0_TRACEBPC_SELECT)
 #define _CP0_SET_TRACEBPC(val) _mtc0 (_CP0_TRACEBPC, _CP0_TRACEBPC_SELECT, val)
 #define _CP0_XCH_TRACEBPC(val) _mxc0 (_CP0_TRACEBPC, _CP0_TRACEBPC_SELECT, val)
@@ -219,6 +476,38 @@
 #define _CP0_GET_DEPC()        _mfc0 (_CP0_DEPC, _CP0_DEPC_SELECT)
 #define _CP0_SET_DEPC(val)     _mtc0 (_CP0_DEPC, _CP0_DEPC_SELECT, val)
 #define _CP0_XCH_DEPC(val)     _mxc0 (_CP0_DEPC, _CP0_DEPC_SELECT, val)
+
+#define _CP0_GET_PERFCNT0_CONTROL()     _mfc0 (_CP0_PERFCNT0_CONTROL, _CP0_PERFCNT0_CONTROL_SELECT)
+#define _CP0_SET_PERFCNT0_CONTROL(val)  _mtc0 (_CP0_PERFCNT0_CONTROL, _CP0_PERFCNT0_CONTROL_SELECT, val)
+#define _CP0_XCH_PERFCNT0_CONTROL(val)  _mxc0 (_CP0_PERFCNT0_CONTROL, _CP0_PERFCNT0_CONTROL_SELECT, val)
+#define _CP0_BIC_PERFCNT0_CONTROL(clr)  _bcc0 (_CP0_PERFCNT0_CONTROL, _CP0_PERFCNT0_CONTROL_SELECT, clr)
+#define _CP0_BIS_PERFCNT0_CONTROL(set)  _bsc0 (_CP0_PERFCNT0_CONTROL, _CP0_PERFCNT0_CONTROL_SELECT, set)
+#define _CP0_BCS_PERFCNT0_CONTROL(c,s)  _bcsc0(_CP0_PERFCNT0_CONTROL, _CP0_PERFCNT0_CONTROL_SELECT, c, s)
+
+#define _CP0_GET_PERFCNT0_COUNT()       _mfc0 (_CP0_PERFCNT0_COUNT, _CP0_PERFCNT0_COUNT_SELECT)
+#define _CP0_SET_PERFCNT0_COUNT(val)    _mtc0 (_CP0_PERFCNT0_COUNT, _CP0_PERFCNT0_COUNT_SELECT, val)
+
+#define _CP0_GET_PERFCNT1_CONTROL()     _mfc0 (_CP0_PERFCNT1_CONTROL, _CP0_PERFCNT1_CONTROL_SELECT)
+#define _CP0_SET_PERFCNT1_CONTROL(val)  _mtc0 (_CP0_PERFCNT1_CONTROL, _CP0_PERFCNT1_CONTROL_SELECT, val)
+#define _CP0_XCH_PERFCNT1_CONTROL(val)  _mxc0 (_CP0_PERFCNT1_CONTROL, _CP0_PERFCNT1_CONTROL_SELECT, val)
+#define _CP0_BIC_PERFCNT1_CONTROL(clr)  _bcc0 (_CP0_PERFCNT1_CONTROL, _CP0_PERFCNT1_CONTROL_SELECT, clr)
+#define _CP0_BIS_PERFCNT1_CONTROL(set)  _bsc0 (_CP0_PERFCNT1_CONTROL, _CP0_PERFCNT1_CONTROL_SELECT, set)
+#define _CP0_BCS_PERFCNT1_CONTROL(c,s)  _bcsc0(_CP0_PERFCNT1_CONTROL, _CP0_PERFCNT1_CONTROL_SELECT, c, s)
+
+#define _CP0_GET_PERFCNT1_COUNT()      _mfc0 (_CP0_PERFCNT1_COUNT, _CP0_PERFCNT1_COUNT_SELECT)
+#define _CP0_SET_PERFCNT1_COUNT(val)   _mtc0 (_CP0_PERFCNT1_COUNT, _CP0_PERFCNT1_COUNT_SELECT, val)
+
+#define _CP0_GET_CACHEERR()    _mfc0 (_CP0_CACHEERR, _CP0_CACHEERR_SELECT)
+
+#define _CP0_GET_TAGLO()       _mfc0 (_CP0_TAGLO, _CP0_TAGLO_SELECT)
+#define _CP0_SET_TAGLO(val)    _mtc0 (_CP0_TAGLO, _CP0_TAGLO_SELECT, val)
+#define _CP0_XCH_TAGLO(val)    _mxc0 (_CP0_TAGLO, _CP0_TAGLO_SELECT, val)
+#define _CP0_BIC_TAGLO(clr)    _bcc0 (_CP0_TAGLO, _CP0_TAGLO_SELECT, clr)
+#define _CP0_BIS_TAGLO(set)    _bsc0 (_CP0_TAGLO, _CP0_TAGLO_SELECT, set)
+#define _CP0_BCS_TAGLO(c,s)    _bcsc0(_CP0_TAGLO, _CP0_TAGLO_SELECT, c, s)
+
+#define _CP0_GET_DATALO()      _mfc0 (_CP0_DATALO, _CP0_DATALO_SELECT)
+#define _CP0_SET_DATALO(val)   _mtc0 (_CP0_DATALO, _CP0_DATALO_SELECT, val)
 
 #define _CP0_GET_ERROREPC()    _mfc0 (_CP0_ERROREPC, _CP0_ERROREPC_SELECT)
 #define _CP0_SET_ERROREPC(val) _mtc0 (_CP0_ERROREPC, _CP0_ERROREPC_SELECT, val)
@@ -313,6 +602,7 @@ extern "C" {
 #define _CP0_STATUS_SR_MASK                    0x00100000
 #define _CP0_STATUS_SR_LENGTH                  0x00000001
 
+/* TLB Shutdown */
 #define _CP0_STATUS_TS_POSITION                0x00000015
 #define _CP0_STATUS_TS_MASK                    0x00200000
 #define _CP0_STATUS_TS_LENGTH                  0x00000001
@@ -320,6 +610,11 @@ extern "C" {
 #define _CP0_STATUS_BEV_POSITION               0x00000016
 #define _CP0_STATUS_BEV_MASK                   0x00400000
 #define _CP0_STATUS_BEV_LENGTH                 0x00000001
+
+/* enable MDMX/DSP ASE */
+#define _CP0_STATUS_MX_POSITION                0x00000018
+#define _CP0_STATUS_MX_MASK                    0x01000000
+#define _CP0_STATUS_MX_LENGTH                  0x00000001
 
 #define _CP0_STATUS_RE_POSITION                0x00000019
 #define _CP0_STATUS_RE_MASK                    0x02000000
@@ -482,6 +777,9 @@ extern "C" {
 #define _CP0_CAUSE_BD_LENGTH                   0x00000001
 
 #define _EXCCODE_INT                           0x00
+#define _EXCCODE_MOD                           0x01        /* tlb modification */
+#define _EXCCODE_TLBL                          0x02        /* tlb miss (load/i-fetch) */
+#define _EXCCODE_TLBS                          0x03        /* tlb miss (store) */
 #define _EXCCODE_ADEL                          0x04
 #define _EXCCODE_ADES                          0x05
 #define _EXCCODE_IBE                           0x06
@@ -495,6 +793,7 @@ extern "C" {
 #define _EXCCODE_IS1                           0x10
 #define _EXCCODE_CEU                           0x11
 #define _EXCCODE_C2E                           0x12
+#define _EXCCODE_DSPU                          0x1A        /* dsp unusable */
 
 #define _CP0_EPC_ALL_POSITION                  0x00000000
 #define _CP0_EPC_ALL_MASK                      0xFFFFFFFF
@@ -532,13 +831,19 @@ extern "C" {
 #define _CP0_EBASE_EBASE_MASK                  0x3FFFF000
 #define _CP0_EBASE_EBASE_LENGTH                0x0000000E
 
+/* Kseg0 coherency algorithm */
 #define _CP0_CONFIG_K0_POSITION                0x00000000
 #define _CP0_CONFIG_K0_MASK                    0x00000007
 #define _CP0_CONFIG_K0_LENGTH                  0x00000003
 
+/* MMU Type */
 #define _CP0_CONFIG_MT_POSITION                0x00000007
 #define _CP0_CONFIG_MT_MASK                    0x00000380
 #define _CP0_CONFIG_MT_LENGTH                  0x00000003
+#define   _CP0_CONFIG_MT_NONE                  (0<<7)
+#define   _CP0_CONFIG_MT_TLB                   (1<<7)
+#define   _CP0_CONFIG_MT_BAT                   (2<<7)
+#define   _CP0_CONFIG_MT_NONSTD                (3<<7)
 
 #define _CP0_CONFIG_AR_POSITION                0x0000000A
 #define _CP0_CONFIG_AR_MASK                    0x00001C00
@@ -663,6 +968,15 @@ extern "C" {
 #define _CP0_CONFIG3_ITL_POSITION              0x00000008
 #define _CP0_CONFIG3_ITL_MASK                  0x00000100
 #define _CP0_CONFIG3_ITL_LENGTH                0x00000001
+
+/* DSP ASE present */
+#define _CP0_CONFIG3_DSPP_POSITION             0x0000000A
+#define _CP0_CONFIG3_DSPP_MASK                 0x00000400
+#define _CP0_CONFIG3_DSPP_LENGTH               0x00000001
+
+#define _CP0_CONFIG3_DSP2P_POSITION            0x0000000B
+#define _CP0_CONFIG3_DSP2P_MASK                0x00000800
+#define _CP0_CONFIG3_DSP2P_LENGTH              0x00000001
 
 #define _CP0_CONFIG3_M_POSITION                0x0000001F
 #define _CP0_CONFIG3_M_MASK                    0x80000000

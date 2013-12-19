@@ -2,6 +2,7 @@ include	$(ROOT)/../defines.mk
 
 include $(ROOT)/startup/Makefile.inc
 include $(ROOT)/stubs/Makefile.inc
+include $(ROOT)/default_vector_dispatch/Makefile.inc
 
 vpath	%.c		$(_VPATH)
 vpath	%.cc		$(_VPATH)

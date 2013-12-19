@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------
-# chipKIT for Microchip PIC32 MCUs -  PIC32MXGENERIC MCU definition module
+# MPLAB XC Compiler -  PIC32MXGENERIC processor definition module
 # 
 # This software is developed by Microchip Technology Inc. and its
 # subsidiaries ("Microchip").
@@ -1849,4 +1849,5 @@ CNPUESET = 0xBF8861E8
   .global CNPUESET
 CNPUEINV = 0xBF8861EC
   .global CNPUEINV
+
 

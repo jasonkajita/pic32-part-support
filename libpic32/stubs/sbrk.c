@@ -1,42 +1,60 @@
-/********************************************************************
- * Software License Agreement
- *
- * This software is developed by Microchip Technology Inc. and its
- * subsidiaries ("Microchip").
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * 1.      Redistributions of source code must retain the above copyright
- * notice, this list of conditions and the following disclaimer.
- *
- * 2.      Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * documentation and/or other materials provided with the distribution.
- *
- * 3.      Microchip's name may not be used to endorse or promote products
- * derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS FOR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL
- * MICROCHIP BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- ********************************************************************/
+#ident "c/stubs/sbrk.c: Copyright (c) MIPS Technologies, Inc. All rights reserved."
 
 /*
+ * Unpublished work (c) MIPS Technologies, Inc.  All rights reserved.
+ * Unpublished rights reserved under the copyright laws of the United
+ * States of America and other countries.
+ * 
+ * This code is confidential and proprietary to MIPS Technologies,
+ * Inc. ("MIPS Technologies") and may be disclosed only as permitted in
+ * writing by MIPS Technologies. Any copying, reproducing, modifying,
+ * use or disclosure of this code (in whole or in part) that is not
+ * expressly permitted in writing by MIPS Technologies is strictly
+ * prohibited. At a minimum, this code is protected under trade secret,
+ * unfair competition, and copyright laws. Violations thereof may result
+ * in criminal penalties and fines.
+ * 
+ * MIPS Technologies reserves the right to change this code to improve
+ * function, design or otherwise. MIPS Technologies does not assume any
+ * liability arising out of the application or use of this code, or of
+ * any error or omission in such code.  Any warranties, whether express,
+ * statutory, implied or otherwise, including but not limited to the
+ * implied warranties of merchantability or fitness for a particular
+ * purpose, are excluded.  Except as expressly provided in any written
+ * license agreement from MIPS Technologies, the furnishing of this
+ * code does not give recipient any license to any intellectual property
+ * rights, including any patent rights, that cover this code.
+ * 
+ * This code shall not be exported, reexported, transferred, or released,
+ * directly or indirectly, in violation of the law of any country or
+ * international law, regulation, treaty, Executive Order, statute,
+ * amendments or supplements thereto.  Should a conflict arise regarding
+ * the export, reexport, transfer, or release of this code, the laws of
+ * the United States of America shall be the governing law.
+ * 
+ * This code may only be disclosed to the United States government
+ * ("Government"), or to Government users, with prior written consent
+ * from MIPS Technologies.  This code constitutes one or more of the
+ * following: commercial computer software, commercial computer software
+ * documentation or other commercial items.  If the user of this code,
+ * or any related documentation of any kind, including related technical
+ * data or manuals, is an agency, department, or other entity of the
+ * Government, the use, duplication, reproduction, release, modification,
+ * disclosure, or transfer of this code, or any related documentation
+ * of any kind, is restricted in accordance with Federal Acquisition
+ * Regulation 12.212 for civilian agencies and Defense Federal Acquisition
+ * Regulation Supplement 227.7202 for military agencies.  The use of this
+ * code by the Government is further restricted in accordance with the
+ * terms of the license agreement(s) and/or applicable contract terms
+ * and conditions covering this code from MIPS Technologies.
+ * 
+ * 
+ */
+
+/* 
  * sbrk.c: a generic sbrk() emulation.
  */
 
-/*
-#include <unistd.h>
-*/
 #include <string.h>
 #include <errno.h>
 
@@ -66,11 +84,11 @@ static pthread_mutex_t sbmx = PTHREAD_MUTEX_INITIALIZER;
 static void *	curbrk = 0;
 
 #ifndef MINHEAP
-#define MINHEAP		(2 * 1024)
+#define MINHEAP		(1 * 1024)
 #endif
 
 #ifndef MAXSTACK
-#define MAXSTACK	(2 * 1024)
+#define MAXSTACK	(32 * 1024)
 #endif
 
 #ifndef PAGESIZE
@@ -93,7 +111,7 @@ getpagesize ()
  * entry.
  *
  * This function can be overridden by the board-specific code
- * if it has some other way to determine the real size of
+ * if it has some other way to determine the real size of 
  * physical memory (e.g. reading the memory controller).
  */
 
@@ -116,8 +134,8 @@ _stub_sbd_memlayout (void)
 }
 
 
-/*
- * Initialise the sbrk heap.
+/* 
+ * Initialise the sbrk heap. 
  *
  * This function is hard-wired to the idea that the code is linked to
  * KSEG0 or KSEG1 addresses. It could just about cope with being
@@ -133,6 +151,8 @@ _sbrk_init (void)
     const struct sbd_region * layout;
     void * minva,  * maxva;
     _paddr_t rbase, rtop, min, max;
+    extern char _heap[];
+    extern char _min_heap_size[];
 
     if (curbrk)
 	return;
@@ -142,7 +162,11 @@ _sbrk_init (void)
 	minva = _minbrk;
     else
 	/* usually heap starts after data & bss segment */
+#if (__C32_VERSION__ > 200)
+	minva = &_heap;
+#else
 	minva = _end;
+#endif
 
     if (_maxbrk)
 	/* user specified heap top */
@@ -150,9 +174,13 @@ _sbrk_init (void)
     else {
 	/* usually stack is at top of memory, and
 	   heap grows up towards base of stack */
-	char * sp;
-	__asm__ ("move %0,$sp" : "=d" (sp));
-	maxva = sp - MAXSTACK;
+#if (__C32_VERSION__ > 200)
+	  maxva = (void*)(&_heap) + (size_t)(&_min_heap_size);
+#else
+	  char * sp;
+	  __asm__ ("move %0,$sp" : "=d" (sp));
+	  maxva = sp - MAXSTACK;
+#endif
     }
 
     /* convert min/max to physical addresses */
@@ -210,7 +238,7 @@ _sbrk_init (void)
 	_minbrk = (void *) min;
 	_minbrk = (void *) max;
     }
-
+    
     curbrk = _minbrk;
 }
 
@@ -219,7 +247,7 @@ void *
 _sbrk (int n)
 {
     void *newbrk, *p;
-
+    
 #if 0
     pthread_mutex_lock (&sbmx);
 #endif
