@@ -3,6 +3,11 @@
  *************************************************************************/
 INPUT("processor.o")
 
+/*************************************************************************
+ * Processor-specific peripheral libraries are optional
+ *************************************************************************/
+OPTIONAL("libmchp_peripheral.a")
+OPTIONAL("libmchp_peripheral_32MXGENERIC.a")
 
 /*************************************************************************
  * For interrupt vector handling

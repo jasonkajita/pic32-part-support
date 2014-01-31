@@ -7,8 +7,6 @@
  *
  * Processor:       PIC32
  *
- * Compiler:        chipKIT for PIC32 MCUs
- *
  * Company:         Microchip Technology Inc.
  *
  * Software License Agreement
@@ -41,35 +39,68 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  ********************************************************************/
+ 
+#include <xc.h>
+#include <cp0defs.h>
 
-#include <p32xxxx.h>
-#ifdef __LIBBUILD__
-   .file 1 "libc/startup/crt0.S"
-   .loc 1 0
+#if !defined(__XC32_VERSION)
+#define USE_OLD_INIT
+#define USE_OLD_DOTSECTION
 #endif
 
-#if (__C32_VERSION__ < 200)
-#define USE_OLD_INIT
+#if (__XC32_VERSION > 1000) && !defined(CPP_INIT)
+#define CPP_INIT
+#endif
+
+#if defined (PIC32MZ)
+# ifndef PIC32_SRS_SET_COUNT
+#  define PIC32_SRS_SET_COUNT 8
+# endif
+# ifndef INIT_L1_CACHE
+#  define INIT_L1_CACHE 1
+# endif
+# ifndef INIT_MMU_MZ_FIXED
+#  define INIT_MMU_MZ_FIXED 1
+# endif
+# ifndef INIT_DSPR2
+#  define INIT_DSPR2 1
+# endif
+# ifndef INIT_SSX
+#  define INIT_SSX 1
+# endif
+#else
+# define PIC32_SRS_SET_COUNT 2
 #endif
 
         ##################################################################
         # Entry point of the entire application
         ##################################################################
+#if defined(USE_OLD_DOTSECTION)
         .section .reset,"ax",@progbits
+#else
+        .section .reset,code
+#endif
+
         .set noreorder
         .ent _reset
 _reset:
         la      k0, _startup
         jr      k0                      # Jump to startup code
         nop
-
+  
         .end _reset
         .globl _reset
+
 
         ##################################################################
         # Startup code
         ##################################################################
+#if defined(USE_OLD_DOTSECTION)
         .section .startup,"ax",@progbits
+#else
+        .section .startup,code
+#endif
+
         .set noreorder
         .ent _startup
 _startup:
@@ -98,11 +129,12 @@ _no_nmi:
         #   of the small variables region
         ##################################################################
         la      gp,_gp
-
+        
+#if (PIC32_SRS_SET_COUNT == 2)
         ##################################################################
         # Initialize Global Pointer in Shadow Set
         #   The SRSCtl's PSS field must be set to the shadow set in which
-        #   to initialize the global pointer.  Since we only have a
+        #   to initialize the global pointer.  Since we have only a
         #   single shadow set (besides the normal), we will initialize
         #   SRSCtl<PSS> to SRSCtl<HSS>.  We then write the global pointer
         #   to the previous shadow set to ensure that on interrupt, the
@@ -113,8 +145,40 @@ _no_nmi:
         ext     t2,t1,26,4              # to obtain HSS field
         ins     t1,t2,6,4               # Put HSS field
         mtc0    t1,_CP0_SRSCTL          # into SRSCtl<PSS>
+        ehb                             # Clear hazard before using new SRSCTL
         wrpgpr  gp,gp                   # Set global pointer in PSS
         mtc0    t3,_CP0_SRSCTL          # Restore SRSCtl
+        ehb
+
+#elif (PIC32_SRS_SET_COUNT > 2) 
+        ##################################################################
+        # Initialize Global Pointer in Shadow Set(s)
+        #   The SRSCtl PSS field must be set to the shadow set in which
+        #   to initialize the global pointer.  We will initialize
+        #   SRSCtl<PSS> to the number of reg sets and work down to set zero.
+        #   We write the global pointer to the previous shadow set to 
+        #   ensure that on interrupt, the global pointer has been 
+        #   initialized.
+        ##################################################################
+        mfc0    t1,_CP0_SRSCTL          # Read SRSCtl register
+        add     t3,t1,zero              # Save off current SRSCtl
+
+        li      t2,(PIC32_SRS_SET_COUNT-1)
+
+1:      ins     t1,t2,6,4               # Put next shadow set field
+        mtc0    t1,_CP0_SRSCTL          # into SRSCtl<PSS>
+        ehb                             # Clear hazard before using new SRSCTL
+        wrpgpr  gp,gp                   # Set global pointer in PSS
+
+        addiu   t2,t2,-1                # Next lower shadow set
+                                        # Loop for all sets
+        bne     t2,$0,1b                # Down to zero (normal GPR set)
+        nop
+
+        mtc0    t3,_CP0_SRSCTL          # Restore SRSCtl
+        ehb
+
+#endif /* (PIC32_SRS_SET_COUNT > 2) */
 
         ##################################################################
         # Call the "on reset" procedure
@@ -123,7 +187,30 @@ _no_nmi:
         jalr    t0
         nop
 
-#if defined(USE_OLD_INIT)
+#if defined(INIT_MMU_MZ_FIXED)
+        ##################################################################
+        # Initialize TLB for fixed mapping to EBI and SQI
+        ##################################################################
+        .extern __pic32_tlb_init_ebi_sqi
+        la      t0,__pic32_tlb_init_ebi_sqi
+        beq     t0, $0,1f
+        nop
+        jalr    t0
+1:      nop
+#endif
+
+#if defined(INIT_L1_CACHE)
+        ##################################################################
+        # Initialize L1 cache register
+        ##################################################################
+        .extern __pic32_init_cache
+        la      t0,__pic32_init_cache
+        beq     t0, $0,1f
+        nop
+        jalr    t0
+1:      nop
+#endif
+
         ##################################################################
         # Clear uninitialized data sections
         ##################################################################
@@ -132,7 +219,7 @@ _no_nmi:
         b       _bss_check
         nop
 
-_bss_init:
+_bss_init:      
         sw      zero,0x0(t0)
         sw      zero,0x4(t0)
         sw      zero,0x8(t0)
@@ -141,7 +228,8 @@ _bss_init:
 _bss_check:
         bltu    t0,t1,_bss_init
         nop
-
+                
+#if defined(USE_OLD_INIT)
         ##################################################################
         # Copy initialized data from program flash to data memory
         #   src=_data_image_begin dst=_data_begin stop=_data_end
@@ -152,7 +240,7 @@ _bss_check:
         b       _init_check
         nop
 
-_init_data:
+_init_data:     
         lw      t3,(t0)
         sw      t3,(t1)
         addu    t0,4
@@ -178,7 +266,7 @@ _init_check:
         la      t1,_ramfunc_begin
         la      t2,_ramfunc_end
 
-_init_ramfunc:
+_init_ramfunc:  
         lw      t3,(t0)
         sw      t3,(t1)
         addu    t0,4
@@ -206,9 +294,8 @@ _ramfunc_done:
         ##################################################################
         # Initialize data using the linker-generated .dinit table
         ##################################################################
-	.equiv FMT_CLEAR,0
-	.equiv FMT_COPY,1
-	    .ent _dinit_init
+        .equiv FMT_CLEAR,0
+        .equiv FMT_COPY,1
 _dinit_init:
         la      t0,_dinit_addr
 
@@ -217,42 +304,70 @@ _dinit_init:
 #define LEN t2
 #define FMT t3
 
-0:	lw	DST,0(SRC)
-	beqz DST,9f
-	addu	SRC,4
-	lw	LEN,0(SRC)
-	addu	SRC,4
-	lw	FMT,0(SRC)
-	addu	SRC,4
-	beq	FMT,$0,_dinit_clear
-	nop
+0:      lw      DST,0(SRC)
+        beqz    DST,9f
+        addu    SRC,4
+        lw      LEN,0(SRC)
+        addu    SRC,4
+        lw      FMT,0(SRC)
+        beq     FMT,$0,_dinit_clear
+        addu    SRC,4
 
 _dinit_copy:
-	lbu	t4,(SRC)
-	sb	t4,(DST)
-	addu	SRC,1
-	addu	DST,1
-	subu	LEN,1
-	bne	LEN,$0,_dinit_copy
-	nop
-	b	_dinit_end
+        lbu     t4,0(SRC)
+        subu    LEN,1
+        addu    SRC,1
+        sb      t4,0(DST)
+        bne     LEN,$0,_dinit_copy
+        addu    DST,1
+
+        b       _dinit_end
+        nop
 
 _dinit_clear:
-	sb	$0,(DST)
-	addu	DST,1
-	subu	LEN,1
-	bne	LEN,$0,_dinit_clear
-	nop
-	addu	SRC,1
+        sb      $0,(DST)
+        subu    LEN,1
+        bne     LEN,$0,_dinit_clear
+        addu    DST,1
 
 _dinit_end:
-	addu	SRC,3
-	andi	SRC,SRC,0xfc
-	b	0
+        addu    SRC,3
+        addiu   LEN,$0,0xFFFFFFFC
+        and     SRC,LEN,SRC
+        lw      DST,0(SRC)
+        bne     DST,$0,0b
+        nop
 9:
-    .end _dinit_init
 
-#endif
+        ##################################################################
+        # If there are no RAM functions, skip the next section --
+        # initializing bus matrix registers.
+        ##################################################################
+        la      t1,_ramfunc_begin
+        beqz    t1,_ramfunc_done
+        nop
+
+#if defined(INIT_SSX)
+  /* TODO */
+#else /* Use BMX */
+        ##################################################################
+        # Initialize bus matrix registers if RAM functions exist in the
+        # application
+        ##################################################################
+        la      t1,_bmxdkpba_address
+        la      t2,BMXDKPBA
+        sw      t1,0(t2)
+        la      t1,_bmxdudba_address
+        la      t2,BMXDUDBA
+        sw      t1,0(t2)
+        la      t1,_bmxdupba_address
+        la      t2,BMXDUPBA
+        sw      t1,0(t2)
+#endif /* INIT_SSX */
+
+_ramfunc_done:
+
+#endif  /* OLD_INIT */
 
         ##################################################################
         # Initialize CP0 registers
@@ -304,14 +419,29 @@ _dinit_end:
         # - Error level is normal <ERL = 0>
         # - Exception level is normal <EXL = 0>
         # - Interrupts are disabled <IE = 0>
+        # - DSPr2 ASE is enabled for devices that support it <MX = 1>
         ##################################################################
         mfc0    t0,_CP0_CONFIG
         ext     t1,t0,22,1              # Extract UDI from Config register
         sll     t1,t1,17                # Move UDI to Status.CEE location
         mfc0    t0,_CP0_STATUS
         and     t0,t0,0x00580000        # Preserve SR, NMI, and BEV
+#if defined(INIT_DSPR2)
+        li      t2, 0x01000000          # Set the Status.MX bit to enable DSP
+        or      t0,t2,t0
+#endif
         or      t0,t1,t0                # Include Status.CEE (from UDI)
         mtc0    t0,_CP0_STATUS
+
+        ##################################################################
+        # Initialize CONFIG register
+        ##################################################################
+#if defined(INIT_L1_CACHE)
+	mfc0    t0,_CP0_CONFIG
+	li      t1,0x00000003
+	or      t0,t1,t0
+	mtc0    t0,_CP0_CONFIG
+#endif
 
         ##################################################################
         # Call the "on bootstrap" procedure
@@ -340,14 +470,19 @@ _dinit_end:
         jr      t0
         nop
 
-
         .end _startup
 
         ##################################################################
         # Boot Exception Vector Handler
         # Jumps to _bootstrap_exception_handler
         ##################################################################
+        
+#if defined(USE_OLD_DOTSECTION)
         .section .bev_handler,"ax",@progbits
+#else
+        .section .bev_handler,code
+#endif
+
         .set noreorder
         .ent _bev_exception
 _bev_exception:
@@ -356,12 +491,18 @@ _bev_exception:
         nop
 
         .end _bev_exception
-
+                        
         ##################################################################
         # General Exception Vector Handler
         # Jumps to _general_exception_handler
         ##################################################################
+        
+#if defined(USE_OLD_DOTSECTION)
         .section .gen_handler,"ax",@progbits
+#else
+        .section .gen_handler,code
+#endif
+
         .set noreorder
         .ent _gen_exception
 _gen_exception:
@@ -375,6 +516,22 @@ _gen_exception:
         .text
         .ent _main_entry
 _main_entry:
+
+#if defined(CPP_INIT)
+        .weak _init
+        # call .init section to run constructors etc
+        lui	a0,%hi(_init)
+        addiu	sp,sp,-24
+        addiu	a0,a0,%lo(_init)
+        beq	a0,$0,2f
+        sw	$31,20(sp)	 #,
+        jalr	a0
+        nop
+2:
+#endif
+        and     a0,a0,0
+        and     a1,a1,0
+        
         ##################################################################
         # Call main
         ##################################################################
@@ -382,18 +539,16 @@ _main_entry:
         nop
 
         ##################################################################
-        # Call exit()
+        # Call exit
         ##################################################################
-        jal exit
-        nop
+        #jal    exit
+        #nop
 
         ##################################################################
         # Just in case, go into infinite loop
         ##################################################################
-__crt0_exit:
 1:
         b       1b
         nop
-        .globl __crt0_exit
         .end _main_entry
-
+ 
