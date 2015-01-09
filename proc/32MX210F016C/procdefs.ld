@@ -39,13 +39,14 @@ _GEN_EXCPT_ADDR                = _ebase_address + 0x180;
  * into these regions.
  *
  * The Debug exception vector is located at 0x9FC00480.
+ *
  * The config_<address> sections are used to locate the config words at
  * their absolute addresses.
  *************************************************************************/
 MEMORY
 {
-  exception_mem               : ORIGIN = 0x9D000000, LENGTH = 0xA00
-  kseg0_program_mem     (rx)  : ORIGIN = 0x9D000A00, LENGTH = 0x3600
+  exception_mem               : ORIGIN = 0x9D000000, LENGTH = 0x780
+  kseg0_program_mem     (rx)  : ORIGIN = 0x9D000780, LENGTH = 0x3880
   debug_exec_mem              : ORIGIN = 0x9FC00490, LENGTH = 0x760
   kseg0_boot_mem              : ORIGIN = 0x9FC00490, LENGTH = 0x0
   kseg1_boot_mem              : ORIGIN = 0xBFC00000, LENGTH = 0x490

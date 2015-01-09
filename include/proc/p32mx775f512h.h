@@ -1,6 +1,10 @@
 /*-------------------------------------------------------------------------
  * PIC32MX775F512H processor header
+ * Build date : Dec 02 2014
  *
+ * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * All rights reserved.
+ * 
  * This software is developed by Microchip Technology Inc. and its
  * subsidiaries ("Microchip").
  * 
@@ -29,7 +33,7 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- *-------------------------------------------------------------------------*/
+ */
 
 #pragma once
 #ifndef __32MX775F512H_H
@@ -4401,10 +4405,18 @@ extern volatile unsigned int        DCH0INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0INTINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHSSA:32;
+} __DCH0SSAbits_t;
+extern volatile __DCH0SSAbits_t DCH0SSAbits __asm__ ("DCH0SSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SSAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHDSA:32;
+} __DCH0DSAbits_t;
+extern volatile __DCH0DSAbits_t DCH0DSAbits __asm__ ("DCH0DSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DSAINV __attribute__((section("sfrs")));
@@ -4508,10 +4520,18 @@ extern volatile unsigned int        DCH1INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1INTINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHSSA:32;
+} __DCH1SSAbits_t;
+extern volatile __DCH1SSAbits_t DCH1SSAbits __asm__ ("DCH1SSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SSAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHDSA:32;
+} __DCH1DSAbits_t;
+extern volatile __DCH1DSAbits_t DCH1DSAbits __asm__ ("DCH1DSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DSAINV __attribute__((section("sfrs")));
@@ -4615,10 +4635,18 @@ extern volatile unsigned int        DCH2INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2INTINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHSSA:32;
+} __DCH2SSAbits_t;
+extern volatile __DCH2SSAbits_t DCH2SSAbits __asm__ ("DCH2SSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SSAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHDSA:32;
+} __DCH2DSAbits_t;
+extern volatile __DCH2DSAbits_t DCH2DSAbits __asm__ ("DCH2DSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DSAINV __attribute__((section("sfrs")));
@@ -4722,10 +4750,18 @@ extern volatile unsigned int        DCH3INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3INTINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHSSA:32;
+} __DCH3SSAbits_t;
+extern volatile __DCH3SSAbits_t DCH3SSAbits __asm__ ("DCH3SSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SSAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHDSA:32;
+} __DCH3DSAbits_t;
+extern volatile __DCH3DSAbits_t DCH3DSAbits __asm__ ("DCH3DSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DSAINV __attribute__((section("sfrs")));
@@ -4829,10 +4865,18 @@ extern volatile unsigned int        DCH4INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH4INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH4INTINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH4SSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHSSA:32;
+} __DCH4SSAbits_t;
+extern volatile __DCH4SSAbits_t DCH4SSAbits __asm__ ("DCH4SSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH4SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH4SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH4SSAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH4DSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHDSA:32;
+} __DCH4DSAbits_t;
+extern volatile __DCH4DSAbits_t DCH4DSAbits __asm__ ("DCH4DSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH4DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH4DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH4DSAINV __attribute__((section("sfrs")));
@@ -4936,10 +4980,18 @@ extern volatile unsigned int        DCH5INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH5INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH5INTINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH5SSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHSSA:32;
+} __DCH5SSAbits_t;
+extern volatile __DCH5SSAbits_t DCH5SSAbits __asm__ ("DCH5SSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH5SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH5SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH5SSAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH5DSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHDSA:32;
+} __DCH5DSAbits_t;
+extern volatile __DCH5DSAbits_t DCH5DSAbits __asm__ ("DCH5DSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH5DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH5DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH5DSAINV __attribute__((section("sfrs")));
@@ -5043,10 +5095,18 @@ extern volatile unsigned int        DCH6INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH6INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH6INTINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH6SSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHSSA:32;
+} __DCH6SSAbits_t;
+extern volatile __DCH6SSAbits_t DCH6SSAbits __asm__ ("DCH6SSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH6SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH6SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH6SSAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH6DSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHDSA:32;
+} __DCH6DSAbits_t;
+extern volatile __DCH6DSAbits_t DCH6DSAbits __asm__ ("DCH6DSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH6DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH6DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH6DSAINV __attribute__((section("sfrs")));
@@ -5150,10 +5210,18 @@ extern volatile unsigned int        DCH7INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH7INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH7INTINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH7SSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHSSA:32;
+} __DCH7SSAbits_t;
+extern volatile __DCH7SSAbits_t DCH7SSAbits __asm__ ("DCH7SSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH7SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH7SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH7SSAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH7DSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHDSA:32;
+} __DCH7DSAbits_t;
+extern volatile __DCH7DSAbits_t DCH7DSAbits __asm__ ("DCH7DSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH7DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH7DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH7DSAINV __attribute__((section("sfrs")));
@@ -24804,6 +24872,14 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DCH0INT_w_MASK                          0xFFFFFFFF
 #define _DCH0INT_w_LENGTH                        0x00000020
 
+#define _DCH0SSA_CHSSA_POSITION                  0x00000000
+#define _DCH0SSA_CHSSA_MASK                      0xFFFFFFFF
+#define _DCH0SSA_CHSSA_LENGTH                    0x00000020
+
+#define _DCH0DSA_CHDSA_POSITION                  0x00000000
+#define _DCH0DSA_CHDSA_MASK                      0xFFFFFFFF
+#define _DCH0DSA_CHDSA_LENGTH                    0x00000020
+
 #define _DCH1CON_CHPRI_POSITION                  0x00000000
 #define _DCH1CON_CHPRI_MASK                      0x00000003
 #define _DCH1CON_CHPRI_LENGTH                    0x00000002
@@ -24939,6 +25015,14 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DCH1INT_w_POSITION                      0x00000000
 #define _DCH1INT_w_MASK                          0xFFFFFFFF
 #define _DCH1INT_w_LENGTH                        0x00000020
+
+#define _DCH1SSA_CHSSA_POSITION                  0x00000000
+#define _DCH1SSA_CHSSA_MASK                      0xFFFFFFFF
+#define _DCH1SSA_CHSSA_LENGTH                    0x00000020
+
+#define _DCH1DSA_CHDSA_POSITION                  0x00000000
+#define _DCH1DSA_CHDSA_MASK                      0xFFFFFFFF
+#define _DCH1DSA_CHDSA_LENGTH                    0x00000020
 
 #define _DCH2CON_CHPRI_POSITION                  0x00000000
 #define _DCH2CON_CHPRI_MASK                      0x00000003
@@ -25076,6 +25160,14 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DCH2INT_w_MASK                          0xFFFFFFFF
 #define _DCH2INT_w_LENGTH                        0x00000020
 
+#define _DCH2SSA_CHSSA_POSITION                  0x00000000
+#define _DCH2SSA_CHSSA_MASK                      0xFFFFFFFF
+#define _DCH2SSA_CHSSA_LENGTH                    0x00000020
+
+#define _DCH2DSA_CHDSA_POSITION                  0x00000000
+#define _DCH2DSA_CHDSA_MASK                      0xFFFFFFFF
+#define _DCH2DSA_CHDSA_LENGTH                    0x00000020
+
 #define _DCH3CON_CHPRI_POSITION                  0x00000000
 #define _DCH3CON_CHPRI_MASK                      0x00000003
 #define _DCH3CON_CHPRI_LENGTH                    0x00000002
@@ -25211,6 +25303,14 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DCH3INT_w_POSITION                      0x00000000
 #define _DCH3INT_w_MASK                          0xFFFFFFFF
 #define _DCH3INT_w_LENGTH                        0x00000020
+
+#define _DCH3SSA_CHSSA_POSITION                  0x00000000
+#define _DCH3SSA_CHSSA_MASK                      0xFFFFFFFF
+#define _DCH3SSA_CHSSA_LENGTH                    0x00000020
+
+#define _DCH3DSA_CHDSA_POSITION                  0x00000000
+#define _DCH3DSA_CHDSA_MASK                      0xFFFFFFFF
+#define _DCH3DSA_CHDSA_LENGTH                    0x00000020
 
 #define _DCH4CON_CHPRI_POSITION                  0x00000000
 #define _DCH4CON_CHPRI_MASK                      0x00000003
@@ -25348,6 +25448,14 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DCH4INT_w_MASK                          0xFFFFFFFF
 #define _DCH4INT_w_LENGTH                        0x00000020
 
+#define _DCH4SSA_CHSSA_POSITION                  0x00000000
+#define _DCH4SSA_CHSSA_MASK                      0xFFFFFFFF
+#define _DCH4SSA_CHSSA_LENGTH                    0x00000020
+
+#define _DCH4DSA_CHDSA_POSITION                  0x00000000
+#define _DCH4DSA_CHDSA_MASK                      0xFFFFFFFF
+#define _DCH4DSA_CHDSA_LENGTH                    0x00000020
+
 #define _DCH5CON_CHPRI_POSITION                  0x00000000
 #define _DCH5CON_CHPRI_MASK                      0x00000003
 #define _DCH5CON_CHPRI_LENGTH                    0x00000002
@@ -25483,6 +25591,14 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DCH5INT_w_POSITION                      0x00000000
 #define _DCH5INT_w_MASK                          0xFFFFFFFF
 #define _DCH5INT_w_LENGTH                        0x00000020
+
+#define _DCH5SSA_CHSSA_POSITION                  0x00000000
+#define _DCH5SSA_CHSSA_MASK                      0xFFFFFFFF
+#define _DCH5SSA_CHSSA_LENGTH                    0x00000020
+
+#define _DCH5DSA_CHDSA_POSITION                  0x00000000
+#define _DCH5DSA_CHDSA_MASK                      0xFFFFFFFF
+#define _DCH5DSA_CHDSA_LENGTH                    0x00000020
 
 #define _DCH6CON_CHPRI_POSITION                  0x00000000
 #define _DCH6CON_CHPRI_MASK                      0x00000003
@@ -25620,6 +25736,14 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DCH6INT_w_MASK                          0xFFFFFFFF
 #define _DCH6INT_w_LENGTH                        0x00000020
 
+#define _DCH6SSA_CHSSA_POSITION                  0x00000000
+#define _DCH6SSA_CHSSA_MASK                      0xFFFFFFFF
+#define _DCH6SSA_CHSSA_LENGTH                    0x00000020
+
+#define _DCH6DSA_CHDSA_POSITION                  0x00000000
+#define _DCH6DSA_CHDSA_MASK                      0xFFFFFFFF
+#define _DCH6DSA_CHDSA_LENGTH                    0x00000020
+
 #define _DCH7CON_CHPRI_POSITION                  0x00000000
 #define _DCH7CON_CHPRI_MASK                      0x00000003
 #define _DCH7CON_CHPRI_LENGTH                    0x00000002
@@ -25755,6 +25879,14 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DCH7INT_w_POSITION                      0x00000000
 #define _DCH7INT_w_MASK                          0xFFFFFFFF
 #define _DCH7INT_w_LENGTH                        0x00000020
+
+#define _DCH7SSA_CHSSA_POSITION                  0x00000000
+#define _DCH7SSA_CHSSA_MASK                      0xFFFFFFFF
+#define _DCH7SSA_CHSSA_LENGTH                    0x00000020
+
+#define _DCH7DSA_CHDSA_POSITION                  0x00000000
+#define _DCH7DSA_CHDSA_MASK                      0xFFFFFFFF
+#define _DCH7DSA_CHDSA_LENGTH                    0x00000020
 
 #define _CHECON_PFMWS_POSITION                   0x00000000
 #define _CHECON_PFMWS_MASK                       0x00000007
@@ -39583,6 +39715,18 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #endif
 #ifndef __32MX775F512H__
 #  define __32MX775F512H__ 1
+#endif
+#ifndef __XC__
+#  define __XC__ 1
+#endif
+#ifndef __XC
+#  define __XC 1
+#endif
+#ifndef __XC32__
+#  define __XC32__ 1
+#endif
+#ifndef __XC32
+#  define __XC32 1
 #endif
 #ifndef __PIC32MX
 #  define __PIC32MX 1

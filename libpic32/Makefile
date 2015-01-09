@@ -1,4 +1,4 @@
-#
+# 
 # Makefile for libpic32.a
 #
 # This makefile will only work with GNU make

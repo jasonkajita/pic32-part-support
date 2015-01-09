@@ -1,5 +1,8 @@
 /*-------------------------------------------------------------------------
  *
+ * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * All rights reserved.
+ * 
  * This software is developed by Microchip Technology Inc. and its
  * subsidiaries ("Microchip").
  *
@@ -101,9 +104,9 @@ __device_tlb_entries:
 1:
         beq  a1, a2, __done_init_tlb    /* done */
 
-        /* Create one 64MB page table entry consisting of two 32MB physical pages */
-        /* 64MB page mask for Entry 0 */
-        lui	t1,0x07FF                            /* in branch delay slot */
+        /* Create one page table entry consisting of two 16MB physical pages */
+        /* 16MB page mask for Entry 0 */
+        lui	t1,0x01FF                            /* in branch delay slot */
         ori	t1,t1,0xE000
 
         mtc0 t1, _CP0_PAGEMASK

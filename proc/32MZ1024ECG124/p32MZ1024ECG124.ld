@@ -1,5 +1,9 @@
 /*--------------------------------------------------------------------------
  * MPLAB XC Compiler -  PIC32MZ1024ECG124 linker script
+ * Build date : Dec 02 2014
+ * 
+ * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
  * subsidiaries ("Microchip").
@@ -29,7 +33,7 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- *-------------------------------------------------------------------------*/
+ */
 
 /* Default linker script, for normal executables */
 
@@ -99,6 +103,7 @@ _GEN_EXCPT_ADDR                = _ebase_address + 0x180;
  * into these regions.
  *
  * The Debug exception vector is located at 0x9FC00480.
+ *
  * The config_<address> sections are used to locate the config words at
  * their absolute addresses.
  *************************************************************************/
@@ -1114,10 +1119,11 @@ SECTIONS
   {
     KEEP(*(.startup))
   } > kseg0_boot_mem
+
   /* Code Sections - Note that input sections *(.text) and *(.text.*)
-  ** are not mapped here. The best-fit allocator locates them,
-  ** so that .text may flow around absolute sections as needed.
-  */
+   * are not mapped here. The best-fit allocator locates them,
+   * so that .text may flow around absolute sections as needed.
+   */
   .text :
   {
     *(.stub .gnu.linkonce.t.*)
@@ -1446,7 +1452,7 @@ PROVIDE (__pic32_init_sqi_kseg2_entrylo0_bitset = 0x1F) ;
 __pic32_tlb_0_entryhi  = __pic32_init_sqi_kseg2_virtual_base_addr ;
 
 
-/*  Create one 64MB page table entry consisting of two 32MB physical pages. 
+/*  Create one page table entry consisting of two 16MB physical pages. 
  *  ENTRYLO0 = RI<31> XI<30> 0<29:26> PFN<25:6> C<5:3> D<2> V<1> G<0> 
  *  Shift __pic32_init_sqi_kseg3_physical_base_addr to PFN. 
  *  Bitwise-OR the other bits of ENTRYLO0.
@@ -1455,7 +1461,23 @@ __pic32_tlb_0_entrylo0 = (__pic32_init_sqi_kseg2_physical_base_addr >> 6) | __pi
 
 
 /*  ENTRYLO1 = RI<31> XI<30> 0<29:26> PFN<25:6> C<5:3> D<2> V<1> G<0> */
-__pic32_tlb_0_entrylo1 = __pic32_tlb_0_entrylo0 | 0x00080000 ;
+__pic32_tlb_0_entrylo1 = __pic32_tlb_0_entrylo0 | ((__pic32_init_sqi_kseg2_physical_base_addr + 0x1000000) >> 6) ;
+
+
+/*  ENTRYHI = VPN2<31:13> VPN2X<12:11> 0<10:8> ASID<7:0> */
+__pic32_tlb_1_entryhi  = __pic32_init_sqi_kseg2_virtual_base_addr + 0x2000000;
+
+
+/*  Create one page table entry consisting of two 16MB physical pages. 
+ *  ENTRYLO0 = RI<31> XI<30> 0<29:26> PFN<25:6> C<5:3> D<2> V<1> G<0> 
+ *  Shift __pic32_init_sqi_kseg3_physical_base_addr to PFN. 
+ *  Bitwise-OR the other bits of ENTRYLO0.
+ */
+__pic32_tlb_1_entrylo0 = ((__pic32_init_sqi_kseg2_physical_base_addr + 0x2000000) >> 6) | __pic32_init_sqi_kseg2_entrylo0_bitset;
+
+
+/*  ENTRYLO1 = RI<31> XI<30> 0<29:26> PFN<25:6> C<5:3> D<2> V<1> G<0> */
+__pic32_tlb_1_entrylo1 = __pic32_tlb_1_entrylo0 | 0x00040000 ;
 
 EXTERN  (__pic32_init_sqi_kseg3_virtual_base_addr)
 PROVIDE (__pic32_init_sqi_kseg3_virtual_base_addr = 0xF0000000) ;
@@ -1465,19 +1487,35 @@ EXTERN  (__pic32_init_sqi_kseg3_entrylo0_bitset)
 PROVIDE (__pic32_init_sqi_kseg3_entrylo0_bitset = 0x17) ;
 
 /*  ENTRYHI = VPN2<31:13> VPN2X<12:11> 0<10:8> ASID<7:0> */
-__pic32_tlb_1_entryhi  = __pic32_init_sqi_kseg3_virtual_base_addr ;
+__pic32_tlb_2_entryhi  = __pic32_init_sqi_kseg3_virtual_base_addr ;
 
 
-/*  Create one 64MB page table entry consisting of two 32MB physical pages. 
+/*  Create one page table entry consisting of two 16MB physical pages. 
  *  ENTRYLO0 = RI<31> XI<30> 0<29:26> PFN<25:6> C<5:3> D<2> V<1> G<0> 
  *  Shift __pic32_init_sqi_kseg3_physical_base_addr to PFN. 
  *  Bitwise-OR the other bits of ENTRYLO0. 
  */
-__pic32_tlb_1_entrylo0 = (__pic32_init_sqi_kseg3_physical_base_addr >> 6) | __pic32_init_sqi_kseg3_entrylo0_bitset ;
+__pic32_tlb_2_entrylo0 = (__pic32_init_sqi_kseg3_physical_base_addr >> 6) | __pic32_init_sqi_kseg3_entrylo0_bitset ;
 
 
 /*  ENTRYLO1 = RI<31> XI<30> 0<29:26> PFN<25:6> C<5:3> D<2> V<1> G<0> */
-__pic32_tlb_1_entrylo1 = __pic32_tlb_1_entrylo0 | 0x00080000 ;
+__pic32_tlb_2_entrylo1 = __pic32_tlb_2_entrylo0 | ((__pic32_init_sqi_kseg3_physical_base_addr + 0x1000000) >> 6) ;
+
+
+/*  ENTRYHI = VPN2<31:13> VPN2X<12:11> 0<10:8> ASID<7:0> */
+__pic32_tlb_3_entryhi  = __pic32_init_sqi_kseg3_virtual_base_addr + 0x2000000;
+
+
+/*  Create one page table entry consisting of two 16MB physical pages. 
+ *  ENTRYLO0 = RI<31> XI<30> 0<29:26> PFN<25:6> C<5:3> D<2> V<1> G<0> 
+ *  Shift __pic32_init_sqi_kseg3_physical_base_addr to PFN. 
+ *  Bitwise-OR the other bits of ENTRYLO0.
+ */
+__pic32_tlb_3_entrylo0 = ((__pic32_init_sqi_kseg3_physical_base_addr + 0x2000000) >> 6) | __pic32_init_sqi_kseg3_entrylo0_bitset;
+
+
+/*  ENTRYLO1 = RI<31> XI<30> 0<29:26> PFN<25:6> C<5:3> D<2> V<1> G<0> */
+__pic32_tlb_3_entrylo1 = __pic32_tlb_3_entrylo0 | 0x00040000 ;
 
 /*
  *  Provide virtual and physical addresses of the EBI for TLB initialization
@@ -1492,19 +1530,35 @@ EXTERN  (__pic32_init_ebi_kseg2_entrylo0_bitset)
 PROVIDE (__pic32_init_ebi_kseg2_entrylo0_bitset = 0x1F) ;
 
 /*  ENTRYHI = VPN2<31:13> VPN2X<12:11> 0<10:8> ASID<7:0> */
-__pic32_tlb_2_entryhi  = __pic32_init_ebi_kseg2_virtual_base_addr ;
+__pic32_tlb_4_entryhi  = __pic32_init_ebi_kseg2_virtual_base_addr ;
 
 
-/*  Create one 64MB page table entry consisting of two 32MB physical pages. 
+/*  Create one page table entry consisting of two 16MB physical pages. 
  *  ENTRYLO0 = RI<31> XI<30> 0<29:26> PFN<25:6> C<5:3> D<2> V<1> G<0> 
  *  Shift __pic32_init_sqi_kseg3_physical_base_addr to PFN. 
  *  Bitwise-OR the other bits of ENTRYLO0.
  */
-__pic32_tlb_2_entrylo0 = (__pic32_init_ebi_kseg2_physical_base_addr >> 6) | __pic32_init_ebi_kseg2_entrylo0_bitset ;
+__pic32_tlb_4_entrylo0 = (__pic32_init_ebi_kseg2_physical_base_addr >> 6) | __pic32_init_ebi_kseg2_entrylo0_bitset ;
 
 
 /*  ENTRYLO1 = RI<31> XI<30> 0<29:26> PFN<25:6> C<5:3> D<2> V<1> G<0> */
-__pic32_tlb_2_entrylo1 = __pic32_tlb_2_entrylo0 | 0x00080000 ;
+__pic32_tlb_4_entrylo1 = __pic32_tlb_4_entrylo0 | ((__pic32_init_ebi_kseg2_physical_base_addr + 0x1000000) >> 6) ;
+
+
+/*  ENTRYHI = VPN2<31:13> VPN2X<12:11> 0<10:8> ASID<7:0> */
+__pic32_tlb_5_entryhi  = __pic32_init_ebi_kseg2_virtual_base_addr + 0x2000000;
+
+
+/*  Create one page table entry consisting of two 16MB physical pages. 
+ *  ENTRYLO0 = RI<31> XI<30> 0<29:26> PFN<25:6> C<5:3> D<2> V<1> G<0> 
+ *  Shift __pic32_init_sqi_kseg3_physical_base_addr to PFN. 
+ *  Bitwise-OR the other bits of ENTRYLO0.
+ */
+__pic32_tlb_5_entrylo0 = ((__pic32_init_ebi_kseg2_physical_base_addr + 0x2000000) >> 6) | __pic32_init_ebi_kseg2_entrylo0_bitset;
+
+
+/*  ENTRYLO1 = RI<31> XI<30> 0<29:26> PFN<25:6> C<5:3> D<2> V<1> G<0> */
+__pic32_tlb_5_entrylo1 = __pic32_tlb_5_entrylo0 | 0x00040000 ;
 
 EXTERN  (__pic32_init_ebi_kseg3_virtual_base_addr)
 PROVIDE (__pic32_init_ebi_kseg3_virtual_base_addr = 0xE0000000) ;
@@ -1514,19 +1568,35 @@ EXTERN  (__pic32_init_ebi_kseg3_entrylo0_bitset)
 PROVIDE (__pic32_init_ebi_kseg3_entrylo0_bitset = 0x17) ;
 
 /*  ENTRYHI = VPN2<31:13> VPN2X<12:11> 0<10:8> ASID<7:0> */
-__pic32_tlb_3_entryhi  = __pic32_init_ebi_kseg3_virtual_base_addr ;
+__pic32_tlb_6_entryhi  = __pic32_init_ebi_kseg3_virtual_base_addr ;
 
 
-/*  Create one 64MB page table entry consisting of two 32MB physical pages. 
+/*  Create one page table entry consisting of two 16MB physical pages. 
  *  ENTRYLO0 = RI<31> XI<30> 0<29:26> PFN<25:6> C<5:3> D<2> V<1> G<0> 
  *  Shift __pic32_init_sqi_kseg3_physical_base_addr to PFN. 
  *  Bitwise-OR the other bits of ENTRYLO0.
  */
-__pic32_tlb_3_entrylo0 = (__pic32_init_ebi_kseg3_physical_base_addr >> 6) | __pic32_init_ebi_kseg3_entrylo0_bitset ;
+__pic32_tlb_6_entrylo0 = (__pic32_init_ebi_kseg3_physical_base_addr >> 6) | __pic32_init_ebi_kseg3_entrylo0_bitset ;
 
 
 /*  ENTRYLO1 = RI<31> XI<30> 0<29:26> PFN<25:6> C<5:3> D<2> V<1> G<0> */
-__pic32_tlb_3_entrylo1 = __pic32_tlb_3_entrylo0 | 0x00080000 ;
+__pic32_tlb_6_entrylo1 = __pic32_tlb_6_entrylo0 | ((__pic32_init_ebi_kseg3_physical_base_addr + 0x1000000) >> 6) ;
+
+
+/*  ENTRYHI = VPN2<31:13> VPN2X<12:11> 0<10:8> ASID<7:0> */
+__pic32_tlb_7_entryhi  = __pic32_init_ebi_kseg3_virtual_base_addr + 0x2000000;
+
+
+/*  Create one page table entry consisting of two 16MB physical pages. 
+ *  ENTRYLO0 = RI<31> XI<30> 0<29:26> PFN<25:6> C<5:3> D<2> V<1> G<0> 
+ *  Shift __pic32_init_sqi_kseg3_physical_base_addr to PFN. 
+ *  Bitwise-OR the other bits of ENTRYLO0.
+ */
+__pic32_tlb_7_entrylo0 = ((__pic32_init_ebi_kseg3_physical_base_addr + 0x2000000) >> 6) | __pic32_init_ebi_kseg3_entrylo0_bitset;
+
+
+/*  ENTRYLO1 = RI<31> XI<30> 0<29:26> PFN<25:6> C<5:3> D<2> V<1> G<0> */
+__pic32_tlb_7_entrylo1 = __pic32_tlb_7_entrylo0 | 0x00040000 ;
 
 /*
  *  The default pic32_init_tlb_ebi_sqi.o module, which is
@@ -1553,8 +1623,20 @@ SECTIONS
     LONG(__pic32_tlb_3_entryhi) ;
     LONG(__pic32_tlb_3_entrylo0) ;
     LONG(__pic32_tlb_3_entrylo1) ;
+    LONG(__pic32_tlb_4_entryhi) ;
+    LONG(__pic32_tlb_4_entrylo0) ;
+    LONG(__pic32_tlb_4_entrylo1) ;
+    LONG(__pic32_tlb_5_entryhi) ;
+    LONG(__pic32_tlb_5_entrylo0) ;
+    LONG(__pic32_tlb_5_entrylo1) ;
+    LONG(__pic32_tlb_6_entryhi) ;
+    LONG(__pic32_tlb_6_entrylo0) ;
+    LONG(__pic32_tlb_6_entrylo1) ;
+    LONG(__pic32_tlb_7_entryhi) ;
+    LONG(__pic32_tlb_7_entrylo0) ;
+    LONG(__pic32_tlb_7_entrylo1) ;
     __pic32_tlb_init_values_end = ABSOLUTE(.);
-    __pic32_tlb_init_values_count = 4 ;
+    __pic32_tlb_init_values_count = 8 ;
   } > kseg1_boot_mem_4B0
 }
 

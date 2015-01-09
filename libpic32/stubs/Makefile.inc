@@ -14,7 +14,6 @@ LIBOBJ += remove.o
 LIBOBJ += close.o
 LIBOBJ += getenv.o
 LIBOBJ += rename.o
-LIBOBJ += fstat.o
 LIBOBJ += open.o
 LIBOBJ += unlink.o
 LIBOBJ += kill.o
@@ -32,6 +31,16 @@ LIBOBJ += pic32_software_reset.o
 # LIBOBJ += stubs.o getenv.o 
 # LIBOBJ += raise.o signal.o localeconv.o setlocale.o isatty.o
 
+SUPOBJ  += pic32_software_reset.o pic32_software_reset-mm.o
+
 sbrk.o: sbrk.c
 	$(CC) $(CFLAGS) -c -DPAGESIZE=128 $< -o $@
 
+pic32_software_reset.o: pic32_software_reset.S
+	$(CC) -c -D__LIBBUILD__ $< -o $@
+	$(STRIP) $(STRIPFLAGS) $@
+
+pic32_software_reset-mm.o: pic32_software_reset.S
+	$(CC) -g -mmicromips -D__USE_MICROMIPS=1 -c -D__LIBBUILD__ $< -o $@
+	$(STRIP) $(STRIPFLAGS) $@
+ 

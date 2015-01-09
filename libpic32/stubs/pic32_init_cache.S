@@ -267,15 +267,18 @@ __pic32_init_cache:
 
         .set noreorder
 
-        mfc0 t0, _CP0_CONFIG
-        ori t0, _CP0_CONFIG_K0_MASK
-        xori t0, _CP0_CONFIG_K0_MASK
-        ori t0, __PIC32_CACHE_MODE
-        mtc0 t0, _CP0_CONFIG
-
         # restore status
         mtc0 t0,_CP0_STATUS
         ehb
+
+        # Configure Cache Mode
+        mfc0 t1, _CP0_CONFIG
+        ori t1, _CP0_CONFIG_K0_MASK
+        xori t1, _CP0_CONFIG_K0_MASK
+        ori t1, __PIC32_CACHE_MODE
+        mtc0 t1, _CP0_CONFIG
+        ehb
+        
          .set reorder
 
         move ra, save_ra

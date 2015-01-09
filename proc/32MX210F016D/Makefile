@@ -7,6 +7,7 @@ ISRFILE=default_isr_vectors.o
 
 STARTUP_OPTIONS = -D__LIBBUILD__
 STARTUP_OPTIONS += -DPIC32MX
+STARTUP_OPTIONS += -D__PIC32_HAS_MIPS32R2
 STARTUP_OPTIONS += -DPIC32_SRS_SET_COUNT=1
 
 STARTUPOBJ += crt0_mips32r2.o mcrt0_mips32r2.o crti_mips32r2.o crtn_mips32r2.o cpprt0_mips32r2.o

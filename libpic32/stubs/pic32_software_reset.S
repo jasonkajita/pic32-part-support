@@ -2,11 +2,19 @@
 	.section	.text,code
 	.align	2
 	.globl	__pic32_software_reset
-	.set	nomips16
-	.set	nomicromips
+
+	.set noreorder
+	.set noat
+	.set nomips16
+#if defined(__mips_micromips) || defined(__USE_MICROMIPS)
+	.set micromips
+#else
+	.set nomicromips
+#endif
+
 	.ent	__pic32_software_reset
 	.type	__pic32_software_reset, @function
-	
+
 __pic32_software_reset:
 
 	.frame	$sp,24,$31

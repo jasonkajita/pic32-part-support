@@ -1,5 +1,9 @@
 /*--------------------------------------------------------------------------
  * MPLAB XC Compiler -  PIC32MX110F016D linker script
+ * Build date : Dec 02 2014
+ * 
+ * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
  * subsidiaries ("Microchip").
@@ -29,7 +33,7 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- *-------------------------------------------------------------------------*/
+ */
 
 /* Default linker script, for normal executables */
 
@@ -97,13 +101,14 @@ _GEN_EXCPT_ADDR                = _ebase_address + 0x180;
  * into these regions.
  *
  * The Debug exception vector is located at 0x9FC00480.
+ *
  * The config_<address> sections are used to locate the config words at
  * their absolute addresses.
  *************************************************************************/
 MEMORY
 {
-  exception_mem               : ORIGIN = 0x9D000000, LENGTH = 0xA00
-  kseg0_program_mem     (rx)  : ORIGIN = 0x9D000A00, LENGTH = 0x3600
+  exception_mem               : ORIGIN = 0x9D000000, LENGTH = 0x780
+  kseg0_program_mem     (rx)  : ORIGIN = 0x9D000780, LENGTH = 0x3880
   debug_exec_mem              : ORIGIN = 0x9FC00490, LENGTH = 0x760
   kseg0_boot_mem              : ORIGIN = 0x9FC00490, LENGTH = 0x0
   kseg1_boot_mem              : ORIGIN = 0xBFC00000, LENGTH = 0x490
@@ -383,106 +388,6 @@ SECTIONS
      KEEP(*(.vector_43))
   } > exception_mem
   ASSERT (_vector_spacing == 0 || SIZEOF(.vector_43) <= (_vector_spacing << 5), "function at exception vector 43 too large")
-  .vector_44 _ebase_address + 0x200 + ((_vector_spacing << 5) * 44) :
-  {
-     KEEP(*(.vector_44))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_44) <= (_vector_spacing << 5), "function at exception vector 44 too large")
-  .vector_45 _ebase_address + 0x200 + ((_vector_spacing << 5) * 45) :
-  {
-     KEEP(*(.vector_45))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_45) <= (_vector_spacing << 5), "function at exception vector 45 too large")
-  .vector_46 _ebase_address + 0x200 + ((_vector_spacing << 5) * 46) :
-  {
-     KEEP(*(.vector_46))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_46) <= (_vector_spacing << 5), "function at exception vector 46 too large")
-  .vector_47 _ebase_address + 0x200 + ((_vector_spacing << 5) * 47) :
-  {
-     KEEP(*(.vector_47))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_47) <= (_vector_spacing << 5), "function at exception vector 47 too large")
-  .vector_48 _ebase_address + 0x200 + ((_vector_spacing << 5) * 48) :
-  {
-     KEEP(*(.vector_48))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_48) <= (_vector_spacing << 5), "function at exception vector 48 too large")
-  .vector_49 _ebase_address + 0x200 + ((_vector_spacing << 5) * 49) :
-  {
-     KEEP(*(.vector_49))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_49) <= (_vector_spacing << 5), "function at exception vector 49 too large")
-  .vector_50 _ebase_address + 0x200 + ((_vector_spacing << 5) * 50) :
-  {
-     KEEP(*(.vector_50))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_50) <= (_vector_spacing << 5), "function at exception vector 50 too large")
-  .vector_51 _ebase_address + 0x200 + ((_vector_spacing << 5) * 51) :
-  {
-     KEEP(*(.vector_51))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_51) <= (_vector_spacing << 5), "function at exception vector 51 too large")
-  .vector_52 _ebase_address + 0x200 + ((_vector_spacing << 5) * 52) :
-  {
-     KEEP(*(.vector_52))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_52) <= (_vector_spacing << 5), "function at exception vector 52 too large")
-  .vector_53 _ebase_address + 0x200 + ((_vector_spacing << 5) * 53) :
-  {
-     KEEP(*(.vector_53))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_53) <= (_vector_spacing << 5), "function at exception vector 53 too large")
-  .vector_54 _ebase_address + 0x200 + ((_vector_spacing << 5) * 54) :
-  {
-     KEEP(*(.vector_54))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_54) <= (_vector_spacing << 5), "function at exception vector 54 too large")
-  .vector_55 _ebase_address + 0x200 + ((_vector_spacing << 5) * 55) :
-  {
-     KEEP(*(.vector_55))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_55) <= (_vector_spacing << 5), "function at exception vector 55 too large")
-  .vector_56 _ebase_address + 0x200 + ((_vector_spacing << 5) * 56) :
-  {
-     KEEP(*(.vector_56))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_56) <= (_vector_spacing << 5), "function at exception vector 56 too large")
-  .vector_57 _ebase_address + 0x200 + ((_vector_spacing << 5) * 57) :
-  {
-     KEEP(*(.vector_57))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_57) <= (_vector_spacing << 5), "function at exception vector 57 too large")
-  .vector_58 _ebase_address + 0x200 + ((_vector_spacing << 5) * 58) :
-  {
-     KEEP(*(.vector_58))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_58) <= (_vector_spacing << 5), "function at exception vector 58 too large")
-  .vector_59 _ebase_address + 0x200 + ((_vector_spacing << 5) * 59) :
-  {
-     KEEP(*(.vector_59))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_59) <= (_vector_spacing << 5), "function at exception vector 59 too large")
-  .vector_60 _ebase_address + 0x200 + ((_vector_spacing << 5) * 60) :
-  {
-     KEEP(*(.vector_60))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_60) <= (_vector_spacing << 5), "function at exception vector 60 too large")
-  .vector_61 _ebase_address + 0x200 + ((_vector_spacing << 5) * 61) :
-  {
-     KEEP(*(.vector_61))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_61) <= (_vector_spacing << 5), "function at exception vector 61 too large")
-  .vector_62 _ebase_address + 0x200 + ((_vector_spacing << 5) * 62) :
-  {
-     KEEP(*(.vector_62))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_62) <= (_vector_spacing << 5), "function at exception vector 62 too large")
-  .vector_63 _ebase_address + 0x200 + ((_vector_spacing << 5) * 63) :
-  {
-     KEEP(*(.vector_63))
-  } > exception_mem
-  ASSERT (_vector_spacing == 0 || SIZEOF(.vector_63) <= (_vector_spacing << 5), "function at exception vector 63 too large")
 
   /*  The startup code is in the .reset.startup section.
    *  Keep this here for backwards compatibility with older
@@ -492,10 +397,11 @@ SECTIONS
   {
     KEEP(*(.startup))
   } > kseg0_boot_mem
+
   /* Code Sections - Note that input sections *(.text) and *(.text.*)
-  ** are not mapped here. The best-fit allocator locates them,
-  ** so that .text may flow around absolute sections as needed.
-  */
+   * are not mapped here. The best-fit allocator locates them,
+   * so that .text may flow around absolute sections as needed.
+   */
   .text :
   {
     *(.stub .gnu.linkonce.t.*)

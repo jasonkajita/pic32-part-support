@@ -1,6 +1,10 @@
 /*-------------------------------------------------------------------------
  * PIC32MX430F064H processor header
+ * Build date : Dec 02 2014
  *
+ * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * All rights reserved.
+ * 
  * This software is developed by Microchip Technology Inc. and its
  * subsidiaries ("Microchip").
  * 
@@ -29,7 +33,7 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- *-------------------------------------------------------------------------*/
+ */
 
 #pragma once
 #ifndef __32MX430F064H_H
@@ -3324,7 +3328,7 @@ typedef union {
     unsigned U2TXIE:1;
     unsigned I2C2BIE:1;
     unsigned I2C2SIE:1;
-    unsigned I2CMIE:1;
+    unsigned I2C2MIE:1;
     unsigned U3EIE:1;
     unsigned U3RXIE:1;
   };
@@ -3801,10 +3805,18 @@ extern volatile unsigned int        DCH0INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0INTINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHSSA:32;
+} __DCH0SSAbits_t;
+extern volatile __DCH0SSAbits_t DCH0SSAbits __asm__ ("DCH0SSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SSAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHDSA:32;
+} __DCH0DSAbits_t;
+extern volatile __DCH0DSAbits_t DCH0DSAbits __asm__ ("DCH0DSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DSAINV __attribute__((section("sfrs")));
@@ -3908,10 +3920,18 @@ extern volatile unsigned int        DCH1INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1INTINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHSSA:32;
+} __DCH1SSAbits_t;
+extern volatile __DCH1SSAbits_t DCH1SSAbits __asm__ ("DCH1SSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SSAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHDSA:32;
+} __DCH1DSAbits_t;
+extern volatile __DCH1DSAbits_t DCH1DSAbits __asm__ ("DCH1DSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DSAINV __attribute__((section("sfrs")));
@@ -4015,10 +4035,18 @@ extern volatile unsigned int        DCH2INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2INTINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHSSA:32;
+} __DCH2SSAbits_t;
+extern volatile __DCH2SSAbits_t DCH2SSAbits __asm__ ("DCH2SSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SSAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHDSA:32;
+} __DCH2DSAbits_t;
+extern volatile __DCH2DSAbits_t DCH2DSAbits __asm__ ("DCH2DSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DSAINV __attribute__((section("sfrs")));
@@ -4122,10 +4150,18 @@ extern volatile unsigned int        DCH3INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3INTINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHSSA:32;
+} __DCH3SSAbits_t;
+extern volatile __DCH3SSAbits_t DCH3SSAbits __asm__ ("DCH3SSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SSAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHDSA:32;
+} __DCH3DSAbits_t;
+extern volatile __DCH3DSAbits_t DCH3DSAbits __asm__ ("DCH3DSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DSAINV __attribute__((section("sfrs")));
@@ -7137,70 +7173,70 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
   .extern U1CNFG1CLR       /* 0xBF8852E4 */
   .extern U1CNFG1SET       /* 0xBF8852E8 */
   .extern U1CNFG1INV       /* 0xBF8852EC */
-  .extern U1EP0            /* 0xBF885360 */
-  .extern U1EP0CLR         /* 0xBF885364 */
-  .extern U1EP0SET         /* 0xBF885368 */
-  .extern U1EP0INV         /* 0xBF88536C */
-  .extern U1EP1            /* 0xBF885370 */
-  .extern U1EP1CLR         /* 0xBF885374 */
-  .extern U1EP1SET         /* 0xBF885378 */
-  .extern U1EP1INV         /* 0xBF88537C */
-  .extern U1EP2            /* 0xBF885380 */
-  .extern U1EP2CLR         /* 0xBF885384 */
-  .extern U1EP2SET         /* 0xBF885388 */
-  .extern U1EP2INV         /* 0xBF88538C */
-  .extern U1EP3            /* 0xBF885390 */
-  .extern U1EP3CLR         /* 0xBF885394 */
-  .extern U1EP3SET         /* 0xBF885398 */
-  .extern U1EP3INV         /* 0xBF88539C */
-  .extern U1EP4            /* 0xBF8853A0 */
-  .extern U1EP4CLR         /* 0xBF8853A4 */
-  .extern U1EP4SET         /* 0xBF8853A8 */
-  .extern U1EP4INV         /* 0xBF8853AC */
-  .extern U1EP5            /* 0xBF8853B0 */
-  .extern U1EP5CLR         /* 0xBF8853B4 */
-  .extern U1EP5SET         /* 0xBF8853B8 */
-  .extern U1EP5INV         /* 0xBF8853BC */
-  .extern U1EP6            /* 0xBF8853C0 */
-  .extern U1EP6CLR         /* 0xBF8853C4 */
-  .extern U1EP6SET         /* 0xBF8853C8 */
-  .extern U1EP6INV         /* 0xBF8853CC */
-  .extern U1EP7            /* 0xBF8853D0 */
-  .extern U1EP7CLR         /* 0xBF8853D4 */
-  .extern U1EP7SET         /* 0xBF8853D8 */
-  .extern U1EP7INV         /* 0xBF8853DC */
-  .extern U1EP8            /* 0xBF8853E0 */
-  .extern U1EP8CLR         /* 0xBF8853E4 */
-  .extern U1EP8SET         /* 0xBF8853E8 */
-  .extern U1EP8INV         /* 0xBF8853EC */
-  .extern U1EP9            /* 0xBF8853F0 */
-  .extern U1EP9CLR         /* 0xBF8853F4 */
-  .extern U1EP9SET         /* 0xBF8853F8 */
-  .extern U1EP9INV         /* 0xBF8853FC */
-  .extern U1EP10           /* 0xBF885400 */
-  .extern U1EP10CLR        /* 0xBF885404 */
-  .extern U1EP10SET        /* 0xBF885408 */
-  .extern U1EP10INV        /* 0xBF88540C */
-  .extern U1EP11           /* 0xBF885410 */
-  .extern U1EP11CLR        /* 0xBF885414 */
-  .extern U1EP11SET        /* 0xBF885418 */
-  .extern U1EP11INV        /* 0xBF88541C */
-  .extern U1EP12           /* 0xBF885420 */
-  .extern U1EP12CLR        /* 0xBF885424 */
-  .extern U1EP12SET        /* 0xBF885428 */
-  .extern U1EP12INV        /* 0xBF88542C */
-  .extern U1EP13           /* 0xBF885430 */
-  .extern U1EP13CLR        /* 0xBF885434 */
-  .extern U1EP13SET        /* 0xBF885438 */
-  .extern U1EP13INV        /* 0xBF88543C */
-  .extern U1EP14           /* 0xBF885440 */
-  .extern U1EP14CLR        /* 0xBF885444 */
-  .extern U1EP14SET        /* 0xBF885448 */
-  .extern U1EP14INV        /* 0xBF88544C */
-  .extern U1EP15           /* 0xBF885450 */
-  .extern U1EP15CLR        /* 0xBF885454 */
-  .extern U1EP15SET        /* 0xBF885458 */
-  .extern U1EP15INV        /* 0xBF88545C */
+  .extern U1EP0            /* 0xBF885300 */
+  .extern U1EP0CLR         /* 0xBF885304 */
+  .extern U1EP0SET         /* 0xBF885308 */
+  .extern U1EP0INV         /* 0xBF88530C */
+  .extern U1EP1            /* 0xBF885310 */
+  .extern U1EP1CLR         /* 0xBF885314 */
+  .extern U1EP1SET         /* 0xBF885318 */
+  .extern U1EP1INV         /* 0xBF88531C */
+  .extern U1EP2            /* 0xBF885320 */
+  .extern U1EP2CLR         /* 0xBF885324 */
+  .extern U1EP2SET         /* 0xBF885328 */
+  .extern U1EP2INV         /* 0xBF88532C */
+  .extern U1EP3            /* 0xBF885330 */
+  .extern U1EP3CLR         /* 0xBF885334 */
+  .extern U1EP3SET         /* 0xBF885338 */
+  .extern U1EP3INV         /* 0xBF88533C */
+  .extern U1EP4            /* 0xBF885340 */
+  .extern U1EP4CLR         /* 0xBF885344 */
+  .extern U1EP4SET         /* 0xBF885348 */
+  .extern U1EP4INV         /* 0xBF88534C */
+  .extern U1EP5            /* 0xBF885350 */
+  .extern U1EP5CLR         /* 0xBF885354 */
+  .extern U1EP5SET         /* 0xBF885358 */
+  .extern U1EP5INV         /* 0xBF88535C */
+  .extern U1EP6            /* 0xBF885360 */
+  .extern U1EP6CLR         /* 0xBF885364 */
+  .extern U1EP6SET         /* 0xBF885368 */
+  .extern U1EP6INV         /* 0xBF88536C */
+  .extern U1EP7            /* 0xBF885370 */
+  .extern U1EP7CLR         /* 0xBF885374 */
+  .extern U1EP7SET         /* 0xBF885378 */
+  .extern U1EP7INV         /* 0xBF88537C */
+  .extern U1EP8            /* 0xBF885380 */
+  .extern U1EP8CLR         /* 0xBF885384 */
+  .extern U1EP8SET         /* 0xBF885388 */
+  .extern U1EP8INV         /* 0xBF88538C */
+  .extern U1EP9            /* 0xBF885390 */
+  .extern U1EP9CLR         /* 0xBF885394 */
+  .extern U1EP9SET         /* 0xBF885398 */
+  .extern U1EP9INV         /* 0xBF88539C */
+  .extern U1EP10           /* 0xBF8853A0 */
+  .extern U1EP10CLR        /* 0xBF8853A4 */
+  .extern U1EP10SET        /* 0xBF8853A8 */
+  .extern U1EP10INV        /* 0xBF8853AC */
+  .extern U1EP11           /* 0xBF8853B0 */
+  .extern U1EP11CLR        /* 0xBF8853B4 */
+  .extern U1EP11SET        /* 0xBF8853B8 */
+  .extern U1EP11INV        /* 0xBF8853BC */
+  .extern U1EP12           /* 0xBF8853C0 */
+  .extern U1EP12CLR        /* 0xBF8853C4 */
+  .extern U1EP12SET        /* 0xBF8853C8 */
+  .extern U1EP12INV        /* 0xBF8853CC */
+  .extern U1EP13           /* 0xBF8853D0 */
+  .extern U1EP13CLR        /* 0xBF8853D4 */
+  .extern U1EP13SET        /* 0xBF8853D8 */
+  .extern U1EP13INV        /* 0xBF8853DC */
+  .extern U1EP14           /* 0xBF8853E0 */
+  .extern U1EP14CLR        /* 0xBF8853E4 */
+  .extern U1EP14SET        /* 0xBF8853E8 */
+  .extern U1EP14INV        /* 0xBF8853EC */
+  .extern U1EP15           /* 0xBF8853F0 */
+  .extern U1EP15CLR        /* 0xBF8853F4 */
+  .extern U1EP15SET        /* 0xBF8853F8 */
+  .extern U1EP15INV        /* 0xBF8853FC */
   .extern ANSELB           /* 0xBF886100 */
   .extern ANSELBCLR        /* 0xBF886104 */
   .extern ANSELBSET        /* 0xBF886108 */
@@ -12985,9 +13021,9 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _IEC1_I2C2SIE_MASK                       0x10000000
 #define _IEC1_I2C2SIE_LENGTH                     0x00000001
 
-#define _IEC1_I2CMIE_POSITION                    0x0000001D
-#define _IEC1_I2CMIE_MASK                        0x20000000
-#define _IEC1_I2CMIE_LENGTH                      0x00000001
+#define _IEC1_I2C2MIE_POSITION                   0x0000001D
+#define _IEC1_I2C2MIE_MASK                       0x20000000
+#define _IEC1_I2C2MIE_LENGTH                     0x00000001
 
 #define _IEC1_U3EIE_POSITION                     0x0000001E
 #define _IEC1_U3EIE_MASK                         0x40000000
@@ -13681,6 +13717,14 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DCH0INT_w_MASK                          0xFFFFFFFF
 #define _DCH0INT_w_LENGTH                        0x00000020
 
+#define _DCH0SSA_CHSSA_POSITION                  0x00000000
+#define _DCH0SSA_CHSSA_MASK                      0xFFFFFFFF
+#define _DCH0SSA_CHSSA_LENGTH                    0x00000020
+
+#define _DCH0DSA_CHDSA_POSITION                  0x00000000
+#define _DCH0DSA_CHDSA_MASK                      0xFFFFFFFF
+#define _DCH0DSA_CHDSA_LENGTH                    0x00000020
+
 #define _DCH1CON_CHPRI_POSITION                  0x00000000
 #define _DCH1CON_CHPRI_MASK                      0x00000003
 #define _DCH1CON_CHPRI_LENGTH                    0x00000002
@@ -13816,6 +13860,14 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DCH1INT_w_POSITION                      0x00000000
 #define _DCH1INT_w_MASK                          0xFFFFFFFF
 #define _DCH1INT_w_LENGTH                        0x00000020
+
+#define _DCH1SSA_CHSSA_POSITION                  0x00000000
+#define _DCH1SSA_CHSSA_MASK                      0xFFFFFFFF
+#define _DCH1SSA_CHSSA_LENGTH                    0x00000020
+
+#define _DCH1DSA_CHDSA_POSITION                  0x00000000
+#define _DCH1DSA_CHDSA_MASK                      0xFFFFFFFF
+#define _DCH1DSA_CHDSA_LENGTH                    0x00000020
 
 #define _DCH2CON_CHPRI_POSITION                  0x00000000
 #define _DCH2CON_CHPRI_MASK                      0x00000003
@@ -13953,6 +14005,14 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DCH2INT_w_MASK                          0xFFFFFFFF
 #define _DCH2INT_w_LENGTH                        0x00000020
 
+#define _DCH2SSA_CHSSA_POSITION                  0x00000000
+#define _DCH2SSA_CHSSA_MASK                      0xFFFFFFFF
+#define _DCH2SSA_CHSSA_LENGTH                    0x00000020
+
+#define _DCH2DSA_CHDSA_POSITION                  0x00000000
+#define _DCH2DSA_CHDSA_MASK                      0xFFFFFFFF
+#define _DCH2DSA_CHDSA_LENGTH                    0x00000020
+
 #define _DCH3CON_CHPRI_POSITION                  0x00000000
 #define _DCH3CON_CHPRI_MASK                      0x00000003
 #define _DCH3CON_CHPRI_LENGTH                    0x00000002
@@ -14088,6 +14148,14 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DCH3INT_w_POSITION                      0x00000000
 #define _DCH3INT_w_MASK                          0xFFFFFFFF
 #define _DCH3INT_w_LENGTH                        0x00000020
+
+#define _DCH3SSA_CHSSA_POSITION                  0x00000000
+#define _DCH3SSA_CHSSA_MASK                      0xFFFFFFFF
+#define _DCH3SSA_CHSSA_LENGTH                    0x00000020
+
+#define _DCH3DSA_CHDSA_POSITION                  0x00000000
+#define _DCH3DSA_CHDSA_MASK                      0xFFFFFFFF
+#define _DCH3DSA_CHDSA_LENGTH                    0x00000020
 
 #define _CHECON_PFMWS_POSITION                   0x00000000
 #define _CHECON_PFMWS_MASK                       0x00000007
@@ -17506,7 +17574,7 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _PORTD_BASE_ADDRESS                      0xBF886320
 #define _PORTE_BASE_ADDRESS                      0xBF886420
 #define _PORTF_BASE_ADDRESS                      0xBF886520
-#define _PORTG_BASE_ADDRESS                      0xBF886660
+#define _PORTG_BASE_ADDRESS                      0xBF886620
 #define _RCON_BASE_ADDRESS                       0xBF80F600
 #define _RTCC_BASE_ADDRESS                       0xBF800200
 #define _SPI1_BASE_ADDRESS                       0xBF805800
@@ -17533,6 +17601,18 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #endif
 #ifndef __32MX430F064H__
 #  define __32MX430F064H__ 1
+#endif
+#ifndef __XC__
+#  define __XC__ 1
+#endif
+#ifndef __XC
+#  define __XC 1
+#endif
+#ifndef __XC32__
+#  define __XC32__ 1
+#endif
+#ifndef __XC32
+#  define __XC32 1
 #endif
 #ifndef __PIC32MX
 #  define __PIC32MX 1

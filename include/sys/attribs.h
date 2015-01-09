@@ -1,3 +1,51 @@
+/*********************************************************************
+ *
+ *              Macros for function and variable attributes
+ *
+ *********************************************************************
+ * Filename:        sys/attribs.h
+ *
+ * Processor:       PIC32
+ *
+ * Compiler:        MPLAB XC32
+ *
+ * Company:         Microchip Technology Inc.
+ *
+ * Software License Agreement
+ *
+ * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * All rights reserved.
+ *
+ * This software is developed by Microchip Technology Inc. and its
+ * subsidiaries ("Microchip").
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1.      Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
+ *
+ * 2.      Redistributions in binary form must reproduce the above copyright
+ * notice, this list of conditions and the following disclaimer in the
+ * documentation and/or other materials provided with the distribution.
+ *
+ * 3.      Microchip's name may not be used to endorse or promote products
+ * derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL
+ * MICROCHIP BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ *-------------------------------------------------------------------------*/
+ 
+#pragma once 
 #ifndef __ATTRIBS_H
 #define __ATTRIBS_H
 
@@ -10,9 +58,7 @@
  * This creates a function named foo that will be placed into section
  * ".fred"
  *****************************************************************************/
-#if 0
 #define __section__(n) __attribute__ ((section (n)))
-#endif
 
 /*****************************************************************************
  * The following macro -- __unique_section__ -- is used to specify that the
@@ -41,7 +87,11 @@
  * This function may be called from other functions located within data
  * memory.
  *****************************************************************************/
+#if (__C32_VERSION__ < 200)
 #define __ramfunc__ __attribute__ ((section(".ramfunc"), unique_section))
+#else
+#define __ramfunc__ __attribute__ ((ramfunc,section(".ramfunc"),unique_section))
+#endif
 
 /*****************************************************************************
  * The following macro -- __longramfunc__ -- is used to specify a function
@@ -55,8 +105,35 @@
  * This function may be called from other functions located in either program
  * or data memory.
  *****************************************************************************/
+#if (__C32_VERSION__ < 200)
+#if !defined(far)
 #define __longramfunc__ __attribute__ ((section(".ramfunc"), far,\
                                         unique_section))
+#elif !defined(longcall)
+#define __longramfunc__ __attribute__ ((section(".ramfunc"), longcall,\
+                                        unique_section))
+#elif !defined(long_call)
+#define __longramfunc__ __attribute__ ((section(".ramfunc"), long_call,\
+                                        unique_section))
+#else
+#error Cannot use __longramfunc__ macro because 'far', 'longcall', & 'long_call' are defined
+#endif
+
+#else /* __C32_VERSION__ */
+#if !defined(far)
+#define __longramfunc__ __attribute__ ((ramfunc,section(".ramfunc"),far,\
+                                        unique_section))
+#elif !defined(longcall)
+#define __longramfunc__ __attribute__ ((ramfunc,section(".ramfunc"),longcall,\
+                                        unique_section))
+#elif !defined(long_call)
+#define __longramfunc__ __attribute__ ((ramfunc,section(".ramfunc"),long_call,\
+                                        unique_section))
+#else
+#error Cannot use __longramfunc__ macro because 'far', 'longcall', & 'long_call' are defined
+#endif
+
+#endif /* __C32_VERSION__ */
 
 /*****************************************************************************
  * The following macro -- __longcall__ -- is used to specify a function

@@ -1,35 +1,40 @@
-#-------------------------------------------------------------------------
-# MPLAB XC Compiler -  PIC32MZ2048ECH100 processor definition module
-# 
-# This software is developed by Microchip Technology Inc. and its
-# subsidiaries ("Microchip").
-# 
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are 
-# met:
-# 
-# 1.      Redistributions of source code must retain the above copyright
-#         notice, this list of conditions and the following disclaimer.
-# 2.      Redistributions in binary form must reproduce the above 
-#         copyright notice, this list of conditions and the following 
-#         disclaimer in the documentation and/or other materials provided 
-#         with the distribution.
-# 3.      Microchip's name may not be used to endorse or promote products
-#         derived from this software without specific prior written 
-#         permission.
-# 
-# THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED
-# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-# MERCHANTABILITY AND FITNESS FOR PURPOSE ARE DISCLAIMED. IN NO EVENT 
-# SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
-# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS;
-# OR BUSINESS INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
-# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-# 
-#-------------------------------------------------------------------------
+ #-------------------------------------------------------------------------
+ # MPLAB XC Compiler -  PIC32MZ2048ECH100 processor definition module
+ # 
+ # Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ # All rights reserved.
+ # 
+ # This software is developed by Microchip Technology Inc. and its
+ # subsidiaries ("Microchip").
+ # 
+ # Redistribution and use in source and binary forms, with or without
+ # modification, are permitted provided that the following conditions are 
+ # met:
+ # 
+ # 1.      Redistributions of source code must retain the above copyright
+ #         notice, this list of conditions and the following disclaimer.
+ # 2.      Redistributions in binary form must reproduce the above 
+ #         copyright notice, this list of conditions and the following 
+ #         disclaimer in the documentation and/or other materials provided 
+ #         with the distribution.
+ # 3.      Microchip's name may not be used to endorse or promote products
+ #         derived from this software without specific prior written 
+ #         permission.
+ # 
+ # THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED
+ # WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ # MERCHANTABILITY AND FITNESS FOR PURPOSE ARE DISCLAIMED. IN NO EVENT 
+ # SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ # EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+ # PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS;
+ # OR BUSINESS INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ # WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
+ # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ # 
+ #
+
+ #-------------------------------------------------------------------------
 
 CFGCON = 0xBF800000
   .global CFGCON
@@ -1609,12 +1614,20 @@ DCH0CSIZSET = 0xBF8110F8
   .global DCH0CSIZSET
 DCH0CSIZINV = 0xBF8110FC
   .global DCH0CSIZINV
+DCH0CPTR = 0xBF811100
+  .global DCH0CPTR
 DCS0CPTR = 0xBF811100
   .global DCS0CPTR
+DCH0CPTRCLR = 0xBF811104
+  .global DCH0CPTRCLR
 DCS0CPTRCLR = 0xBF811104
   .global DCS0CPTRCLR
+DCH0CPTRSET = 0xBF811108
+  .global DCH0CPTRSET
 DCS0CPTRSET = 0xBF811108
   .global DCS0CPTRSET
+DCH0CPTRINV = 0xBF81110C
+  .global DCH0CPTRINV
 DCS0CPTRINV = 0xBF81110C
   .global DCS0CPTRINV
 DCH0DAT = 0xBF811110
@@ -1705,12 +1718,20 @@ DCH1CSIZSET = 0xBF8111B8
   .global DCH1CSIZSET
 DCH1CSIZINV = 0xBF8111BC
   .global DCH1CSIZINV
+DCH1CPTR = 0xBF8111C0
+  .global DCH1CPTR
 DCS1CPTR = 0xBF8111C0
   .global DCS1CPTR
+DCH1CPTRCLR = 0xBF8111C4
+  .global DCH1CPTRCLR
 DCS1CPTRCLR = 0xBF8111C4
   .global DCS1CPTRCLR
+DCH1CPTRSET = 0xBF8111C8
+  .global DCH1CPTRSET
 DCS1CPTRSET = 0xBF8111C8
   .global DCS1CPTRSET
+DCH1CPTRINV = 0xBF8111CC
+  .global DCH1CPTRINV
 DCS1CPTRINV = 0xBF8111CC
   .global DCS1CPTRINV
 DCH1DAT = 0xBF8111D0
@@ -1801,12 +1822,20 @@ DCH2CSIZSET = 0xBF811278
   .global DCH2CSIZSET
 DCH2CSIZINV = 0xBF81127C
   .global DCH2CSIZINV
+DCH2CPTR = 0xBF811280
+  .global DCH2CPTR
 DCS2CPTR = 0xBF811280
   .global DCS2CPTR
+DCH2CPTRCLR = 0xBF811284
+  .global DCH2CPTRCLR
 DCS2CPTRCLR = 0xBF811284
   .global DCS2CPTRCLR
+DCH2CPTRSET = 0xBF811288
+  .global DCH2CPTRSET
 DCS2CPTRSET = 0xBF811288
   .global DCS2CPTRSET
+DCH2CPTRINV = 0xBF81128C
+  .global DCH2CPTRINV
 DCS2CPTRINV = 0xBF81128C
   .global DCS2CPTRINV
 DCH2DAT = 0xBF811290
@@ -1897,12 +1926,20 @@ DCH3CSIZSET = 0xBF811338
   .global DCH3CSIZSET
 DCH3CSIZINV = 0xBF81133C
   .global DCH3CSIZINV
+DCH3CPTR = 0xBF811340
+  .global DCH3CPTR
 DCS3CPTR = 0xBF811340
   .global DCS3CPTR
+DCH3CPTRCLR = 0xBF811344
+  .global DCH3CPTRCLR
 DCS3CPTRCLR = 0xBF811344
   .global DCS3CPTRCLR
+DCH3CPTRSET = 0xBF811348
+  .global DCH3CPTRSET
 DCS3CPTRSET = 0xBF811348
   .global DCS3CPTRSET
+DCH3CPTRINV = 0xBF81134C
+  .global DCH3CPTRINV
 DCS3CPTRINV = 0xBF81134C
   .global DCS3CPTRINV
 DCH3DAT = 0xBF811350
@@ -1993,12 +2030,20 @@ DCH4CSIZSET = 0xBF8113F8
   .global DCH4CSIZSET
 DCH4CSIZINV = 0xBF8113FC
   .global DCH4CSIZINV
+DCH4CPTR = 0xBF811400
+  .global DCH4CPTR
 DCS4CPTR = 0xBF811400
   .global DCS4CPTR
+DCH4CPTRCLR = 0xBF811404
+  .global DCH4CPTRCLR
 DCS4CPTRCLR = 0xBF811404
   .global DCS4CPTRCLR
+DCH4CPTRSET = 0xBF811408
+  .global DCH4CPTRSET
 DCS4CPTRSET = 0xBF811408
   .global DCS4CPTRSET
+DCH4CPTRINV = 0xBF81140C
+  .global DCH4CPTRINV
 DCS4CPTRINV = 0xBF81140C
   .global DCS4CPTRINV
 DCH4DAT = 0xBF811410
@@ -2089,12 +2134,20 @@ DCH5CSIZSET = 0xBF8114B8
   .global DCH5CSIZSET
 DCH5CSIZINV = 0xBF8114BC
   .global DCH5CSIZINV
+DCH5CPTR = 0xBF8114C0
+  .global DCH5CPTR
 DCS5CPTR = 0xBF8114C0
   .global DCS5CPTR
+DCH5CPTRCLR = 0xBF8114C4
+  .global DCH5CPTRCLR
 DCS5CPTRCLR = 0xBF8114C4
   .global DCS5CPTRCLR
+DCH5CPTRSET = 0xBF8114C8
+  .global DCH5CPTRSET
 DCS5CPTRSET = 0xBF8114C8
   .global DCS5CPTRSET
+DCH5CPTRINV = 0xBF8114CC
+  .global DCH5CPTRINV
 DCS5CPTRINV = 0xBF8114CC
   .global DCS5CPTRINV
 DCH5DAT = 0xBF8114D0
@@ -2185,12 +2238,20 @@ DCH6CSIZSET = 0xBF811578
   .global DCH6CSIZSET
 DCH6CSIZINV = 0xBF81157C
   .global DCH6CSIZINV
+DCH6CPTR = 0xBF811580
+  .global DCH6CPTR
 DCS6CPTR = 0xBF811580
   .global DCS6CPTR
+DCH6CPTRCLR = 0xBF811584
+  .global DCH6CPTRCLR
 DCS6CPTRCLR = 0xBF811584
   .global DCS6CPTRCLR
+DCH6CPTRSET = 0xBF811588
+  .global DCH6CPTRSET
 DCS6CPTRSET = 0xBF811588
   .global DCS6CPTRSET
+DCH6CPTRINV = 0xBF81158C
+  .global DCH6CPTRINV
 DCS6CPTRINV = 0xBF81158C
   .global DCS6CPTRINV
 DCH6DAT = 0xBF811590
@@ -2281,12 +2342,20 @@ DCH7CSIZSET = 0xBF811638
   .global DCH7CSIZSET
 DCH7CSIZINV = 0xBF81163C
   .global DCH7CSIZINV
+DCH7CPTR = 0xBF811640
+  .global DCH7CPTR
 DCS7CPTR = 0xBF811640
   .global DCS7CPTR
+DCH7CPTRCLR = 0xBF811644
+  .global DCH7CPTRCLR
 DCS7CPTRCLR = 0xBF811644
   .global DCS7CPTRCLR
+DCH7CPTRSET = 0xBF811648
+  .global DCH7CPTRSET
 DCS7CPTRSET = 0xBF811648
   .global DCS7CPTRSET
+DCH7CPTRINV = 0xBF81164C
+  .global DCH7CPTRINV
 DCS7CPTRINV = 0xBF81164C
   .global DCS7CPTRINV
 DCH7DAT = 0xBF811650

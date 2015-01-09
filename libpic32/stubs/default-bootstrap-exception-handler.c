@@ -39,7 +39,7 @@
  * referenced and thus not pulled in from the library.
  */
 
-extern void __attribute__((nomips16, noreturn, far)) __pic32_software_reset();
+extern void __attribute__((nomips16, noreturn, far, weak)) __pic32_software_reset();
 void __attribute__((weak)) __exception_handler_break(void);
 extern void _DEBUGGER  __attribute__((weak));
 
@@ -48,7 +48,11 @@ __attribute__((weak, nomips16, noreturn)) _bootstrap_exception_handler (void)
 {
   if (&_DEBUGGER != 0 && __exception_handler_break)
     __asm__ volatile ("sdbbp 0");
-   
+  
+  if (__pic32_software_reset) 
   __pic32_software_reset();
+  
+  while(1);
 }
+
 

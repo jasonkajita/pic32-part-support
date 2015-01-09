@@ -1,7 +1,8 @@
 include	$(ROOT)/../defines.mk
 
-include $(ROOT)/startup/Makefile.inc
+include $(ROOT)/arch/$(ARCH)/Makefile.inc
 include $(ROOT)/stubs/Makefile.inc
+include $(ROOT)/startup/Makefile.inc
 include $(ROOT)/default_vector_dispatch/Makefile.inc
 
 vpath	%.c		$(_VPATH)
@@ -14,8 +15,9 @@ vpath	Makefile	$(_VPATH)
 
 # Force optimisation, but no inlining/unrolling
 OPTIM	=-O2 -fno-inline-functions -fno-unroll-loops \
-	 -fno-optimize-sibling-calls -fno-builtin-functions -ffunction-sections \
-	 -fdata-sections -fno-common
+	 -foptimize-sibling-calls -ffunction-sections \
+	 -fno-common -fno-builtin-exit -fno-builtin-abort -minterlink-mips16 \
+	 -fno-jump-tables
 
 CPPFLAGS += $(GPOPT) -DNDEBUG=1 -I$(ROOT)/include -I$(ROOT)/../include
 CFLAGS += $(OPTIM) $(VAR) $(GPOPT) -DNDEBUG=1 -D__LIBBUILD__ -I$(ROOT)/include -I$(ROOT)/../include -g1 -msmart-io=0 -Wcast-align -Wall
@@ -23,11 +25,11 @@ ASFLAGS += $(VAR) -DNDEBUG=1 -D__LIBBUILD__
 
 all: libpic32.a startup_modules
 
-libpic32.a: $(LIBOBJ)
+libpic32.a: Makefile $(LIBOBJ)
 	$(STRIP) $(STRIPFLAGS) $(LIBOBJ)
 	$(AR) rcs $@ $(LIBOBJ)
 
-startup_modules:  $(SUPOBJ)
+startup_modules:  Makefile $(SUPOBJ)
 
 install: libpic32.a startup_modules
 	mkdir -p $(LIBDESTDIR)/$(SUBDIR)
@@ -37,5 +39,5 @@ install: libpic32.a startup_modules
 	cp -p $(SUPOBJ) $(LIBDESTDIR)/$(SUBDIR)
 
 clean:
-	rm -f lib.a *.o core* *~
+	rm -f libpic32.a *.o core* *~
 

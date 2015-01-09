@@ -1,6 +1,10 @@
 /*-------------------------------------------------------------------------
  * PIC32MZ1024ECG100 processor header
+ * Build date : Dec 02 2014
  *
+ * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * All rights reserved.
+ * 
  * This software is developed by Microchip Technology Inc. and its
  * subsidiaries ("Microchip").
  * 
@@ -29,7 +33,7 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- *-------------------------------------------------------------------------*/
+ */
 
 #pragma once
 #ifndef __32MZ1024ECG100_H
@@ -446,11 +450,11 @@ typedef union {
     unsigned HALFSEC:1;
     unsigned RTCSYNC:1;
     unsigned RTCWREN:1;
-    unsigned :1;
+    unsigned :2;
     unsigned RTCCLKON:1;
     unsigned RTCOUTSEL:2;
     unsigned RTCCLKSEL:2;
-    unsigned :3;
+    unsigned :2;
     unsigned SIDL:1;
     unsigned :1;
     unsigned ON:1;
@@ -4214,13 +4218,21 @@ extern volatile __DCH0CSIZbits_t DCH0CSIZbits __asm__ ("DCH0CSIZ") __attribute__
 extern volatile unsigned int        DCH0CSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0CSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0CSIZINV __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0CPTR __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHCPTR:16;
+} __DCH0CPTRbits_t;
+extern volatile __DCH0CPTRbits_t DCH0CPTRbits __asm__ ("DCH0CPTR") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS0CPTR __attribute__((section("sfrs")));
 typedef struct {
   unsigned CHCPTR:16;
 } __DCS0CPTRbits_t;
 extern volatile __DCS0CPTRbits_t DCS0CPTRbits __asm__ ("DCS0CPTR") __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0CPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS0CPTRCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0CPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS0CPTRSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH0CPTRINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS0CPTRINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DAT __attribute__((section("sfrs")));
 typedef struct {
@@ -4348,13 +4360,21 @@ extern volatile __DCH1CSIZbits_t DCH1CSIZbits __asm__ ("DCH1CSIZ") __attribute__
 extern volatile unsigned int        DCH1CSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1CSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1CSIZINV __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH1CPTR __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHCPTR:16;
+} __DCH1CPTRbits_t;
+extern volatile __DCH1CPTRbits_t DCH1CPTRbits __asm__ ("DCH1CPTR") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS1CPTR __attribute__((section("sfrs")));
 typedef struct {
   unsigned CHCPTR:16;
 } __DCS1CPTRbits_t;
 extern volatile __DCS1CPTRbits_t DCS1CPTRbits __asm__ ("DCS1CPTR") __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH1CPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS1CPTRCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH1CPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS1CPTRSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH1CPTRINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS1CPTRINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DAT __attribute__((section("sfrs")));
 typedef struct {
@@ -4482,13 +4502,21 @@ extern volatile __DCH2CSIZbits_t DCH2CSIZbits __asm__ ("DCH2CSIZ") __attribute__
 extern volatile unsigned int        DCH2CSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2CSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2CSIZINV __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH2CPTR __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHCPTR:16;
+} __DCH2CPTRbits_t;
+extern volatile __DCH2CPTRbits_t DCH2CPTRbits __asm__ ("DCH2CPTR") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS2CPTR __attribute__((section("sfrs")));
 typedef struct {
   unsigned CHCPTR:16;
 } __DCS2CPTRbits_t;
 extern volatile __DCS2CPTRbits_t DCS2CPTRbits __asm__ ("DCS2CPTR") __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH2CPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS2CPTRCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH2CPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS2CPTRSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH2CPTRINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS2CPTRINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DAT __attribute__((section("sfrs")));
 typedef struct {
@@ -4616,13 +4644,21 @@ extern volatile __DCH3CSIZbits_t DCH3CSIZbits __asm__ ("DCH3CSIZ") __attribute__
 extern volatile unsigned int        DCH3CSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3CSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3CSIZINV __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH3CPTR __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHCPTR:16;
+} __DCH3CPTRbits_t;
+extern volatile __DCH3CPTRbits_t DCH3CPTRbits __asm__ ("DCH3CPTR") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS3CPTR __attribute__((section("sfrs")));
 typedef struct {
   unsigned CHCPTR:16;
 } __DCS3CPTRbits_t;
 extern volatile __DCS3CPTRbits_t DCS3CPTRbits __asm__ ("DCS3CPTR") __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH3CPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS3CPTRCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH3CPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS3CPTRSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH3CPTRINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS3CPTRINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DAT __attribute__((section("sfrs")));
 typedef struct {
@@ -4750,13 +4786,21 @@ extern volatile __DCH4CSIZbits_t DCH4CSIZbits __asm__ ("DCH4CSIZ") __attribute__
 extern volatile unsigned int        DCH4CSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH4CSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH4CSIZINV __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH4CPTR __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHCPTR:16;
+} __DCH4CPTRbits_t;
+extern volatile __DCH4CPTRbits_t DCH4CPTRbits __asm__ ("DCH4CPTR") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS4CPTR __attribute__((section("sfrs")));
 typedef struct {
   unsigned CHCPTR:16;
 } __DCS4CPTRbits_t;
 extern volatile __DCS4CPTRbits_t DCS4CPTRbits __asm__ ("DCS4CPTR") __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH4CPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS4CPTRCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH4CPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS4CPTRSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH4CPTRINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS4CPTRINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH4DAT __attribute__((section("sfrs")));
 typedef struct {
@@ -4884,13 +4928,21 @@ extern volatile __DCH5CSIZbits_t DCH5CSIZbits __asm__ ("DCH5CSIZ") __attribute__
 extern volatile unsigned int        DCH5CSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH5CSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH5CSIZINV __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH5CPTR __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHCPTR:16;
+} __DCH5CPTRbits_t;
+extern volatile __DCH5CPTRbits_t DCH5CPTRbits __asm__ ("DCH5CPTR") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS5CPTR __attribute__((section("sfrs")));
 typedef struct {
   unsigned CHCPTR:16;
 } __DCS5CPTRbits_t;
 extern volatile __DCS5CPTRbits_t DCS5CPTRbits __asm__ ("DCS5CPTR") __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH5CPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS5CPTRCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH5CPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS5CPTRSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH5CPTRINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS5CPTRINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH5DAT __attribute__((section("sfrs")));
 typedef struct {
@@ -5018,13 +5070,21 @@ extern volatile __DCH6CSIZbits_t DCH6CSIZbits __asm__ ("DCH6CSIZ") __attribute__
 extern volatile unsigned int        DCH6CSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH6CSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH6CSIZINV __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH6CPTR __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHCPTR:16;
+} __DCH6CPTRbits_t;
+extern volatile __DCH6CPTRbits_t DCH6CPTRbits __asm__ ("DCH6CPTR") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS6CPTR __attribute__((section("sfrs")));
 typedef struct {
   unsigned CHCPTR:16;
 } __DCS6CPTRbits_t;
 extern volatile __DCS6CPTRbits_t DCS6CPTRbits __asm__ ("DCS6CPTR") __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH6CPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS6CPTRCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH6CPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS6CPTRSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH6CPTRINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS6CPTRINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH6DAT __attribute__((section("sfrs")));
 typedef struct {
@@ -5152,13 +5212,21 @@ extern volatile __DCH7CSIZbits_t DCH7CSIZbits __asm__ ("DCH7CSIZ") __attribute__
 extern volatile unsigned int        DCH7CSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH7CSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH7CSIZINV __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH7CPTR __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHCPTR:16;
+} __DCH7CPTRbits_t;
+extern volatile __DCH7CPTRbits_t DCH7CPTRbits __asm__ ("DCH7CPTR") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS7CPTR __attribute__((section("sfrs")));
 typedef struct {
   unsigned CHCPTR:16;
 } __DCS7CPTRbits_t;
 extern volatile __DCS7CPTRbits_t DCS7CPTRbits __asm__ ("DCS7CPTR") __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH7CPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS7CPTRCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH7CPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS7CPTRSET __attribute__((section("sfrs")));
+extern volatile unsigned int        DCH7CPTRINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCS7CPTRINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH7DAT __attribute__((section("sfrs")));
 typedef struct {
@@ -12086,13 +12154,14 @@ typedef struct {
   unsigned CPHA:1;
   unsigned CPOL:1;
   unsigned LSBF:1;
+  unsigned :1;
   unsigned RXLATCH:1;
-  unsigned SERMODE:1;
+  unsigned :1;
   unsigned WP:1;
   unsigned HOLD:1;
   unsigned :1;
   unsigned BURSTEN:1;
-  unsigned :2;
+  unsigned :3;
   unsigned RESET:1;
   unsigned :3;
   unsigned DATAEN:2;
@@ -16581,9 +16650,13 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern DCH0CSIZCLR      /* 0xBF8110F4 */
   .extern DCH0CSIZSET      /* 0xBF8110F8 */
   .extern DCH0CSIZINV      /* 0xBF8110FC */
+  .extern DCH0CPTR         /* 0xBF811100 */
   .extern DCS0CPTR         /* 0xBF811100 */
+  .extern DCH0CPTRCLR      /* 0xBF811104 */
   .extern DCS0CPTRCLR      /* 0xBF811104 */
+  .extern DCH0CPTRSET      /* 0xBF811108 */
   .extern DCS0CPTRSET      /* 0xBF811108 */
+  .extern DCH0CPTRINV      /* 0xBF81110C */
   .extern DCS0CPTRINV      /* 0xBF81110C */
   .extern DCH0DAT          /* 0xBF811110 */
   .extern DCH0DATCLR       /* 0xBF811114 */
@@ -16629,9 +16702,13 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern DCH1CSIZCLR      /* 0xBF8111B4 */
   .extern DCH1CSIZSET      /* 0xBF8111B8 */
   .extern DCH1CSIZINV      /* 0xBF8111BC */
+  .extern DCH1CPTR         /* 0xBF8111C0 */
   .extern DCS1CPTR         /* 0xBF8111C0 */
+  .extern DCH1CPTRCLR      /* 0xBF8111C4 */
   .extern DCS1CPTRCLR      /* 0xBF8111C4 */
+  .extern DCH1CPTRSET      /* 0xBF8111C8 */
   .extern DCS1CPTRSET      /* 0xBF8111C8 */
+  .extern DCH1CPTRINV      /* 0xBF8111CC */
   .extern DCS1CPTRINV      /* 0xBF8111CC */
   .extern DCH1DAT          /* 0xBF8111D0 */
   .extern DCH1DATCLR       /* 0xBF8111D4 */
@@ -16677,9 +16754,13 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern DCH2CSIZCLR      /* 0xBF811274 */
   .extern DCH2CSIZSET      /* 0xBF811278 */
   .extern DCH2CSIZINV      /* 0xBF81127C */
+  .extern DCH2CPTR         /* 0xBF811280 */
   .extern DCS2CPTR         /* 0xBF811280 */
+  .extern DCH2CPTRCLR      /* 0xBF811284 */
   .extern DCS2CPTRCLR      /* 0xBF811284 */
+  .extern DCH2CPTRSET      /* 0xBF811288 */
   .extern DCS2CPTRSET      /* 0xBF811288 */
+  .extern DCH2CPTRINV      /* 0xBF81128C */
   .extern DCS2CPTRINV      /* 0xBF81128C */
   .extern DCH2DAT          /* 0xBF811290 */
   .extern DCH2DATCLR       /* 0xBF811294 */
@@ -16725,9 +16806,13 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern DCH3CSIZCLR      /* 0xBF811334 */
   .extern DCH3CSIZSET      /* 0xBF811338 */
   .extern DCH3CSIZINV      /* 0xBF81133C */
+  .extern DCH3CPTR         /* 0xBF811340 */
   .extern DCS3CPTR         /* 0xBF811340 */
+  .extern DCH3CPTRCLR      /* 0xBF811344 */
   .extern DCS3CPTRCLR      /* 0xBF811344 */
+  .extern DCH3CPTRSET      /* 0xBF811348 */
   .extern DCS3CPTRSET      /* 0xBF811348 */
+  .extern DCH3CPTRINV      /* 0xBF81134C */
   .extern DCS3CPTRINV      /* 0xBF81134C */
   .extern DCH3DAT          /* 0xBF811350 */
   .extern DCH3DATCLR       /* 0xBF811354 */
@@ -16773,9 +16858,13 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern DCH4CSIZCLR      /* 0xBF8113F4 */
   .extern DCH4CSIZSET      /* 0xBF8113F8 */
   .extern DCH4CSIZINV      /* 0xBF8113FC */
+  .extern DCH4CPTR         /* 0xBF811400 */
   .extern DCS4CPTR         /* 0xBF811400 */
+  .extern DCH4CPTRCLR      /* 0xBF811404 */
   .extern DCS4CPTRCLR      /* 0xBF811404 */
+  .extern DCH4CPTRSET      /* 0xBF811408 */
   .extern DCS4CPTRSET      /* 0xBF811408 */
+  .extern DCH4CPTRINV      /* 0xBF81140C */
   .extern DCS4CPTRINV      /* 0xBF81140C */
   .extern DCH4DAT          /* 0xBF811410 */
   .extern DCH4DATCLR       /* 0xBF811414 */
@@ -16821,9 +16910,13 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern DCH5CSIZCLR      /* 0xBF8114B4 */
   .extern DCH5CSIZSET      /* 0xBF8114B8 */
   .extern DCH5CSIZINV      /* 0xBF8114BC */
+  .extern DCH5CPTR         /* 0xBF8114C0 */
   .extern DCS5CPTR         /* 0xBF8114C0 */
+  .extern DCH5CPTRCLR      /* 0xBF8114C4 */
   .extern DCS5CPTRCLR      /* 0xBF8114C4 */
+  .extern DCH5CPTRSET      /* 0xBF8114C8 */
   .extern DCS5CPTRSET      /* 0xBF8114C8 */
+  .extern DCH5CPTRINV      /* 0xBF8114CC */
   .extern DCS5CPTRINV      /* 0xBF8114CC */
   .extern DCH5DAT          /* 0xBF8114D0 */
   .extern DCH5DATCLR       /* 0xBF8114D4 */
@@ -16869,9 +16962,13 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern DCH6CSIZCLR      /* 0xBF811574 */
   .extern DCH6CSIZSET      /* 0xBF811578 */
   .extern DCH6CSIZINV      /* 0xBF81157C */
+  .extern DCH6CPTR         /* 0xBF811580 */
   .extern DCS6CPTR         /* 0xBF811580 */
+  .extern DCH6CPTRCLR      /* 0xBF811584 */
   .extern DCS6CPTRCLR      /* 0xBF811584 */
+  .extern DCH6CPTRSET      /* 0xBF811588 */
   .extern DCS6CPTRSET      /* 0xBF811588 */
+  .extern DCH6CPTRINV      /* 0xBF81158C */
   .extern DCS6CPTRINV      /* 0xBF81158C */
   .extern DCH6DAT          /* 0xBF811590 */
   .extern DCH6DATCLR       /* 0xBF811594 */
@@ -16917,9 +17014,13 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern DCH7CSIZCLR      /* 0xBF811634 */
   .extern DCH7CSIZSET      /* 0xBF811638 */
   .extern DCH7CSIZINV      /* 0xBF81163C */
+  .extern DCH7CPTR         /* 0xBF811640 */
   .extern DCS7CPTR         /* 0xBF811640 */
+  .extern DCH7CPTRCLR      /* 0xBF811644 */
   .extern DCS7CPTRCLR      /* 0xBF811644 */
+  .extern DCH7CPTRSET      /* 0xBF811648 */
   .extern DCS7CPTRSET      /* 0xBF811648 */
+  .extern DCH7CPTRINV      /* 0xBF81164C */
   .extern DCS7CPTRINV      /* 0xBF81164C */
   .extern DCH7DAT          /* 0xBF811650 */
   .extern DCH7DATCLR       /* 0xBF811654 */
@@ -19410,16 +19511,16 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _RTCCON_RTCWREN_MASK                     0x00000008
 #define _RTCCON_RTCWREN_LENGTH                   0x00000001
 
-#define _RTCCON_RTCCLKON_POSITION                0x00000005
-#define _RTCCON_RTCCLKON_MASK                    0x00000020
+#define _RTCCON_RTCCLKON_POSITION                0x00000006
+#define _RTCCON_RTCCLKON_MASK                    0x00000040
 #define _RTCCON_RTCCLKON_LENGTH                  0x00000001
 
-#define _RTCCON_RTCOUTSEL_POSITION               0x00000006
-#define _RTCCON_RTCOUTSEL_MASK                   0x000000C0
+#define _RTCCON_RTCOUTSEL_POSITION               0x00000007
+#define _RTCCON_RTCOUTSEL_MASK                   0x00000180
 #define _RTCCON_RTCOUTSEL_LENGTH                 0x00000002
 
-#define _RTCCON_RTCCLKSEL_POSITION               0x00000008
-#define _RTCCON_RTCCLKSEL_MASK                   0x00000300
+#define _RTCCON_RTCCLKSEL_POSITION               0x00000009
+#define _RTCCON_RTCCLKSEL_MASK                   0x00000600
 #define _RTCCON_RTCCLKSEL_LENGTH                 0x00000002
 
 #define _RTCCON_SIDL_POSITION                    0x0000000D
@@ -24470,6 +24571,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _DCH0CSIZ_CHCSIZ_MASK                    0x0000FFFF
 #define _DCH0CSIZ_CHCSIZ_LENGTH                  0x00000010
 
+#define _DCH0CPTR_CHCPTR_POSITION                0x00000000
+#define _DCH0CPTR_CHCPTR_MASK                    0x0000FFFF
+#define _DCH0CPTR_CHCPTR_LENGTH                  0x00000010
+
 #define _DCS0CPTR_CHCPTR_POSITION                0x00000000
 #define _DCS0CPTR_CHCPTR_MASK                    0x0000FFFF
 #define _DCS0CPTR_CHCPTR_LENGTH                  0x00000010
@@ -24641,6 +24746,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _DCH1CSIZ_CHCSIZ_POSITION                0x00000000
 #define _DCH1CSIZ_CHCSIZ_MASK                    0x0000FFFF
 #define _DCH1CSIZ_CHCSIZ_LENGTH                  0x00000010
+
+#define _DCH1CPTR_CHCPTR_POSITION                0x00000000
+#define _DCH1CPTR_CHCPTR_MASK                    0x0000FFFF
+#define _DCH1CPTR_CHCPTR_LENGTH                  0x00000010
 
 #define _DCS1CPTR_CHCPTR_POSITION                0x00000000
 #define _DCS1CPTR_CHCPTR_MASK                    0x0000FFFF
@@ -24814,6 +24923,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _DCH2CSIZ_CHCSIZ_MASK                    0x0000FFFF
 #define _DCH2CSIZ_CHCSIZ_LENGTH                  0x00000010
 
+#define _DCH2CPTR_CHCPTR_POSITION                0x00000000
+#define _DCH2CPTR_CHCPTR_MASK                    0x0000FFFF
+#define _DCH2CPTR_CHCPTR_LENGTH                  0x00000010
+
 #define _DCS2CPTR_CHCPTR_POSITION                0x00000000
 #define _DCS2CPTR_CHCPTR_MASK                    0x0000FFFF
 #define _DCS2CPTR_CHCPTR_LENGTH                  0x00000010
@@ -24985,6 +25098,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _DCH3CSIZ_CHCSIZ_POSITION                0x00000000
 #define _DCH3CSIZ_CHCSIZ_MASK                    0x0000FFFF
 #define _DCH3CSIZ_CHCSIZ_LENGTH                  0x00000010
+
+#define _DCH3CPTR_CHCPTR_POSITION                0x00000000
+#define _DCH3CPTR_CHCPTR_MASK                    0x0000FFFF
+#define _DCH3CPTR_CHCPTR_LENGTH                  0x00000010
 
 #define _DCS3CPTR_CHCPTR_POSITION                0x00000000
 #define _DCS3CPTR_CHCPTR_MASK                    0x0000FFFF
@@ -25158,6 +25275,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _DCH4CSIZ_CHCSIZ_MASK                    0x0000FFFF
 #define _DCH4CSIZ_CHCSIZ_LENGTH                  0x00000010
 
+#define _DCH4CPTR_CHCPTR_POSITION                0x00000000
+#define _DCH4CPTR_CHCPTR_MASK                    0x0000FFFF
+#define _DCH4CPTR_CHCPTR_LENGTH                  0x00000010
+
 #define _DCS4CPTR_CHCPTR_POSITION                0x00000000
 #define _DCS4CPTR_CHCPTR_MASK                    0x0000FFFF
 #define _DCS4CPTR_CHCPTR_LENGTH                  0x00000010
@@ -25329,6 +25450,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _DCH5CSIZ_CHCSIZ_POSITION                0x00000000
 #define _DCH5CSIZ_CHCSIZ_MASK                    0x0000FFFF
 #define _DCH5CSIZ_CHCSIZ_LENGTH                  0x00000010
+
+#define _DCH5CPTR_CHCPTR_POSITION                0x00000000
+#define _DCH5CPTR_CHCPTR_MASK                    0x0000FFFF
+#define _DCH5CPTR_CHCPTR_LENGTH                  0x00000010
 
 #define _DCS5CPTR_CHCPTR_POSITION                0x00000000
 #define _DCS5CPTR_CHCPTR_MASK                    0x0000FFFF
@@ -25502,6 +25627,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _DCH6CSIZ_CHCSIZ_MASK                    0x0000FFFF
 #define _DCH6CSIZ_CHCSIZ_LENGTH                  0x00000010
 
+#define _DCH6CPTR_CHCPTR_POSITION                0x00000000
+#define _DCH6CPTR_CHCPTR_MASK                    0x0000FFFF
+#define _DCH6CPTR_CHCPTR_LENGTH                  0x00000010
+
 #define _DCS6CPTR_CHCPTR_POSITION                0x00000000
 #define _DCS6CPTR_CHCPTR_MASK                    0x0000FFFF
 #define _DCS6CPTR_CHCPTR_LENGTH                  0x00000010
@@ -25673,6 +25802,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _DCH7CSIZ_CHCSIZ_POSITION                0x00000000
 #define _DCH7CSIZ_CHCSIZ_MASK                    0x0000FFFF
 #define _DCH7CSIZ_CHCSIZ_LENGTH                  0x00000010
+
+#define _DCH7CPTR_CHCPTR_POSITION                0x00000000
+#define _DCH7CPTR_CHCPTR_MASK                    0x0000FFFF
+#define _DCH7CPTR_CHCPTR_LENGTH                  0x00000010
 
 #define _DCS7CPTR_CHCPTR_POSITION                0x00000000
 #define _DCS7CPTR_CHCPTR_MASK                    0x0000FFFF
@@ -37630,40 +37763,36 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _SQI1CFG_LSBF_MASK                       0x00000020
 #define _SQI1CFG_LSBF_LENGTH                     0x00000001
 
-#define _SQI1CFG_RXLATCH_POSITION                0x00000006
-#define _SQI1CFG_RXLATCH_MASK                    0x00000040
+#define _SQI1CFG_RXLATCH_POSITION                0x00000007
+#define _SQI1CFG_RXLATCH_MASK                    0x00000080
 #define _SQI1CFG_RXLATCH_LENGTH                  0x00000001
 
-#define _SQI1CFG_SERMODE_POSITION                0x00000007
-#define _SQI1CFG_SERMODE_MASK                    0x00000080
-#define _SQI1CFG_SERMODE_LENGTH                  0x00000001
-
-#define _SQI1CFG_WP_POSITION                     0x00000008
-#define _SQI1CFG_WP_MASK                         0x00000100
+#define _SQI1CFG_WP_POSITION                     0x00000009
+#define _SQI1CFG_WP_MASK                         0x00000200
 #define _SQI1CFG_WP_LENGTH                       0x00000001
 
-#define _SQI1CFG_HOLD_POSITION                   0x00000009
-#define _SQI1CFG_HOLD_MASK                       0x00000200
+#define _SQI1CFG_HOLD_POSITION                   0x0000000A
+#define _SQI1CFG_HOLD_MASK                       0x00000400
 #define _SQI1CFG_HOLD_LENGTH                     0x00000001
 
-#define _SQI1CFG_BURSTEN_POSITION                0x0000000B
-#define _SQI1CFG_BURSTEN_MASK                    0x00000800
+#define _SQI1CFG_BURSTEN_POSITION                0x0000000C
+#define _SQI1CFG_BURSTEN_MASK                    0x00001000
 #define _SQI1CFG_BURSTEN_LENGTH                  0x00000001
 
-#define _SQI1CFG_RESET_POSITION                  0x0000000E
-#define _SQI1CFG_RESET_MASK                      0x00004000
+#define _SQI1CFG_RESET_POSITION                  0x00000010
+#define _SQI1CFG_RESET_MASK                      0x00010000
 #define _SQI1CFG_RESET_LENGTH                    0x00000001
 
-#define _SQI1CFG_DATAEN_POSITION                 0x00000012
-#define _SQI1CFG_DATAEN_MASK                     0x000C0000
+#define _SQI1CFG_DATAEN_POSITION                 0x00000014
+#define _SQI1CFG_DATAEN_MASK                     0x00300000
 #define _SQI1CFG_DATAEN_LENGTH                   0x00000002
 
-#define _SQI1CFG_CSEN_POSITION                   0x00000016
-#define _SQI1CFG_CSEN_MASK                       0x00C00000
+#define _SQI1CFG_CSEN_POSITION                   0x00000018
+#define _SQI1CFG_CSEN_MASK                       0x03000000
 #define _SQI1CFG_CSEN_LENGTH                     0x00000002
 
-#define _SQI1CFG_SQIEN_POSITION                  0x0000001D
-#define _SQI1CFG_SQIEN_MASK                      0x20000000
+#define _SQI1CFG_SQIEN_POSITION                  0x0000001F
+#define _SQI1CFG_SQIEN_MASK                      0x80000000
 #define _SQI1CFG_SQIEN_LENGTH                    0x00000001
 
 #define _SQI1CON_TXRXCOUNT_POSITION              0x00000000
@@ -44508,6 +44637,18 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #endif
 #ifndef __32MZ1024ECG100__
 #  define __32MZ1024ECG100__ 1
+#endif
+#ifndef __XC__
+#  define __XC__ 1
+#endif
+#ifndef __XC
+#  define __XC 1
+#endif
+#ifndef __XC32__
+#  define __XC32__ 1
+#endif
+#ifndef __XC32
+#  define __XC32 1
 #endif
 #ifndef __PIC32MZ
 #  define __PIC32MZ 1

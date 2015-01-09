@@ -1,5 +1,9 @@
 /*--------------------------------------------------------------------------
  * MPLAB XC Compiler -  PIC32MX330F064L linker script
+ * Build date : Dec 02 2014
+ * 
+ * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
  * subsidiaries ("Microchip").
@@ -29,7 +33,7 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- *-------------------------------------------------------------------------*/
+ */
 
 /* Default linker script, for normal executables */
 
@@ -97,6 +101,7 @@ _GEN_EXCPT_ADDR                = _ebase_address + 0x180;
  * into these regions.
  *
  * The Debug exception vector is located at 0x9FC00480.
+ *
  * The config_<address> sections are used to locate the config words at
  * their absolute addresses.
  *************************************************************************/
@@ -492,10 +497,11 @@ SECTIONS
   {
     KEEP(*(.startup))
   } > kseg0_boot_mem
+
   /* Code Sections - Note that input sections *(.text) and *(.text.*)
-  ** are not mapped here. The best-fit allocator locates them,
-  ** so that .text may flow around absolute sections as needed.
-  */
+   * are not mapped here. The best-fit allocator locates them,
+   * so that .text may flow around absolute sections as needed.
+   */
   .text :
   {
     *(.stub .gnu.linkonce.t.*)

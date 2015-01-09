@@ -210,7 +210,7 @@ CSETTING:00000400:OSCIOFNC:CLKO Output Signal Active on the OSCO Pin
 CVALUE:00000000:ON:Enabled
 CVALUE:00000400:OFF:Disabled
 CSETTING:0000C000:FCKSM:Clock Switching and Monitor Selection
-CVALUE:00000000:CSDCMD:Clock Switch Disabled, FSCM Enabled
+CVALUE:00000000:CSDCMD:Clock Switch Disabled, FSCM Disabled
 CVALUE:00004000:CSECMD:Clock Switch Enabled, FSCM Disabled
 CVALUE:00008000:CSDCME:Clock Switch Disabled, FSCM Enabled
 CVALUE:0000C000:CSECME:Clock Switch Enabled, FSCM Enabled
@@ -556,7 +556,7 @@ CSETTING:00000400:A_OSCIOFNC:CLKO Output Signal Active on the OSCO Pin
 CVALUE:00000000:ON:Enabled
 CVALUE:00000400:OFF:Disabled
 CSETTING:0000C000:A_FCKSM:Clock Switching and Monitor Selection
-CVALUE:00000000:CSDCMD:Clock Switch Disabled, FSCM Enabled
+CVALUE:00000000:CSDCMD:Clock Switch Disabled, FSCM Disabled
 CVALUE:00004000:CSECMD:Clock Switch Enabled, FSCM Disabled
 CVALUE:00008000:CSDCME:Clock Switch Disabled, FSCM Enabled
 CVALUE:0000C000:CSECME:Clock Switch Enabled, FSCM Enabled
@@ -888,7 +888,7 @@ CSETTING:00000400:ABF1_OSCIOFNC:CLKO Output Signal Active on the OSCO Pin
 CVALUE:00000000:ON:Enabled
 CVALUE:00000400:OFF:Disabled
 CSETTING:0000C000:ABF1_FCKSM:Clock Switching and Monitor Selection
-CVALUE:00000000:CSDCMD:Clock Switch Disabled, FSCM Enabled
+CVALUE:00000000:CSDCMD:Clock Switch Disabled, FSCM Disabled
 CVALUE:00004000:CSECMD:Clock Switch Enabled, FSCM Disabled
 CVALUE:00008000:CSDCME:Clock Switch Disabled, FSCM Enabled
 CVALUE:0000C000:CSECME:Clock Switch Enabled, FSCM Enabled
@@ -1220,7 +1220,7 @@ CSETTING:00000400:BF1_OSCIOFNC:CLKO Output Signal Active on the OSCO Pin
 CVALUE:00000000:ON:Enabled
 CVALUE:00000400:OFF:Disabled
 CSETTING:0000C000:BF1_FCKSM:Clock Switching and Monitor Selection
-CVALUE:00000000:CSDCMD:Clock Switch Disabled, FSCM Enabled
+CVALUE:00000000:CSDCMD:Clock Switch Disabled, FSCM Disabled
 CVALUE:00004000:CSECMD:Clock Switch Enabled, FSCM Disabled
 CVALUE:00008000:CSDCME:Clock Switch Disabled, FSCM Enabled
 CVALUE:0000C000:CSECME:Clock Switch Enabled, FSCM Enabled
@@ -1552,7 +1552,7 @@ CSETTING:00000400:ABF2_OSCIOFNC:CLKO Output Signal Active on the OSCO Pin
 CVALUE:00000000:ON:Enabled
 CVALUE:00000400:OFF:Disabled
 CSETTING:0000C000:ABF2_FCKSM:Clock Switching and Monitor Selection
-CVALUE:00000000:CSDCMD:Clock Switch Disabled, FSCM Enabled
+CVALUE:00000000:CSDCMD:Clock Switch Disabled, FSCM Disabled
 CVALUE:00004000:CSECMD:Clock Switch Enabled, FSCM Disabled
 CVALUE:00008000:CSDCME:Clock Switch Disabled, FSCM Enabled
 CVALUE:0000C000:CSECME:Clock Switch Enabled, FSCM Enabled
@@ -1884,7 +1884,7 @@ CSETTING:00000400:BF2_OSCIOFNC:CLKO Output Signal Active on the OSCO Pin
 CVALUE:00000000:ON:Enabled
 CVALUE:00000400:OFF:Disabled
 CSETTING:0000C000:BF2_FCKSM:Clock Switching and Monitor Selection
-CVALUE:00000000:CSDCMD:Clock Switch Disabled, FSCM Enabled
+CVALUE:00000000:CSDCMD:Clock Switch Disabled, FSCM Disabled
 CVALUE:00004000:CSECMD:Clock Switch Enabled, FSCM Disabled
 CVALUE:00008000:CSDCME:Clock Switch Disabled, FSCM Enabled
 CVALUE:0000C000:CSECME:Clock Switch Enabled, FSCM Enabled

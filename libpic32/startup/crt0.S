@@ -7,10 +7,15 @@
  *
  * Processor:       PIC32
  *
+ * Compiler:        MPLAB XC32
+ *                  MPLAB X IDE
  * Company:         Microchip Technology Inc.
  *
  * Software License Agreement
  *
+ * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * All rights reserved.
+ * 
  * This software is developed by Microchip Technology Inc. and its
  * subsidiaries ("Microchip").
  *
@@ -39,68 +44,98 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  ********************************************************************/
- 
-#include <xc.h>
+
+#include "xc.h"
 #include <cp0defs.h>
 
-#if !defined(__XC32_VERSION)
-#define USE_OLD_INIT
-#define USE_OLD_DOTSECTION
+#ifdef __LIBBUILD__
+   # Replace the standard debugging information with a simple filename. This
+   # prevents the library build directory from showing up in MPLAB IDE. It
+   # also effectively disables source-line debugging.
+   .file 1 "libpic32/startup/crt0.S"
+   .loc 1 0
 #endif
 
 #if (__XC32_VERSION > 1000) && !defined(CPP_INIT)
 #define CPP_INIT
 #endif
 
-#if defined (PIC32MZ)
-# ifndef PIC32_SRS_SET_COUNT
-#  define PIC32_SRS_SET_COUNT 8
-# endif
-# ifndef INIT_L1_CACHE
-#  define INIT_L1_CACHE 1
-# endif
-# ifndef INIT_MMU_MZ_FIXED
-#  define INIT_MMU_MZ_FIXED 1
-# endif
-# ifndef INIT_DSPR2
-#  define INIT_DSPR2 1
-# endif
-# ifndef INIT_SSX
-#  define INIT_SSX 1
-# endif
-#else
+#if !defined(PIC32_SRS_SET_COUNT)
+# warning PIC32_SRS_SET_COUNT not defined on build line
 # define PIC32_SRS_SET_COUNT 2
 #endif
+
+
+/* This file contains 32-bit assembly code */
+       .set nomips16
 
         ##################################################################
         # Entry point of the entire application
         ##################################################################
-#if defined(USE_OLD_DOTSECTION)
-        .section .reset,"ax",@progbits
-#else
-        .section .reset,code
-#endif
-
+        .section .reset,code,keep
+        .align 2
         .set noreorder
         .ent _reset
+
+############################
+# Begin ISA switching code #
+############################
+
+#if defined (__mips_micromips)
+        .set micromips
+#endif
+
+#if (defined(__PIC32_HAS_MICROMIPS)) && (defined(__PIC32_HAS_MIPS32R2))
 _reset:
-        la      k0, _startup
-        jr      k0                      # Jump to startup code
+        .word 0x10000003     /* MIPS32:    branch forward 0x10 bytes from here  */
+                             /* MicroMIPS: ADDI32 $0, $0, 0x0007 (nop)          */
+                             /* DO NOT change the relative branch               */
+
+        .word 0x00000000     /* NOP */
+__reset_micromips_isa:
+        .set    micromips
+        jal     _startup
         nop
-  
+
+        .align 2
+        /* Device not in proper ISA mode */
+        .set nomicromips
+__reset_switch_isa:
+        jal _startup
+        nop
+
+#else
+
+_reset:
+        jal _startup
+        nop
+
+#endif  /* __PIC32_HAS_MICROMIPS */
+
+        .align 2
         .end _reset
         .globl _reset
+        .size _reset, .-_reset
+
+        .section .reset.startup,code,keep
+        .align 2
+        .set noreorder
+
+#if defined (__mips_micromips)
+        .set micromips
+#else
+        .set nomicromips
+#endif
+
+############################
+# End ISA switching code   #
+############################
 
 
         ##################################################################
         # Startup code
         ##################################################################
-#if defined(USE_OLD_DOTSECTION)
-        .section .startup,"ax",@progbits
-#else
-        .section .startup,code
-#endif
-
+        .align 2
         .set noreorder
         .ent _startup
 _startup:
@@ -129,7 +164,7 @@ _no_nmi:
         #   of the small variables region
         ##################################################################
         la      gp,_gp
-        
+
 #if (PIC32_SRS_SET_COUNT == 2)
         ##################################################################
         # Initialize Global Pointer in Shadow Set
@@ -150,14 +185,14 @@ _no_nmi:
         mtc0    t3,_CP0_SRSCTL          # Restore SRSCtl
         ehb
 
-#elif (PIC32_SRS_SET_COUNT > 2) 
+#elif (PIC32_SRS_SET_COUNT > 2)
         ##################################################################
         # Initialize Global Pointer in Shadow Set(s)
         #   The SRSCtl PSS field must be set to the shadow set in which
         #   to initialize the global pointer.  We will initialize
         #   SRSCtl<PSS> to the number of reg sets and work down to set zero.
-        #   We write the global pointer to the previous shadow set to 
-        #   ensure that on interrupt, the global pointer has been 
+        #   We write the global pointer to the previous shadow set to
+        #   ensure that on interrupt, the global pointer has been
         #   initialized.
         ##################################################################
         mfc0    t1,_CP0_SRSCTL          # Read SRSCtl register
@@ -193,10 +228,8 @@ _no_nmi:
         ##################################################################
         .extern __pic32_tlb_init_ebi_sqi
         la      t0,__pic32_tlb_init_ebi_sqi
-        beq     t0, $0,1f
-        nop
         jalr    t0
-1:      nop
+        nop
 #endif
 
 #if defined(INIT_L1_CACHE)
@@ -205,10 +238,8 @@ _no_nmi:
         ##################################################################
         .extern __pic32_init_cache
         la      t0,__pic32_init_cache
-        beq     t0, $0,1f
-        nop
         jalr    t0
-1:      nop
+        nop
 #endif
 
         ##################################################################
@@ -219,7 +250,7 @@ _no_nmi:
         b       _bss_check
         nop
 
-_bss_init:      
+_bss_init:
         sw      zero,0x0(t0)
         sw      zero,0x4(t0)
         sw      zero,0x8(t0)
@@ -228,69 +259,7 @@ _bss_init:
 _bss_check:
         bltu    t0,t1,_bss_init
         nop
-                
-#if defined(USE_OLD_INIT)
-        ##################################################################
-        # Copy initialized data from program flash to data memory
-        #   src=_data_image_begin dst=_data_begin stop=_data_end
-        ##################################################################
-        la      t0,_data_image_begin
-        la      t1,_data_begin
-        la      t2,_data_end
-        b       _init_check
-        nop
 
-_init_data:     
-        lw      t3,(t0)
-        sw      t3,(t1)
-        addu    t0,4
-        addu    t1,4
-_init_check:
-        bltu    t1,t2,_init_data
-        nop
-
-        ##################################################################
-        # If there are no RAM functions, skip the next two sections --
-        # copying RAM functions from program flash to data memory and
-        # initializing bus matrix registers.
-        ##################################################################
-        la      t1,_ramfunc_length
-        beqz    t1,_ramfunc_done
-        nop
-
-        ##################################################################
-        # Copy RAM functions from program flash to data memory
-        #   src=_ramfunc_image_begin dst=_ramfunc_begin stop=_ramfunc_end
-        ##################################################################
-        la      t0,_ramfunc_image_begin
-        la      t1,_ramfunc_begin
-        la      t2,_ramfunc_end
-
-_init_ramfunc:  
-        lw      t3,(t0)
-        sw      t3,(t1)
-        addu    t0,4
-        addu    t1,4
-_ramfunc_check:
-        bltu    t1,t2,_init_ramfunc
-        nop
-
-        ##################################################################
-        # Initialize bus matrix registers if RAM functions exist in the
-        # application
-        ##################################################################
-        la      t1,_bmxdkpba_address
-        la      t2,BMXDKPBA
-        sw      t1,0(t2)
-        la      t1,_bmxdudba_address
-        la      t2,BMXDUDBA
-        sw      t1,0(t2)
-        la      t1,_bmxdupba_address
-        la      t2,BMXDUPBA
-        sw      t1,0(t2)
-_ramfunc_done:
-
-#else
         ##################################################################
         # Initialize data using the linker-generated .dinit table
         ##################################################################
@@ -348,7 +317,7 @@ _dinit_end:
         nop
 
 #if defined(INIT_SSX)
-  /* TODO */
+  /* No initialization required */
 #else /* Use BMX */
         ##################################################################
         # Initialize bus matrix registers if RAM functions exist in the
@@ -366,8 +335,6 @@ _dinit_end:
 #endif /* INIT_SSX */
 
 _ramfunc_done:
-
-#endif  /* OLD_INIT */
 
         ##################################################################
         # Initialize CP0 registers
@@ -434,16 +401,6 @@ _ramfunc_done:
         mtc0    t0,_CP0_STATUS
 
         ##################################################################
-        # Initialize CONFIG register
-        ##################################################################
-#if defined(INIT_L1_CACHE)
-	mfc0    t0,_CP0_CONFIG
-	li      t1,0x00000003
-	or      t0,t1,t0
-	mtc0    t0,_CP0_CONFIG
-#endif
-
-        ##################################################################
         # Call the "on bootstrap" procedure
         ##################################################################
         la      t0,_on_bootstrap
@@ -476,44 +433,63 @@ _ramfunc_done:
         # Boot Exception Vector Handler
         # Jumps to _bootstrap_exception_handler
         ##################################################################
-        
-#if defined(USE_OLD_DOTSECTION)
-        .section .bev_handler,"ax",@progbits
-#else
-        .section .bev_handler,code
-#endif
-
+        .section .bev_handler,code,keep
         .set noreorder
         .ent _bev_exception
 _bev_exception:
-        la      k0,_bootstrap_exception_handler
-        jr      k0
+        la        k0,_bootstrap_exception_handler
+        jr        k0
         nop
 
         .end _bev_exception
-                        
+
         ##################################################################
         # General Exception Vector Handler
-        # Jumps to _general_exception_handler
+        # Jumps to _general_exception_context
         ##################################################################
-        
-#if defined(USE_OLD_DOTSECTION)
-        .section .gen_handler,"ax",@progbits
-#else
         .section .gen_handler,code
-#endif
-
         .set noreorder
         .ent _gen_exception
 _gen_exception:
-        la      k0,_general_exception_context
+0:      la      k0,_general_exception_context
         jr      k0
         nop
 
         .end _gen_exception
 
+#if defined(INIT_MMU_MZ_FIXED)
+        ##################################################################
+        # Simple TLB-Refill Exception Vector
+        # Jumps to _simple_tlb_refill_exception_context
+        ##################################################################
+        .section .simple_tlb_refill_vector,code,keep
+        .set noreorder
+        .ent simple_tlb_refill_vector
+simple_tlb_refill_vector:
+        la      k0,_simple_tlb_refill_exception_context
+        jr      k0
+        nop
 
-        .text
+        .end simple_tlb_refill_vector
+#endif
+
+#if defined(INIT_L1_CACHE)
+        ##################################################################
+        # Cache-Error Exception Vector Handler
+        # Jumps to _cache_err_exception_context
+        ##################################################################
+        .section .cache_err_vector,code,keep
+        .set noreorder
+        .ent _cache_err_vector
+_cache_err_vector:
+        la      k0,_cache_err_exception_context
+        jr      k0
+        nop
+
+        .end _cache_err_vector
+#endif
+
+        .section .text.main_entry,code,keep
         .ent _main_entry
 _main_entry:
 
@@ -531,24 +507,37 @@ _main_entry:
 #endif
         and     a0,a0,0
         and     a1,a1,0
-        
+
         ##################################################################
+
         # Call main
         ##################################################################
         jal main
         nop
 
+#if defined(CALL_EXIT)
         ##################################################################
-        # Call exit
+        # Call exit()
         ##################################################################
-        #jal    exit
-        #nop
+        jal exit
+        nop
+#endif
 
         ##################################################################
         # Just in case, go into infinite loop
+        # Call a software breakpoint only with -mdebugger compiler option
         ##################################################################
+        .weak __exception_handler_break
+__crt0_exit:
 1:
-        b       1b
+        la      v0,__exception_handler_break
+        beq     v0,0,0f
         nop
+        jalr    v0
+        nop
+
+0:      b       1b
+        nop
+
+        .globl __crt0_exit
         .end _main_entry
- 

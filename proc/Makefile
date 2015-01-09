@@ -16,7 +16,7 @@ install: $(SUBDIRS)
 		rm -rf ${LIBDESTDIR}/proc/$(dir); \
 		mkdir -p ${LIBDESTDIR}/proc/$(dir); \
 		cp $(dir)/* ${LIBDESTDIR}/proc/$(dir) 2>>/dev/null; \
-		rm ${LIBDESTDIR}/proc/$(dir)/p32*.S; \
+		rm ${LIBDESTDIR}/proc/$(dir)/[p32,pmec]*.S; \
 		rm ${LIBDESTDIR}/proc/$(dir)/Makefile; )
 
 clean: $(SUBDIRS)

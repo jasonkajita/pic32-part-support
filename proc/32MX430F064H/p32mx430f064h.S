@@ -1,35 +1,40 @@
-#-------------------------------------------------------------------------
-# MPLAB XC Compiler -  PIC32MX430F064H processor definition module
-# 
-# This software is developed by Microchip Technology Inc. and its
-# subsidiaries ("Microchip").
-# 
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are 
-# met:
-# 
-# 1.      Redistributions of source code must retain the above copyright
-#         notice, this list of conditions and the following disclaimer.
-# 2.      Redistributions in binary form must reproduce the above 
-#         copyright notice, this list of conditions and the following 
-#         disclaimer in the documentation and/or other materials provided 
-#         with the distribution.
-# 3.      Microchip's name may not be used to endorse or promote products
-#         derived from this software without specific prior written 
-#         permission.
-# 
-# THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED
-# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-# MERCHANTABILITY AND FITNESS FOR PURPOSE ARE DISCLAIMED. IN NO EVENT 
-# SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
-# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS;
-# OR BUSINESS INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
-# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-# 
-#-------------------------------------------------------------------------
+ #-------------------------------------------------------------------------
+ # MPLAB XC Compiler -  PIC32MX430F064H processor definition module
+ # 
+ # Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ # All rights reserved.
+ # 
+ # This software is developed by Microchip Technology Inc. and its
+ # subsidiaries ("Microchip").
+ # 
+ # Redistribution and use in source and binary forms, with or without
+ # modification, are permitted provided that the following conditions are 
+ # met:
+ # 
+ # 1.      Redistributions of source code must retain the above copyright
+ #         notice, this list of conditions and the following disclaimer.
+ # 2.      Redistributions in binary form must reproduce the above 
+ #         copyright notice, this list of conditions and the following 
+ #         disclaimer in the documentation and/or other materials provided 
+ #         with the distribution.
+ # 3.      Microchip's name may not be used to endorse or promote products
+ #         derived from this software without specific prior written 
+ #         permission.
+ # 
+ # THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED
+ # WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ # MERCHANTABILITY AND FITNESS FOR PURPOSE ARE DISCLAIMED. IN NO EVENT 
+ # SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ # EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+ # PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS;
+ # OR BUSINESS INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ # WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
+ # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ # 
+ #
+
+ #-------------------------------------------------------------------------
 
 WDTCON = 0xBF800000
   .global WDTCON
@@ -2109,133 +2114,133 @@ U1CNFG1SET = 0xBF8852E8
   .global U1CNFG1SET
 U1CNFG1INV = 0xBF8852EC
   .global U1CNFG1INV
-U1EP0 = 0xBF885360
+U1EP0 = 0xBF885300
   .global U1EP0
-U1EP0CLR = 0xBF885364
+U1EP0CLR = 0xBF885304
   .global U1EP0CLR
-U1EP0SET = 0xBF885368
+U1EP0SET = 0xBF885308
   .global U1EP0SET
-U1EP0INV = 0xBF88536C
+U1EP0INV = 0xBF88530C
   .global U1EP0INV
-U1EP1 = 0xBF885370
+U1EP1 = 0xBF885310
   .global U1EP1
-U1EP1CLR = 0xBF885374
+U1EP1CLR = 0xBF885314
   .global U1EP1CLR
-U1EP1SET = 0xBF885378
+U1EP1SET = 0xBF885318
   .global U1EP1SET
-U1EP1INV = 0xBF88537C
+U1EP1INV = 0xBF88531C
   .global U1EP1INV
-U1EP2 = 0xBF885380
+U1EP2 = 0xBF885320
   .global U1EP2
-U1EP2CLR = 0xBF885384
+U1EP2CLR = 0xBF885324
   .global U1EP2CLR
-U1EP2SET = 0xBF885388
+U1EP2SET = 0xBF885328
   .global U1EP2SET
-U1EP2INV = 0xBF88538C
+U1EP2INV = 0xBF88532C
   .global U1EP2INV
-U1EP3 = 0xBF885390
+U1EP3 = 0xBF885330
   .global U1EP3
-U1EP3CLR = 0xBF885394
+U1EP3CLR = 0xBF885334
   .global U1EP3CLR
-U1EP3SET = 0xBF885398
+U1EP3SET = 0xBF885338
   .global U1EP3SET
-U1EP3INV = 0xBF88539C
+U1EP3INV = 0xBF88533C
   .global U1EP3INV
-U1EP4 = 0xBF8853A0
+U1EP4 = 0xBF885340
   .global U1EP4
-U1EP4CLR = 0xBF8853A4
+U1EP4CLR = 0xBF885344
   .global U1EP4CLR
-U1EP4SET = 0xBF8853A8
+U1EP4SET = 0xBF885348
   .global U1EP4SET
-U1EP4INV = 0xBF8853AC
+U1EP4INV = 0xBF88534C
   .global U1EP4INV
-U1EP5 = 0xBF8853B0
+U1EP5 = 0xBF885350
   .global U1EP5
-U1EP5CLR = 0xBF8853B4
+U1EP5CLR = 0xBF885354
   .global U1EP5CLR
-U1EP5SET = 0xBF8853B8
+U1EP5SET = 0xBF885358
   .global U1EP5SET
-U1EP5INV = 0xBF8853BC
+U1EP5INV = 0xBF88535C
   .global U1EP5INV
-U1EP6 = 0xBF8853C0
+U1EP6 = 0xBF885360
   .global U1EP6
-U1EP6CLR = 0xBF8853C4
+U1EP6CLR = 0xBF885364
   .global U1EP6CLR
-U1EP6SET = 0xBF8853C8
+U1EP6SET = 0xBF885368
   .global U1EP6SET
-U1EP6INV = 0xBF8853CC
+U1EP6INV = 0xBF88536C
   .global U1EP6INV
-U1EP7 = 0xBF8853D0
+U1EP7 = 0xBF885370
   .global U1EP7
-U1EP7CLR = 0xBF8853D4
+U1EP7CLR = 0xBF885374
   .global U1EP7CLR
-U1EP7SET = 0xBF8853D8
+U1EP7SET = 0xBF885378
   .global U1EP7SET
-U1EP7INV = 0xBF8853DC
+U1EP7INV = 0xBF88537C
   .global U1EP7INV
-U1EP8 = 0xBF8853E0
+U1EP8 = 0xBF885380
   .global U1EP8
-U1EP8CLR = 0xBF8853E4
+U1EP8CLR = 0xBF885384
   .global U1EP8CLR
-U1EP8SET = 0xBF8853E8
+U1EP8SET = 0xBF885388
   .global U1EP8SET
-U1EP8INV = 0xBF8853EC
+U1EP8INV = 0xBF88538C
   .global U1EP8INV
-U1EP9 = 0xBF8853F0
+U1EP9 = 0xBF885390
   .global U1EP9
-U1EP9CLR = 0xBF8853F4
+U1EP9CLR = 0xBF885394
   .global U1EP9CLR
-U1EP9SET = 0xBF8853F8
+U1EP9SET = 0xBF885398
   .global U1EP9SET
-U1EP9INV = 0xBF8853FC
+U1EP9INV = 0xBF88539C
   .global U1EP9INV
-U1EP10 = 0xBF885400
+U1EP10 = 0xBF8853A0
   .global U1EP10
-U1EP10CLR = 0xBF885404
+U1EP10CLR = 0xBF8853A4
   .global U1EP10CLR
-U1EP10SET = 0xBF885408
+U1EP10SET = 0xBF8853A8
   .global U1EP10SET
-U1EP10INV = 0xBF88540C
+U1EP10INV = 0xBF8853AC
   .global U1EP10INV
-U1EP11 = 0xBF885410
+U1EP11 = 0xBF8853B0
   .global U1EP11
-U1EP11CLR = 0xBF885414
+U1EP11CLR = 0xBF8853B4
   .global U1EP11CLR
-U1EP11SET = 0xBF885418
+U1EP11SET = 0xBF8853B8
   .global U1EP11SET
-U1EP11INV = 0xBF88541C
+U1EP11INV = 0xBF8853BC
   .global U1EP11INV
-U1EP12 = 0xBF885420
+U1EP12 = 0xBF8853C0
   .global U1EP12
-U1EP12CLR = 0xBF885424
+U1EP12CLR = 0xBF8853C4
   .global U1EP12CLR
-U1EP12SET = 0xBF885428
+U1EP12SET = 0xBF8853C8
   .global U1EP12SET
-U1EP12INV = 0xBF88542C
+U1EP12INV = 0xBF8853CC
   .global U1EP12INV
-U1EP13 = 0xBF885430
+U1EP13 = 0xBF8853D0
   .global U1EP13
-U1EP13CLR = 0xBF885434
+U1EP13CLR = 0xBF8853D4
   .global U1EP13CLR
-U1EP13SET = 0xBF885438
+U1EP13SET = 0xBF8853D8
   .global U1EP13SET
-U1EP13INV = 0xBF88543C
+U1EP13INV = 0xBF8853DC
   .global U1EP13INV
-U1EP14 = 0xBF885440
+U1EP14 = 0xBF8853E0
   .global U1EP14
-U1EP14CLR = 0xBF885444
+U1EP14CLR = 0xBF8853E4
   .global U1EP14CLR
-U1EP14SET = 0xBF885448
+U1EP14SET = 0xBF8853E8
   .global U1EP14SET
-U1EP14INV = 0xBF88544C
+U1EP14INV = 0xBF8853EC
   .global U1EP14INV
-U1EP15 = 0xBF885450
+U1EP15 = 0xBF8853F0
   .global U1EP15
-U1EP15CLR = 0xBF885454
+U1EP15CLR = 0xBF8853F4
   .global U1EP15CLR
-U1EP15SET = 0xBF885458
+U1EP15SET = 0xBF8853F8
   .global U1EP15SET
-U1EP15INV = 0xBF88545C
+U1EP15INV = 0xBF8853FC
   .global U1EP15INV
 ANSELB = 0xBF886100
   .global ANSELB

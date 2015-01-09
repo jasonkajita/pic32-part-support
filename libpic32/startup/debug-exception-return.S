@@ -7,12 +7,15 @@
  *
  * Processor:       PIC32
  *
- * Compiler:        MPLAB XC32 v1.00
+ * Compiler:        MPLAB XC32 v1.30
  *                  MPLAB X IDE
  * Company:         Microchip Technology Inc.
  *
  * Software License Agreement
  *
+ * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * All rights reserved.
+ * 
  * This software is developed by Microchip Technology Inc. and its
  * subsidiaries ("Microchip").
  *
@@ -48,6 +51,8 @@
    .loc 1 0
 #endif
 
+        .extern __pic32_software_reset
+
         ##################################################################
         # Debug Exception Vector Handler
         # If we get a debug exception in release mode, just return
@@ -66,15 +71,18 @@
         .ent __DbgExecReturn
 __DbgExecReturn:
 
-        mtc0      k1, _CP0_DESAVE     # preserve the k1 register
+        mtc0      k1, _CP0_DESAVE               # preserve the k1 register
         ehb
+        
+        la        k1, __pic32_software_reset    # use __pic32_software_reset as new DEPC
+        beq       k1, $0, 1f
+        nop
 
-        la        k1, __pic32_software_reset
-        mtc0      k1, _CP0_DEPC       # store new DEPC
+        mtc0      k1, _CP0_DEPC                 # store new DEPC
 
-        mfc0      k1, _CP0_DESAVE     # restore original k1 value
+1:      mfc0      k1, _CP0_DESAVE               # restore original k1 value
 
-        ehb                           # ensure that all CP0 ops have finished
-        deret                         # debug-exception return
+        ehb                                     # ensure that all CP0 ops have finished
+        deret                                   # debug-exception return
         nop
         .end __DbgExecReturn

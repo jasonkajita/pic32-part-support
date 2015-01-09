@@ -39,11 +39,11 @@ software-debug-break.o: software-debug-break.c
 	$(CC) $(CFLAGS) -Os -c -D__LIBBUILD__ $< -o $@
 	$(STRIP) $(STRIPFLAGS) $@
 
-debug-exception-return.o: debug-exception-return.s
+debug-exception-return.o: debug-exception-return.S
 	$(CC) -c -D__LIBBUILD__ $< -o $@
 	$(STRIP) $(STRIPFLAGS) $@
 
-debug-exception-return-mm.o: debug-exception-return.s
+debug-exception-return-mm.o: debug-exception-return.S
 	$(CC) -g -mmicromips -D__USE_MICROMIPS=1 -c -D__LIBBUILD__ $< -o $@
-	#$(STRIP) $(STRIPFLAGS) $@
+	$(STRIP) $(STRIPFLAGS) $@
  

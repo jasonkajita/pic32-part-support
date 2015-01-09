@@ -1,6 +1,10 @@
 /*-------------------------------------------------------------------------
  * PIC32MX320F064H processor header
+ * Build date : Dec 02 2014
  *
+ * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * All rights reserved.
+ * 
  * This software is developed by Microchip Technology Inc. and its
  * subsidiaries ("Microchip").
  * 
@@ -29,7 +33,7 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- *-------------------------------------------------------------------------*/
+ */
 
 #pragma once
 #ifndef __32MX320F064H_H
@@ -239,9 +243,7 @@ extern volatile unsigned int        PR1INV __attribute__((section("sfrs")));
 extern volatile unsigned int        T2CON __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned :1;
-    unsigned TCS:1;
-    unsigned :1;
+    unsigned :3;
     unsigned T32:1;
     unsigned TCKPS:3;
     unsigned TGATE:1;
@@ -281,9 +283,7 @@ extern volatile unsigned int        PR2INV __attribute__((section("sfrs")));
 extern volatile unsigned int        T3CON __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned :1;
-    unsigned TCS:1;
-    unsigned :2;
+    unsigned :4;
     unsigned TCKPS:3;
     unsigned TGATE:1;
     unsigned :5;
@@ -322,9 +322,7 @@ extern volatile unsigned int        PR3INV __attribute__((section("sfrs")));
 extern volatile unsigned int        T4CON __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned :1;
-    unsigned TCS:1;
-    unsigned :1;
+    unsigned :3;
     unsigned T32:1;
     unsigned TCKPS:3;
     unsigned TGATE:1;
@@ -364,9 +362,7 @@ extern volatile unsigned int        PR4INV __attribute__((section("sfrs")));
 extern volatile unsigned int        T5CON __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned :1;
-    unsigned TCS:1;
-    unsigned :2;
+    unsigned :4;
     unsigned TCKPS:3;
     unsigned TGATE:1;
     unsigned :5;
@@ -3939,10 +3935,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _T1CON_w_MASK                            0xFFFFFFFF
 #define _T1CON_w_LENGTH                          0x00000020
 
-#define _T2CON_TCS_POSITION                      0x00000001
-#define _T2CON_TCS_MASK                          0x00000002
-#define _T2CON_TCS_LENGTH                        0x00000001
-
 #define _T2CON_T32_POSITION                      0x00000003
 #define _T2CON_T32_MASK                          0x00000008
 #define _T2CON_T32_LENGTH                        0x00000001
@@ -3987,10 +3979,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _T2CON_w_MASK                            0xFFFFFFFF
 #define _T2CON_w_LENGTH                          0x00000020
 
-#define _T3CON_TCS_POSITION                      0x00000001
-#define _T3CON_TCS_MASK                          0x00000002
-#define _T3CON_TCS_LENGTH                        0x00000001
-
 #define _T3CON_TCKPS_POSITION                    0x00000004
 #define _T3CON_TCKPS_MASK                        0x00000070
 #define _T3CON_TCKPS_LENGTH                      0x00000003
@@ -4030,10 +4018,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _T3CON_w_POSITION                        0x00000000
 #define _T3CON_w_MASK                            0xFFFFFFFF
 #define _T3CON_w_LENGTH                          0x00000020
-
-#define _T4CON_TCS_POSITION                      0x00000001
-#define _T4CON_TCS_MASK                          0x00000002
-#define _T4CON_TCS_LENGTH                        0x00000001
 
 #define _T4CON_T32_POSITION                      0x00000003
 #define _T4CON_T32_MASK                          0x00000008
@@ -4078,10 +4062,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _T4CON_w_POSITION                        0x00000000
 #define _T4CON_w_MASK                            0xFFFFFFFF
 #define _T4CON_w_LENGTH                          0x00000020
-
-#define _T5CON_TCS_POSITION                      0x00000001
-#define _T5CON_TCS_MASK                          0x00000002
-#define _T5CON_TCS_LENGTH                        0x00000001
 
 #define _T5CON_TCKPS_POSITION                    0x00000004
 #define _T5CON_TCKPS_MASK                        0x00000070
@@ -8879,6 +8859,18 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #endif
 #ifndef __32MX320F064H__
 #  define __32MX320F064H__ 1
+#endif
+#ifndef __XC__
+#  define __XC__ 1
+#endif
+#ifndef __XC
+#  define __XC 1
+#endif
+#ifndef __XC32__
+#  define __XC32__ 1
+#endif
+#ifndef __XC32
+#  define __XC32 1
 #endif
 #ifndef __PIC32MX
 #  define __PIC32MX 1
