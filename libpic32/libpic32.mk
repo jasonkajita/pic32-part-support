@@ -1,6 +1,6 @@
 include	$(ROOT)/../defines.mk
 
-include $(ROOT)/arch/$(ARCH)/Makefile.inc
+#include $(ROOT)/arch/$(ARCH)/Makefile.inc
 include $(ROOT)/stubs/Makefile.inc
 include $(ROOT)/startup/Makefile.inc
 include $(ROOT)/default_vector_dispatch/Makefile.inc
