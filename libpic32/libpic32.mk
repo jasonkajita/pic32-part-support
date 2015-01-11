@@ -29,7 +29,7 @@ libpic32.a: $(LIBOBJ)
 	$(STRIP) $(STRIPFLAGS) $(LIBOBJ)
 	$(AR) rcs $@ $(LIBOBJ)
 
-startup_modules:  Makefile $(SUPOBJ)
+startup_modules:  $(SUPOBJ)
 
 install: libpic32.a startup_modules
 	mkdir -p $(LIBDESTDIR)/$(SUBDIR)
