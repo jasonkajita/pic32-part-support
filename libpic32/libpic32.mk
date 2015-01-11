@@ -25,7 +25,7 @@ ASFLAGS += $(VAR) -DNDEBUG=1 -D__LIBBUILD__
 
 all: libpic32.a startup_modules
 
-libpic32.a: Makefile $(LIBOBJ)
+libpic32.a: $(LIBOBJ)
 	$(STRIP) $(STRIPFLAGS) $(LIBOBJ)
 	$(AR) rcs $@ $(LIBOBJ)
 
