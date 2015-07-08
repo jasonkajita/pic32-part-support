@@ -1,8 +1,8 @@
 /*-------------------------------------------------------------------------
  * PIC32MZ2048EFM144 processor header
- * Build date : Dec 02 2014
+ * Build date : May 01 2015
  *
- * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
@@ -80,7 +80,7 @@ typedef struct {
 extern volatile __SYSKEYbits_t SYSKEYbits __asm__ ("SYSKEY") __attribute__((section("sfrs")));
 extern volatile unsigned int        PMD1 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned AD1MD:1;
+  unsigned ADCMD:1;
   unsigned :11;
   unsigned CVRMD:1;
 } __PMD1bits_t;
@@ -293,7 +293,7 @@ typedef union {
   struct {
     unsigned NVMOP:4;
     unsigned :2;
-    unsigned BOOTSWAP:1;
+    unsigned BFSWAP:1;
     unsigned PFSWAP:1;
     unsigned :4;
     unsigned LVDERR:1;
@@ -306,6 +306,8 @@ typedef union {
     unsigned NVMOP1:1;
     unsigned NVMOP2:1;
     unsigned NVMOP3:1;
+    unsigned :3;
+    unsigned SWAP:1;
   };
   struct {
     unsigned PROGOP:4;
@@ -370,13 +372,12 @@ typedef struct {
 extern volatile __NVMCON2bits_t NVMCON2bits __asm__ ("NVMCON2") __attribute__((section("sfrs")));
 extern volatile unsigned int        WDTCON __attribute__((section("sfrs")));
 typedef struct {
-  unsigned WINEN:1;
-  unsigned SLPDIV:5;
-  unsigned CLKSEL:2;
+  unsigned WDTWINEN:1;
+  unsigned :7;
   unsigned RUNDIV:5;
   unsigned :2;
   unsigned ON:1;
-  unsigned WDTKEY:16;
+  unsigned WDTCLRKEY:16;
 } __WDTCONbits_t;
 extern volatile __WDTCONbits_t WDTCONbits __asm__ ("WDTCON") __attribute__((section("sfrs")));
 extern volatile unsigned int        WDTCONCLR __attribute__((section("sfrs")));
@@ -653,14 +654,9 @@ typedef struct {
   unsigned EXTR:1;
   unsigned :1;
   unsigned CMR:1;
-  unsigned :15;
-  unsigned NVMLTA:1;
+  unsigned :16;
   unsigned BCFGFAIL:1;
   unsigned BCFGERR:1;
-  unsigned :1;
-  unsigned HVDCORE:1;
-  unsigned PORCORE:1;
-  unsigned PORIO:1;
 } __RCONbits_t;
 extern volatile __RCONbits_t RCONbits __asm__ ("RCON") __attribute__((section("sfrs")));
 extern volatile unsigned int        RCONCLR __attribute__((section("sfrs")));
@@ -693,11 +689,6 @@ extern volatile unsigned int        RNMICONINV __attribute__((section("sfrs")));
 extern volatile unsigned int        PWRCON __attribute__((section("sfrs")));
 typedef struct {
   unsigned VREGS:1;
-  unsigned RETEN:1;
-  unsigned SBOREN:1;
-  unsigned :1;
-  unsigned VRGSLP:2;
-  unsigned VRGRUN:2;
 } __PWRCONbits_t;
 extern volatile __PWRCONbits_t PWRCONbits __asm__ ("PWRCON") __attribute__((section("sfrs")));
 extern volatile unsigned int        PWRCONCLR __attribute__((section("sfrs")));
@@ -816,8 +807,6 @@ typedef struct {
   unsigned PBDIV:7;
   unsigned :4;
   unsigned PBDIVRDY:1;
-  unsigned :3;
-  unsigned ON:1;
 } __PB1DIVbits_t;
 extern volatile __PB1DIVbits_t PB1DIVbits __asm__ ("PB1DIV") __attribute__((section("sfrs")));
 extern volatile unsigned int        PB1DIVCLR __attribute__((section("sfrs")));
@@ -910,15 +899,19 @@ extern volatile unsigned int        SLEWCONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SLEWCONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SLEWCONINV __attribute__((section("sfrs")));
 extern volatile unsigned int        CLKSTAT __attribute__((section("sfrs")));
-typedef struct {
-  unsigned FRCRDY:1;
-  unsigned :1;
-  unsigned POSRDY:1;
-  unsigned :1;
-  unsigned SOSRDY:1;
-  unsigned LPRCRDY:1;
-  unsigned :1;
-  unsigned SPLLRDY:1;
+typedef union {
+  struct {
+    unsigned FRCRDY:1;
+    unsigned SPDIVRDY:1;
+    unsigned POSCRDY:1;
+    unsigned :1;
+    unsigned SOSCRDY:1;
+    unsigned LPRCRDY:1;
+  };
+  struct {
+    unsigned :1;
+    unsigned DIVSPLLRDY:1;
+  };
 } __CLKSTATbits_t;
 extern volatile __CLKSTATbits_t CLKSTATbits __asm__ ("CLKSTAT") __attribute__((section("sfrs")));
 extern volatile unsigned int        CLKSTATCLR __attribute__((section("sfrs")));
@@ -1554,26 +1547,26 @@ typedef union {
     unsigned IC9EIF:1;
     unsigned IC9IF:1;
     unsigned OC9IF:1;
-    unsigned AD1IF:1;
+    unsigned ADCIF:1;
     unsigned :1;
-    unsigned AD1DC1IF:1;
-    unsigned AD1DC2IF:1;
-    unsigned AD1DC3IF:1;
-    unsigned AD1DC4IF:1;
-    unsigned AD1DC5IF:1;
-    unsigned AD1DC6IF:1;
-    unsigned AD1DF1IF:1;
-    unsigned AD1DF2IF:1;
-    unsigned AD1DF3IF:1;
-    unsigned AD1DF4IF:1;
-    unsigned AD1DF5IF:1;
-    unsigned AD1DF6IF:1;
-    unsigned :1;
-    unsigned AD1D0IF:1;
-    unsigned AD1D1IF:1;
-    unsigned AD1D2IF:1;
-    unsigned AD1D3IF:1;
-    unsigned AD1D4IF:1;
+    unsigned ADCDC1IF:1;
+    unsigned ADCDC2IF:1;
+    unsigned ADCDC3IF:1;
+    unsigned ADCDC4IF:1;
+    unsigned ADCDC5IF:1;
+    unsigned ADCDC6IF:1;
+    unsigned ADCDF1IF:1;
+    unsigned ADCDF2IF:1;
+    unsigned ADCDF3IF:1;
+    unsigned ADCDF4IF:1;
+    unsigned ADCDF5IF:1;
+    unsigned ADCDF6IF:1;
+    unsigned ADCFLTIF:1;
+    unsigned ADCD0IF:1;
+    unsigned ADCD1IF:1;
+    unsigned ADCD2IF:1;
+    unsigned ADCD3IF:1;
+    unsigned ADCD4IF:1;
   };
   struct {
     unsigned w:32;
@@ -1586,38 +1579,38 @@ extern volatile unsigned int        IFS1INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IFS2 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1D5IF:1;
-    unsigned AD1D6IF:1;
-    unsigned AD1D7IF:1;
-    unsigned AD1D8IF:1;
-    unsigned AD1D9IF:1;
-    unsigned AD1D10IF:1;
-    unsigned AD1D11IF:1;
-    unsigned AD1D12IF:1;
-    unsigned AD1D13IF:1;
-    unsigned AD1D14IF:1;
-    unsigned AD1D15IF:1;
-    unsigned AD1D16IF:1;
-    unsigned AD1D17IF:1;
-    unsigned AD1D18IF:1;
-    unsigned AD1D19IF:1;
-    unsigned AD1D20IF:1;
-    unsigned AD1D21IF:1;
-    unsigned AD1D22IF:1;
-    unsigned AD1D23IF:1;
-    unsigned AD1D24IF:1;
-    unsigned AD1D25IF:1;
-    unsigned AD1D26IF:1;
-    unsigned AD1D27IF:1;
-    unsigned AD1D28IF:1;
-    unsigned AD1D29IF:1;
-    unsigned AD1D30IF:1;
-    unsigned AD1D31IF:1;
-    unsigned AD1D32IF:1;
-    unsigned AD1D33IF:1;
-    unsigned AD1D34IF:1;
-    unsigned AD1D35IF:1;
-    unsigned AD1D36IF:1;
+    unsigned ADCD5IF:1;
+    unsigned ADCD6IF:1;
+    unsigned ADCD7IF:1;
+    unsigned ADCD8IF:1;
+    unsigned ADCD9IF:1;
+    unsigned ADCD10IF:1;
+    unsigned ADCD11IF:1;
+    unsigned ADCD12IF:1;
+    unsigned ADCD13IF:1;
+    unsigned ADCD14IF:1;
+    unsigned ADCD15IF:1;
+    unsigned ADCD16IF:1;
+    unsigned ADCD17IF:1;
+    unsigned ADCD18IF:1;
+    unsigned ADCD19IF:1;
+    unsigned ADCD20IF:1;
+    unsigned ADCD21IF:1;
+    unsigned ADCD22IF:1;
+    unsigned ADCD23IF:1;
+    unsigned ADCD24IF:1;
+    unsigned ADCD25IF:1;
+    unsigned ADCD26IF:1;
+    unsigned ADCD27IF:1;
+    unsigned ADCD28IF:1;
+    unsigned ADCD29IF:1;
+    unsigned ADCD30IF:1;
+    unsigned ADCD31IF:1;
+    unsigned ADCD32IF:1;
+    unsigned ADCD33IF:1;
+    unsigned ADCD34IF:1;
+    unsigned ADCD35IF:1;
+    unsigned ADCD36IF:1;
   };
   struct {
     unsigned w:32;
@@ -1630,14 +1623,14 @@ extern volatile unsigned int        IFS2INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IFS3 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1D37IF:1;
-    unsigned AD1D38IF:1;
-    unsigned AD1D39IF:1;
-    unsigned AD1D40IF:1;
-    unsigned AD1D41IF:1;
-    unsigned AD1D42IF:1;
-    unsigned AD1D43IF:1;
-    unsigned AD1D44IF:1;
+    unsigned ADCD37IF:1;
+    unsigned ADCD38IF:1;
+    unsigned ADCD39IF:1;
+    unsigned ADCD40IF:1;
+    unsigned ADCD41IF:1;
+    unsigned ADCD42IF:1;
+    unsigned ADCD43IF:1;
+    unsigned ADCD44IF:1;
     unsigned CPCIF:1;
     unsigned CFDCIF:1;
     unsigned SBIF:1;
@@ -1767,20 +1760,20 @@ typedef union {
     unsigned :1;
     unsigned ADCGRPIF:1;
     unsigned :1;
-    unsigned AD0EIF:1;
-    unsigned AD1EIF:1;
-    unsigned AD2EIF:1;
-    unsigned AD3EIF:1;
-    unsigned AD4EIF:1;
+    unsigned ADC0EIF:1;
+    unsigned ADC1EIF:1;
+    unsigned ADC2EIF:1;
+    unsigned ADC3EIF:1;
+    unsigned ADC4EIF:1;
     unsigned :2;
-    unsigned AD7EIF:1;
-    unsigned AD0WIF:1;
-    unsigned AD1WIF:1;
-    unsigned AD2WIF:1;
-    unsigned AD3WIF:1;
-    unsigned AD4WIF:1;
+    unsigned ADC7EIF:1;
+    unsigned ADC0WIF:1;
+    unsigned ADC1WIF:1;
+    unsigned ADC2WIF:1;
+    unsigned ADC3WIF:1;
+    unsigned ADC4WIF:1;
     unsigned :2;
-    unsigned AD7WIF:1;
+    unsigned ADC7WIF:1;
   };
   struct {
     unsigned w:32;
@@ -1849,26 +1842,26 @@ typedef union {
     unsigned IC9EIE:1;
     unsigned IC9IE:1;
     unsigned OC9IE:1;
-    unsigned AD1IE:1;
+    unsigned ADCIE:1;
     unsigned :1;
-    unsigned AD1DC1IE:1;
-    unsigned AD1DC2IE:1;
-    unsigned AD1DC3IE:1;
-    unsigned AD1DC4IE:1;
-    unsigned AD1DC5IE:1;
-    unsigned AD1DC6IE:1;
-    unsigned AD1DF1IE:1;
-    unsigned AD1DF2IE:1;
-    unsigned AD1DF3IE:1;
-    unsigned AD1DF4IE:1;
-    unsigned AD1DF5IE:1;
-    unsigned AD1DF6IE:1;
-    unsigned :1;
-    unsigned AD1D0IE:1;
-    unsigned AD1D1IE:1;
-    unsigned AD1D2IE:1;
-    unsigned AD1D3IE:1;
-    unsigned AD1D4IE:1;
+    unsigned ADCDC1IE:1;
+    unsigned ADCDC2IE:1;
+    unsigned ADCDC3IE:1;
+    unsigned ADCDC4IE:1;
+    unsigned ADCDC5IE:1;
+    unsigned ADCDC6IE:1;
+    unsigned ADCDF1IE:1;
+    unsigned ADCDF2IE:1;
+    unsigned ADCDF3IE:1;
+    unsigned ADCDF4IE:1;
+    unsigned ADCDF5IE:1;
+    unsigned ADCDF6IE:1;
+    unsigned ADCFLTIE:1;
+    unsigned ADCD0IE:1;
+    unsigned ADCD1IE:1;
+    unsigned ADCD2IE:1;
+    unsigned ADCD3IE:1;
+    unsigned ADCD4IE:1;
   };
   struct {
     unsigned w:32;
@@ -1881,38 +1874,38 @@ extern volatile unsigned int        IEC1INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IEC2 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1D5IE:1;
-    unsigned AD1D6IE:1;
-    unsigned AD1D7IE:1;
-    unsigned AD1D8IE:1;
-    unsigned AD1D9IE:1;
-    unsigned AD1D10IE:1;
-    unsigned AD1D11IE:1;
-    unsigned AD1D12IE:1;
-    unsigned AD1D13IE:1;
-    unsigned AD1D14IE:1;
-    unsigned AD1D15IE:1;
-    unsigned AD1D16IE:1;
-    unsigned AD1D17IE:1;
-    unsigned AD1D18IE:1;
-    unsigned AD1D19IE:1;
-    unsigned AD1D20IE:1;
-    unsigned AD1D21IE:1;
-    unsigned AD1D22IE:1;
-    unsigned AD1D23IE:1;
-    unsigned AD1D24IE:1;
-    unsigned AD1D25IE:1;
-    unsigned AD1D26IE:1;
-    unsigned AD1D27IE:1;
-    unsigned AD1D28IE:1;
-    unsigned AD1D29IE:1;
-    unsigned AD1D30IE:1;
-    unsigned AD1D31IE:1;
-    unsigned AD1D32IE:1;
-    unsigned AD1D33IE:1;
-    unsigned AD1D34IE:1;
-    unsigned AD1D35IE:1;
-    unsigned AD1D36IE:1;
+    unsigned ADCD5IE:1;
+    unsigned ADCD6IE:1;
+    unsigned ADCD7IE:1;
+    unsigned ADCD8IE:1;
+    unsigned ADCD9IE:1;
+    unsigned ADCD10IE:1;
+    unsigned ADCD11IE:1;
+    unsigned ADCD12IE:1;
+    unsigned ADCD13IE:1;
+    unsigned ADCD14IE:1;
+    unsigned ADCD15IE:1;
+    unsigned ADCD16IE:1;
+    unsigned ADCD17IE:1;
+    unsigned ADCD18IE:1;
+    unsigned ADCD19IE:1;
+    unsigned ADCD20IE:1;
+    unsigned ADCD21IE:1;
+    unsigned ADCD22IE:1;
+    unsigned ADCD23IE:1;
+    unsigned ADCD24IE:1;
+    unsigned ADCD25IE:1;
+    unsigned ADCD26IE:1;
+    unsigned ADCD27IE:1;
+    unsigned ADCD28IE:1;
+    unsigned ADCD29IE:1;
+    unsigned ADCD30IE:1;
+    unsigned ADCD31IE:1;
+    unsigned ADCD32IE:1;
+    unsigned ADCD33IE:1;
+    unsigned ADCD34IE:1;
+    unsigned ADCD35IE:1;
+    unsigned ADCD36IE:1;
   };
   struct {
     unsigned w:32;
@@ -1925,14 +1918,14 @@ extern volatile unsigned int        IEC2INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IEC3 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1D37IE:1;
-    unsigned AD1D38IE:1;
-    unsigned AD1D39IE:1;
-    unsigned AD1D40IE:1;
-    unsigned AD1D41IE:1;
-    unsigned AD1D42IE:1;
-    unsigned AD1D43IE:1;
-    unsigned AD1D44IE:1;
+    unsigned ADCD37IE:1;
+    unsigned ADCD38IE:1;
+    unsigned ADCD39IE:1;
+    unsigned ADCD40IE:1;
+    unsigned ADCD41IE:1;
+    unsigned ADCD42IE:1;
+    unsigned ADCD43IE:1;
+    unsigned ADCD44IE:1;
     unsigned CPCIE:1;
     unsigned CFDCIE:1;
     unsigned SBIE:1;
@@ -2062,20 +2055,20 @@ typedef union {
     unsigned :1;
     unsigned ADCGRPIE:1;
     unsigned :1;
-    unsigned AD0EIE:1;
-    unsigned AD1EIE:1;
-    unsigned AD2EIE:1;
-    unsigned AD3EIE:1;
-    unsigned AD4EIE:1;
+    unsigned ADC0EIE:1;
+    unsigned ADC1EIE:1;
+    unsigned ADC2EIE:1;
+    unsigned ADC3EIE:1;
+    unsigned ADC4EIE:1;
     unsigned :2;
-    unsigned AD7EIE:1;
-    unsigned AD0WIE:1;
-    unsigned AD1WIE:1;
-    unsigned AD2WIE:1;
-    unsigned AD3WIE:1;
-    unsigned AD4WIE:1;
+    unsigned ADC7EIE:1;
+    unsigned ADC0WIE:1;
+    unsigned ADC1WIE:1;
+    unsigned ADC2WIE:1;
+    unsigned ADC3WIE:1;
+    unsigned ADC4WIE:1;
     unsigned :2;
-    unsigned AD7WIE:1;
+    unsigned ADC7WIE:1;
   };
   struct {
     unsigned w:32;
@@ -2341,14 +2334,14 @@ extern volatile unsigned int        IPC10INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC11 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1IS:2;
-    unsigned AD1IP:3;
+    unsigned ADCIS:2;
+    unsigned ADCIP:3;
     unsigned :11;
-    unsigned AD1DC1IS:2;
-    unsigned AD1DC1IP:3;
+    unsigned ADCDC1IS:2;
+    unsigned ADCDC1IP:3;
     unsigned :3;
-    unsigned AD1DC2IS:2;
-    unsigned AD1DC2IP:3;
+    unsigned ADCDC2IS:2;
+    unsigned ADCDC2IP:3;
   };
   struct {
     unsigned w:32;
@@ -2361,17 +2354,17 @@ extern volatile unsigned int        IPC11INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC12 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1DC3IS:2;
-    unsigned AD1DC3IP:3;
+    unsigned ADCDC3IS:2;
+    unsigned ADCDC3IP:3;
     unsigned :3;
-    unsigned AD1DC4IS:2;
-    unsigned AD1DC4IP:3;
+    unsigned ADCDC4IS:2;
+    unsigned ADCDC4IP:3;
     unsigned :3;
-    unsigned AD1DC5IS:2;
-    unsigned AD1DC5IP:3;
+    unsigned ADCDC5IS:2;
+    unsigned ADCDC5IP:3;
     unsigned :3;
-    unsigned AD1DC6IS:2;
-    unsigned AD1DC6IP:3;
+    unsigned ADCDC6IS:2;
+    unsigned ADCDC6IP:3;
   };
   struct {
     unsigned w:32;
@@ -2384,17 +2377,17 @@ extern volatile unsigned int        IPC12INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC13 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1DF1IS:2;
-    unsigned AD1DF1IP:3;
+    unsigned ADCDF1IS:2;
+    unsigned ADCDF1IP:3;
     unsigned :3;
-    unsigned AD1DF2IS:2;
-    unsigned AD1DF2IP:3;
+    unsigned ADCDF2IS:2;
+    unsigned ADCDF2IP:3;
     unsigned :3;
-    unsigned AD1DF3IS:2;
-    unsigned AD1DF3IP:3;
+    unsigned ADCDF3IS:2;
+    unsigned ADCDF3IP:3;
     unsigned :3;
-    unsigned AD1DF4IS:2;
-    unsigned AD1DF4IP:3;
+    unsigned ADCDF4IS:2;
+    unsigned ADCDF4IP:3;
   };
   struct {
     unsigned w:32;
@@ -2407,14 +2400,17 @@ extern volatile unsigned int        IPC13INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC14 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1DF5IS:2;
-    unsigned AD1DF5IP:3;
+    unsigned ADCDF5IS:2;
+    unsigned ADCDF5IP:3;
     unsigned :3;
-    unsigned AD1DF6IS:2;
-    unsigned AD1DF6IP:3;
-    unsigned :11;
-    unsigned AD1D0IS:2;
-    unsigned AD1D0IP:3;
+    unsigned ADCDF6IS:2;
+    unsigned ADCDF6IP:3;
+    unsigned :3;
+    unsigned ADCFLTIS:2;
+    unsigned ADCFLTIP:3;
+    unsigned :3;
+    unsigned ADCD0IS:2;
+    unsigned ADCD0IP:3;
   };
   struct {
     unsigned w:32;
@@ -2427,17 +2423,17 @@ extern volatile unsigned int        IPC14INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC15 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1D1IS:2;
-    unsigned AD1D1IP:3;
+    unsigned ADCD1IS:2;
+    unsigned ADCD1IP:3;
     unsigned :3;
-    unsigned AD1D2IS:2;
-    unsigned AD1D2IP:3;
+    unsigned ADCD2IS:2;
+    unsigned ADCD2IP:3;
     unsigned :3;
-    unsigned AD1D3IS:2;
-    unsigned AD1D3IP:3;
+    unsigned ADCD3IS:2;
+    unsigned ADCD3IP:3;
     unsigned :3;
-    unsigned AD1D4IS:2;
-    unsigned AD1D4IP:3;
+    unsigned ADCD4IS:2;
+    unsigned ADCD4IP:3;
   };
   struct {
     unsigned w:32;
@@ -2450,17 +2446,17 @@ extern volatile unsigned int        IPC15INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC16 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1D5IS:2;
-    unsigned AD1D5IP:3;
+    unsigned ADCD5IS:2;
+    unsigned ADCD5IP:3;
     unsigned :3;
-    unsigned AD1D6IS:2;
-    unsigned AD1D6IP:3;
+    unsigned ADCD6IS:2;
+    unsigned ADCD6IP:3;
     unsigned :3;
-    unsigned AD1D7IS:2;
-    unsigned AD1D7IP:3;
+    unsigned ADCD7IS:2;
+    unsigned ADCD7IP:3;
     unsigned :3;
-    unsigned AD1D8IS:2;
-    unsigned AD1D8IP:3;
+    unsigned ADCD8IS:2;
+    unsigned ADCD8IP:3;
   };
   struct {
     unsigned w:32;
@@ -2473,17 +2469,17 @@ extern volatile unsigned int        IPC16INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC17 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1D9IS:2;
-    unsigned AD1D9IP:3;
+    unsigned ADCD9IS:2;
+    unsigned ADCD9IP:3;
     unsigned :3;
-    unsigned AD1D10IS:2;
-    unsigned AD1D10IP:3;
+    unsigned ADCD10IS:2;
+    unsigned ADCD10IP:3;
     unsigned :3;
-    unsigned AD1D11IS:2;
-    unsigned AD1D11IP:3;
+    unsigned ADCD11IS:2;
+    unsigned ADCD11IP:3;
     unsigned :3;
-    unsigned AD1D12IS:2;
-    unsigned AD1D12IP:3;
+    unsigned ADCD12IS:2;
+    unsigned ADCD12IP:3;
   };
   struct {
     unsigned w:32;
@@ -2496,17 +2492,17 @@ extern volatile unsigned int        IPC17INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC18 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1D13IS:2;
-    unsigned AD1D13IP:3;
+    unsigned ADCD13IS:2;
+    unsigned ADCD13IP:3;
     unsigned :3;
-    unsigned AD1D14IS:2;
-    unsigned AD1D14IP:3;
+    unsigned ADCD14IS:2;
+    unsigned ADCD14IP:3;
     unsigned :3;
-    unsigned AD1D15IS:2;
-    unsigned AD1D15IP:3;
+    unsigned ADCD15IS:2;
+    unsigned ADCD15IP:3;
     unsigned :3;
-    unsigned AD1D16IS:2;
-    unsigned AD1D16IP:3;
+    unsigned ADCD16IS:2;
+    unsigned ADCD16IP:3;
   };
   struct {
     unsigned w:32;
@@ -2519,17 +2515,17 @@ extern volatile unsigned int        IPC18INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC19 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1D17IS:2;
-    unsigned AD1D17IP:3;
+    unsigned ADCD17IS:2;
+    unsigned ADCD17IP:3;
     unsigned :3;
-    unsigned AD1D18IS:2;
-    unsigned AD1D18IP:3;
+    unsigned ADCD18IS:2;
+    unsigned ADCD18IP:3;
     unsigned :3;
-    unsigned AD1D19IS:2;
-    unsigned AD1D19IP:3;
+    unsigned ADCD19IS:2;
+    unsigned ADCD19IP:3;
     unsigned :3;
-    unsigned AD1D20IS:2;
-    unsigned AD1D20IP:3;
+    unsigned ADCD20IS:2;
+    unsigned ADCD20IP:3;
   };
   struct {
     unsigned w:32;
@@ -2542,17 +2538,17 @@ extern volatile unsigned int        IPC19INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC20 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1D21IS:2;
-    unsigned AD1D21IP:3;
+    unsigned ADCD21IS:2;
+    unsigned ADCD21IP:3;
     unsigned :3;
-    unsigned AD1D22IS:2;
-    unsigned AD1D22IP:3;
+    unsigned ADCD22IS:2;
+    unsigned ADCD22IP:3;
     unsigned :3;
-    unsigned AD1D23IS:2;
-    unsigned AD1D23IP:3;
+    unsigned ADCD23IS:2;
+    unsigned ADCD23IP:3;
     unsigned :3;
-    unsigned AD1D24IS:2;
-    unsigned AD1D24IP:3;
+    unsigned ADCD24IS:2;
+    unsigned ADCD24IP:3;
   };
   struct {
     unsigned w:32;
@@ -2565,17 +2561,17 @@ extern volatile unsigned int        IPC20INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC21 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1D25IS:2;
-    unsigned AD1D25IP:3;
+    unsigned ADCD25IS:2;
+    unsigned ADCD25IP:3;
     unsigned :3;
-    unsigned AD1D26IS:2;
-    unsigned AD1D26IP:3;
+    unsigned ADCD26IS:2;
+    unsigned ADCD26IP:3;
     unsigned :3;
-    unsigned AD1D27IS:2;
-    unsigned AD1D27IP:3;
+    unsigned ADCD27IS:2;
+    unsigned ADCD27IP:3;
     unsigned :3;
-    unsigned AD1D28IS:2;
-    unsigned AD1D28IP:3;
+    unsigned ADCD28IS:2;
+    unsigned ADCD28IP:3;
   };
   struct {
     unsigned w:32;
@@ -2588,17 +2584,17 @@ extern volatile unsigned int        IPC21INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC22 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1D29IS:2;
-    unsigned AD1D29IP:3;
+    unsigned ADCD29IS:2;
+    unsigned ADCD29IP:3;
     unsigned :3;
-    unsigned AD1D30IS:2;
-    unsigned AD1D30IP:3;
+    unsigned ADCD30IS:2;
+    unsigned ADCD30IP:3;
     unsigned :3;
-    unsigned AD1D31IS:2;
-    unsigned AD1D31IP:3;
+    unsigned ADCD31IS:2;
+    unsigned ADCD31IP:3;
     unsigned :3;
-    unsigned AD1D32IS:2;
-    unsigned AD1D32IP:3;
+    unsigned ADCD32IS:2;
+    unsigned ADCD32IP:3;
   };
   struct {
     unsigned w:32;
@@ -2611,17 +2607,17 @@ extern volatile unsigned int        IPC22INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC23 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1D33IS:2;
-    unsigned AD1D33IP:3;
+    unsigned ADCD33IS:2;
+    unsigned ADCD33IP:3;
     unsigned :3;
-    unsigned AD1D34IS:2;
-    unsigned AD1D34IP:3;
+    unsigned ADCD34IS:2;
+    unsigned ADCD34IP:3;
     unsigned :3;
-    unsigned AD1D35IS:2;
-    unsigned AD1D35IP:3;
+    unsigned ADCD35IS:2;
+    unsigned ADCD35IP:3;
     unsigned :3;
-    unsigned AD1D36IS:2;
-    unsigned AD1D36IP:3;
+    unsigned ADCD36IS:2;
+    unsigned ADCD36IP:3;
   };
   struct {
     unsigned w:32;
@@ -2634,17 +2630,17 @@ extern volatile unsigned int        IPC23INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC24 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1D37IS:2;
-    unsigned AD1D37IP:3;
+    unsigned ADCD37IS:2;
+    unsigned ADCD37IP:3;
     unsigned :3;
-    unsigned AD1D38IS:2;
-    unsigned AD1D38IP:3;
+    unsigned ADCD38IS:2;
+    unsigned ADCD38IP:3;
     unsigned :3;
-    unsigned AD1D39IS:2;
-    unsigned AD1D39IP:3;
+    unsigned ADCD39IS:2;
+    unsigned ADCD39IP:3;
     unsigned :3;
-    unsigned AD1D40IS:2;
-    unsigned AD1D40IP:3;
+    unsigned ADCD40IS:2;
+    unsigned ADCD40IP:3;
   };
   struct {
     unsigned w:32;
@@ -2657,17 +2653,17 @@ extern volatile unsigned int        IPC24INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC25 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD1D41IS:2;
-    unsigned AD1D41IP:3;
+    unsigned ADCD41IS:2;
+    unsigned ADCD41IP:3;
     unsigned :3;
-    unsigned AD1D42IS:2;
-    unsigned AD1D42IP:3;
+    unsigned ADCD42IS:2;
+    unsigned ADCD42IP:3;
     unsigned :3;
-    unsigned AD1D43IS:2;
-    unsigned AD1D43IP:3;
+    unsigned ADCD43IS:2;
+    unsigned ADCD43IP:3;
     unsigned :3;
-    unsigned AD1D44IS:2;
-    unsigned AD1D44IP:3;
+    unsigned ADCD44IS:2;
+    unsigned ADCD44IP:3;
   };
   struct {
     unsigned w:32;
@@ -3204,11 +3200,11 @@ typedef union {
     unsigned ADCGRPIS:2;
     unsigned ADCGRPIP:3;
     unsigned :11;
-    unsigned AD0EIS:2;
-    unsigned AD0EIP:3;
+    unsigned ADC0EIS:2;
+    unsigned ADC0EIP:3;
     unsigned :3;
-    unsigned AD1EIS:2;
-    unsigned AD1EIP:3;
+    unsigned ADC1EIS:2;
+    unsigned ADC1EIP:3;
   };
   struct {
     unsigned w:32;
@@ -3221,14 +3217,14 @@ extern volatile unsigned int        IPC49INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC50 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD2EIS:2;
-    unsigned AD2EIP:3;
+    unsigned ADC2EIS:2;
+    unsigned ADC2EIP:3;
     unsigned :3;
-    unsigned AD3EIS:2;
-    unsigned AD3EIP:3;
+    unsigned ADC3EIS:2;
+    unsigned ADC3EIP:3;
     unsigned :3;
-    unsigned AD4EIS:2;
-    unsigned AD4EIP:3;
+    unsigned ADC4EIS:2;
+    unsigned ADC4EIP:3;
   };
   struct {
     unsigned w:32;
@@ -3242,14 +3238,14 @@ extern volatile unsigned int        IPC51 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :8;
-    unsigned AD7EIS:2;
-    unsigned AD7EIP:3;
+    unsigned ADC7EIS:2;
+    unsigned ADC7EIP:3;
     unsigned :3;
-    unsigned AD0WIS:2;
-    unsigned AD0WIP:3;
+    unsigned ADC0WIS:2;
+    unsigned ADC0WIP:3;
     unsigned :3;
-    unsigned AD1WIS:2;
-    unsigned AD1WIP:3;
+    unsigned ADC1WIS:2;
+    unsigned ADC1WIP:3;
   };
   struct {
     unsigned w:32;
@@ -3262,14 +3258,14 @@ extern volatile unsigned int        IPC51INV __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC52 __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned AD2WIS:2;
-    unsigned AD2WIP:3;
+    unsigned ADC2WIS:2;
+    unsigned ADC2WIP:3;
     unsigned :3;
-    unsigned AD3WIS:2;
-    unsigned AD3WIP:3;
+    unsigned ADC3WIS:2;
+    unsigned ADC3WIP:3;
     unsigned :3;
-    unsigned AD4WIS:2;
-    unsigned AD4WIP:3;
+    unsigned ADC4WIS:2;
+    unsigned ADC4WIP:3;
   };
   struct {
     unsigned w:32;
@@ -3283,8 +3279,8 @@ extern volatile unsigned int        IPC53 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :8;
-    unsigned AD7WIS:2;
-    unsigned AD7WIP:3;
+    unsigned ADC7WIS:2;
+    unsigned ADC7WIP:3;
   };
   struct {
     unsigned w:32;
@@ -3636,6 +3632,12 @@ typedef struct {
   unsigned VOFF:17;
 } __OFF057bits_t;
 extern volatile __OFF057bits_t OFF057bits __asm__ ("OFF057") __attribute__((section("sfrs")));
+extern volatile unsigned int        OFF058 __attribute__((section("sfrs")));
+typedef struct {
+  unsigned :1;
+  unsigned VOFF:17;
+} __OFF058bits_t;
+extern volatile __OFF058bits_t OFF058bits __asm__ ("OFF058") __attribute__((section("sfrs")));
 extern volatile unsigned int        OFF059 __attribute__((section("sfrs")));
 typedef struct {
   unsigned :1;
@@ -7914,6 +7916,10 @@ typedef union {
     unsigned SIDL:1;
     unsigned :1;
     unsigned ON:1;
+    unsigned :1;
+    unsigned DUALBUF:1;
+    unsigned :5;
+    unsigned RDSTART:1;
   };
   struct {
     unsigned :6;
@@ -7978,10 +7984,12 @@ extern volatile unsigned int        PMADDR __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ADDR:14;
-    unsigned CS:2;
+    unsigned ADDR14:1;
+    unsigned ADDR15:1;
   };
   struct {
-    unsigned PADDR:14;
+    unsigned :14;
+    unsigned CS:2;
   };
   struct {
     unsigned :14;
@@ -8025,25 +8033,7 @@ extern volatile unsigned int        PMDININV __attribute__((section("sfrs")));
 extern volatile unsigned int        PMAEN __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned PTEN:16;
-  };
-  struct {
-    unsigned PTEN0:1;
-    unsigned PTEN1:1;
-    unsigned PTEN2:1;
-    unsigned PTEN3:1;
-    unsigned PTEN4:1;
-    unsigned PTEN5:1;
-    unsigned PTEN6:1;
-    unsigned PTEN7:1;
-    unsigned PTEN8:1;
-    unsigned PTEN9:1;
-    unsigned PTEN10:1;
-    unsigned PTEN11:1;
-    unsigned PTEN12:1;
-    unsigned PTEN13:1;
-    unsigned PTEN14:1;
-    unsigned PTEN15:1;
+    unsigned PTEN:24;
   };
   struct {
     unsigned w:32;
@@ -8079,6 +8069,67 @@ extern volatile __PMSTATbits_t PMSTATbits __asm__ ("PMSTAT") __attribute__((sect
 extern volatile unsigned int        PMSTATCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMSTATSET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMSTATINV __attribute__((section("sfrs")));
+extern volatile unsigned int        PMWADDR __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned WADDR:14;
+    unsigned WADDR14:1;
+    unsigned WADDR15:1;
+  };
+  struct {
+    unsigned :14;
+    unsigned WCS:2;
+  };
+  struct {
+    unsigned :14;
+    unsigned WCS1:1;
+    unsigned WCS2:1;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __PMWADDRbits_t;
+extern volatile __PMWADDRbits_t PMWADDRbits __asm__ ("PMWADDR") __attribute__((section("sfrs")));
+extern volatile unsigned int        PMWADDRCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        PMWADDRSET __attribute__((section("sfrs")));
+extern volatile unsigned int        PMWADDRINV __attribute__((section("sfrs")));
+extern volatile unsigned int        PMRADDR __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned RADDR:14;
+    unsigned RADDR14:1;
+    unsigned RADDR15:1;
+  };
+  struct {
+    unsigned :14;
+    unsigned RCS:2;
+  };
+  struct {
+    unsigned :14;
+    unsigned RCS1:1;
+    unsigned RCS2:1;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __PMRADDRbits_t;
+extern volatile __PMRADDRbits_t PMRADDRbits __asm__ ("PMRADDR") __attribute__((section("sfrs")));
+extern volatile unsigned int        PMRADDRCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        PMRADDRSET __attribute__((section("sfrs")));
+extern volatile unsigned int        PMRADDRINV __attribute__((section("sfrs")));
+extern volatile unsigned int        PMRDIN __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned RDATAIN:32;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __PMRDINbits_t;
+extern volatile __PMRDINbits_t PMRDINbits __asm__ ("PMRDIN") __attribute__((section("sfrs")));
+extern volatile unsigned int        PMRDINCLR __attribute__((section("sfrs")));
+extern volatile unsigned int        PMRDINSET __attribute__((section("sfrs")));
+extern volatile unsigned int        PMRDININV __attribute__((section("sfrs")));
 extern volatile unsigned int        T1CON __attribute__((section("sfrs")));
 typedef union {
   struct {
@@ -9818,61 +9869,6 @@ typedef struct {
   unsigned TRGSRC11:5;
 } __ADCTRG3bits_t;
 extern volatile __ADCTRG3bits_t ADCTRG3bits __asm__ ("ADCTRG3") __attribute__((section("sfrs")));
-extern volatile unsigned int        ADCTRG4 __attribute__((section("sfrs")));
-typedef struct {
-  unsigned TRGSRC12:5;
-  unsigned :3;
-  unsigned TRGSRC13:5;
-  unsigned :3;
-  unsigned TRGSRC14:5;
-  unsigned :3;
-  unsigned TRGSRC15:5;
-} __ADCTRG4bits_t;
-extern volatile __ADCTRG4bits_t ADCTRG4bits __asm__ ("ADCTRG4") __attribute__((section("sfrs")));
-extern volatile unsigned int        ADCTRG5 __attribute__((section("sfrs")));
-typedef struct {
-  unsigned TRGSRC16:5;
-  unsigned :3;
-  unsigned TRGSRC17:5;
-  unsigned :3;
-  unsigned TRGSRC18:5;
-  unsigned :3;
-  unsigned TRGSRC19:5;
-} __ADCTRG5bits_t;
-extern volatile __ADCTRG5bits_t ADCTRG5bits __asm__ ("ADCTRG5") __attribute__((section("sfrs")));
-extern volatile unsigned int        ADCTRG6 __attribute__((section("sfrs")));
-typedef struct {
-  unsigned TRGSRC20:5;
-  unsigned :3;
-  unsigned TRGSRC21:5;
-  unsigned :3;
-  unsigned TRGSRC22:5;
-  unsigned :3;
-  unsigned TRGSRC23:5;
-} __ADCTRG6bits_t;
-extern volatile __ADCTRG6bits_t ADCTRG6bits __asm__ ("ADCTRG6") __attribute__((section("sfrs")));
-extern volatile unsigned int        ADCTRG7 __attribute__((section("sfrs")));
-typedef struct {
-  unsigned TRGSRC24:5;
-  unsigned :3;
-  unsigned TRGSRC25:5;
-  unsigned :3;
-  unsigned TRGSRC26:5;
-  unsigned :3;
-  unsigned TRGSRC27:5;
-} __ADCTRG7bits_t;
-extern volatile __ADCTRG7bits_t ADCTRG7bits __asm__ ("ADCTRG7") __attribute__((section("sfrs")));
-extern volatile unsigned int        ADCTRG8 __attribute__((section("sfrs")));
-typedef struct {
-  unsigned TRGSRC28:5;
-  unsigned :3;
-  unsigned TRGSRC29:5;
-  unsigned :3;
-  unsigned TRGSRC30:5;
-  unsigned :3;
-  unsigned TRGSRC31:5;
-} __ADCTRG8bits_t;
-extern volatile __ADCTRG8bits_t ADCTRG8bits __asm__ ("ADCTRG8") __attribute__((section("sfrs")));
 extern volatile unsigned int        ADCCMPCON1 __attribute__((section("sfrs")));
 typedef struct {
   unsigned IELOLO:1;
@@ -9972,26 +9968,6 @@ typedef struct {
   unsigned LVL9:1;
   unsigned LVL10:1;
   unsigned LVL11:1;
-  unsigned LVL12:1;
-  unsigned LVL13:1;
-  unsigned LVL14:1;
-  unsigned LVL15:1;
-  unsigned LVL16:1;
-  unsigned LVL17:1;
-  unsigned LVL18:1;
-  unsigned LVL19:1;
-  unsigned LVL20:1;
-  unsigned LVL21:1;
-  unsigned LVL22:1;
-  unsigned LVL23:1;
-  unsigned LVL24:1;
-  unsigned LVL25:1;
-  unsigned LVL26:1;
-  unsigned LVL27:1;
-  unsigned LVL28:1;
-  unsigned LVL29:1;
-  unsigned LVL30:1;
-  unsigned LVL31:1;
 } __ADCTRGSNSbits_t;
 extern volatile __ADCTRGSNSbits_t ADCTRGSNSbits __asm__ ("ADCTRGSNS") __attribute__((section("sfrs")));
 extern volatile unsigned int        ADC0TIME __attribute__((section("sfrs")));
@@ -10176,6 +10152,36 @@ typedef struct {
   unsigned WKUPCLKCNT:4;
 } __ADCANCONbits_t;
 extern volatile __ADCANCONbits_t ADCANCONbits __asm__ ("ADCANCON") __attribute__((section("sfrs")));
+extern volatile unsigned int        ADC0CFG __attribute__((section("sfrs")));
+typedef struct {
+  unsigned ADCCFG:32;
+} __ADC0CFGbits_t;
+extern volatile __ADC0CFGbits_t ADC0CFGbits __asm__ ("ADC0CFG") __attribute__((section("sfrs")));
+extern volatile unsigned int        ADC1CFG __attribute__((section("sfrs")));
+typedef struct {
+  unsigned ADCCFG:32;
+} __ADC1CFGbits_t;
+extern volatile __ADC1CFGbits_t ADC1CFGbits __asm__ ("ADC1CFG") __attribute__((section("sfrs")));
+extern volatile unsigned int        ADC2CFG __attribute__((section("sfrs")));
+typedef struct {
+  unsigned ADCCFG:32;
+} __ADC2CFGbits_t;
+extern volatile __ADC2CFGbits_t ADC2CFGbits __asm__ ("ADC2CFG") __attribute__((section("sfrs")));
+extern volatile unsigned int        ADC3CFG __attribute__((section("sfrs")));
+typedef struct {
+  unsigned ADCCFG:32;
+} __ADC3CFGbits_t;
+extern volatile __ADC3CFGbits_t ADC3CFGbits __asm__ ("ADC3CFG") __attribute__((section("sfrs")));
+extern volatile unsigned int        ADC4CFG __attribute__((section("sfrs")));
+typedef struct {
+  unsigned ADCCFG:32;
+} __ADC4CFGbits_t;
+extern volatile __ADC4CFGbits_t ADC4CFGbits __asm__ ("ADC4CFG") __attribute__((section("sfrs")));
+extern volatile unsigned int        ADC7CFG __attribute__((section("sfrs")));
+typedef struct {
+  unsigned ADCCFG:32;
+} __ADC7CFGbits_t;
+extern volatile __ADC7CFGbits_t ADC7CFGbits __asm__ ("ADC7CFG") __attribute__((section("sfrs")));
 extern volatile unsigned int        ADCSYSCFG0 __attribute__((section("sfrs")));
 typedef struct {
   unsigned AN0:1;
@@ -10227,38 +10233,27 @@ typedef struct {
   unsigned AN42:1;
   unsigned AN43:1;
   unsigned AN44:1;
+  unsigned AN45:1;
+  unsigned AN46:1;
+  unsigned AN47:1;
+  unsigned AN48:1;
+  unsigned AN49:1;
+  unsigned AN50:1;
+  unsigned AN51:1;
+  unsigned AN52:1;
+  unsigned AN53:1;
+  unsigned AN54:1;
+  unsigned AN55:1;
+  unsigned AN56:1;
+  unsigned AN57:1;
+  unsigned AN58:1;
+  unsigned AN59:1;
+  unsigned AN60:1;
+  unsigned AN61:1;
+  unsigned AN62:1;
+  unsigned AN63:1;
 } __ADCSYSCFG1bits_t;
 extern volatile __ADCSYSCFG1bits_t ADCSYSCFG1bits __asm__ ("ADCSYSCFG1") __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC0CFG __attribute__((section("sfrs")));
-typedef struct {
-  unsigned ADCCFG:32;
-} __ADC0CFGbits_t;
-extern volatile __ADC0CFGbits_t ADC0CFGbits __asm__ ("ADC0CFG") __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC1CFG __attribute__((section("sfrs")));
-typedef struct {
-  unsigned ADCCFG:32;
-} __ADC1CFGbits_t;
-extern volatile __ADC1CFGbits_t ADC1CFGbits __asm__ ("ADC1CFG") __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC2CFG __attribute__((section("sfrs")));
-typedef struct {
-  unsigned ADCCFG:32;
-} __ADC2CFGbits_t;
-extern volatile __ADC2CFGbits_t ADC2CFGbits __asm__ ("ADC2CFG") __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC3CFG __attribute__((section("sfrs")));
-typedef struct {
-  unsigned ADCCFG:32;
-} __ADC3CFGbits_t;
-extern volatile __ADC3CFGbits_t ADC3CFGbits __asm__ ("ADC3CFG") __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC4CFG __attribute__((section("sfrs")));
-typedef struct {
-  unsigned ADCCFG:32;
-} __ADC4CFGbits_t;
-extern volatile __ADC4CFGbits_t ADC4CFGbits __asm__ ("ADC4CFG") __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC7CFG __attribute__((section("sfrs")));
-typedef struct {
-  unsigned ADCCFG:32;
-} __ADC7CFGbits_t;
-extern volatile __ADC7CFGbits_t ADC7CFGbits __asm__ ("ADC7CFG") __attribute__((section("sfrs")));
 extern volatile unsigned int        ADCDATA0 __attribute__((section("sfrs")));
 typedef struct {
   unsigned DATA:32;
@@ -10736,7 +10731,9 @@ extern volatile unsigned int        CNPDAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONA __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned :13;
+    unsigned :11;
+    unsigned EDGEDETECT:1;
+    unsigned :1;
     unsigned SIDL:1;
     unsigned :1;
     unsigned ON:1;
@@ -10801,13 +10798,42 @@ extern volatile __CNSTATAbits_t CNSTATAbits __asm__ ("CNSTATA") __attribute__((s
 extern volatile unsigned int        CNSTATACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATASET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        SRCON1A __attribute__((section("sfrs")));
+extern volatile unsigned int        CNNEA __attribute__((section("sfrs")));
 typedef struct {
-  unsigned :6;
-  unsigned SR1A6:1;
-  unsigned SR1A7:1;
-} __SRCON1Abits_t;
-extern volatile __SRCON1Abits_t SRCON1Abits __asm__ ("SRCON1A") __attribute__((section("sfrs")));
+  unsigned CNNEA0:1;
+  unsigned CNNEA1:1;
+  unsigned CNNEA2:1;
+  unsigned CNNEA3:1;
+  unsigned CNNEA4:1;
+  unsigned CNNEA5:1;
+  unsigned CNNEA6:1;
+  unsigned CNNEA7:1;
+  unsigned :1;
+  unsigned CNNEA9:1;
+  unsigned CNNEA10:1;
+  unsigned :3;
+  unsigned CNNEA14:1;
+  unsigned CNNEA15:1;
+} __CNNEAbits_t;
+extern volatile __CNNEAbits_t CNNEAbits __asm__ ("CNNEA") __attribute__((section("sfrs")));
+extern volatile unsigned int        CNFA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CNFA0:1;
+  unsigned CNFA1:1;
+  unsigned CNFA2:1;
+  unsigned CNFA3:1;
+  unsigned CNFA4:1;
+  unsigned CNFA5:1;
+  unsigned CNFA6:1;
+  unsigned CNFA7:1;
+  unsigned :1;
+  unsigned CNFA9:1;
+  unsigned CNFA10:1;
+  unsigned :3;
+  unsigned CNFA14:1;
+  unsigned CNFA15:1;
+} __CNFAbits_t;
+extern volatile __CNFAbits_t CNFAbits __asm__ ("CNFA") __attribute__((section("sfrs")));
 extern volatile unsigned int        SRCON0A __attribute__((section("sfrs")));
 typedef struct {
   unsigned :6;
@@ -10815,6 +10841,13 @@ typedef struct {
   unsigned SR0A7:1;
 } __SRCON0Abits_t;
 extern volatile __SRCON0Abits_t SRCON0Abits __asm__ ("SRCON0A") __attribute__((section("sfrs")));
+extern volatile unsigned int        SRCON1A __attribute__((section("sfrs")));
+typedef struct {
+  unsigned :6;
+  unsigned SR1A6:1;
+  unsigned SR1A7:1;
+} __SRCON1Abits_t;
+extern volatile __SRCON1Abits_t SRCON1Abits __asm__ ("SRCON1A") __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELB __attribute__((section("sfrs")));
 typedef union {
   struct {
@@ -11014,7 +11047,9 @@ extern volatile unsigned int        CNPDBINV __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONB __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned :13;
+    unsigned :11;
+    unsigned EDGEDETECT:1;
+    unsigned :1;
     unsigned SIDL:1;
     unsigned :1;
     unsigned ON:1;
@@ -11083,20 +11118,46 @@ extern volatile __CNSTATBbits_t CNSTATBbits __asm__ ("CNSTATB") __attribute__((s
 extern volatile unsigned int        CNSTATBCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATBSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATBINV __attribute__((section("sfrs")));
-extern volatile unsigned int        SRCON1B __attribute__((section("sfrs")));
+extern volatile unsigned int        CNNEB __attribute__((section("sfrs")));
 typedef struct {
-  unsigned :3;
-  unsigned SR1B3:1;
-  unsigned :1;
-  unsigned SR1B5:1;
-  unsigned :2;
-  unsigned SR1B8:1;
-  unsigned SR1B9:1;
-  unsigned SR1B10:1;
-  unsigned :3;
-  unsigned SR1B14:1;
-} __SRCON1Bbits_t;
-extern volatile __SRCON1Bbits_t SRCON1Bbits __asm__ ("SRCON1B") __attribute__((section("sfrs")));
+  unsigned CNNEB0:1;
+  unsigned CNNEB1:1;
+  unsigned CNNEB2:1;
+  unsigned CNNEB3:1;
+  unsigned CNNEB4:1;
+  unsigned CNNEB5:1;
+  unsigned CNNEB6:1;
+  unsigned CNNEB7:1;
+  unsigned CNNEB8:1;
+  unsigned CNNEB9:1;
+  unsigned CNNEB10:1;
+  unsigned CNNEB11:1;
+  unsigned CNNEB12:1;
+  unsigned CNNEB13:1;
+  unsigned CNNEB14:1;
+  unsigned CNNEB15:1;
+} __CNNEBbits_t;
+extern volatile __CNNEBbits_t CNNEBbits __asm__ ("CNNEB") __attribute__((section("sfrs")));
+extern volatile unsigned int        CNFB __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CNFB0:1;
+  unsigned CNFB1:1;
+  unsigned CNFB2:1;
+  unsigned CNFB3:1;
+  unsigned CNFB4:1;
+  unsigned CNFB5:1;
+  unsigned CNFB6:1;
+  unsigned CNFB7:1;
+  unsigned CNFB8:1;
+  unsigned CNFB9:1;
+  unsigned CNFB10:1;
+  unsigned CNFB11:1;
+  unsigned CNFB12:1;
+  unsigned CNFB13:1;
+  unsigned CNFB14:1;
+  unsigned CNFB15:1;
+} __CNFBbits_t;
+extern volatile __CNFBbits_t CNFBbits __asm__ ("CNFB") __attribute__((section("sfrs")));
 extern volatile unsigned int        SRCON0B __attribute__((section("sfrs")));
 typedef struct {
   unsigned :3;
@@ -11111,6 +11172,20 @@ typedef struct {
   unsigned SR0B14:1;
 } __SRCON0Bbits_t;
 extern volatile __SRCON0Bbits_t SRCON0Bbits __asm__ ("SRCON0B") __attribute__((section("sfrs")));
+extern volatile unsigned int        SRCON1B __attribute__((section("sfrs")));
+typedef struct {
+  unsigned :3;
+  unsigned SR1B3:1;
+  unsigned :1;
+  unsigned SR1B5:1;
+  unsigned :2;
+  unsigned SR1B8:1;
+  unsigned SR1B9:1;
+  unsigned SR1B10:1;
+  unsigned :3;
+  unsigned SR1B14:1;
+} __SRCON1Bbits_t;
+extern volatile __SRCON1Bbits_t SRCON1Bbits __asm__ ("SRCON1B") __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELC __attribute__((section("sfrs")));
 typedef union {
   struct {
@@ -11263,7 +11338,9 @@ extern volatile unsigned int        CNPDCINV __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONC __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned :13;
+    unsigned :11;
+    unsigned EDGEDETECT:1;
+    unsigned :1;
     unsigned SIDL:1;
     unsigned :1;
     unsigned ON:1;
@@ -11320,6 +11397,34 @@ extern volatile __CNSTATCbits_t CNSTATCbits __asm__ ("CNSTATC") __attribute__((s
 extern volatile unsigned int        CNSTATCCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATCSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATCINV __attribute__((section("sfrs")));
+extern volatile unsigned int        CNNEC __attribute__((section("sfrs")));
+typedef struct {
+  unsigned :1;
+  unsigned CNNEC1:1;
+  unsigned CNNEC2:1;
+  unsigned CNNEC3:1;
+  unsigned CNNEC4:1;
+  unsigned :7;
+  unsigned CNNEC12:1;
+  unsigned CNNEC13:1;
+  unsigned CNNEC14:1;
+  unsigned CNNEC15:1;
+} __CNNECbits_t;
+extern volatile __CNNECbits_t CNNECbits __asm__ ("CNNEC") __attribute__((section("sfrs")));
+extern volatile unsigned int        CNFC __attribute__((section("sfrs")));
+typedef struct {
+  unsigned :1;
+  unsigned CNFC1:1;
+  unsigned CNFC2:1;
+  unsigned CNFC3:1;
+  unsigned CNFC4:1;
+  unsigned :7;
+  unsigned CNFC12:1;
+  unsigned CNFC13:1;
+  unsigned CNFC14:1;
+  unsigned CNFC15:1;
+} __CNFCbits_t;
+extern volatile __CNFCbits_t CNFCbits __asm__ ("CNFC") __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELD __attribute__((section("sfrs")));
 typedef union {
   struct {
@@ -11506,7 +11611,9 @@ extern volatile unsigned int        CNPDDINV __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCOND __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned :13;
+    unsigned :11;
+    unsigned EDGEDETECT:1;
+    unsigned :1;
     unsigned SIDL:1;
     unsigned :1;
     unsigned ON:1;
@@ -11575,6 +11682,46 @@ extern volatile __CNSTATDbits_t CNSTATDbits __asm__ ("CNSTATD") __attribute__((s
 extern volatile unsigned int        CNSTATDCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATDSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATDINV __attribute__((section("sfrs")));
+extern volatile unsigned int        CNNED __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CNNED0:1;
+  unsigned CNNED1:1;
+  unsigned CNNED2:1;
+  unsigned CNNED3:1;
+  unsigned CNNED4:1;
+  unsigned CNNED5:1;
+  unsigned CNNED6:1;
+  unsigned CNNED7:1;
+  unsigned :1;
+  unsigned CNNED9:1;
+  unsigned CNNED10:1;
+  unsigned CNNED11:1;
+  unsigned CNNED12:1;
+  unsigned CNNED13:1;
+  unsigned CNNED14:1;
+  unsigned CNNED15:1;
+} __CNNEDbits_t;
+extern volatile __CNNEDbits_t CNNEDbits __asm__ ("CNNED") __attribute__((section("sfrs")));
+extern volatile unsigned int        CNFD __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CNFD0:1;
+  unsigned CNFD1:1;
+  unsigned CNFD2:1;
+  unsigned CNFD3:1;
+  unsigned CNFD4:1;
+  unsigned CNFD5:1;
+  unsigned CNFD6:1;
+  unsigned CNFD7:1;
+  unsigned :1;
+  unsigned CNFD9:1;
+  unsigned CNFD10:1;
+  unsigned CNFD11:1;
+  unsigned CNFD12:1;
+  unsigned CNFD13:1;
+  unsigned CNFD14:1;
+  unsigned CNFD15:1;
+} __CNFDbits_t;
+extern volatile __CNFDbits_t CNFDbits __asm__ ("CNFD") __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELE __attribute__((section("sfrs")));
 typedef union {
   struct {
@@ -11729,7 +11876,9 @@ extern volatile unsigned int        CNPDEINV __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONE __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned :13;
+    unsigned :11;
+    unsigned EDGEDETECT:1;
+    unsigned :1;
     unsigned SIDL:1;
     unsigned :1;
     unsigned ON:1;
@@ -11786,14 +11935,34 @@ extern volatile __CNSTATEbits_t CNSTATEbits __asm__ ("CNSTATE") __attribute__((s
 extern volatile unsigned int        CNSTATECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATESET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        SRCON1E __attribute__((section("sfrs")));
+extern volatile unsigned int        CNNEE __attribute__((section("sfrs")));
 typedef struct {
-  unsigned SR1E0:1;
-  unsigned SR1E1:1;
-  unsigned SR1E2:1;
-  unsigned SR1E3:1;
-} __SRCON1Ebits_t;
-extern volatile __SRCON1Ebits_t SRCON1Ebits __asm__ ("SRCON1E") __attribute__((section("sfrs")));
+  unsigned CNNEE0:1;
+  unsigned CNNEE1:1;
+  unsigned CNNEE2:1;
+  unsigned CNNEE3:1;
+  unsigned CNNEE4:1;
+  unsigned CNNEE5:1;
+  unsigned CNNEE6:1;
+  unsigned CNNEE7:1;
+  unsigned CNNEE8:1;
+  unsigned CNNEE9:1;
+} __CNNEEbits_t;
+extern volatile __CNNEEbits_t CNNEEbits __asm__ ("CNNEE") __attribute__((section("sfrs")));
+extern volatile unsigned int        CNFE __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CNFE0:1;
+  unsigned CNFE1:1;
+  unsigned CNFE2:1;
+  unsigned CNFE3:1;
+  unsigned CNFE4:1;
+  unsigned CNFE5:1;
+  unsigned CNFE6:1;
+  unsigned CNFE7:1;
+  unsigned CNFE8:1;
+  unsigned CNFE9:1;
+} __CNFEbits_t;
+extern volatile __CNFEbits_t CNFEbits __asm__ ("CNFE") __attribute__((section("sfrs")));
 extern volatile unsigned int        SRCON0E __attribute__((section("sfrs")));
 typedef struct {
   unsigned SR0E0:1;
@@ -11802,6 +11971,14 @@ typedef struct {
   unsigned SR0E3:1;
 } __SRCON0Ebits_t;
 extern volatile __SRCON0Ebits_t SRCON0Ebits __asm__ ("SRCON0E") __attribute__((section("sfrs")));
+extern volatile unsigned int        SRCON1E __attribute__((section("sfrs")));
+typedef struct {
+  unsigned SR1E0:1;
+  unsigned SR1E1:1;
+  unsigned SR1E2:1;
+  unsigned SR1E3:1;
+} __SRCON1Ebits_t;
+extern volatile __SRCON1Ebits_t SRCON1Ebits __asm__ ("SRCON1E") __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELF __attribute__((section("sfrs")));
 typedef union {
   struct {
@@ -11958,7 +12135,9 @@ extern volatile unsigned int        CNPDFINV __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONF __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned :13;
+    unsigned :11;
+    unsigned EDGEDETECT:1;
+    unsigned :1;
     unsigned SIDL:1;
     unsigned :1;
     unsigned ON:1;
@@ -12017,18 +12196,48 @@ extern volatile __CNSTATFbits_t CNSTATFbits __asm__ ("CNSTATF") __attribute__((s
 extern volatile unsigned int        CNSTATFCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATFSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATFINV __attribute__((section("sfrs")));
-extern volatile unsigned int        SRCON1F __attribute__((section("sfrs")));
+extern volatile unsigned int        CNNEF __attribute__((section("sfrs")));
 typedef struct {
-  unsigned SR1F0:1;
-  unsigned SR1F1:1;
-} __SRCON1Fbits_t;
-extern volatile __SRCON1Fbits_t SRCON1Fbits __asm__ ("SRCON1F") __attribute__((section("sfrs")));
+  unsigned CNNEF0:1;
+  unsigned CNNEF1:1;
+  unsigned CNNEF2:1;
+  unsigned CNNEF3:1;
+  unsigned CNNEF4:1;
+  unsigned CNNEF5:1;
+  unsigned :2;
+  unsigned CNNEF8:1;
+  unsigned :3;
+  unsigned CNNEF12:1;
+  unsigned CNNEF13:1;
+} __CNNEFbits_t;
+extern volatile __CNNEFbits_t CNNEFbits __asm__ ("CNNEF") __attribute__((section("sfrs")));
+extern volatile unsigned int        CNFF __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CNFF0:1;
+  unsigned CNFF1:1;
+  unsigned CNFF2:1;
+  unsigned CNFF3:1;
+  unsigned CNFF4:1;
+  unsigned CNFF5:1;
+  unsigned :2;
+  unsigned CNFF8:1;
+  unsigned :3;
+  unsigned CNFF12:1;
+  unsigned CNFF13:1;
+} __CNFFbits_t;
+extern volatile __CNFFbits_t CNFFbits __asm__ ("CNFF") __attribute__((section("sfrs")));
 extern volatile unsigned int        SRCON0F __attribute__((section("sfrs")));
 typedef struct {
   unsigned SR0F0:1;
   unsigned SR0F1:1;
 } __SRCON0Fbits_t;
 extern volatile __SRCON0Fbits_t SRCON0Fbits __asm__ ("SRCON0F") __attribute__((section("sfrs")));
+extern volatile unsigned int        SRCON1F __attribute__((section("sfrs")));
+typedef struct {
+  unsigned SR1F0:1;
+  unsigned SR1F1:1;
+} __SRCON1Fbits_t;
+extern volatile __SRCON1Fbits_t SRCON1Fbits __asm__ ("SRCON1F") __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELG __attribute__((section("sfrs")));
 typedef union {
   struct {
@@ -12195,7 +12404,9 @@ extern volatile unsigned int        CNPDGINV __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONG __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned :13;
+    unsigned :11;
+    unsigned EDGEDETECT:1;
+    unsigned :1;
     unsigned SIDL:1;
     unsigned :1;
     unsigned ON:1;
@@ -12256,18 +12467,38 @@ extern volatile __CNSTATGbits_t CNSTATGbits __asm__ ("CNSTATG") __attribute__((s
 extern volatile unsigned int        CNSTATGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        SRCON1G __attribute__((section("sfrs")));
+extern volatile unsigned int        CNNEG __attribute__((section("sfrs")));
 typedef struct {
-  unsigned :6;
-  unsigned SR1G6:1;
+  unsigned CNNEG0:1;
+  unsigned CNNEG1:1;
+  unsigned :4;
+  unsigned CNNEG6:1;
+  unsigned CNNEG7:1;
+  unsigned CNNEG8:1;
+  unsigned CNNEG9:1;
   unsigned :2;
-  unsigned SR1G9:1;
+  unsigned CNNEG12:1;
+  unsigned CNNEG13:1;
+  unsigned CNNEG14:1;
+  unsigned CNNEG15:1;
+} __CNNEGbits_t;
+extern volatile __CNNEGbits_t CNNEGbits __asm__ ("CNNEG") __attribute__((section("sfrs")));
+extern volatile unsigned int        CNFG __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CNFG0:1;
+  unsigned CNFG1:1;
+  unsigned :4;
+  unsigned CNFG6:1;
+  unsigned CNFG7:1;
+  unsigned CNFG8:1;
+  unsigned CNFG9:1;
   unsigned :2;
-  unsigned SR1G12:1;
-  unsigned SR1G13:1;
-  unsigned SR1G14:1;
-} __SRCON1Gbits_t;
-extern volatile __SRCON1Gbits_t SRCON1Gbits __asm__ ("SRCON1G") __attribute__((section("sfrs")));
+  unsigned CNFG12:1;
+  unsigned CNFG13:1;
+  unsigned CNFG14:1;
+  unsigned CNFG15:1;
+} __CNFGbits_t;
+extern volatile __CNFGbits_t CNFGbits __asm__ ("CNFG") __attribute__((section("sfrs")));
 extern volatile unsigned int        SRCON0G __attribute__((section("sfrs")));
 typedef struct {
   unsigned :6;
@@ -12280,6 +12511,18 @@ typedef struct {
   unsigned SR0G14:1;
 } __SRCON0Gbits_t;
 extern volatile __SRCON0Gbits_t SRCON0Gbits __asm__ ("SRCON0G") __attribute__((section("sfrs")));
+extern volatile unsigned int        SRCON1G __attribute__((section("sfrs")));
+typedef struct {
+  unsigned :6;
+  unsigned SR1G6:1;
+  unsigned :2;
+  unsigned SR1G9:1;
+  unsigned :2;
+  unsigned SR1G12:1;
+  unsigned SR1G13:1;
+  unsigned SR1G14:1;
+} __SRCON1Gbits_t;
+extern volatile __SRCON1Gbits_t SRCON1Gbits __asm__ ("SRCON1G") __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELH __attribute__((section("sfrs")));
 typedef union {
   struct {
@@ -12469,7 +12712,9 @@ extern volatile unsigned int        CNPDHINV __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONH __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned :13;
+    unsigned :11;
+    unsigned EDGEDETECT:1;
+    unsigned :1;
     unsigned SIDL:1;
     unsigned :1;
     unsigned ON:1;
@@ -12538,6 +12783,46 @@ extern volatile __CNSTATHbits_t CNSTATHbits __asm__ ("CNSTATH") __attribute__((s
 extern volatile unsigned int        CNSTATHCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATHSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATHINV __attribute__((section("sfrs")));
+extern volatile unsigned int        CNNEH __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CNNEH0:1;
+  unsigned CNNEH1:1;
+  unsigned CNNEH2:1;
+  unsigned CNNEH3:1;
+  unsigned CNNEH4:1;
+  unsigned CNNEH5:1;
+  unsigned CNNEH6:1;
+  unsigned CNNEH7:1;
+  unsigned CNNEH8:1;
+  unsigned CNNEH9:1;
+  unsigned CNNEH10:1;
+  unsigned CNNEH11:1;
+  unsigned CNNEH12:1;
+  unsigned CNNEH13:1;
+  unsigned CNNEH14:1;
+  unsigned CNNEH15:1;
+} __CNNEHbits_t;
+extern volatile __CNNEHbits_t CNNEHbits __asm__ ("CNNEH") __attribute__((section("sfrs")));
+extern volatile unsigned int        CNFH __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CNFH0:1;
+  unsigned CNFH1:1;
+  unsigned CNFH2:1;
+  unsigned CNFH3:1;
+  unsigned CNFH4:1;
+  unsigned CNFH5:1;
+  unsigned CNFH6:1;
+  unsigned CNFH7:1;
+  unsigned CNFH8:1;
+  unsigned CNFH9:1;
+  unsigned CNFH10:1;
+  unsigned CNFH11:1;
+  unsigned CNFH12:1;
+  unsigned CNFH13:1;
+  unsigned CNFH14:1;
+  unsigned CNFH15:1;
+} __CNFHbits_t;
+extern volatile __CNFHbits_t CNFHbits __asm__ ("CNFH") __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELJ __attribute__((section("sfrs")));
 typedef union {
   struct {
@@ -12726,7 +13011,9 @@ extern volatile unsigned int        CNPDJINV __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONJ __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned :13;
+    unsigned :11;
+    unsigned EDGEDETECT:1;
+    unsigned :1;
     unsigned SIDL:1;
     unsigned :1;
     unsigned ON:1;
@@ -12795,14 +13082,46 @@ extern volatile __CNSTATJbits_t CNSTATJbits __asm__ ("CNSTATJ") __attribute__((s
 extern volatile unsigned int        CNSTATJCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATJSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATJINV __attribute__((section("sfrs")));
-extern volatile unsigned int        ANSELK __attribute__((section("sfrs")));
+extern volatile unsigned int        CNNEJ __attribute__((section("sfrs")));
 typedef struct {
-  unsigned w:32;
-} __ANSELKbits_t;
-extern volatile __ANSELKbits_t ANSELKbits __asm__ ("ANSELK") __attribute__((section("sfrs")));
-extern volatile unsigned int        ANSELKCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        ANSELKSET __attribute__((section("sfrs")));
-extern volatile unsigned int        ANSELKINV __attribute__((section("sfrs")));
+  unsigned CNNEJ0:1;
+  unsigned CNNEJ1:1;
+  unsigned CNNEJ2:1;
+  unsigned CNNEJ3:1;
+  unsigned CNNEJ4:1;
+  unsigned CNNEJ5:1;
+  unsigned CNNEJ6:1;
+  unsigned CNNEJ7:1;
+  unsigned CNNEJ8:1;
+  unsigned CNNEJ9:1;
+  unsigned CNNEJ10:1;
+  unsigned CNNEJ11:1;
+  unsigned CNNEJ12:1;
+  unsigned CNNEJ13:1;
+  unsigned CNNEJ14:1;
+  unsigned CNNEJ15:1;
+} __CNNEJbits_t;
+extern volatile __CNNEJbits_t CNNEJbits __asm__ ("CNNEJ") __attribute__((section("sfrs")));
+extern volatile unsigned int        CNFJ __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CNFJ0:1;
+  unsigned CNFJ1:1;
+  unsigned CNFJ2:1;
+  unsigned CNFJ3:1;
+  unsigned CNFJ4:1;
+  unsigned CNFJ5:1;
+  unsigned CNFJ6:1;
+  unsigned CNFJ7:1;
+  unsigned CNFJ8:1;
+  unsigned CNFJ9:1;
+  unsigned CNFJ10:1;
+  unsigned CNFJ11:1;
+  unsigned CNFJ12:1;
+  unsigned CNFJ13:1;
+  unsigned CNFJ14:1;
+  unsigned CNFJ15:1;
+} __CNFJbits_t;
+extern volatile __CNFJbits_t CNFJbits __asm__ ("CNFJ") __attribute__((section("sfrs")));
 extern volatile unsigned int        TRISK __attribute__((section("sfrs")));
 typedef union {
   struct {
@@ -12926,7 +13245,9 @@ extern volatile unsigned int        CNPDKINV __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONK __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned :13;
+    unsigned :11;
+    unsigned EDGEDETECT:1;
+    unsigned :1;
     unsigned SIDL:1;
     unsigned :1;
     unsigned ON:1;
@@ -12979,6 +13300,30 @@ extern volatile __CNSTATKbits_t CNSTATKbits __asm__ ("CNSTATK") __attribute__((s
 extern volatile unsigned int        CNSTATKCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATKSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATKINV __attribute__((section("sfrs")));
+extern volatile unsigned int        CNNEK __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CNNEK0:1;
+  unsigned CNNEK1:1;
+  unsigned CNNEK2:1;
+  unsigned CNNEK3:1;
+  unsigned CNNEK4:1;
+  unsigned CNNEK5:1;
+  unsigned CNNEK6:1;
+  unsigned CNNEK7:1;
+} __CNNEKbits_t;
+extern volatile __CNNEKbits_t CNNEKbits __asm__ ("CNNEK") __attribute__((section("sfrs")));
+extern volatile unsigned int        CNFK __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CNFK0:1;
+  unsigned CNFK1:1;
+  unsigned CNFK2:1;
+  unsigned CNFK3:1;
+  unsigned CNFK4:1;
+  unsigned CNFK5:1;
+  unsigned CNFK6:1;
+  unsigned CNFK7:1;
+} __CNFKbits_t;
+extern volatile __CNFKbits_t CNFKbits __asm__ ("CNFK") __attribute__((section("sfrs")));
 extern volatile unsigned int        C1CON __attribute__((section("sfrs")));
 typedef union {
   struct {
@@ -20599,7 +20944,7 @@ typedef struct {
 extern volatile __EBISMT2bits_t EBISMT2bits __asm__ ("EBISMT2") __attribute__((section("sfrs")));
 extern volatile unsigned int        EBIFTRPD __attribute__((section("sfrs")));
 typedef struct {
-  unsigned TRPD:32;
+  unsigned TRPD:31;
 } __EBIFTRPDbits_t;
 extern volatile __EBIFTRPDbits_t EBIFTRPDbits __asm__ ("EBIFTRPD") __attribute__((section("sfrs")));
 extern volatile unsigned int        EBISMCON __attribute__((section("sfrs")));
@@ -20626,6 +20971,7 @@ typedef struct {
   unsigned DDRMODE:1;
   unsigned DDRDUMMY:1;
   unsigned DDRDATA:1;
+  unsigned SDRCMD:1;
 } __SQI1XCON1bits_t;
 extern volatile __SQI1XCON1bits_t SQI1XCON1bits __asm__ ("SQI1XCON1") __attribute__((section("sfrs")));
 extern volatile unsigned int        SQI1XCON2 __attribute__((section("sfrs")));
@@ -20648,9 +20994,9 @@ typedef struct {
   unsigned BURSTEN:1;
   unsigned :3;
   unsigned RESET:1;
-  unsigned TXFIFORST:1;
-  unsigned RXFIFORST:1;
-  unsigned CONFIFORST:1;
+  unsigned TXBUFRST:1;
+  unsigned RXBUFRST:1;
+  unsigned CONBUFRST:1;
   unsigned DATAEN:2;
   unsigned :1;
   unsigned SQIEN:1;
@@ -20673,21 +21019,21 @@ typedef struct {
   unsigned EN:1;
   unsigned STABLE:1;
   unsigned :6;
-  unsigned CLKDIV:10;
+  unsigned CLKDIV:11;
 } __SQI1CLKCONbits_t;
 extern volatile __SQI1CLKCONbits_t SQI1CLKCONbits __asm__ ("SQI1CLKCON") __attribute__((section("sfrs")));
 extern volatile unsigned int        SQI1CMDTHR __attribute__((section("sfrs")));
 typedef struct {
-  unsigned RXCMDTHR:5;
-  unsigned :3;
-  unsigned TXCMDTHR:5;
+  unsigned RXCMDTHR:6;
+  unsigned :2;
+  unsigned TXCMDTHR:6;
 } __SQI1CMDTHRbits_t;
 extern volatile __SQI1CMDTHRbits_t SQI1CMDTHRbits __asm__ ("SQI1CMDTHR") __attribute__((section("sfrs")));
 extern volatile unsigned int        SQI1INTTHR __attribute__((section("sfrs")));
 typedef struct {
-  unsigned RXINTTHR:5;
-  unsigned :3;
-  unsigned TXINTTHR:5;
+  unsigned RXINTTHR:6;
+  unsigned :2;
+  unsigned TXINTTHR:6;
 } __SQI1INTTHRbits_t;
 extern volatile __SQI1INTTHRbits_t SQI1INTTHRbits __asm__ ("SQI1INTTHR") __attribute__((section("sfrs")));
 extern volatile unsigned int        SQI1INTEN __attribute__((section("sfrs")));
@@ -20734,9 +21080,9 @@ typedef struct {
 extern volatile __SQI1RXDATAbits_t SQI1RXDATAbits __asm__ ("SQI1RXDATA") __attribute__((section("sfrs")));
 extern volatile unsigned int        SQI1STAT1 __attribute__((section("sfrs")));
 typedef struct {
-  unsigned RXFIFOCNT:8;
-  unsigned :8;
-  unsigned TXFIFOFREE:8;
+  unsigned RXBUFCNT:6;
+  unsigned :10;
+  unsigned TXBUFFREE:6;
 } __SQI1STAT1bits_t;
 extern volatile __SQI1STAT1bits_t SQI1STAT1bits __asm__ ("SQI1STAT1") __attribute__((section("sfrs")));
 extern volatile unsigned int        SQI1STAT2 __attribute__((section("sfrs")));
@@ -20744,12 +21090,12 @@ typedef struct {
   unsigned TXOV:1;
   unsigned RXUN:1;
   unsigned :1;
-  unsigned SDID0:1;
-  unsigned SDID1:1;
-  unsigned SDID2:1;
-  unsigned SDID3:1;
-  unsigned CONAVAIL:5;
-  unsigned :4;
+  unsigned SQID0:1;
+  unsigned SQID1:1;
+  unsigned SQID2:1;
+  unsigned SQID3:1;
+  unsigned CONAVAIL:4;
+  unsigned :5;
   unsigned CMDSTAT:2;
 } __SQI1STAT2bits_t;
 extern volatile __SQI1STAT2bits_t SQI1STAT2bits __asm__ ("SQI1STAT2") __attribute__((section("sfrs")));
@@ -20765,7 +21111,6 @@ typedef struct {
   unsigned BDCURRADDR:32;
 } __SQI1BDCURADDbits_t;
 extern volatile __SQI1BDCURADDbits_t SQI1BDCURADDbits __asm__ ("SQI1BDCURADD") __attribute__((section("sfrs")));
-extern volatile unsigned int        RESERVED __attribute__((section("sfrs")));
 extern volatile unsigned int        SQI1BDBASEADD __attribute__((section("sfrs")));
 typedef struct {
   unsigned BDADDR:32;
@@ -20786,8 +21131,8 @@ typedef struct {
 extern volatile __SQI1BDPOLLCONbits_t SQI1BDPOLLCONbits __asm__ ("SQI1BDPOLLCON") __attribute__((section("sfrs")));
 extern volatile unsigned int        SQI1BDTXDSTAT __attribute__((section("sfrs")));
 typedef struct {
-  unsigned TXCURBUFLEN:8;
-  unsigned :8;
+  unsigned TXCURBUFLEN:9;
+  unsigned :7;
   unsigned TXBUFCNT:5;
   unsigned :4;
   unsigned TXSTATE:4;
@@ -20795,8 +21140,8 @@ typedef struct {
 extern volatile __SQI1BDTXDSTATbits_t SQI1BDTXDSTATbits __asm__ ("SQI1BDTXDSTAT") __attribute__((section("sfrs")));
 extern volatile unsigned int        SQI1BDRXDSTAT __attribute__((section("sfrs")));
 typedef struct {
-  unsigned RXCURBUFLEN:8;
-  unsigned :8;
+  unsigned RXCURBUFLEN:9;
+  unsigned :7;
   unsigned RXBUFCNT:5;
   unsigned :4;
   unsigned RXSTATE:4;
@@ -20804,7 +21149,7 @@ typedef struct {
 extern volatile __SQI1BDRXDSTATbits_t SQI1BDRXDSTATbits __asm__ ("SQI1BDRXDSTAT") __attribute__((section("sfrs")));
 extern volatile unsigned int        SQI1THR __attribute__((section("sfrs")));
 typedef struct {
-  unsigned THRES:7;
+  unsigned THRES:4;
 } __SQI1THRbits_t;
 extern volatile __SQI1THRbits_t SQI1THRbits __asm__ ("SQI1THR") __attribute__((section("sfrs")));
 extern volatile unsigned int        SQI1INTSIGEN __attribute__((section("sfrs")));
@@ -20819,7 +21164,7 @@ typedef struct {
   unsigned CONEMPTYISE:1;
   unsigned CONTHRISE:1;
   unsigned BDDONEISE:1;
-  unsigned PKTDONEISE:1;
+  unsigned PKTCOMPISE:1;
   unsigned DMAEISE:1;
 } __SQI1INTSIGENbits_t;
 extern volatile __SQI1INTSIGENbits_t SQI1INTSIGENbits __asm__ ("SQI1INTSIGEN") __attribute__((section("sfrs")));
@@ -20827,13 +21172,12 @@ extern volatile unsigned int        SQI1TAPCON __attribute__((section("sfrs")));
 typedef struct {
   unsigned CLKOUTDLY:4;
   unsigned DATAOUTDLY:4;
-  unsigned CLKINDLY:6;
+  unsigned SDRCLKINDLY:6;
 } __SQI1TAPCONbits_t;
 extern volatile __SQI1TAPCONbits_t SQI1TAPCONbits __asm__ ("SQI1TAPCON") __attribute__((section("sfrs")));
 extern volatile unsigned int        SQI1MEMSTAT __attribute__((section("sfrs")));
 typedef struct {
-  unsigned STATCMD:8;
-  unsigned STATDATA:8;
+  unsigned STATCMD:16;
   unsigned STATBYTES:2;
   unsigned STATTYPE:2;
   unsigned STATPOS:1;
@@ -22237,6 +22581,18 @@ typedef struct {
   unsigned LPMFADDR:7;
 } __USBLMPR2bits_t;
 extern volatile __USBLMPR2bits_t USBLMPR2bits __asm__ ("USBLMPR2") __attribute__((section("sfrs")));
+extern volatile unsigned int        USBLPMP2 __attribute__((section("sfrs")));
+typedef struct {
+  unsigned LPMST:1;
+  unsigned LPMNY:1;
+  unsigned LPMACK:1;
+  unsigned LPMNC:1;
+  unsigned LPMRES:1;
+  unsigned LPMERR:1;
+  unsigned :2;
+  unsigned LPMFADDR:7;
+} __USBLPMP2bits_t;
+extern volatile __USBLPMP2bits_t USBLPMP2bits __asm__ ("USBLPMP2") __attribute__((section("sfrs")));
 extern volatile unsigned int        CEVER __attribute__((section("sfrs")));
 typedef struct {
   unsigned ID:16;
@@ -22321,7 +22677,7 @@ typedef struct {
   unsigned TRNGEN:1;
   unsigned PRNGEN:1;
   unsigned CONT:1;
-  unsigned :1;
+  unsigned TRNGMODE:1;
   unsigned LOAD:1;
 } __RNGCONbits_t;
 extern volatile __RNGCONbits_t RNGCONbits __asm__ ("RNGCON") __attribute__((section("sfrs")));
@@ -23761,10 +24117,14 @@ typedef union {
     unsigned :1;
     unsigned FECCCON:2;
     unsigned FSLEEP:1;
-    unsigned FDBGWP:1;
+    unsigned :1;
     unsigned DBGPER:3;
     unsigned SMCLR:1;
-    unsigned :14;
+    unsigned SOSCGAIN:2;
+    unsigned SOSCBOOST:1;
+    unsigned POSCGAIN:2;
+    unsigned POSCBOOST:1;
+    unsigned :8;
     unsigned EJTAGBEN:1;
   };
   struct {
@@ -23898,10 +24258,14 @@ typedef union {
     unsigned :1;
     unsigned FECCCON:2;
     unsigned FSLEEP:1;
-    unsigned FDBGWP:1;
+    unsigned :1;
     unsigned DBGPER:3;
     unsigned SMCLR:1;
-    unsigned :14;
+    unsigned SOSCGAIN:2;
+    unsigned SOSCBOOST:1;
+    unsigned POSCGAIN:2;
+    unsigned POSCBOOST:1;
+    unsigned :8;
     unsigned EJTAGBEN:1;
   };
   struct {
@@ -23944,6 +24308,248 @@ typedef union {
   };
 } __ASEQ0bits_t;
 extern volatile __ASEQ0bits_t ASEQ0bits __asm__ ("ASEQ0") __attribute__((section("sfrs")));
+extern volatile unsigned int        AUBADEVCFG3 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned USERID:16;
+    unsigned :8;
+    unsigned FMIIEN:1;
+    unsigned FETHIO:1;
+    unsigned :1;
+    unsigned PGL1WAY:1;
+    unsigned PMDL1WAY:1;
+    unsigned IOL1WAY:1;
+    unsigned FUSBIDIO:1;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __AUBADEVCFG3bits_t;
+extern volatile __AUBADEVCFG3bits_t AUBADEVCFG3bits __asm__ ("AUBADEVCFG3") __attribute__((section("sfrs")));
+extern volatile unsigned int        AUBADEVCFG2 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned FPLLIDIV:3;
+    unsigned :1;
+    unsigned FPLLRNG:3;
+    unsigned FPLLICLK:1;
+    unsigned FPLLMULT:7;
+    unsigned :1;
+    unsigned FPLLODIV:3;
+    unsigned :11;
+    unsigned UPLLFSEL:1;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __AUBADEVCFG2bits_t;
+extern volatile __AUBADEVCFG2bits_t AUBADEVCFG2bits __asm__ ("AUBADEVCFG2") __attribute__((section("sfrs")));
+extern volatile unsigned int        AUBADEVCFG1 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned FNOSC:3;
+    unsigned DMTINTV:3;
+    unsigned FSOSCEN:1;
+    unsigned IESO:1;
+    unsigned POSCMOD:2;
+    unsigned OSCIOFNC:1;
+    unsigned :3;
+    unsigned FCKSM:2;
+    unsigned WDTPS:5;
+    unsigned WDTSPGM:1;
+    unsigned WINDIS:1;
+    unsigned FWDTEN:1;
+    unsigned FWDTWINSZ:2;
+    unsigned DMTCNT:5;
+    unsigned FDMTEN:1;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __AUBADEVCFG1bits_t;
+extern volatile __AUBADEVCFG1bits_t AUBADEVCFG1bits __asm__ ("AUBADEVCFG1") __attribute__((section("sfrs")));
+extern volatile unsigned int        AUBADEVCFG0 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned DEBUG:2;
+    unsigned JTAGEN:1;
+    unsigned ICESEL:2;
+    unsigned TRCEN:1;
+    unsigned BOOTISA:1;
+    unsigned :1;
+    unsigned FECCCON:2;
+    unsigned FSLEEP:1;
+    unsigned :1;
+    unsigned DBGPER:3;
+    unsigned SMCLR:1;
+    unsigned SOSCGAIN:2;
+    unsigned SOSCBOOST:1;
+    unsigned POSCGAIN:2;
+    unsigned POSCBOOST:1;
+    unsigned :8;
+    unsigned EJTAGBEN:1;
+  };
+  struct {
+    unsigned FDEBUG:2;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __AUBADEVCFG0bits_t;
+extern volatile __AUBADEVCFG0bits_t AUBADEVCFG0bits __asm__ ("AUBADEVCFG0") __attribute__((section("sfrs")));
+extern volatile unsigned int        AUBADEVCP3 __attribute__((section("sfrs")));
+extern volatile unsigned int        AUBADEVCP2 __attribute__((section("sfrs")));
+extern volatile unsigned int        AUBADEVCP1 __attribute__((section("sfrs")));
+extern volatile unsigned int        AUBADEVCP0 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned :28;
+    unsigned CP:1;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __AUBADEVCP0bits_t;
+extern volatile __AUBADEVCP0bits_t AUBADEVCP0bits __asm__ ("AUBADEVCP0") __attribute__((section("sfrs")));
+extern volatile unsigned int        AUBADEVSIGN3 __attribute__((section("sfrs")));
+extern volatile unsigned int        AUBADEVSIGN2 __attribute__((section("sfrs")));
+extern volatile unsigned int        AUBADEVSIGN1 __attribute__((section("sfrs")));
+extern volatile unsigned int        AUBADEVSIGN0 __attribute__((section("sfrs")));
+extern volatile unsigned int        AUBASEQ3 __attribute__((section("sfrs")));
+extern volatile unsigned int        AUBASEQ2 __attribute__((section("sfrs")));
+extern volatile unsigned int        AUBASEQ1 __attribute__((section("sfrs")));
+extern volatile unsigned int        AUBASEQ0 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned TSEQ:16;
+    unsigned CSEQ:16;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __AUBASEQ0bits_t;
+extern volatile __AUBASEQ0bits_t AUBASEQ0bits __asm__ ("AUBASEQ0") __attribute__((section("sfrs")));
+extern volatile unsigned int        UBADEVCFG3 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned USERID:16;
+    unsigned :8;
+    unsigned FMIIEN:1;
+    unsigned FETHIO:1;
+    unsigned :1;
+    unsigned PGL1WAY:1;
+    unsigned PMDL1WAY:1;
+    unsigned IOL1WAY:1;
+    unsigned FUSBIDIO:1;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __UBADEVCFG3bits_t;
+extern volatile __UBADEVCFG3bits_t UBADEVCFG3bits __asm__ ("UBADEVCFG3") __attribute__((section("sfrs")));
+extern volatile unsigned int        UBADEVCFG2 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned FPLLIDIV:3;
+    unsigned :1;
+    unsigned FPLLRNG:3;
+    unsigned FPLLICLK:1;
+    unsigned FPLLMULT:7;
+    unsigned :1;
+    unsigned FPLLODIV:3;
+    unsigned :11;
+    unsigned UPLLFSEL:1;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __UBADEVCFG2bits_t;
+extern volatile __UBADEVCFG2bits_t UBADEVCFG2bits __asm__ ("UBADEVCFG2") __attribute__((section("sfrs")));
+extern volatile unsigned int        UBADEVCFG1 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned FNOSC:3;
+    unsigned DMTINTV:3;
+    unsigned FSOSCEN:1;
+    unsigned IESO:1;
+    unsigned POSCMOD:2;
+    unsigned OSCIOFNC:1;
+    unsigned :3;
+    unsigned FCKSM:2;
+    unsigned WDTPS:5;
+    unsigned WDTSPGM:1;
+    unsigned WINDIS:1;
+    unsigned FWDTEN:1;
+    unsigned FWDTWINSZ:2;
+    unsigned DMTCNT:5;
+    unsigned FDMTEN:1;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __UBADEVCFG1bits_t;
+extern volatile __UBADEVCFG1bits_t UBADEVCFG1bits __asm__ ("UBADEVCFG1") __attribute__((section("sfrs")));
+extern volatile unsigned int        UBADEVCFG0 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned DEBUG:2;
+    unsigned JTAGEN:1;
+    unsigned ICESEL:2;
+    unsigned TRCEN:1;
+    unsigned BOOTISA:1;
+    unsigned :1;
+    unsigned FECCCON:2;
+    unsigned FSLEEP:1;
+    unsigned :1;
+    unsigned DBGPER:3;
+    unsigned SMCLR:1;
+    unsigned SOSCGAIN:2;
+    unsigned SOSCBOOST:1;
+    unsigned POSCGAIN:2;
+    unsigned POSCBOOST:1;
+    unsigned :8;
+    unsigned EJTAGBEN:1;
+  };
+  struct {
+    unsigned FDEBUG:2;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __UBADEVCFG0bits_t;
+extern volatile __UBADEVCFG0bits_t UBADEVCFG0bits __asm__ ("UBADEVCFG0") __attribute__((section("sfrs")));
+extern volatile unsigned int        UBADEVCP3 __attribute__((section("sfrs")));
+extern volatile unsigned int        UBADEVCP2 __attribute__((section("sfrs")));
+extern volatile unsigned int        UBADEVCP1 __attribute__((section("sfrs")));
+extern volatile unsigned int        UBADEVCP0 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned :28;
+    unsigned CP:1;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __UBADEVCP0bits_t;
+extern volatile __UBADEVCP0bits_t UBADEVCP0bits __asm__ ("UBADEVCP0") __attribute__((section("sfrs")));
+extern volatile unsigned int        UBADEVSIGN3 __attribute__((section("sfrs")));
+extern volatile unsigned int        UBADEVSIGN2 __attribute__((section("sfrs")));
+extern volatile unsigned int        UBADEVSIGN1 __attribute__((section("sfrs")));
+extern volatile unsigned int        UBADEVSIGN0 __attribute__((section("sfrs")));
+extern volatile unsigned int        UBASEQ3 __attribute__((section("sfrs")));
+extern volatile unsigned int        UBASEQ2 __attribute__((section("sfrs")));
+extern volatile unsigned int        UBASEQ1 __attribute__((section("sfrs")));
+extern volatile unsigned int        UBASEQ0 __attribute__((section("sfrs")));
+typedef union {
+  struct {
+    unsigned TSEQ:16;
+    unsigned CSEQ:16;
+  };
+  struct {
+    unsigned w:32;
+  };
+} __UBASEQ0bits_t;
+extern volatile __UBASEQ0bits_t UBASEQ0bits __asm__ ("UBASEQ0") __attribute__((section("sfrs")));
 extern volatile unsigned int        ABF1DEVCFG3 __attribute__((section("sfrs")));
 typedef union {
   struct {
@@ -24015,10 +24621,14 @@ typedef union {
     unsigned :1;
     unsigned FECCCON:2;
     unsigned FSLEEP:1;
-    unsigned FDBGWP:1;
+    unsigned :1;
     unsigned DBGPER:3;
     unsigned SMCLR:1;
-    unsigned :14;
+    unsigned SOSCGAIN:2;
+    unsigned SOSCBOOST:1;
+    unsigned POSCGAIN:2;
+    unsigned POSCBOOST:1;
+    unsigned :8;
     unsigned EJTAGBEN:1;
   };
   struct {
@@ -24132,10 +24742,14 @@ typedef union {
     unsigned :1;
     unsigned FECCCON:2;
     unsigned FSLEEP:1;
-    unsigned FDBGWP:1;
+    unsigned :1;
     unsigned DBGPER:3;
     unsigned SMCLR:1;
-    unsigned :14;
+    unsigned SOSCGAIN:2;
+    unsigned SOSCBOOST:1;
+    unsigned POSCGAIN:2;
+    unsigned POSCBOOST:1;
+    unsigned :8;
     unsigned EJTAGBEN:1;
   };
   struct {
@@ -24249,10 +24863,14 @@ typedef union {
     unsigned :1;
     unsigned FECCCON:2;
     unsigned FSLEEP:1;
-    unsigned FDBGWP:1;
+    unsigned :1;
     unsigned DBGPER:3;
     unsigned SMCLR:1;
-    unsigned :14;
+    unsigned SOSCGAIN:2;
+    unsigned SOSCBOOST:1;
+    unsigned POSCGAIN:2;
+    unsigned POSCBOOST:1;
+    unsigned :8;
     unsigned EJTAGBEN:1;
   };
   struct {
@@ -24366,10 +24984,14 @@ typedef union {
     unsigned :1;
     unsigned FECCCON:2;
     unsigned FSLEEP:1;
-    unsigned FDBGWP:1;
+    unsigned :1;
     unsigned DBGPER:3;
     unsigned SMCLR:1;
-    unsigned :14;
+    unsigned SOSCGAIN:2;
+    unsigned SOSCBOOST:1;
+    unsigned POSCGAIN:2;
+    unsigned POSCBOOST:1;
+    unsigned :8;
     unsigned EJTAGBEN:1;
   };
   struct {
@@ -24609,118 +25231,118 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern PB8DIVCLR        /* 0xBF801374 */
   .extern PB8DIVSET        /* 0xBF801378 */
   .extern PB8DIVINV        /* 0xBF80137C */
-  .extern SLEWCON          /* 0xBF801380 */
-  .extern SLEWCONCLR       /* 0xBF801384 */
-  .extern SLEWCONSET       /* 0xBF801388 */
-  .extern SLEWCONINV       /* 0xBF80138C */
-  .extern CLKSTAT          /* 0xBF801390 */
-  .extern CLKSTATCLR       /* 0xBF801394 */
-  .extern CLKSTATSET       /* 0xBF801398 */
-  .extern CLKSTATINV       /* 0xBF80139C */
-  .extern INT1R            /* 0xBF801418 */
-  .extern INT2R            /* 0xBF80141C */
-  .extern INT3R            /* 0xBF801420 */
-  .extern INT4R            /* 0xBF801424 */
-  .extern T2CKR            /* 0xBF80142C */
-  .extern T3CKR            /* 0xBF801430 */
-  .extern T4CKR            /* 0xBF801434 */
-  .extern T5CKR            /* 0xBF801438 */
-  .extern T6CKR            /* 0xBF80143C */
-  .extern T7CKR            /* 0xBF801440 */
-  .extern T8CKR            /* 0xBF801444 */
-  .extern T9CKR            /* 0xBF801448 */
-  .extern IC1R             /* 0xBF80144C */
-  .extern IC2R             /* 0xBF801450 */
-  .extern IC3R             /* 0xBF801454 */
-  .extern IC4R             /* 0xBF801458 */
-  .extern IC5R             /* 0xBF80145C */
-  .extern IC6R             /* 0xBF801460 */
-  .extern IC7R             /* 0xBF801464 */
-  .extern IC8R             /* 0xBF801468 */
-  .extern IC9R             /* 0xBF80146C */
-  .extern OCFAR            /* 0xBF801474 */
-  .extern U1RXR            /* 0xBF80147C */
-  .extern U1CTSR           /* 0xBF801480 */
-  .extern U2RXR            /* 0xBF801484 */
-  .extern U2CTSR           /* 0xBF801488 */
-  .extern U3RXR            /* 0xBF80148C */
-  .extern U3CTSR           /* 0xBF801490 */
-  .extern U4RXR            /* 0xBF801494 */
-  .extern U4CTSR           /* 0xBF801498 */
-  .extern U5RXR            /* 0xBF80149C */
-  .extern U5CTSR           /* 0xBF8014A0 */
-  .extern U6RXR            /* 0xBF8014A4 */
-  .extern U6CTSR           /* 0xBF8014A8 */
-  .extern SDI1R            /* 0xBF8014B0 */
-  .extern SS1R             /* 0xBF8014B4 */
-  .extern SDI2R            /* 0xBF8014BC */
-  .extern SS2R             /* 0xBF8014C0 */
-  .extern SDI3R            /* 0xBF8014C8 */
-  .extern SS3R             /* 0xBF8014CC */
-  .extern SDI4R            /* 0xBF8014D4 */
-  .extern SS4R             /* 0xBF8014D8 */
-  .extern SDI5R            /* 0xBF8014E0 */
-  .extern SS5R             /* 0xBF8014E4 */
-  .extern SDI6R            /* 0xBF8014EC */
-  .extern SS6R             /* 0xBF8014F0 */
-  .extern C1RXR            /* 0xBF8014F4 */
-  .extern C2RXR            /* 0xBF8014F8 */
-  .extern REFCLKI1R        /* 0xBF8014FC */
-  .extern REFCLKI3R        /* 0xBF801504 */
-  .extern REFCLKI4R        /* 0xBF801508 */
-  .extern RPA14R           /* 0xBF80154C */
-  .extern RPA15R           /* 0xBF801550 */
-  .extern RPB0R            /* 0xBF801554 */
-  .extern RPB1R            /* 0xBF801558 */
-  .extern RPB2R            /* 0xBF80155C */
-  .extern RPB3R            /* 0xBF801560 */
-  .extern RPB5R            /* 0xBF801568 */
-  .extern RPB6R            /* 0xBF80156C */
-  .extern RPB7R            /* 0xBF801570 */
-  .extern RPB8R            /* 0xBF801574 */
-  .extern RPB9R            /* 0xBF801578 */
-  .extern RPB10R           /* 0xBF80157C */
-  .extern RPB14R           /* 0xBF80158C */
-  .extern RPB15R           /* 0xBF801590 */
-  .extern RPC1R            /* 0xBF801598 */
-  .extern RPC2R            /* 0xBF80159C */
-  .extern RPC3R            /* 0xBF8015A0 */
-  .extern RPC4R            /* 0xBF8015A4 */
-  .extern RPC13R           /* 0xBF8015C8 */
-  .extern RPC14R           /* 0xBF8015CC */
-  .extern RPD0R            /* 0xBF8015D4 */
-  .extern RPD1R            /* 0xBF8015D8 */
-  .extern RPD2R            /* 0xBF8015DC */
-  .extern RPD3R            /* 0xBF8015E0 */
-  .extern RPD4R            /* 0xBF8015E4 */
-  .extern RPD5R            /* 0xBF8015E8 */
-  .extern RPD6R            /* 0xBF8015EC */
-  .extern RPD7R            /* 0xBF8015F0 */
-  .extern RPD9R            /* 0xBF8015F8 */
-  .extern RPD10R           /* 0xBF8015FC */
-  .extern RPD11R           /* 0xBF801600 */
-  .extern RPD12R           /* 0xBF801604 */
-  .extern RPD14R           /* 0xBF80160C */
-  .extern RPD15R           /* 0xBF801610 */
-  .extern RPE3R            /* 0xBF801620 */
-  .extern RPE5R            /* 0xBF801628 */
-  .extern RPE8R            /* 0xBF801634 */
-  .extern RPE9R            /* 0xBF801638 */
-  .extern RPF0R            /* 0xBF801654 */
-  .extern RPF1R            /* 0xBF801658 */
-  .extern RPF2R            /* 0xBF80165C */
-  .extern RPF3R            /* 0xBF801660 */
-  .extern RPF4R            /* 0xBF801664 */
-  .extern RPF5R            /* 0xBF801668 */
-  .extern RPF8R            /* 0xBF801674 */
-  .extern RPF12R           /* 0xBF801684 */
-  .extern RPF13R           /* 0xBF801688 */
-  .extern RPG0R            /* 0xBF801694 */
-  .extern RPG1R            /* 0xBF801698 */
-  .extern RPG6R            /* 0xBF8016AC */
-  .extern RPG7R            /* 0xBF8016B0 */
-  .extern RPG8R            /* 0xBF8016B4 */
-  .extern RPG9R            /* 0xBF8016B8 */
+  .extern SLEWCON          /* 0xBF8013C0 */
+  .extern SLEWCONCLR       /* 0xBF8013C4 */
+  .extern SLEWCONSET       /* 0xBF8013C8 */
+  .extern SLEWCONINV       /* 0xBF8013CC */
+  .extern CLKSTAT          /* 0xBF8013D0 */
+  .extern CLKSTATCLR       /* 0xBF8013D4 */
+  .extern CLKSTATSET       /* 0xBF8013D8 */
+  .extern CLKSTATINV       /* 0xBF8013DC */
+  .extern INT1R            /* 0xBF801404 */
+  .extern INT2R            /* 0xBF801408 */
+  .extern INT3R            /* 0xBF80140C */
+  .extern INT4R            /* 0xBF801410 */
+  .extern T2CKR            /* 0xBF801418 */
+  .extern T3CKR            /* 0xBF80141C */
+  .extern T4CKR            /* 0xBF801420 */
+  .extern T5CKR            /* 0xBF801424 */
+  .extern T6CKR            /* 0xBF801428 */
+  .extern T7CKR            /* 0xBF80142C */
+  .extern T8CKR            /* 0xBF801430 */
+  .extern T9CKR            /* 0xBF801434 */
+  .extern IC1R             /* 0xBF801438 */
+  .extern IC2R             /* 0xBF80143C */
+  .extern IC3R             /* 0xBF801440 */
+  .extern IC4R             /* 0xBF801444 */
+  .extern IC5R             /* 0xBF801448 */
+  .extern IC6R             /* 0xBF80144C */
+  .extern IC7R             /* 0xBF801450 */
+  .extern IC8R             /* 0xBF801454 */
+  .extern IC9R             /* 0xBF801458 */
+  .extern OCFAR            /* 0xBF801460 */
+  .extern U1RXR            /* 0xBF801468 */
+  .extern U1CTSR           /* 0xBF80146C */
+  .extern U2RXR            /* 0xBF801470 */
+  .extern U2CTSR           /* 0xBF801474 */
+  .extern U3RXR            /* 0xBF801478 */
+  .extern U3CTSR           /* 0xBF80147C */
+  .extern U4RXR            /* 0xBF801480 */
+  .extern U4CTSR           /* 0xBF801484 */
+  .extern U5RXR            /* 0xBF801488 */
+  .extern U5CTSR           /* 0xBF80148C */
+  .extern U6RXR            /* 0xBF801490 */
+  .extern U6CTSR           /* 0xBF801494 */
+  .extern SDI1R            /* 0xBF80149C */
+  .extern SS1R             /* 0xBF8014A0 */
+  .extern SDI2R            /* 0xBF8014A8 */
+  .extern SS2R             /* 0xBF8014AC */
+  .extern SDI3R            /* 0xBF8014B4 */
+  .extern SS3R             /* 0xBF8014B8 */
+  .extern SDI4R            /* 0xBF8014C0 */
+  .extern SS4R             /* 0xBF8014C4 */
+  .extern SDI5R            /* 0xBF8014CC */
+  .extern SS5R             /* 0xBF8014D0 */
+  .extern SDI6R            /* 0xBF8014D8 */
+  .extern SS6R             /* 0xBF8014DC */
+  .extern C1RXR            /* 0xBF8014E0 */
+  .extern C2RXR            /* 0xBF8014E4 */
+  .extern REFCLKI1R        /* 0xBF8014E8 */
+  .extern REFCLKI3R        /* 0xBF8014F0 */
+  .extern REFCLKI4R        /* 0xBF8014F4 */
+  .extern RPA14R           /* 0xBF801538 */
+  .extern RPA15R           /* 0xBF80153C */
+  .extern RPB0R            /* 0xBF801540 */
+  .extern RPB1R            /* 0xBF801544 */
+  .extern RPB2R            /* 0xBF801548 */
+  .extern RPB3R            /* 0xBF80154C */
+  .extern RPB5R            /* 0xBF801554 */
+  .extern RPB6R            /* 0xBF801558 */
+  .extern RPB7R            /* 0xBF80155C */
+  .extern RPB8R            /* 0xBF801560 */
+  .extern RPB9R            /* 0xBF801564 */
+  .extern RPB10R           /* 0xBF801568 */
+  .extern RPB14R           /* 0xBF801578 */
+  .extern RPB15R           /* 0xBF80157C */
+  .extern RPC1R            /* 0xBF801584 */
+  .extern RPC2R            /* 0xBF801588 */
+  .extern RPC3R            /* 0xBF80158C */
+  .extern RPC4R            /* 0xBF801590 */
+  .extern RPC13R           /* 0xBF8015B4 */
+  .extern RPC14R           /* 0xBF8015B8 */
+  .extern RPD0R            /* 0xBF8015C0 */
+  .extern RPD1R            /* 0xBF8015C4 */
+  .extern RPD2R            /* 0xBF8015C8 */
+  .extern RPD3R            /* 0xBF8015CC */
+  .extern RPD4R            /* 0xBF8015D0 */
+  .extern RPD5R            /* 0xBF8015D4 */
+  .extern RPD6R            /* 0xBF8015D8 */
+  .extern RPD7R            /* 0xBF8015DC */
+  .extern RPD9R            /* 0xBF8015E4 */
+  .extern RPD10R           /* 0xBF8015E8 */
+  .extern RPD11R           /* 0xBF8015EC */
+  .extern RPD12R           /* 0xBF8015F0 */
+  .extern RPD14R           /* 0xBF8015F8 */
+  .extern RPD15R           /* 0xBF8015FC */
+  .extern RPE3R            /* 0xBF80160C */
+  .extern RPE5R            /* 0xBF801614 */
+  .extern RPE8R            /* 0xBF801620 */
+  .extern RPE9R            /* 0xBF801624 */
+  .extern RPF0R            /* 0xBF801640 */
+  .extern RPF1R            /* 0xBF801644 */
+  .extern RPF2R            /* 0xBF801648 */
+  .extern RPF3R            /* 0xBF80164C */
+  .extern RPF4R            /* 0xBF801650 */
+  .extern RPF5R            /* 0xBF801654 */
+  .extern RPF8R            /* 0xBF801660 */
+  .extern RPF12R           /* 0xBF801670 */
+  .extern RPF13R           /* 0xBF801674 */
+  .extern RPG0R            /* 0xBF801680 */
+  .extern RPG1R            /* 0xBF801684 */
+  .extern RPG6R            /* 0xBF801698 */
+  .extern RPG7R            /* 0xBF80169C */
+  .extern RPG8R            /* 0xBF8016A0 */
+  .extern RPG9R            /* 0xBF8016A4 */
   .extern INTCON           /* 0xBF810000 */
   .extern INTCONCLR        /* 0xBF810004 */
   .extern INTCONSET        /* 0xBF810008 */
@@ -25066,6 +25688,7 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern OFF055           /* 0xBF81061C */
   .extern OFF056           /* 0xBF810620 */
   .extern OFF057           /* 0xBF810624 */
+  .extern OFF058           /* 0xBF810628 */
   .extern OFF059           /* 0xBF81062C */
   .extern OFF060           /* 0xBF810630 */
   .extern OFF061           /* 0xBF810634 */
@@ -26091,6 +26714,18 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern PMSTATCLR        /* 0xBF82E064 */
   .extern PMSTATSET        /* 0xBF82E068 */
   .extern PMSTATINV        /* 0xBF82E06C */
+  .extern PMWADDR          /* 0xBF82E070 */
+  .extern PMWADDRCLR       /* 0xBF82E074 */
+  .extern PMWADDRSET       /* 0xBF82E078 */
+  .extern PMWADDRINV       /* 0xBF82E07C */
+  .extern PMRADDR          /* 0xBF82E080 */
+  .extern PMRADDRCLR       /* 0xBF82E084 */
+  .extern PMRADDRSET       /* 0xBF82E088 */
+  .extern PMRADDRINV       /* 0xBF82E08C */
+  .extern PMRDIN           /* 0xBF82E090 */
+  .extern PMRDINCLR        /* 0xBF82E094 */
+  .extern PMRDINSET        /* 0xBF82E098 */
+  .extern PMRDININV        /* 0xBF82E09C */
   .extern T1CON            /* 0xBF840000 */
   .extern T1CONCLR         /* 0xBF840004 */
   .extern T1CONSET         /* 0xBF840008 */
@@ -26386,11 +27021,6 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern ADCTRG1          /* 0xBF84B080 */
   .extern ADCTRG2          /* 0xBF84B084 */
   .extern ADCTRG3          /* 0xBF84B088 */
-  .extern ADCTRG4          /* 0xBF84B08C */
-  .extern ADCTRG5          /* 0xBF84B090 */
-  .extern ADCTRG6          /* 0xBF84B094 */
-  .extern ADCTRG7          /* 0xBF84B098 */
-  .extern ADCTRG8          /* 0xBF84B09C */
   .extern ADCCMPCON1       /* 0xBF84B0A0 */
   .extern ADCCMPCON2       /* 0xBF84B0A4 */
   .extern ADCCMPCON3       /* 0xBF84B0A8 */
@@ -26409,14 +27039,14 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern ADCEISTAT1       /* 0xBF84B0F8 */
   .extern ADCEISTAT2       /* 0xBF84B0FC */
   .extern ADCANCON         /* 0xBF84B100 */
-  .extern ADCSYSCFG0       /* 0xBF84B104 */
-  .extern ADCSYSCFG1       /* 0xBF84B108 */
   .extern ADC0CFG          /* 0xBF84B180 */
   .extern ADC1CFG          /* 0xBF84B184 */
   .extern ADC2CFG          /* 0xBF84B188 */
   .extern ADC3CFG          /* 0xBF84B18C */
   .extern ADC4CFG          /* 0xBF84B190 */
   .extern ADC7CFG          /* 0xBF84B19C */
+  .extern ADCSYSCFG0       /* 0xBF84B1C0 */
+  .extern ADCSYSCFG1       /* 0xBF84B1C4 */
   .extern ADCDATA0         /* 0xBF84B200 */
   .extern ADCDATA1         /* 0xBF84B204 */
   .extern ADCDATA2         /* 0xBF84B208 */
@@ -26514,8 +27144,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern CNSTATACLR       /* 0xBF860094 */
   .extern CNSTATASET       /* 0xBF860098 */
   .extern CNSTATAINV       /* 0xBF86009C */
-  .extern SRCON1A          /* 0xBF8600A0 */
-  .extern SRCON0A          /* 0xBF8600A4 */
+  .extern CNNEA            /* 0xBF8600A0 */
+  .extern CNFA             /* 0xBF8600B0 */
+  .extern SRCON0A          /* 0xBF8600C0 */
+  .extern SRCON1A          /* 0xBF8600D0 */
   .extern ANSELB           /* 0xBF860100 */
   .extern ANSELBCLR        /* 0xBF860104 */
   .extern ANSELBSET        /* 0xBF860108 */
@@ -26556,8 +27188,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern CNSTATBCLR       /* 0xBF860194 */
   .extern CNSTATBSET       /* 0xBF860198 */
   .extern CNSTATBINV       /* 0xBF86019C */
-  .extern SRCON1B          /* 0xBF8601A0 */
-  .extern SRCON0B          /* 0xBF8601A4 */
+  .extern CNNEB            /* 0xBF8601A0 */
+  .extern CNFB             /* 0xBF8601B0 */
+  .extern SRCON0B          /* 0xBF8601C0 */
+  .extern SRCON1B          /* 0xBF8601D0 */
   .extern ANSELC           /* 0xBF860200 */
   .extern ANSELCCLR        /* 0xBF860204 */
   .extern ANSELCSET        /* 0xBF860208 */
@@ -26598,6 +27232,8 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern CNSTATCCLR       /* 0xBF860294 */
   .extern CNSTATCSET       /* 0xBF860298 */
   .extern CNSTATCINV       /* 0xBF86029C */
+  .extern CNNEC            /* 0xBF8602A0 */
+  .extern CNFC             /* 0xBF8602B0 */
   .extern ANSELD           /* 0xBF860300 */
   .extern ANSELDCLR        /* 0xBF860304 */
   .extern ANSELDSET        /* 0xBF860308 */
@@ -26638,6 +27274,8 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern CNSTATDCLR       /* 0xBF860394 */
   .extern CNSTATDSET       /* 0xBF860398 */
   .extern CNSTATDINV       /* 0xBF86039C */
+  .extern CNNED            /* 0xBF8603A0 */
+  .extern CNFD             /* 0xBF8603B0 */
   .extern ANSELE           /* 0xBF860400 */
   .extern ANSELECLR        /* 0xBF860404 */
   .extern ANSELESET        /* 0xBF860408 */
@@ -26678,8 +27316,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern CNSTATECLR       /* 0xBF860494 */
   .extern CNSTATESET       /* 0xBF860498 */
   .extern CNSTATEINV       /* 0xBF86049C */
-  .extern SRCON1E          /* 0xBF8604A0 */
-  .extern SRCON0E          /* 0xBF8604A4 */
+  .extern CNNEE            /* 0xBF8604A0 */
+  .extern CNFE             /* 0xBF8604B0 */
+  .extern SRCON0E          /* 0xBF8604C0 */
+  .extern SRCON1E          /* 0xBF8604D0 */
   .extern ANSELF           /* 0xBF860500 */
   .extern ANSELFCLR        /* 0xBF860504 */
   .extern ANSELFSET        /* 0xBF860508 */
@@ -26720,8 +27360,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern CNSTATFCLR       /* 0xBF860594 */
   .extern CNSTATFSET       /* 0xBF860598 */
   .extern CNSTATFINV       /* 0xBF86059C */
-  .extern SRCON1F          /* 0xBF8605A0 */
-  .extern SRCON0F          /* 0xBF8605A4 */
+  .extern CNNEF            /* 0xBF8605A0 */
+  .extern CNFF             /* 0xBF8605B0 */
+  .extern SRCON0F          /* 0xBF8605C0 */
+  .extern SRCON1F          /* 0xBF8605D0 */
   .extern ANSELG           /* 0xBF860600 */
   .extern ANSELGCLR        /* 0xBF860604 */
   .extern ANSELGSET        /* 0xBF860608 */
@@ -26762,8 +27404,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern CNSTATGCLR       /* 0xBF860694 */
   .extern CNSTATGSET       /* 0xBF860698 */
   .extern CNSTATGINV       /* 0xBF86069C */
-  .extern SRCON1G          /* 0xBF8606A0 */
-  .extern SRCON0G          /* 0xBF8606A4 */
+  .extern CNNEG            /* 0xBF8606A0 */
+  .extern CNFG             /* 0xBF8606B0 */
+  .extern SRCON0G          /* 0xBF8606C0 */
+  .extern SRCON1G          /* 0xBF8606D0 */
   .extern ANSELH           /* 0xBF860700 */
   .extern ANSELHCLR        /* 0xBF860704 */
   .extern ANSELHSET        /* 0xBF860708 */
@@ -26804,6 +27448,8 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern CNSTATHCLR       /* 0xBF860794 */
   .extern CNSTATHSET       /* 0xBF860798 */
   .extern CNSTATHINV       /* 0xBF86079C */
+  .extern CNNEH            /* 0xBF8607A0 */
+  .extern CNFH             /* 0xBF8607B0 */
   .extern ANSELJ           /* 0xBF860800 */
   .extern ANSELJCLR        /* 0xBF860804 */
   .extern ANSELJSET        /* 0xBF860808 */
@@ -26844,10 +27490,8 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern CNSTATJCLR       /* 0xBF860894 */
   .extern CNSTATJSET       /* 0xBF860898 */
   .extern CNSTATJINV       /* 0xBF86089C */
-  .extern ANSELK           /* 0xBF860900 */
-  .extern ANSELKCLR        /* 0xBF860904 */
-  .extern ANSELKSET        /* 0xBF860908 */
-  .extern ANSELKINV        /* 0xBF86090C */
+  .extern CNNEJ            /* 0xBF8608A0 */
+  .extern CNFJ             /* 0xBF8608B0 */
   .extern TRISK            /* 0xBF860910 */
   .extern TRISKCLR         /* 0xBF860914 */
   .extern TRISKSET         /* 0xBF860918 */
@@ -26884,6 +27528,8 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern CNSTATKCLR       /* 0xBF860994 */
   .extern CNSTATKSET       /* 0xBF860998 */
   .extern CNSTATKINV       /* 0xBF86099C */
+  .extern CNNEK            /* 0xBF8609A0 */
+  .extern CNFK             /* 0xBF8609B0 */
   .extern C1CON            /* 0xBF880000 */
   .extern C1CONCLR         /* 0xBF880004 */
   .extern C1CONSET         /* 0xBF880008 */
@@ -28593,7 +29239,6 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern SQI1STAT2        /* 0xBF8E2030 */
   .extern SQI1BDCON        /* 0xBF8E2034 */
   .extern SQI1BDCURADD     /* 0xBF8E2038 */
-  .extern RESERVED         /* 0xBF8E203C */
   .extern SQI1BDBASEADD    /* 0xBF8E2040 */
   .extern SQI1BDSTAT       /* 0xBF8E2044 */
   .extern SQI1BDPOLLCON    /* 0xBF8E2048 */
@@ -28710,25 +29355,26 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern USBTMCON2        /* 0xBF8E3348 */
   .extern USBLPMR1         /* 0xBF8E3360 */
   .extern USBLMPR2         /* 0xBF8E3364 */
-  .extern CEVER            /* 0xBF8E4FFC */
-  .extern CECON            /* 0xBF8E5000 */
-  .extern CEBDADDR         /* 0xBF8E5004 */
-  .extern CEBDPADDR        /* 0xBF8E5008 */
-  .extern CESTAT           /* 0xBF8E500C */
-  .extern CEINTSRC         /* 0xBF8E5010 */
-  .extern CEINTEN          /* 0xBF8E5014 */
-  .extern CEPOLLCON        /* 0xBF8E5018 */
-  .extern CEHDLEN          /* 0xBF8E501C */
-  .extern CETRLLEN         /* 0xBF8E5020 */
-  .extern RNGVER           /* 0xBF8E5FFC */
-  .extern RNGCON           /* 0xBF8E6000 */
-  .extern RNGPOLY1         /* 0xBF8E6004 */
-  .extern RNGPOLY2         /* 0xBF8E6008 */
-  .extern RNGNUMGEN1       /* 0xBF8E600C */
-  .extern RNGNUMGEN2       /* 0xBF8E6010 */
-  .extern RNGSEED1         /* 0xBF8E6014 */
-  .extern RNGSEED2         /* 0xBF8E6018 */
-  .extern RNGCNT           /* 0xBF8E601C */
+  .extern USBLPMP2         /* 0xBF8E3364 */
+  .extern CEVER            /* 0xBF8E5000 */
+  .extern CECON            /* 0xBF8E5004 */
+  .extern CEBDADDR         /* 0xBF8E5008 */
+  .extern CEBDPADDR        /* 0xBF8E500C */
+  .extern CESTAT           /* 0xBF8E5010 */
+  .extern CEINTSRC         /* 0xBF8E5014 */
+  .extern CEINTEN          /* 0xBF8E5018 */
+  .extern CEPOLLCON        /* 0xBF8E501C */
+  .extern CEHDLEN          /* 0xBF8E5020 */
+  .extern CETRLLEN         /* 0xBF8E5024 */
+  .extern RNGVER           /* 0xBF8E6000 */
+  .extern RNGCON           /* 0xBF8E6004 */
+  .extern RNGPOLY1         /* 0xBF8E6008 */
+  .extern RNGPOLY2         /* 0xBF8E600C */
+  .extern RNGNUMGEN1       /* 0xBF8E6010 */
+  .extern RNGNUMGEN2       /* 0xBF8E6014 */
+  .extern RNGSEED1         /* 0xBF8E6018 */
+  .extern RNGSEED2         /* 0xBF8E601C */
+  .extern RNGCNT           /* 0xBF8E6020 */
   .extern SBFLAG           /* 0xBF8F0510 */
   .extern SBT0ELOG1        /* 0xBF8F8020 */
   .extern SBT0ELOG2        /* 0xBF8F8024 */
@@ -28936,6 +29582,38 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
   .extern ASEQ2            /* 0xBFC0FF74 */
   .extern ASEQ1            /* 0xBFC0FF78 */
   .extern ASEQ0            /* 0xBFC0FF7C */
+  .extern AUBADEVCFG3      /* 0xBFC2FF40 */
+  .extern AUBADEVCFG2      /* 0xBFC2FF44 */
+  .extern AUBADEVCFG1      /* 0xBFC2FF48 */
+  .extern AUBADEVCFG0      /* 0xBFC2FF4C */
+  .extern AUBADEVCP3       /* 0xBFC2FF50 */
+  .extern AUBADEVCP2       /* 0xBFC2FF54 */
+  .extern AUBADEVCP1       /* 0xBFC2FF58 */
+  .extern AUBADEVCP0       /* 0xBFC2FF5C */
+  .extern AUBADEVSIGN3     /* 0xBFC2FF60 */
+  .extern AUBADEVSIGN2     /* 0xBFC2FF64 */
+  .extern AUBADEVSIGN1     /* 0xBFC2FF68 */
+  .extern AUBADEVSIGN0     /* 0xBFC2FF6C */
+  .extern AUBASEQ3         /* 0xBFC2FF70 */
+  .extern AUBASEQ2         /* 0xBFC2FF74 */
+  .extern AUBASEQ1         /* 0xBFC2FF78 */
+  .extern AUBASEQ0         /* 0xBFC2FF7C */
+  .extern UBADEVCFG3       /* 0xBFC2FFC0 */
+  .extern UBADEVCFG2       /* 0xBFC2FFC4 */
+  .extern UBADEVCFG1       /* 0xBFC2FFC8 */
+  .extern UBADEVCFG0       /* 0xBFC2FFCC */
+  .extern UBADEVCP3        /* 0xBFC2FFD0 */
+  .extern UBADEVCP2        /* 0xBFC2FFD4 */
+  .extern UBADEVCP1        /* 0xBFC2FFD8 */
+  .extern UBADEVCP0        /* 0xBFC2FFDC */
+  .extern UBADEVSIGN3      /* 0xBFC2FFE0 */
+  .extern UBADEVSIGN2      /* 0xBFC2FFE4 */
+  .extern UBADEVSIGN1      /* 0xBFC2FFE8 */
+  .extern UBADEVSIGN0      /* 0xBFC2FFEC */
+  .extern UBASEQ3          /* 0xBFC2FFF0 */
+  .extern UBASEQ2          /* 0xBFC2FFF4 */
+  .extern UBASEQ1          /* 0xBFC2FFF8 */
+  .extern UBASEQ0          /* 0xBFC2FFFC */
   .extern ABF1DEVCFG3      /* 0xBFC4FF40 */
   .extern ABF1DEVCFG2      /* 0xBFC4FF44 */
   .extern ABF1DEVCFG1      /* 0xBFC4FF48 */
@@ -29068,9 +29746,9 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _SYSKEY_SYSKEY_MASK                      0xFFFFFFFF
 #define _SYSKEY_SYSKEY_LENGTH                    0x00000020
 
-#define _PMD1_AD1MD_POSITION                     0x00000000
-#define _PMD1_AD1MD_MASK                         0x00000001
-#define _PMD1_AD1MD_LENGTH                       0x00000001
+#define _PMD1_ADCMD_POSITION                     0x00000000
+#define _PMD1_ADCMD_MASK                         0x00000001
+#define _PMD1_ADCMD_LENGTH                       0x00000001
 
 #define _PMD1_CVRMD_POSITION                     0x0000000C
 #define _PMD1_CVRMD_MASK                         0x00001000
@@ -29536,9 +30214,9 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _NVMCON_NVMOP_MASK                       0x0000000F
 #define _NVMCON_NVMOP_LENGTH                     0x00000004
 
-#define _NVMCON_BOOTSWAP_POSITION                0x00000006
-#define _NVMCON_BOOTSWAP_MASK                    0x00000040
-#define _NVMCON_BOOTSWAP_LENGTH                  0x00000001
+#define _NVMCON_BFSWAP_POSITION                  0x00000006
+#define _NVMCON_BFSWAP_MASK                      0x00000040
+#define _NVMCON_BFSWAP_LENGTH                    0x00000001
 
 #define _NVMCON_PFSWAP_POSITION                  0x00000007
 #define _NVMCON_PFSWAP_MASK                      0x00000080
@@ -29575,6 +30253,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _NVMCON_NVMOP3_POSITION                  0x00000003
 #define _NVMCON_NVMOP3_MASK                      0x00000008
 #define _NVMCON_NVMOP3_LENGTH                    0x00000001
+
+#define _NVMCON_SWAP_POSITION                    0x00000007
+#define _NVMCON_SWAP_MASK                        0x00000080
+#define _NVMCON_SWAP_LENGTH                      0x00000001
 
 #define _NVMCON_PROGOP_POSITION                  0x00000000
 #define _NVMCON_PROGOP_MASK                      0x0000000F
@@ -29660,17 +30342,9 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _NVMCON2_SWAPLOCK_MASK                   0x000000C0
 #define _NVMCON2_SWAPLOCK_LENGTH                 0x00000002
 
-#define _WDTCON_WINEN_POSITION                   0x00000000
-#define _WDTCON_WINEN_MASK                       0x00000001
-#define _WDTCON_WINEN_LENGTH                     0x00000001
-
-#define _WDTCON_SLPDIV_POSITION                  0x00000001
-#define _WDTCON_SLPDIV_MASK                      0x0000003E
-#define _WDTCON_SLPDIV_LENGTH                    0x00000005
-
-#define _WDTCON_CLKSEL_POSITION                  0x00000006
-#define _WDTCON_CLKSEL_MASK                      0x000000C0
-#define _WDTCON_CLKSEL_LENGTH                    0x00000002
+#define _WDTCON_WDTWINEN_POSITION                0x00000000
+#define _WDTCON_WDTWINEN_MASK                    0x00000001
+#define _WDTCON_WDTWINEN_LENGTH                  0x00000001
 
 #define _WDTCON_RUNDIV_POSITION                  0x00000008
 #define _WDTCON_RUNDIV_MASK                      0x00001F00
@@ -29680,9 +30354,9 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _WDTCON_ON_MASK                          0x00008000
 #define _WDTCON_ON_LENGTH                        0x00000001
 
-#define _WDTCON_WDTKEY_POSITION                  0x00000010
-#define _WDTCON_WDTKEY_MASK                      0xFFFF0000
-#define _WDTCON_WDTKEY_LENGTH                    0x00000010
+#define _WDTCON_WDTCLRKEY_POSITION               0x00000010
+#define _WDTCON_WDTCLRKEY_MASK                   0xFFFF0000
+#define _WDTCON_WDTCLRKEY_LENGTH                 0x00000010
 
 #define _DMTCON_ON_POSITION                      0x0000000F
 #define _DMTCON_ON_MASK                          0x00008000
@@ -30104,10 +30778,6 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _RCON_CMR_MASK                           0x00000200
 #define _RCON_CMR_LENGTH                         0x00000001
 
-#define _RCON_NVMLTA_POSITION                    0x00000019
-#define _RCON_NVMLTA_MASK                        0x02000000
-#define _RCON_NVMLTA_LENGTH                      0x00000001
-
 #define _RCON_BCFGFAIL_POSITION                  0x0000001A
 #define _RCON_BCFGFAIL_MASK                      0x04000000
 #define _RCON_BCFGFAIL_LENGTH                    0x00000001
@@ -30115,18 +30785,6 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _RCON_BCFGERR_POSITION                   0x0000001B
 #define _RCON_BCFGERR_MASK                       0x08000000
 #define _RCON_BCFGERR_LENGTH                     0x00000001
-
-#define _RCON_HVDCORE_POSITION                   0x0000001D
-#define _RCON_HVDCORE_MASK                       0x20000000
-#define _RCON_HVDCORE_LENGTH                     0x00000001
-
-#define _RCON_PORCORE_POSITION                   0x0000001E
-#define _RCON_PORCORE_MASK                       0x40000000
-#define _RCON_PORCORE_LENGTH                     0x00000001
-
-#define _RCON_PORIO_POSITION                     0x0000001F
-#define _RCON_PORIO_MASK                         0x80000000
-#define _RCON_PORIO_LENGTH                       0x00000001
 
 #define _RSWRST_SWRST_POSITION                   0x00000000
 #define _RSWRST_SWRST_MASK                       0x00000001
@@ -30163,22 +30821,6 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _PWRCON_VREGS_POSITION                   0x00000000
 #define _PWRCON_VREGS_MASK                       0x00000001
 #define _PWRCON_VREGS_LENGTH                     0x00000001
-
-#define _PWRCON_RETEN_POSITION                   0x00000001
-#define _PWRCON_RETEN_MASK                       0x00000002
-#define _PWRCON_RETEN_LENGTH                     0x00000001
-
-#define _PWRCON_SBOREN_POSITION                  0x00000002
-#define _PWRCON_SBOREN_MASK                      0x00000004
-#define _PWRCON_SBOREN_LENGTH                    0x00000001
-
-#define _PWRCON_VRGSLP_POSITION                  0x00000004
-#define _PWRCON_VRGSLP_MASK                      0x00000030
-#define _PWRCON_VRGSLP_LENGTH                    0x00000002
-
-#define _PWRCON_VRGRUN_POSITION                  0x00000006
-#define _PWRCON_VRGRUN_MASK                      0x000000C0
-#define _PWRCON_VRGRUN_LENGTH                    0x00000002
 
 #define _REFO1CON_ROSEL_POSITION                 0x00000000
 #define _REFO1CON_ROSEL_MASK                     0x0000000F
@@ -30332,10 +30974,6 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _PB1DIV_PBDIVRDY_MASK                    0x00000800
 #define _PB1DIV_PBDIVRDY_LENGTH                  0x00000001
 
-#define _PB1DIV_ON_POSITION                      0x0000000F
-#define _PB1DIV_ON_MASK                          0x00008000
-#define _PB1DIV_ON_LENGTH                        0x00000001
-
 #define _PB2DIV_PBDIV_POSITION                   0x00000000
 #define _PB2DIV_PBDIV_MASK                       0x0000007F
 #define _PB2DIV_PBDIV_LENGTH                     0x00000007
@@ -30432,21 +31070,25 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CLKSTAT_FRCRDY_MASK                     0x00000001
 #define _CLKSTAT_FRCRDY_LENGTH                   0x00000001
 
-#define _CLKSTAT_POSRDY_POSITION                 0x00000002
-#define _CLKSTAT_POSRDY_MASK                     0x00000004
-#define _CLKSTAT_POSRDY_LENGTH                   0x00000001
+#define _CLKSTAT_SPDIVRDY_POSITION               0x00000001
+#define _CLKSTAT_SPDIVRDY_MASK                   0x00000002
+#define _CLKSTAT_SPDIVRDY_LENGTH                 0x00000001
 
-#define _CLKSTAT_SOSRDY_POSITION                 0x00000004
-#define _CLKSTAT_SOSRDY_MASK                     0x00000010
-#define _CLKSTAT_SOSRDY_LENGTH                   0x00000001
+#define _CLKSTAT_POSCRDY_POSITION                0x00000002
+#define _CLKSTAT_POSCRDY_MASK                    0x00000004
+#define _CLKSTAT_POSCRDY_LENGTH                  0x00000001
+
+#define _CLKSTAT_SOSCRDY_POSITION                0x00000004
+#define _CLKSTAT_SOSCRDY_MASK                    0x00000010
+#define _CLKSTAT_SOSCRDY_LENGTH                  0x00000001
 
 #define _CLKSTAT_LPRCRDY_POSITION                0x00000005
 #define _CLKSTAT_LPRCRDY_MASK                    0x00000020
 #define _CLKSTAT_LPRCRDY_LENGTH                  0x00000001
 
-#define _CLKSTAT_SPLLRDY_POSITION                0x00000007
-#define _CLKSTAT_SPLLRDY_MASK                    0x00000080
-#define _CLKSTAT_SPLLRDY_LENGTH                  0x00000001
+#define _CLKSTAT_DIVSPLLRDY_POSITION             0x00000001
+#define _CLKSTAT_DIVSPLLRDY_MASK                 0x00000002
+#define _CLKSTAT_DIVSPLLRDY_LENGTH               0x00000001
 
 #define _INT1R_INT1R_POSITION                    0x00000000
 #define _INT1R_INT1R_MASK                        0x0000000F
@@ -31120,245 +31762,249 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _IFS1_OC9IF_MASK                         0x00000800
 #define _IFS1_OC9IF_LENGTH                       0x00000001
 
-#define _IFS1_AD1IF_POSITION                     0x0000000C
-#define _IFS1_AD1IF_MASK                         0x00001000
-#define _IFS1_AD1IF_LENGTH                       0x00000001
+#define _IFS1_ADCIF_POSITION                     0x0000000C
+#define _IFS1_ADCIF_MASK                         0x00001000
+#define _IFS1_ADCIF_LENGTH                       0x00000001
 
-#define _IFS1_AD1DC1IF_POSITION                  0x0000000E
-#define _IFS1_AD1DC1IF_MASK                      0x00004000
-#define _IFS1_AD1DC1IF_LENGTH                    0x00000001
+#define _IFS1_ADCDC1IF_POSITION                  0x0000000E
+#define _IFS1_ADCDC1IF_MASK                      0x00004000
+#define _IFS1_ADCDC1IF_LENGTH                    0x00000001
 
-#define _IFS1_AD1DC2IF_POSITION                  0x0000000F
-#define _IFS1_AD1DC2IF_MASK                      0x00008000
-#define _IFS1_AD1DC2IF_LENGTH                    0x00000001
+#define _IFS1_ADCDC2IF_POSITION                  0x0000000F
+#define _IFS1_ADCDC2IF_MASK                      0x00008000
+#define _IFS1_ADCDC2IF_LENGTH                    0x00000001
 
-#define _IFS1_AD1DC3IF_POSITION                  0x00000010
-#define _IFS1_AD1DC3IF_MASK                      0x00010000
-#define _IFS1_AD1DC3IF_LENGTH                    0x00000001
+#define _IFS1_ADCDC3IF_POSITION                  0x00000010
+#define _IFS1_ADCDC3IF_MASK                      0x00010000
+#define _IFS1_ADCDC3IF_LENGTH                    0x00000001
 
-#define _IFS1_AD1DC4IF_POSITION                  0x00000011
-#define _IFS1_AD1DC4IF_MASK                      0x00020000
-#define _IFS1_AD1DC4IF_LENGTH                    0x00000001
+#define _IFS1_ADCDC4IF_POSITION                  0x00000011
+#define _IFS1_ADCDC4IF_MASK                      0x00020000
+#define _IFS1_ADCDC4IF_LENGTH                    0x00000001
 
-#define _IFS1_AD1DC5IF_POSITION                  0x00000012
-#define _IFS1_AD1DC5IF_MASK                      0x00040000
-#define _IFS1_AD1DC5IF_LENGTH                    0x00000001
+#define _IFS1_ADCDC5IF_POSITION                  0x00000012
+#define _IFS1_ADCDC5IF_MASK                      0x00040000
+#define _IFS1_ADCDC5IF_LENGTH                    0x00000001
 
-#define _IFS1_AD1DC6IF_POSITION                  0x00000013
-#define _IFS1_AD1DC6IF_MASK                      0x00080000
-#define _IFS1_AD1DC6IF_LENGTH                    0x00000001
+#define _IFS1_ADCDC6IF_POSITION                  0x00000013
+#define _IFS1_ADCDC6IF_MASK                      0x00080000
+#define _IFS1_ADCDC6IF_LENGTH                    0x00000001
 
-#define _IFS1_AD1DF1IF_POSITION                  0x00000014
-#define _IFS1_AD1DF1IF_MASK                      0x00100000
-#define _IFS1_AD1DF1IF_LENGTH                    0x00000001
+#define _IFS1_ADCDF1IF_POSITION                  0x00000014
+#define _IFS1_ADCDF1IF_MASK                      0x00100000
+#define _IFS1_ADCDF1IF_LENGTH                    0x00000001
 
-#define _IFS1_AD1DF2IF_POSITION                  0x00000015
-#define _IFS1_AD1DF2IF_MASK                      0x00200000
-#define _IFS1_AD1DF2IF_LENGTH                    0x00000001
+#define _IFS1_ADCDF2IF_POSITION                  0x00000015
+#define _IFS1_ADCDF2IF_MASK                      0x00200000
+#define _IFS1_ADCDF2IF_LENGTH                    0x00000001
 
-#define _IFS1_AD1DF3IF_POSITION                  0x00000016
-#define _IFS1_AD1DF3IF_MASK                      0x00400000
-#define _IFS1_AD1DF3IF_LENGTH                    0x00000001
+#define _IFS1_ADCDF3IF_POSITION                  0x00000016
+#define _IFS1_ADCDF3IF_MASK                      0x00400000
+#define _IFS1_ADCDF3IF_LENGTH                    0x00000001
 
-#define _IFS1_AD1DF4IF_POSITION                  0x00000017
-#define _IFS1_AD1DF4IF_MASK                      0x00800000
-#define _IFS1_AD1DF4IF_LENGTH                    0x00000001
+#define _IFS1_ADCDF4IF_POSITION                  0x00000017
+#define _IFS1_ADCDF4IF_MASK                      0x00800000
+#define _IFS1_ADCDF4IF_LENGTH                    0x00000001
 
-#define _IFS1_AD1DF5IF_POSITION                  0x00000018
-#define _IFS1_AD1DF5IF_MASK                      0x01000000
-#define _IFS1_AD1DF5IF_LENGTH                    0x00000001
+#define _IFS1_ADCDF5IF_POSITION                  0x00000018
+#define _IFS1_ADCDF5IF_MASK                      0x01000000
+#define _IFS1_ADCDF5IF_LENGTH                    0x00000001
 
-#define _IFS1_AD1DF6IF_POSITION                  0x00000019
-#define _IFS1_AD1DF6IF_MASK                      0x02000000
-#define _IFS1_AD1DF6IF_LENGTH                    0x00000001
+#define _IFS1_ADCDF6IF_POSITION                  0x00000019
+#define _IFS1_ADCDF6IF_MASK                      0x02000000
+#define _IFS1_ADCDF6IF_LENGTH                    0x00000001
 
-#define _IFS1_AD1D0IF_POSITION                   0x0000001B
-#define _IFS1_AD1D0IF_MASK                       0x08000000
-#define _IFS1_AD1D0IF_LENGTH                     0x00000001
+#define _IFS1_ADCFLTIF_POSITION                  0x0000001A
+#define _IFS1_ADCFLTIF_MASK                      0x04000000
+#define _IFS1_ADCFLTIF_LENGTH                    0x00000001
 
-#define _IFS1_AD1D1IF_POSITION                   0x0000001C
-#define _IFS1_AD1D1IF_MASK                       0x10000000
-#define _IFS1_AD1D1IF_LENGTH                     0x00000001
+#define _IFS1_ADCD0IF_POSITION                   0x0000001B
+#define _IFS1_ADCD0IF_MASK                       0x08000000
+#define _IFS1_ADCD0IF_LENGTH                     0x00000001
 
-#define _IFS1_AD1D2IF_POSITION                   0x0000001D
-#define _IFS1_AD1D2IF_MASK                       0x20000000
-#define _IFS1_AD1D2IF_LENGTH                     0x00000001
+#define _IFS1_ADCD1IF_POSITION                   0x0000001C
+#define _IFS1_ADCD1IF_MASK                       0x10000000
+#define _IFS1_ADCD1IF_LENGTH                     0x00000001
 
-#define _IFS1_AD1D3IF_POSITION                   0x0000001E
-#define _IFS1_AD1D3IF_MASK                       0x40000000
-#define _IFS1_AD1D3IF_LENGTH                     0x00000001
+#define _IFS1_ADCD2IF_POSITION                   0x0000001D
+#define _IFS1_ADCD2IF_MASK                       0x20000000
+#define _IFS1_ADCD2IF_LENGTH                     0x00000001
 
-#define _IFS1_AD1D4IF_POSITION                   0x0000001F
-#define _IFS1_AD1D4IF_MASK                       0x80000000
-#define _IFS1_AD1D4IF_LENGTH                     0x00000001
+#define _IFS1_ADCD3IF_POSITION                   0x0000001E
+#define _IFS1_ADCD3IF_MASK                       0x40000000
+#define _IFS1_ADCD3IF_LENGTH                     0x00000001
+
+#define _IFS1_ADCD4IF_POSITION                   0x0000001F
+#define _IFS1_ADCD4IF_MASK                       0x80000000
+#define _IFS1_ADCD4IF_LENGTH                     0x00000001
 
 #define _IFS1_w_POSITION                         0x00000000
 #define _IFS1_w_MASK                             0xFFFFFFFF
 #define _IFS1_w_LENGTH                           0x00000020
 
-#define _IFS2_AD1D5IF_POSITION                   0x00000000
-#define _IFS2_AD1D5IF_MASK                       0x00000001
-#define _IFS2_AD1D5IF_LENGTH                     0x00000001
+#define _IFS2_ADCD5IF_POSITION                   0x00000000
+#define _IFS2_ADCD5IF_MASK                       0x00000001
+#define _IFS2_ADCD5IF_LENGTH                     0x00000001
 
-#define _IFS2_AD1D6IF_POSITION                   0x00000001
-#define _IFS2_AD1D6IF_MASK                       0x00000002
-#define _IFS2_AD1D6IF_LENGTH                     0x00000001
+#define _IFS2_ADCD6IF_POSITION                   0x00000001
+#define _IFS2_ADCD6IF_MASK                       0x00000002
+#define _IFS2_ADCD6IF_LENGTH                     0x00000001
 
-#define _IFS2_AD1D7IF_POSITION                   0x00000002
-#define _IFS2_AD1D7IF_MASK                       0x00000004
-#define _IFS2_AD1D7IF_LENGTH                     0x00000001
+#define _IFS2_ADCD7IF_POSITION                   0x00000002
+#define _IFS2_ADCD7IF_MASK                       0x00000004
+#define _IFS2_ADCD7IF_LENGTH                     0x00000001
 
-#define _IFS2_AD1D8IF_POSITION                   0x00000003
-#define _IFS2_AD1D8IF_MASK                       0x00000008
-#define _IFS2_AD1D8IF_LENGTH                     0x00000001
+#define _IFS2_ADCD8IF_POSITION                   0x00000003
+#define _IFS2_ADCD8IF_MASK                       0x00000008
+#define _IFS2_ADCD8IF_LENGTH                     0x00000001
 
-#define _IFS2_AD1D9IF_POSITION                   0x00000004
-#define _IFS2_AD1D9IF_MASK                       0x00000010
-#define _IFS2_AD1D9IF_LENGTH                     0x00000001
+#define _IFS2_ADCD9IF_POSITION                   0x00000004
+#define _IFS2_ADCD9IF_MASK                       0x00000010
+#define _IFS2_ADCD9IF_LENGTH                     0x00000001
 
-#define _IFS2_AD1D10IF_POSITION                  0x00000005
-#define _IFS2_AD1D10IF_MASK                      0x00000020
-#define _IFS2_AD1D10IF_LENGTH                    0x00000001
+#define _IFS2_ADCD10IF_POSITION                  0x00000005
+#define _IFS2_ADCD10IF_MASK                      0x00000020
+#define _IFS2_ADCD10IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D11IF_POSITION                  0x00000006
-#define _IFS2_AD1D11IF_MASK                      0x00000040
-#define _IFS2_AD1D11IF_LENGTH                    0x00000001
+#define _IFS2_ADCD11IF_POSITION                  0x00000006
+#define _IFS2_ADCD11IF_MASK                      0x00000040
+#define _IFS2_ADCD11IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D12IF_POSITION                  0x00000007
-#define _IFS2_AD1D12IF_MASK                      0x00000080
-#define _IFS2_AD1D12IF_LENGTH                    0x00000001
+#define _IFS2_ADCD12IF_POSITION                  0x00000007
+#define _IFS2_ADCD12IF_MASK                      0x00000080
+#define _IFS2_ADCD12IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D13IF_POSITION                  0x00000008
-#define _IFS2_AD1D13IF_MASK                      0x00000100
-#define _IFS2_AD1D13IF_LENGTH                    0x00000001
+#define _IFS2_ADCD13IF_POSITION                  0x00000008
+#define _IFS2_ADCD13IF_MASK                      0x00000100
+#define _IFS2_ADCD13IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D14IF_POSITION                  0x00000009
-#define _IFS2_AD1D14IF_MASK                      0x00000200
-#define _IFS2_AD1D14IF_LENGTH                    0x00000001
+#define _IFS2_ADCD14IF_POSITION                  0x00000009
+#define _IFS2_ADCD14IF_MASK                      0x00000200
+#define _IFS2_ADCD14IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D15IF_POSITION                  0x0000000A
-#define _IFS2_AD1D15IF_MASK                      0x00000400
-#define _IFS2_AD1D15IF_LENGTH                    0x00000001
+#define _IFS2_ADCD15IF_POSITION                  0x0000000A
+#define _IFS2_ADCD15IF_MASK                      0x00000400
+#define _IFS2_ADCD15IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D16IF_POSITION                  0x0000000B
-#define _IFS2_AD1D16IF_MASK                      0x00000800
-#define _IFS2_AD1D16IF_LENGTH                    0x00000001
+#define _IFS2_ADCD16IF_POSITION                  0x0000000B
+#define _IFS2_ADCD16IF_MASK                      0x00000800
+#define _IFS2_ADCD16IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D17IF_POSITION                  0x0000000C
-#define _IFS2_AD1D17IF_MASK                      0x00001000
-#define _IFS2_AD1D17IF_LENGTH                    0x00000001
+#define _IFS2_ADCD17IF_POSITION                  0x0000000C
+#define _IFS2_ADCD17IF_MASK                      0x00001000
+#define _IFS2_ADCD17IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D18IF_POSITION                  0x0000000D
-#define _IFS2_AD1D18IF_MASK                      0x00002000
-#define _IFS2_AD1D18IF_LENGTH                    0x00000001
+#define _IFS2_ADCD18IF_POSITION                  0x0000000D
+#define _IFS2_ADCD18IF_MASK                      0x00002000
+#define _IFS2_ADCD18IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D19IF_POSITION                  0x0000000E
-#define _IFS2_AD1D19IF_MASK                      0x00004000
-#define _IFS2_AD1D19IF_LENGTH                    0x00000001
+#define _IFS2_ADCD19IF_POSITION                  0x0000000E
+#define _IFS2_ADCD19IF_MASK                      0x00004000
+#define _IFS2_ADCD19IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D20IF_POSITION                  0x0000000F
-#define _IFS2_AD1D20IF_MASK                      0x00008000
-#define _IFS2_AD1D20IF_LENGTH                    0x00000001
+#define _IFS2_ADCD20IF_POSITION                  0x0000000F
+#define _IFS2_ADCD20IF_MASK                      0x00008000
+#define _IFS2_ADCD20IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D21IF_POSITION                  0x00000010
-#define _IFS2_AD1D21IF_MASK                      0x00010000
-#define _IFS2_AD1D21IF_LENGTH                    0x00000001
+#define _IFS2_ADCD21IF_POSITION                  0x00000010
+#define _IFS2_ADCD21IF_MASK                      0x00010000
+#define _IFS2_ADCD21IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D22IF_POSITION                  0x00000011
-#define _IFS2_AD1D22IF_MASK                      0x00020000
-#define _IFS2_AD1D22IF_LENGTH                    0x00000001
+#define _IFS2_ADCD22IF_POSITION                  0x00000011
+#define _IFS2_ADCD22IF_MASK                      0x00020000
+#define _IFS2_ADCD22IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D23IF_POSITION                  0x00000012
-#define _IFS2_AD1D23IF_MASK                      0x00040000
-#define _IFS2_AD1D23IF_LENGTH                    0x00000001
+#define _IFS2_ADCD23IF_POSITION                  0x00000012
+#define _IFS2_ADCD23IF_MASK                      0x00040000
+#define _IFS2_ADCD23IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D24IF_POSITION                  0x00000013
-#define _IFS2_AD1D24IF_MASK                      0x00080000
-#define _IFS2_AD1D24IF_LENGTH                    0x00000001
+#define _IFS2_ADCD24IF_POSITION                  0x00000013
+#define _IFS2_ADCD24IF_MASK                      0x00080000
+#define _IFS2_ADCD24IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D25IF_POSITION                  0x00000014
-#define _IFS2_AD1D25IF_MASK                      0x00100000
-#define _IFS2_AD1D25IF_LENGTH                    0x00000001
+#define _IFS2_ADCD25IF_POSITION                  0x00000014
+#define _IFS2_ADCD25IF_MASK                      0x00100000
+#define _IFS2_ADCD25IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D26IF_POSITION                  0x00000015
-#define _IFS2_AD1D26IF_MASK                      0x00200000
-#define _IFS2_AD1D26IF_LENGTH                    0x00000001
+#define _IFS2_ADCD26IF_POSITION                  0x00000015
+#define _IFS2_ADCD26IF_MASK                      0x00200000
+#define _IFS2_ADCD26IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D27IF_POSITION                  0x00000016
-#define _IFS2_AD1D27IF_MASK                      0x00400000
-#define _IFS2_AD1D27IF_LENGTH                    0x00000001
+#define _IFS2_ADCD27IF_POSITION                  0x00000016
+#define _IFS2_ADCD27IF_MASK                      0x00400000
+#define _IFS2_ADCD27IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D28IF_POSITION                  0x00000017
-#define _IFS2_AD1D28IF_MASK                      0x00800000
-#define _IFS2_AD1D28IF_LENGTH                    0x00000001
+#define _IFS2_ADCD28IF_POSITION                  0x00000017
+#define _IFS2_ADCD28IF_MASK                      0x00800000
+#define _IFS2_ADCD28IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D29IF_POSITION                  0x00000018
-#define _IFS2_AD1D29IF_MASK                      0x01000000
-#define _IFS2_AD1D29IF_LENGTH                    0x00000001
+#define _IFS2_ADCD29IF_POSITION                  0x00000018
+#define _IFS2_ADCD29IF_MASK                      0x01000000
+#define _IFS2_ADCD29IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D30IF_POSITION                  0x00000019
-#define _IFS2_AD1D30IF_MASK                      0x02000000
-#define _IFS2_AD1D30IF_LENGTH                    0x00000001
+#define _IFS2_ADCD30IF_POSITION                  0x00000019
+#define _IFS2_ADCD30IF_MASK                      0x02000000
+#define _IFS2_ADCD30IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D31IF_POSITION                  0x0000001A
-#define _IFS2_AD1D31IF_MASK                      0x04000000
-#define _IFS2_AD1D31IF_LENGTH                    0x00000001
+#define _IFS2_ADCD31IF_POSITION                  0x0000001A
+#define _IFS2_ADCD31IF_MASK                      0x04000000
+#define _IFS2_ADCD31IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D32IF_POSITION                  0x0000001B
-#define _IFS2_AD1D32IF_MASK                      0x08000000
-#define _IFS2_AD1D32IF_LENGTH                    0x00000001
+#define _IFS2_ADCD32IF_POSITION                  0x0000001B
+#define _IFS2_ADCD32IF_MASK                      0x08000000
+#define _IFS2_ADCD32IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D33IF_POSITION                  0x0000001C
-#define _IFS2_AD1D33IF_MASK                      0x10000000
-#define _IFS2_AD1D33IF_LENGTH                    0x00000001
+#define _IFS2_ADCD33IF_POSITION                  0x0000001C
+#define _IFS2_ADCD33IF_MASK                      0x10000000
+#define _IFS2_ADCD33IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D34IF_POSITION                  0x0000001D
-#define _IFS2_AD1D34IF_MASK                      0x20000000
-#define _IFS2_AD1D34IF_LENGTH                    0x00000001
+#define _IFS2_ADCD34IF_POSITION                  0x0000001D
+#define _IFS2_ADCD34IF_MASK                      0x20000000
+#define _IFS2_ADCD34IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D35IF_POSITION                  0x0000001E
-#define _IFS2_AD1D35IF_MASK                      0x40000000
-#define _IFS2_AD1D35IF_LENGTH                    0x00000001
+#define _IFS2_ADCD35IF_POSITION                  0x0000001E
+#define _IFS2_ADCD35IF_MASK                      0x40000000
+#define _IFS2_ADCD35IF_LENGTH                    0x00000001
 
-#define _IFS2_AD1D36IF_POSITION                  0x0000001F
-#define _IFS2_AD1D36IF_MASK                      0x80000000
-#define _IFS2_AD1D36IF_LENGTH                    0x00000001
+#define _IFS2_ADCD36IF_POSITION                  0x0000001F
+#define _IFS2_ADCD36IF_MASK                      0x80000000
+#define _IFS2_ADCD36IF_LENGTH                    0x00000001
 
 #define _IFS2_w_POSITION                         0x00000000
 #define _IFS2_w_MASK                             0xFFFFFFFF
 #define _IFS2_w_LENGTH                           0x00000020
 
-#define _IFS3_AD1D37IF_POSITION                  0x00000000
-#define _IFS3_AD1D37IF_MASK                      0x00000001
-#define _IFS3_AD1D37IF_LENGTH                    0x00000001
+#define _IFS3_ADCD37IF_POSITION                  0x00000000
+#define _IFS3_ADCD37IF_MASK                      0x00000001
+#define _IFS3_ADCD37IF_LENGTH                    0x00000001
 
-#define _IFS3_AD1D38IF_POSITION                  0x00000001
-#define _IFS3_AD1D38IF_MASK                      0x00000002
-#define _IFS3_AD1D38IF_LENGTH                    0x00000001
+#define _IFS3_ADCD38IF_POSITION                  0x00000001
+#define _IFS3_ADCD38IF_MASK                      0x00000002
+#define _IFS3_ADCD38IF_LENGTH                    0x00000001
 
-#define _IFS3_AD1D39IF_POSITION                  0x00000002
-#define _IFS3_AD1D39IF_MASK                      0x00000004
-#define _IFS3_AD1D39IF_LENGTH                    0x00000001
+#define _IFS3_ADCD39IF_POSITION                  0x00000002
+#define _IFS3_ADCD39IF_MASK                      0x00000004
+#define _IFS3_ADCD39IF_LENGTH                    0x00000001
 
-#define _IFS3_AD1D40IF_POSITION                  0x00000003
-#define _IFS3_AD1D40IF_MASK                      0x00000008
-#define _IFS3_AD1D40IF_LENGTH                    0x00000001
+#define _IFS3_ADCD40IF_POSITION                  0x00000003
+#define _IFS3_ADCD40IF_MASK                      0x00000008
+#define _IFS3_ADCD40IF_LENGTH                    0x00000001
 
-#define _IFS3_AD1D41IF_POSITION                  0x00000004
-#define _IFS3_AD1D41IF_MASK                      0x00000010
-#define _IFS3_AD1D41IF_LENGTH                    0x00000001
+#define _IFS3_ADCD41IF_POSITION                  0x00000004
+#define _IFS3_ADCD41IF_MASK                      0x00000010
+#define _IFS3_ADCD41IF_LENGTH                    0x00000001
 
-#define _IFS3_AD1D42IF_POSITION                  0x00000005
-#define _IFS3_AD1D42IF_MASK                      0x00000020
-#define _IFS3_AD1D42IF_LENGTH                    0x00000001
+#define _IFS3_ADCD42IF_POSITION                  0x00000005
+#define _IFS3_ADCD42IF_MASK                      0x00000020
+#define _IFS3_ADCD42IF_LENGTH                    0x00000001
 
-#define _IFS3_AD1D43IF_POSITION                  0x00000006
-#define _IFS3_AD1D43IF_MASK                      0x00000040
-#define _IFS3_AD1D43IF_LENGTH                    0x00000001
+#define _IFS3_ADCD43IF_POSITION                  0x00000006
+#define _IFS3_ADCD43IF_MASK                      0x00000040
+#define _IFS3_ADCD43IF_LENGTH                    0x00000001
 
-#define _IFS3_AD1D44IF_POSITION                  0x00000007
-#define _IFS3_AD1D44IF_MASK                      0x00000080
-#define _IFS3_AD1D44IF_LENGTH                    0x00000001
+#define _IFS3_ADCD44IF_POSITION                  0x00000007
+#define _IFS3_ADCD44IF_MASK                      0x00000080
+#define _IFS3_ADCD44IF_LENGTH                    0x00000001
 
 #define _IFS3_CPCIF_POSITION                     0x00000008
 #define _IFS3_CPCIF_MASK                         0x00000100
@@ -31732,53 +32378,53 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _IFS6_ADCGRPIF_MASK                      0x00000010
 #define _IFS6_ADCGRPIF_LENGTH                    0x00000001
 
-#define _IFS6_AD0EIF_POSITION                    0x00000006
-#define _IFS6_AD0EIF_MASK                        0x00000040
-#define _IFS6_AD0EIF_LENGTH                      0x00000001
+#define _IFS6_ADC0EIF_POSITION                   0x00000006
+#define _IFS6_ADC0EIF_MASK                       0x00000040
+#define _IFS6_ADC0EIF_LENGTH                     0x00000001
 
-#define _IFS6_AD1EIF_POSITION                    0x00000007
-#define _IFS6_AD1EIF_MASK                        0x00000080
-#define _IFS6_AD1EIF_LENGTH                      0x00000001
+#define _IFS6_ADC1EIF_POSITION                   0x00000007
+#define _IFS6_ADC1EIF_MASK                       0x00000080
+#define _IFS6_ADC1EIF_LENGTH                     0x00000001
 
-#define _IFS6_AD2EIF_POSITION                    0x00000008
-#define _IFS6_AD2EIF_MASK                        0x00000100
-#define _IFS6_AD2EIF_LENGTH                      0x00000001
+#define _IFS6_ADC2EIF_POSITION                   0x00000008
+#define _IFS6_ADC2EIF_MASK                       0x00000100
+#define _IFS6_ADC2EIF_LENGTH                     0x00000001
 
-#define _IFS6_AD3EIF_POSITION                    0x00000009
-#define _IFS6_AD3EIF_MASK                        0x00000200
-#define _IFS6_AD3EIF_LENGTH                      0x00000001
+#define _IFS6_ADC3EIF_POSITION                   0x00000009
+#define _IFS6_ADC3EIF_MASK                       0x00000200
+#define _IFS6_ADC3EIF_LENGTH                     0x00000001
 
-#define _IFS6_AD4EIF_POSITION                    0x0000000A
-#define _IFS6_AD4EIF_MASK                        0x00000400
-#define _IFS6_AD4EIF_LENGTH                      0x00000001
+#define _IFS6_ADC4EIF_POSITION                   0x0000000A
+#define _IFS6_ADC4EIF_MASK                       0x00000400
+#define _IFS6_ADC4EIF_LENGTH                     0x00000001
 
-#define _IFS6_AD7EIF_POSITION                    0x0000000D
-#define _IFS6_AD7EIF_MASK                        0x00002000
-#define _IFS6_AD7EIF_LENGTH                      0x00000001
+#define _IFS6_ADC7EIF_POSITION                   0x0000000D
+#define _IFS6_ADC7EIF_MASK                       0x00002000
+#define _IFS6_ADC7EIF_LENGTH                     0x00000001
 
-#define _IFS6_AD0WIF_POSITION                    0x0000000E
-#define _IFS6_AD0WIF_MASK                        0x00004000
-#define _IFS6_AD0WIF_LENGTH                      0x00000001
+#define _IFS6_ADC0WIF_POSITION                   0x0000000E
+#define _IFS6_ADC0WIF_MASK                       0x00004000
+#define _IFS6_ADC0WIF_LENGTH                     0x00000001
 
-#define _IFS6_AD1WIF_POSITION                    0x0000000F
-#define _IFS6_AD1WIF_MASK                        0x00008000
-#define _IFS6_AD1WIF_LENGTH                      0x00000001
+#define _IFS6_ADC1WIF_POSITION                   0x0000000F
+#define _IFS6_ADC1WIF_MASK                       0x00008000
+#define _IFS6_ADC1WIF_LENGTH                     0x00000001
 
-#define _IFS6_AD2WIF_POSITION                    0x00000010
-#define _IFS6_AD2WIF_MASK                        0x00010000
-#define _IFS6_AD2WIF_LENGTH                      0x00000001
+#define _IFS6_ADC2WIF_POSITION                   0x00000010
+#define _IFS6_ADC2WIF_MASK                       0x00010000
+#define _IFS6_ADC2WIF_LENGTH                     0x00000001
 
-#define _IFS6_AD3WIF_POSITION                    0x00000011
-#define _IFS6_AD3WIF_MASK                        0x00020000
-#define _IFS6_AD3WIF_LENGTH                      0x00000001
+#define _IFS6_ADC3WIF_POSITION                   0x00000011
+#define _IFS6_ADC3WIF_MASK                       0x00020000
+#define _IFS6_ADC3WIF_LENGTH                     0x00000001
 
-#define _IFS6_AD4WIF_POSITION                    0x00000012
-#define _IFS6_AD4WIF_MASK                        0x00040000
-#define _IFS6_AD4WIF_LENGTH                      0x00000001
+#define _IFS6_ADC4WIF_POSITION                   0x00000012
+#define _IFS6_ADC4WIF_MASK                       0x00040000
+#define _IFS6_ADC4WIF_LENGTH                     0x00000001
 
-#define _IFS6_AD7WIF_POSITION                    0x00000015
-#define _IFS6_AD7WIF_MASK                        0x00200000
-#define _IFS6_AD7WIF_LENGTH                      0x00000001
+#define _IFS6_ADC7WIF_POSITION                   0x00000015
+#define _IFS6_ADC7WIF_MASK                       0x00200000
+#define _IFS6_ADC7WIF_LENGTH                     0x00000001
 
 #define _IFS6_w_POSITION                         0x00000000
 #define _IFS6_w_MASK                             0xFFFFFFFF
@@ -31964,245 +32610,249 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _IEC1_OC9IE_MASK                         0x00000800
 #define _IEC1_OC9IE_LENGTH                       0x00000001
 
-#define _IEC1_AD1IE_POSITION                     0x0000000C
-#define _IEC1_AD1IE_MASK                         0x00001000
-#define _IEC1_AD1IE_LENGTH                       0x00000001
+#define _IEC1_ADCIE_POSITION                     0x0000000C
+#define _IEC1_ADCIE_MASK                         0x00001000
+#define _IEC1_ADCIE_LENGTH                       0x00000001
 
-#define _IEC1_AD1DC1IE_POSITION                  0x0000000E
-#define _IEC1_AD1DC1IE_MASK                      0x00004000
-#define _IEC1_AD1DC1IE_LENGTH                    0x00000001
+#define _IEC1_ADCDC1IE_POSITION                  0x0000000E
+#define _IEC1_ADCDC1IE_MASK                      0x00004000
+#define _IEC1_ADCDC1IE_LENGTH                    0x00000001
 
-#define _IEC1_AD1DC2IE_POSITION                  0x0000000F
-#define _IEC1_AD1DC2IE_MASK                      0x00008000
-#define _IEC1_AD1DC2IE_LENGTH                    0x00000001
+#define _IEC1_ADCDC2IE_POSITION                  0x0000000F
+#define _IEC1_ADCDC2IE_MASK                      0x00008000
+#define _IEC1_ADCDC2IE_LENGTH                    0x00000001
 
-#define _IEC1_AD1DC3IE_POSITION                  0x00000010
-#define _IEC1_AD1DC3IE_MASK                      0x00010000
-#define _IEC1_AD1DC3IE_LENGTH                    0x00000001
+#define _IEC1_ADCDC3IE_POSITION                  0x00000010
+#define _IEC1_ADCDC3IE_MASK                      0x00010000
+#define _IEC1_ADCDC3IE_LENGTH                    0x00000001
 
-#define _IEC1_AD1DC4IE_POSITION                  0x00000011
-#define _IEC1_AD1DC4IE_MASK                      0x00020000
-#define _IEC1_AD1DC4IE_LENGTH                    0x00000001
+#define _IEC1_ADCDC4IE_POSITION                  0x00000011
+#define _IEC1_ADCDC4IE_MASK                      0x00020000
+#define _IEC1_ADCDC4IE_LENGTH                    0x00000001
 
-#define _IEC1_AD1DC5IE_POSITION                  0x00000012
-#define _IEC1_AD1DC5IE_MASK                      0x00040000
-#define _IEC1_AD1DC5IE_LENGTH                    0x00000001
+#define _IEC1_ADCDC5IE_POSITION                  0x00000012
+#define _IEC1_ADCDC5IE_MASK                      0x00040000
+#define _IEC1_ADCDC5IE_LENGTH                    0x00000001
 
-#define _IEC1_AD1DC6IE_POSITION                  0x00000013
-#define _IEC1_AD1DC6IE_MASK                      0x00080000
-#define _IEC1_AD1DC6IE_LENGTH                    0x00000001
+#define _IEC1_ADCDC6IE_POSITION                  0x00000013
+#define _IEC1_ADCDC6IE_MASK                      0x00080000
+#define _IEC1_ADCDC6IE_LENGTH                    0x00000001
 
-#define _IEC1_AD1DF1IE_POSITION                  0x00000014
-#define _IEC1_AD1DF1IE_MASK                      0x00100000
-#define _IEC1_AD1DF1IE_LENGTH                    0x00000001
+#define _IEC1_ADCDF1IE_POSITION                  0x00000014
+#define _IEC1_ADCDF1IE_MASK                      0x00100000
+#define _IEC1_ADCDF1IE_LENGTH                    0x00000001
 
-#define _IEC1_AD1DF2IE_POSITION                  0x00000015
-#define _IEC1_AD1DF2IE_MASK                      0x00200000
-#define _IEC1_AD1DF2IE_LENGTH                    0x00000001
+#define _IEC1_ADCDF2IE_POSITION                  0x00000015
+#define _IEC1_ADCDF2IE_MASK                      0x00200000
+#define _IEC1_ADCDF2IE_LENGTH                    0x00000001
 
-#define _IEC1_AD1DF3IE_POSITION                  0x00000016
-#define _IEC1_AD1DF3IE_MASK                      0x00400000
-#define _IEC1_AD1DF3IE_LENGTH                    0x00000001
+#define _IEC1_ADCDF3IE_POSITION                  0x00000016
+#define _IEC1_ADCDF3IE_MASK                      0x00400000
+#define _IEC1_ADCDF3IE_LENGTH                    0x00000001
 
-#define _IEC1_AD1DF4IE_POSITION                  0x00000017
-#define _IEC1_AD1DF4IE_MASK                      0x00800000
-#define _IEC1_AD1DF4IE_LENGTH                    0x00000001
+#define _IEC1_ADCDF4IE_POSITION                  0x00000017
+#define _IEC1_ADCDF4IE_MASK                      0x00800000
+#define _IEC1_ADCDF4IE_LENGTH                    0x00000001
 
-#define _IEC1_AD1DF5IE_POSITION                  0x00000018
-#define _IEC1_AD1DF5IE_MASK                      0x01000000
-#define _IEC1_AD1DF5IE_LENGTH                    0x00000001
+#define _IEC1_ADCDF5IE_POSITION                  0x00000018
+#define _IEC1_ADCDF5IE_MASK                      0x01000000
+#define _IEC1_ADCDF5IE_LENGTH                    0x00000001
 
-#define _IEC1_AD1DF6IE_POSITION                  0x00000019
-#define _IEC1_AD1DF6IE_MASK                      0x02000000
-#define _IEC1_AD1DF6IE_LENGTH                    0x00000001
+#define _IEC1_ADCDF6IE_POSITION                  0x00000019
+#define _IEC1_ADCDF6IE_MASK                      0x02000000
+#define _IEC1_ADCDF6IE_LENGTH                    0x00000001
 
-#define _IEC1_AD1D0IE_POSITION                   0x0000001B
-#define _IEC1_AD1D0IE_MASK                       0x08000000
-#define _IEC1_AD1D0IE_LENGTH                     0x00000001
+#define _IEC1_ADCFLTIE_POSITION                  0x0000001A
+#define _IEC1_ADCFLTIE_MASK                      0x04000000
+#define _IEC1_ADCFLTIE_LENGTH                    0x00000001
 
-#define _IEC1_AD1D1IE_POSITION                   0x0000001C
-#define _IEC1_AD1D1IE_MASK                       0x10000000
-#define _IEC1_AD1D1IE_LENGTH                     0x00000001
+#define _IEC1_ADCD0IE_POSITION                   0x0000001B
+#define _IEC1_ADCD0IE_MASK                       0x08000000
+#define _IEC1_ADCD0IE_LENGTH                     0x00000001
 
-#define _IEC1_AD1D2IE_POSITION                   0x0000001D
-#define _IEC1_AD1D2IE_MASK                       0x20000000
-#define _IEC1_AD1D2IE_LENGTH                     0x00000001
+#define _IEC1_ADCD1IE_POSITION                   0x0000001C
+#define _IEC1_ADCD1IE_MASK                       0x10000000
+#define _IEC1_ADCD1IE_LENGTH                     0x00000001
 
-#define _IEC1_AD1D3IE_POSITION                   0x0000001E
-#define _IEC1_AD1D3IE_MASK                       0x40000000
-#define _IEC1_AD1D3IE_LENGTH                     0x00000001
+#define _IEC1_ADCD2IE_POSITION                   0x0000001D
+#define _IEC1_ADCD2IE_MASK                       0x20000000
+#define _IEC1_ADCD2IE_LENGTH                     0x00000001
 
-#define _IEC1_AD1D4IE_POSITION                   0x0000001F
-#define _IEC1_AD1D4IE_MASK                       0x80000000
-#define _IEC1_AD1D4IE_LENGTH                     0x00000001
+#define _IEC1_ADCD3IE_POSITION                   0x0000001E
+#define _IEC1_ADCD3IE_MASK                       0x40000000
+#define _IEC1_ADCD3IE_LENGTH                     0x00000001
+
+#define _IEC1_ADCD4IE_POSITION                   0x0000001F
+#define _IEC1_ADCD4IE_MASK                       0x80000000
+#define _IEC1_ADCD4IE_LENGTH                     0x00000001
 
 #define _IEC1_w_POSITION                         0x00000000
 #define _IEC1_w_MASK                             0xFFFFFFFF
 #define _IEC1_w_LENGTH                           0x00000020
 
-#define _IEC2_AD1D5IE_POSITION                   0x00000000
-#define _IEC2_AD1D5IE_MASK                       0x00000001
-#define _IEC2_AD1D5IE_LENGTH                     0x00000001
+#define _IEC2_ADCD5IE_POSITION                   0x00000000
+#define _IEC2_ADCD5IE_MASK                       0x00000001
+#define _IEC2_ADCD5IE_LENGTH                     0x00000001
 
-#define _IEC2_AD1D6IE_POSITION                   0x00000001
-#define _IEC2_AD1D6IE_MASK                       0x00000002
-#define _IEC2_AD1D6IE_LENGTH                     0x00000001
+#define _IEC2_ADCD6IE_POSITION                   0x00000001
+#define _IEC2_ADCD6IE_MASK                       0x00000002
+#define _IEC2_ADCD6IE_LENGTH                     0x00000001
 
-#define _IEC2_AD1D7IE_POSITION                   0x00000002
-#define _IEC2_AD1D7IE_MASK                       0x00000004
-#define _IEC2_AD1D7IE_LENGTH                     0x00000001
+#define _IEC2_ADCD7IE_POSITION                   0x00000002
+#define _IEC2_ADCD7IE_MASK                       0x00000004
+#define _IEC2_ADCD7IE_LENGTH                     0x00000001
 
-#define _IEC2_AD1D8IE_POSITION                   0x00000003
-#define _IEC2_AD1D8IE_MASK                       0x00000008
-#define _IEC2_AD1D8IE_LENGTH                     0x00000001
+#define _IEC2_ADCD8IE_POSITION                   0x00000003
+#define _IEC2_ADCD8IE_MASK                       0x00000008
+#define _IEC2_ADCD8IE_LENGTH                     0x00000001
 
-#define _IEC2_AD1D9IE_POSITION                   0x00000004
-#define _IEC2_AD1D9IE_MASK                       0x00000010
-#define _IEC2_AD1D9IE_LENGTH                     0x00000001
+#define _IEC2_ADCD9IE_POSITION                   0x00000004
+#define _IEC2_ADCD9IE_MASK                       0x00000010
+#define _IEC2_ADCD9IE_LENGTH                     0x00000001
 
-#define _IEC2_AD1D10IE_POSITION                  0x00000005
-#define _IEC2_AD1D10IE_MASK                      0x00000020
-#define _IEC2_AD1D10IE_LENGTH                    0x00000001
+#define _IEC2_ADCD10IE_POSITION                  0x00000005
+#define _IEC2_ADCD10IE_MASK                      0x00000020
+#define _IEC2_ADCD10IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D11IE_POSITION                  0x00000006
-#define _IEC2_AD1D11IE_MASK                      0x00000040
-#define _IEC2_AD1D11IE_LENGTH                    0x00000001
+#define _IEC2_ADCD11IE_POSITION                  0x00000006
+#define _IEC2_ADCD11IE_MASK                      0x00000040
+#define _IEC2_ADCD11IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D12IE_POSITION                  0x00000007
-#define _IEC2_AD1D12IE_MASK                      0x00000080
-#define _IEC2_AD1D12IE_LENGTH                    0x00000001
+#define _IEC2_ADCD12IE_POSITION                  0x00000007
+#define _IEC2_ADCD12IE_MASK                      0x00000080
+#define _IEC2_ADCD12IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D13IE_POSITION                  0x00000008
-#define _IEC2_AD1D13IE_MASK                      0x00000100
-#define _IEC2_AD1D13IE_LENGTH                    0x00000001
+#define _IEC2_ADCD13IE_POSITION                  0x00000008
+#define _IEC2_ADCD13IE_MASK                      0x00000100
+#define _IEC2_ADCD13IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D14IE_POSITION                  0x00000009
-#define _IEC2_AD1D14IE_MASK                      0x00000200
-#define _IEC2_AD1D14IE_LENGTH                    0x00000001
+#define _IEC2_ADCD14IE_POSITION                  0x00000009
+#define _IEC2_ADCD14IE_MASK                      0x00000200
+#define _IEC2_ADCD14IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D15IE_POSITION                  0x0000000A
-#define _IEC2_AD1D15IE_MASK                      0x00000400
-#define _IEC2_AD1D15IE_LENGTH                    0x00000001
+#define _IEC2_ADCD15IE_POSITION                  0x0000000A
+#define _IEC2_ADCD15IE_MASK                      0x00000400
+#define _IEC2_ADCD15IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D16IE_POSITION                  0x0000000B
-#define _IEC2_AD1D16IE_MASK                      0x00000800
-#define _IEC2_AD1D16IE_LENGTH                    0x00000001
+#define _IEC2_ADCD16IE_POSITION                  0x0000000B
+#define _IEC2_ADCD16IE_MASK                      0x00000800
+#define _IEC2_ADCD16IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D17IE_POSITION                  0x0000000C
-#define _IEC2_AD1D17IE_MASK                      0x00001000
-#define _IEC2_AD1D17IE_LENGTH                    0x00000001
+#define _IEC2_ADCD17IE_POSITION                  0x0000000C
+#define _IEC2_ADCD17IE_MASK                      0x00001000
+#define _IEC2_ADCD17IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D18IE_POSITION                  0x0000000D
-#define _IEC2_AD1D18IE_MASK                      0x00002000
-#define _IEC2_AD1D18IE_LENGTH                    0x00000001
+#define _IEC2_ADCD18IE_POSITION                  0x0000000D
+#define _IEC2_ADCD18IE_MASK                      0x00002000
+#define _IEC2_ADCD18IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D19IE_POSITION                  0x0000000E
-#define _IEC2_AD1D19IE_MASK                      0x00004000
-#define _IEC2_AD1D19IE_LENGTH                    0x00000001
+#define _IEC2_ADCD19IE_POSITION                  0x0000000E
+#define _IEC2_ADCD19IE_MASK                      0x00004000
+#define _IEC2_ADCD19IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D20IE_POSITION                  0x0000000F
-#define _IEC2_AD1D20IE_MASK                      0x00008000
-#define _IEC2_AD1D20IE_LENGTH                    0x00000001
+#define _IEC2_ADCD20IE_POSITION                  0x0000000F
+#define _IEC2_ADCD20IE_MASK                      0x00008000
+#define _IEC2_ADCD20IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D21IE_POSITION                  0x00000010
-#define _IEC2_AD1D21IE_MASK                      0x00010000
-#define _IEC2_AD1D21IE_LENGTH                    0x00000001
+#define _IEC2_ADCD21IE_POSITION                  0x00000010
+#define _IEC2_ADCD21IE_MASK                      0x00010000
+#define _IEC2_ADCD21IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D22IE_POSITION                  0x00000011
-#define _IEC2_AD1D22IE_MASK                      0x00020000
-#define _IEC2_AD1D22IE_LENGTH                    0x00000001
+#define _IEC2_ADCD22IE_POSITION                  0x00000011
+#define _IEC2_ADCD22IE_MASK                      0x00020000
+#define _IEC2_ADCD22IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D23IE_POSITION                  0x00000012
-#define _IEC2_AD1D23IE_MASK                      0x00040000
-#define _IEC2_AD1D23IE_LENGTH                    0x00000001
+#define _IEC2_ADCD23IE_POSITION                  0x00000012
+#define _IEC2_ADCD23IE_MASK                      0x00040000
+#define _IEC2_ADCD23IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D24IE_POSITION                  0x00000013
-#define _IEC2_AD1D24IE_MASK                      0x00080000
-#define _IEC2_AD1D24IE_LENGTH                    0x00000001
+#define _IEC2_ADCD24IE_POSITION                  0x00000013
+#define _IEC2_ADCD24IE_MASK                      0x00080000
+#define _IEC2_ADCD24IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D25IE_POSITION                  0x00000014
-#define _IEC2_AD1D25IE_MASK                      0x00100000
-#define _IEC2_AD1D25IE_LENGTH                    0x00000001
+#define _IEC2_ADCD25IE_POSITION                  0x00000014
+#define _IEC2_ADCD25IE_MASK                      0x00100000
+#define _IEC2_ADCD25IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D26IE_POSITION                  0x00000015
-#define _IEC2_AD1D26IE_MASK                      0x00200000
-#define _IEC2_AD1D26IE_LENGTH                    0x00000001
+#define _IEC2_ADCD26IE_POSITION                  0x00000015
+#define _IEC2_ADCD26IE_MASK                      0x00200000
+#define _IEC2_ADCD26IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D27IE_POSITION                  0x00000016
-#define _IEC2_AD1D27IE_MASK                      0x00400000
-#define _IEC2_AD1D27IE_LENGTH                    0x00000001
+#define _IEC2_ADCD27IE_POSITION                  0x00000016
+#define _IEC2_ADCD27IE_MASK                      0x00400000
+#define _IEC2_ADCD27IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D28IE_POSITION                  0x00000017
-#define _IEC2_AD1D28IE_MASK                      0x00800000
-#define _IEC2_AD1D28IE_LENGTH                    0x00000001
+#define _IEC2_ADCD28IE_POSITION                  0x00000017
+#define _IEC2_ADCD28IE_MASK                      0x00800000
+#define _IEC2_ADCD28IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D29IE_POSITION                  0x00000018
-#define _IEC2_AD1D29IE_MASK                      0x01000000
-#define _IEC2_AD1D29IE_LENGTH                    0x00000001
+#define _IEC2_ADCD29IE_POSITION                  0x00000018
+#define _IEC2_ADCD29IE_MASK                      0x01000000
+#define _IEC2_ADCD29IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D30IE_POSITION                  0x00000019
-#define _IEC2_AD1D30IE_MASK                      0x02000000
-#define _IEC2_AD1D30IE_LENGTH                    0x00000001
+#define _IEC2_ADCD30IE_POSITION                  0x00000019
+#define _IEC2_ADCD30IE_MASK                      0x02000000
+#define _IEC2_ADCD30IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D31IE_POSITION                  0x0000001A
-#define _IEC2_AD1D31IE_MASK                      0x04000000
-#define _IEC2_AD1D31IE_LENGTH                    0x00000001
+#define _IEC2_ADCD31IE_POSITION                  0x0000001A
+#define _IEC2_ADCD31IE_MASK                      0x04000000
+#define _IEC2_ADCD31IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D32IE_POSITION                  0x0000001B
-#define _IEC2_AD1D32IE_MASK                      0x08000000
-#define _IEC2_AD1D32IE_LENGTH                    0x00000001
+#define _IEC2_ADCD32IE_POSITION                  0x0000001B
+#define _IEC2_ADCD32IE_MASK                      0x08000000
+#define _IEC2_ADCD32IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D33IE_POSITION                  0x0000001C
-#define _IEC2_AD1D33IE_MASK                      0x10000000
-#define _IEC2_AD1D33IE_LENGTH                    0x00000001
+#define _IEC2_ADCD33IE_POSITION                  0x0000001C
+#define _IEC2_ADCD33IE_MASK                      0x10000000
+#define _IEC2_ADCD33IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D34IE_POSITION                  0x0000001D
-#define _IEC2_AD1D34IE_MASK                      0x20000000
-#define _IEC2_AD1D34IE_LENGTH                    0x00000001
+#define _IEC2_ADCD34IE_POSITION                  0x0000001D
+#define _IEC2_ADCD34IE_MASK                      0x20000000
+#define _IEC2_ADCD34IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D35IE_POSITION                  0x0000001E
-#define _IEC2_AD1D35IE_MASK                      0x40000000
-#define _IEC2_AD1D35IE_LENGTH                    0x00000001
+#define _IEC2_ADCD35IE_POSITION                  0x0000001E
+#define _IEC2_ADCD35IE_MASK                      0x40000000
+#define _IEC2_ADCD35IE_LENGTH                    0x00000001
 
-#define _IEC2_AD1D36IE_POSITION                  0x0000001F
-#define _IEC2_AD1D36IE_MASK                      0x80000000
-#define _IEC2_AD1D36IE_LENGTH                    0x00000001
+#define _IEC2_ADCD36IE_POSITION                  0x0000001F
+#define _IEC2_ADCD36IE_MASK                      0x80000000
+#define _IEC2_ADCD36IE_LENGTH                    0x00000001
 
 #define _IEC2_w_POSITION                         0x00000000
 #define _IEC2_w_MASK                             0xFFFFFFFF
 #define _IEC2_w_LENGTH                           0x00000020
 
-#define _IEC3_AD1D37IE_POSITION                  0x00000000
-#define _IEC3_AD1D37IE_MASK                      0x00000001
-#define _IEC3_AD1D37IE_LENGTH                    0x00000001
+#define _IEC3_ADCD37IE_POSITION                  0x00000000
+#define _IEC3_ADCD37IE_MASK                      0x00000001
+#define _IEC3_ADCD37IE_LENGTH                    0x00000001
 
-#define _IEC3_AD1D38IE_POSITION                  0x00000001
-#define _IEC3_AD1D38IE_MASK                      0x00000002
-#define _IEC3_AD1D38IE_LENGTH                    0x00000001
+#define _IEC3_ADCD38IE_POSITION                  0x00000001
+#define _IEC3_ADCD38IE_MASK                      0x00000002
+#define _IEC3_ADCD38IE_LENGTH                    0x00000001
 
-#define _IEC3_AD1D39IE_POSITION                  0x00000002
-#define _IEC3_AD1D39IE_MASK                      0x00000004
-#define _IEC3_AD1D39IE_LENGTH                    0x00000001
+#define _IEC3_ADCD39IE_POSITION                  0x00000002
+#define _IEC3_ADCD39IE_MASK                      0x00000004
+#define _IEC3_ADCD39IE_LENGTH                    0x00000001
 
-#define _IEC3_AD1D40IE_POSITION                  0x00000003
-#define _IEC3_AD1D40IE_MASK                      0x00000008
-#define _IEC3_AD1D40IE_LENGTH                    0x00000001
+#define _IEC3_ADCD40IE_POSITION                  0x00000003
+#define _IEC3_ADCD40IE_MASK                      0x00000008
+#define _IEC3_ADCD40IE_LENGTH                    0x00000001
 
-#define _IEC3_AD1D41IE_POSITION                  0x00000004
-#define _IEC3_AD1D41IE_MASK                      0x00000010
-#define _IEC3_AD1D41IE_LENGTH                    0x00000001
+#define _IEC3_ADCD41IE_POSITION                  0x00000004
+#define _IEC3_ADCD41IE_MASK                      0x00000010
+#define _IEC3_ADCD41IE_LENGTH                    0x00000001
 
-#define _IEC3_AD1D42IE_POSITION                  0x00000005
-#define _IEC3_AD1D42IE_MASK                      0x00000020
-#define _IEC3_AD1D42IE_LENGTH                    0x00000001
+#define _IEC3_ADCD42IE_POSITION                  0x00000005
+#define _IEC3_ADCD42IE_MASK                      0x00000020
+#define _IEC3_ADCD42IE_LENGTH                    0x00000001
 
-#define _IEC3_AD1D43IE_POSITION                  0x00000006
-#define _IEC3_AD1D43IE_MASK                      0x00000040
-#define _IEC3_AD1D43IE_LENGTH                    0x00000001
+#define _IEC3_ADCD43IE_POSITION                  0x00000006
+#define _IEC3_ADCD43IE_MASK                      0x00000040
+#define _IEC3_ADCD43IE_LENGTH                    0x00000001
 
-#define _IEC3_AD1D44IE_POSITION                  0x00000007
-#define _IEC3_AD1D44IE_MASK                      0x00000080
-#define _IEC3_AD1D44IE_LENGTH                    0x00000001
+#define _IEC3_ADCD44IE_POSITION                  0x00000007
+#define _IEC3_ADCD44IE_MASK                      0x00000080
+#define _IEC3_ADCD44IE_LENGTH                    0x00000001
 
 #define _IEC3_CPCIE_POSITION                     0x00000008
 #define _IEC3_CPCIE_MASK                         0x00000100
@@ -32576,53 +33226,53 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _IEC6_ADCGRPIE_MASK                      0x00000010
 #define _IEC6_ADCGRPIE_LENGTH                    0x00000001
 
-#define _IEC6_AD0EIE_POSITION                    0x00000006
-#define _IEC6_AD0EIE_MASK                        0x00000040
-#define _IEC6_AD0EIE_LENGTH                      0x00000001
+#define _IEC6_ADC0EIE_POSITION                   0x00000006
+#define _IEC6_ADC0EIE_MASK                       0x00000040
+#define _IEC6_ADC0EIE_LENGTH                     0x00000001
 
-#define _IEC6_AD1EIE_POSITION                    0x00000007
-#define _IEC6_AD1EIE_MASK                        0x00000080
-#define _IEC6_AD1EIE_LENGTH                      0x00000001
+#define _IEC6_ADC1EIE_POSITION                   0x00000007
+#define _IEC6_ADC1EIE_MASK                       0x00000080
+#define _IEC6_ADC1EIE_LENGTH                     0x00000001
 
-#define _IEC6_AD2EIE_POSITION                    0x00000008
-#define _IEC6_AD2EIE_MASK                        0x00000100
-#define _IEC6_AD2EIE_LENGTH                      0x00000001
+#define _IEC6_ADC2EIE_POSITION                   0x00000008
+#define _IEC6_ADC2EIE_MASK                       0x00000100
+#define _IEC6_ADC2EIE_LENGTH                     0x00000001
 
-#define _IEC6_AD3EIE_POSITION                    0x00000009
-#define _IEC6_AD3EIE_MASK                        0x00000200
-#define _IEC6_AD3EIE_LENGTH                      0x00000001
+#define _IEC6_ADC3EIE_POSITION                   0x00000009
+#define _IEC6_ADC3EIE_MASK                       0x00000200
+#define _IEC6_ADC3EIE_LENGTH                     0x00000001
 
-#define _IEC6_AD4EIE_POSITION                    0x0000000A
-#define _IEC6_AD4EIE_MASK                        0x00000400
-#define _IEC6_AD4EIE_LENGTH                      0x00000001
+#define _IEC6_ADC4EIE_POSITION                   0x0000000A
+#define _IEC6_ADC4EIE_MASK                       0x00000400
+#define _IEC6_ADC4EIE_LENGTH                     0x00000001
 
-#define _IEC6_AD7EIE_POSITION                    0x0000000D
-#define _IEC6_AD7EIE_MASK                        0x00002000
-#define _IEC6_AD7EIE_LENGTH                      0x00000001
+#define _IEC6_ADC7EIE_POSITION                   0x0000000D
+#define _IEC6_ADC7EIE_MASK                       0x00002000
+#define _IEC6_ADC7EIE_LENGTH                     0x00000001
 
-#define _IEC6_AD0WIE_POSITION                    0x0000000E
-#define _IEC6_AD0WIE_MASK                        0x00004000
-#define _IEC6_AD0WIE_LENGTH                      0x00000001
+#define _IEC6_ADC0WIE_POSITION                   0x0000000E
+#define _IEC6_ADC0WIE_MASK                       0x00004000
+#define _IEC6_ADC0WIE_LENGTH                     0x00000001
 
-#define _IEC6_AD1WIE_POSITION                    0x0000000F
-#define _IEC6_AD1WIE_MASK                        0x00008000
-#define _IEC6_AD1WIE_LENGTH                      0x00000001
+#define _IEC6_ADC1WIE_POSITION                   0x0000000F
+#define _IEC6_ADC1WIE_MASK                       0x00008000
+#define _IEC6_ADC1WIE_LENGTH                     0x00000001
 
-#define _IEC6_AD2WIE_POSITION                    0x00000010
-#define _IEC6_AD2WIE_MASK                        0x00010000
-#define _IEC6_AD2WIE_LENGTH                      0x00000001
+#define _IEC6_ADC2WIE_POSITION                   0x00000010
+#define _IEC6_ADC2WIE_MASK                       0x00010000
+#define _IEC6_ADC2WIE_LENGTH                     0x00000001
 
-#define _IEC6_AD3WIE_POSITION                    0x00000011
-#define _IEC6_AD3WIE_MASK                        0x00020000
-#define _IEC6_AD3WIE_LENGTH                      0x00000001
+#define _IEC6_ADC3WIE_POSITION                   0x00000011
+#define _IEC6_ADC3WIE_MASK                       0x00020000
+#define _IEC6_ADC3WIE_LENGTH                     0x00000001
 
-#define _IEC6_AD4WIE_POSITION                    0x00000012
-#define _IEC6_AD4WIE_MASK                        0x00040000
-#define _IEC6_AD4WIE_LENGTH                      0x00000001
+#define _IEC6_ADC4WIE_POSITION                   0x00000012
+#define _IEC6_ADC4WIE_MASK                       0x00040000
+#define _IEC6_ADC4WIE_LENGTH                     0x00000001
 
-#define _IEC6_AD7WIE_POSITION                    0x00000015
-#define _IEC6_AD7WIE_MASK                        0x00200000
-#define _IEC6_AD7WIE_LENGTH                      0x00000001
+#define _IEC6_ADC7WIE_POSITION                   0x00000015
+#define _IEC6_ADC7WIE_MASK                       0x00200000
+#define _IEC6_ADC7WIE_LENGTH                     0x00000001
 
 #define _IEC6_w_POSITION                         0x00000000
 #define _IEC6_w_MASK                             0xFFFFFFFF
@@ -33024,525 +33674,533 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _IPC10_w_MASK                            0xFFFFFFFF
 #define _IPC10_w_LENGTH                          0x00000020
 
-#define _IPC11_AD1IS_POSITION                    0x00000000
-#define _IPC11_AD1IS_MASK                        0x00000003
-#define _IPC11_AD1IS_LENGTH                      0x00000002
+#define _IPC11_ADCIS_POSITION                    0x00000000
+#define _IPC11_ADCIS_MASK                        0x00000003
+#define _IPC11_ADCIS_LENGTH                      0x00000002
 
-#define _IPC11_AD1IP_POSITION                    0x00000002
-#define _IPC11_AD1IP_MASK                        0x0000001C
-#define _IPC11_AD1IP_LENGTH                      0x00000003
+#define _IPC11_ADCIP_POSITION                    0x00000002
+#define _IPC11_ADCIP_MASK                        0x0000001C
+#define _IPC11_ADCIP_LENGTH                      0x00000003
 
-#define _IPC11_AD1DC1IS_POSITION                 0x00000010
-#define _IPC11_AD1DC1IS_MASK                     0x00030000
-#define _IPC11_AD1DC1IS_LENGTH                   0x00000002
+#define _IPC11_ADCDC1IS_POSITION                 0x00000010
+#define _IPC11_ADCDC1IS_MASK                     0x00030000
+#define _IPC11_ADCDC1IS_LENGTH                   0x00000002
 
-#define _IPC11_AD1DC1IP_POSITION                 0x00000012
-#define _IPC11_AD1DC1IP_MASK                     0x001C0000
-#define _IPC11_AD1DC1IP_LENGTH                   0x00000003
+#define _IPC11_ADCDC1IP_POSITION                 0x00000012
+#define _IPC11_ADCDC1IP_MASK                     0x001C0000
+#define _IPC11_ADCDC1IP_LENGTH                   0x00000003
 
-#define _IPC11_AD1DC2IS_POSITION                 0x00000018
-#define _IPC11_AD1DC2IS_MASK                     0x03000000
-#define _IPC11_AD1DC2IS_LENGTH                   0x00000002
+#define _IPC11_ADCDC2IS_POSITION                 0x00000018
+#define _IPC11_ADCDC2IS_MASK                     0x03000000
+#define _IPC11_ADCDC2IS_LENGTH                   0x00000002
 
-#define _IPC11_AD1DC2IP_POSITION                 0x0000001A
-#define _IPC11_AD1DC2IP_MASK                     0x1C000000
-#define _IPC11_AD1DC2IP_LENGTH                   0x00000003
+#define _IPC11_ADCDC2IP_POSITION                 0x0000001A
+#define _IPC11_ADCDC2IP_MASK                     0x1C000000
+#define _IPC11_ADCDC2IP_LENGTH                   0x00000003
 
 #define _IPC11_w_POSITION                        0x00000000
 #define _IPC11_w_MASK                            0xFFFFFFFF
 #define _IPC11_w_LENGTH                          0x00000020
 
-#define _IPC12_AD1DC3IS_POSITION                 0x00000000
-#define _IPC12_AD1DC3IS_MASK                     0x00000003
-#define _IPC12_AD1DC3IS_LENGTH                   0x00000002
+#define _IPC12_ADCDC3IS_POSITION                 0x00000000
+#define _IPC12_ADCDC3IS_MASK                     0x00000003
+#define _IPC12_ADCDC3IS_LENGTH                   0x00000002
 
-#define _IPC12_AD1DC3IP_POSITION                 0x00000002
-#define _IPC12_AD1DC3IP_MASK                     0x0000001C
-#define _IPC12_AD1DC3IP_LENGTH                   0x00000003
+#define _IPC12_ADCDC3IP_POSITION                 0x00000002
+#define _IPC12_ADCDC3IP_MASK                     0x0000001C
+#define _IPC12_ADCDC3IP_LENGTH                   0x00000003
 
-#define _IPC12_AD1DC4IS_POSITION                 0x00000008
-#define _IPC12_AD1DC4IS_MASK                     0x00000300
-#define _IPC12_AD1DC4IS_LENGTH                   0x00000002
+#define _IPC12_ADCDC4IS_POSITION                 0x00000008
+#define _IPC12_ADCDC4IS_MASK                     0x00000300
+#define _IPC12_ADCDC4IS_LENGTH                   0x00000002
 
-#define _IPC12_AD1DC4IP_POSITION                 0x0000000A
-#define _IPC12_AD1DC4IP_MASK                     0x00001C00
-#define _IPC12_AD1DC4IP_LENGTH                   0x00000003
+#define _IPC12_ADCDC4IP_POSITION                 0x0000000A
+#define _IPC12_ADCDC4IP_MASK                     0x00001C00
+#define _IPC12_ADCDC4IP_LENGTH                   0x00000003
 
-#define _IPC12_AD1DC5IS_POSITION                 0x00000010
-#define _IPC12_AD1DC5IS_MASK                     0x00030000
-#define _IPC12_AD1DC5IS_LENGTH                   0x00000002
+#define _IPC12_ADCDC5IS_POSITION                 0x00000010
+#define _IPC12_ADCDC5IS_MASK                     0x00030000
+#define _IPC12_ADCDC5IS_LENGTH                   0x00000002
 
-#define _IPC12_AD1DC5IP_POSITION                 0x00000012
-#define _IPC12_AD1DC5IP_MASK                     0x001C0000
-#define _IPC12_AD1DC5IP_LENGTH                   0x00000003
+#define _IPC12_ADCDC5IP_POSITION                 0x00000012
+#define _IPC12_ADCDC5IP_MASK                     0x001C0000
+#define _IPC12_ADCDC5IP_LENGTH                   0x00000003
 
-#define _IPC12_AD1DC6IS_POSITION                 0x00000018
-#define _IPC12_AD1DC6IS_MASK                     0x03000000
-#define _IPC12_AD1DC6IS_LENGTH                   0x00000002
+#define _IPC12_ADCDC6IS_POSITION                 0x00000018
+#define _IPC12_ADCDC6IS_MASK                     0x03000000
+#define _IPC12_ADCDC6IS_LENGTH                   0x00000002
 
-#define _IPC12_AD1DC6IP_POSITION                 0x0000001A
-#define _IPC12_AD1DC6IP_MASK                     0x1C000000
-#define _IPC12_AD1DC6IP_LENGTH                   0x00000003
+#define _IPC12_ADCDC6IP_POSITION                 0x0000001A
+#define _IPC12_ADCDC6IP_MASK                     0x1C000000
+#define _IPC12_ADCDC6IP_LENGTH                   0x00000003
 
 #define _IPC12_w_POSITION                        0x00000000
 #define _IPC12_w_MASK                            0xFFFFFFFF
 #define _IPC12_w_LENGTH                          0x00000020
 
-#define _IPC13_AD1DF1IS_POSITION                 0x00000000
-#define _IPC13_AD1DF1IS_MASK                     0x00000003
-#define _IPC13_AD1DF1IS_LENGTH                   0x00000002
+#define _IPC13_ADCDF1IS_POSITION                 0x00000000
+#define _IPC13_ADCDF1IS_MASK                     0x00000003
+#define _IPC13_ADCDF1IS_LENGTH                   0x00000002
 
-#define _IPC13_AD1DF1IP_POSITION                 0x00000002
-#define _IPC13_AD1DF1IP_MASK                     0x0000001C
-#define _IPC13_AD1DF1IP_LENGTH                   0x00000003
+#define _IPC13_ADCDF1IP_POSITION                 0x00000002
+#define _IPC13_ADCDF1IP_MASK                     0x0000001C
+#define _IPC13_ADCDF1IP_LENGTH                   0x00000003
 
-#define _IPC13_AD1DF2IS_POSITION                 0x00000008
-#define _IPC13_AD1DF2IS_MASK                     0x00000300
-#define _IPC13_AD1DF2IS_LENGTH                   0x00000002
+#define _IPC13_ADCDF2IS_POSITION                 0x00000008
+#define _IPC13_ADCDF2IS_MASK                     0x00000300
+#define _IPC13_ADCDF2IS_LENGTH                   0x00000002
 
-#define _IPC13_AD1DF2IP_POSITION                 0x0000000A
-#define _IPC13_AD1DF2IP_MASK                     0x00001C00
-#define _IPC13_AD1DF2IP_LENGTH                   0x00000003
+#define _IPC13_ADCDF2IP_POSITION                 0x0000000A
+#define _IPC13_ADCDF2IP_MASK                     0x00001C00
+#define _IPC13_ADCDF2IP_LENGTH                   0x00000003
 
-#define _IPC13_AD1DF3IS_POSITION                 0x00000010
-#define _IPC13_AD1DF3IS_MASK                     0x00030000
-#define _IPC13_AD1DF3IS_LENGTH                   0x00000002
+#define _IPC13_ADCDF3IS_POSITION                 0x00000010
+#define _IPC13_ADCDF3IS_MASK                     0x00030000
+#define _IPC13_ADCDF3IS_LENGTH                   0x00000002
 
-#define _IPC13_AD1DF3IP_POSITION                 0x00000012
-#define _IPC13_AD1DF3IP_MASK                     0x001C0000
-#define _IPC13_AD1DF3IP_LENGTH                   0x00000003
+#define _IPC13_ADCDF3IP_POSITION                 0x00000012
+#define _IPC13_ADCDF3IP_MASK                     0x001C0000
+#define _IPC13_ADCDF3IP_LENGTH                   0x00000003
 
-#define _IPC13_AD1DF4IS_POSITION                 0x00000018
-#define _IPC13_AD1DF4IS_MASK                     0x03000000
-#define _IPC13_AD1DF4IS_LENGTH                   0x00000002
+#define _IPC13_ADCDF4IS_POSITION                 0x00000018
+#define _IPC13_ADCDF4IS_MASK                     0x03000000
+#define _IPC13_ADCDF4IS_LENGTH                   0x00000002
 
-#define _IPC13_AD1DF4IP_POSITION                 0x0000001A
-#define _IPC13_AD1DF4IP_MASK                     0x1C000000
-#define _IPC13_AD1DF4IP_LENGTH                   0x00000003
+#define _IPC13_ADCDF4IP_POSITION                 0x0000001A
+#define _IPC13_ADCDF4IP_MASK                     0x1C000000
+#define _IPC13_ADCDF4IP_LENGTH                   0x00000003
 
 #define _IPC13_w_POSITION                        0x00000000
 #define _IPC13_w_MASK                            0xFFFFFFFF
 #define _IPC13_w_LENGTH                          0x00000020
 
-#define _IPC14_AD1DF5IS_POSITION                 0x00000000
-#define _IPC14_AD1DF5IS_MASK                     0x00000003
-#define _IPC14_AD1DF5IS_LENGTH                   0x00000002
+#define _IPC14_ADCDF5IS_POSITION                 0x00000000
+#define _IPC14_ADCDF5IS_MASK                     0x00000003
+#define _IPC14_ADCDF5IS_LENGTH                   0x00000002
 
-#define _IPC14_AD1DF5IP_POSITION                 0x00000002
-#define _IPC14_AD1DF5IP_MASK                     0x0000001C
-#define _IPC14_AD1DF5IP_LENGTH                   0x00000003
+#define _IPC14_ADCDF5IP_POSITION                 0x00000002
+#define _IPC14_ADCDF5IP_MASK                     0x0000001C
+#define _IPC14_ADCDF5IP_LENGTH                   0x00000003
 
-#define _IPC14_AD1DF6IS_POSITION                 0x00000008
-#define _IPC14_AD1DF6IS_MASK                     0x00000300
-#define _IPC14_AD1DF6IS_LENGTH                   0x00000002
+#define _IPC14_ADCDF6IS_POSITION                 0x00000008
+#define _IPC14_ADCDF6IS_MASK                     0x00000300
+#define _IPC14_ADCDF6IS_LENGTH                   0x00000002
 
-#define _IPC14_AD1DF6IP_POSITION                 0x0000000A
-#define _IPC14_AD1DF6IP_MASK                     0x00001C00
-#define _IPC14_AD1DF6IP_LENGTH                   0x00000003
+#define _IPC14_ADCDF6IP_POSITION                 0x0000000A
+#define _IPC14_ADCDF6IP_MASK                     0x00001C00
+#define _IPC14_ADCDF6IP_LENGTH                   0x00000003
 
-#define _IPC14_AD1D0IS_POSITION                  0x00000018
-#define _IPC14_AD1D0IS_MASK                      0x03000000
-#define _IPC14_AD1D0IS_LENGTH                    0x00000002
+#define _IPC14_ADCFLTIS_POSITION                 0x00000010
+#define _IPC14_ADCFLTIS_MASK                     0x00030000
+#define _IPC14_ADCFLTIS_LENGTH                   0x00000002
 
-#define _IPC14_AD1D0IP_POSITION                  0x0000001A
-#define _IPC14_AD1D0IP_MASK                      0x1C000000
-#define _IPC14_AD1D0IP_LENGTH                    0x00000003
+#define _IPC14_ADCFLTIP_POSITION                 0x00000012
+#define _IPC14_ADCFLTIP_MASK                     0x001C0000
+#define _IPC14_ADCFLTIP_LENGTH                   0x00000003
+
+#define _IPC14_ADCD0IS_POSITION                  0x00000018
+#define _IPC14_ADCD0IS_MASK                      0x03000000
+#define _IPC14_ADCD0IS_LENGTH                    0x00000002
+
+#define _IPC14_ADCD0IP_POSITION                  0x0000001A
+#define _IPC14_ADCD0IP_MASK                      0x1C000000
+#define _IPC14_ADCD0IP_LENGTH                    0x00000003
 
 #define _IPC14_w_POSITION                        0x00000000
 #define _IPC14_w_MASK                            0xFFFFFFFF
 #define _IPC14_w_LENGTH                          0x00000020
 
-#define _IPC15_AD1D1IS_POSITION                  0x00000000
-#define _IPC15_AD1D1IS_MASK                      0x00000003
-#define _IPC15_AD1D1IS_LENGTH                    0x00000002
+#define _IPC15_ADCD1IS_POSITION                  0x00000000
+#define _IPC15_ADCD1IS_MASK                      0x00000003
+#define _IPC15_ADCD1IS_LENGTH                    0x00000002
 
-#define _IPC15_AD1D1IP_POSITION                  0x00000002
-#define _IPC15_AD1D1IP_MASK                      0x0000001C
-#define _IPC15_AD1D1IP_LENGTH                    0x00000003
+#define _IPC15_ADCD1IP_POSITION                  0x00000002
+#define _IPC15_ADCD1IP_MASK                      0x0000001C
+#define _IPC15_ADCD1IP_LENGTH                    0x00000003
 
-#define _IPC15_AD1D2IS_POSITION                  0x00000008
-#define _IPC15_AD1D2IS_MASK                      0x00000300
-#define _IPC15_AD1D2IS_LENGTH                    0x00000002
+#define _IPC15_ADCD2IS_POSITION                  0x00000008
+#define _IPC15_ADCD2IS_MASK                      0x00000300
+#define _IPC15_ADCD2IS_LENGTH                    0x00000002
 
-#define _IPC15_AD1D2IP_POSITION                  0x0000000A
-#define _IPC15_AD1D2IP_MASK                      0x00001C00
-#define _IPC15_AD1D2IP_LENGTH                    0x00000003
+#define _IPC15_ADCD2IP_POSITION                  0x0000000A
+#define _IPC15_ADCD2IP_MASK                      0x00001C00
+#define _IPC15_ADCD2IP_LENGTH                    0x00000003
 
-#define _IPC15_AD1D3IS_POSITION                  0x00000010
-#define _IPC15_AD1D3IS_MASK                      0x00030000
-#define _IPC15_AD1D3IS_LENGTH                    0x00000002
+#define _IPC15_ADCD3IS_POSITION                  0x00000010
+#define _IPC15_ADCD3IS_MASK                      0x00030000
+#define _IPC15_ADCD3IS_LENGTH                    0x00000002
 
-#define _IPC15_AD1D3IP_POSITION                  0x00000012
-#define _IPC15_AD1D3IP_MASK                      0x001C0000
-#define _IPC15_AD1D3IP_LENGTH                    0x00000003
+#define _IPC15_ADCD3IP_POSITION                  0x00000012
+#define _IPC15_ADCD3IP_MASK                      0x001C0000
+#define _IPC15_ADCD3IP_LENGTH                    0x00000003
 
-#define _IPC15_AD1D4IS_POSITION                  0x00000018
-#define _IPC15_AD1D4IS_MASK                      0x03000000
-#define _IPC15_AD1D4IS_LENGTH                    0x00000002
+#define _IPC15_ADCD4IS_POSITION                  0x00000018
+#define _IPC15_ADCD4IS_MASK                      0x03000000
+#define _IPC15_ADCD4IS_LENGTH                    0x00000002
 
-#define _IPC15_AD1D4IP_POSITION                  0x0000001A
-#define _IPC15_AD1D4IP_MASK                      0x1C000000
-#define _IPC15_AD1D4IP_LENGTH                    0x00000003
+#define _IPC15_ADCD4IP_POSITION                  0x0000001A
+#define _IPC15_ADCD4IP_MASK                      0x1C000000
+#define _IPC15_ADCD4IP_LENGTH                    0x00000003
 
 #define _IPC15_w_POSITION                        0x00000000
 #define _IPC15_w_MASK                            0xFFFFFFFF
 #define _IPC15_w_LENGTH                          0x00000020
 
-#define _IPC16_AD1D5IS_POSITION                  0x00000000
-#define _IPC16_AD1D5IS_MASK                      0x00000003
-#define _IPC16_AD1D5IS_LENGTH                    0x00000002
+#define _IPC16_ADCD5IS_POSITION                  0x00000000
+#define _IPC16_ADCD5IS_MASK                      0x00000003
+#define _IPC16_ADCD5IS_LENGTH                    0x00000002
 
-#define _IPC16_AD1D5IP_POSITION                  0x00000002
-#define _IPC16_AD1D5IP_MASK                      0x0000001C
-#define _IPC16_AD1D5IP_LENGTH                    0x00000003
+#define _IPC16_ADCD5IP_POSITION                  0x00000002
+#define _IPC16_ADCD5IP_MASK                      0x0000001C
+#define _IPC16_ADCD5IP_LENGTH                    0x00000003
 
-#define _IPC16_AD1D6IS_POSITION                  0x00000008
-#define _IPC16_AD1D6IS_MASK                      0x00000300
-#define _IPC16_AD1D6IS_LENGTH                    0x00000002
+#define _IPC16_ADCD6IS_POSITION                  0x00000008
+#define _IPC16_ADCD6IS_MASK                      0x00000300
+#define _IPC16_ADCD6IS_LENGTH                    0x00000002
 
-#define _IPC16_AD1D6IP_POSITION                  0x0000000A
-#define _IPC16_AD1D6IP_MASK                      0x00001C00
-#define _IPC16_AD1D6IP_LENGTH                    0x00000003
+#define _IPC16_ADCD6IP_POSITION                  0x0000000A
+#define _IPC16_ADCD6IP_MASK                      0x00001C00
+#define _IPC16_ADCD6IP_LENGTH                    0x00000003
 
-#define _IPC16_AD1D7IS_POSITION                  0x00000010
-#define _IPC16_AD1D7IS_MASK                      0x00030000
-#define _IPC16_AD1D7IS_LENGTH                    0x00000002
+#define _IPC16_ADCD7IS_POSITION                  0x00000010
+#define _IPC16_ADCD7IS_MASK                      0x00030000
+#define _IPC16_ADCD7IS_LENGTH                    0x00000002
 
-#define _IPC16_AD1D7IP_POSITION                  0x00000012
-#define _IPC16_AD1D7IP_MASK                      0x001C0000
-#define _IPC16_AD1D7IP_LENGTH                    0x00000003
+#define _IPC16_ADCD7IP_POSITION                  0x00000012
+#define _IPC16_ADCD7IP_MASK                      0x001C0000
+#define _IPC16_ADCD7IP_LENGTH                    0x00000003
 
-#define _IPC16_AD1D8IS_POSITION                  0x00000018
-#define _IPC16_AD1D8IS_MASK                      0x03000000
-#define _IPC16_AD1D8IS_LENGTH                    0x00000002
+#define _IPC16_ADCD8IS_POSITION                  0x00000018
+#define _IPC16_ADCD8IS_MASK                      0x03000000
+#define _IPC16_ADCD8IS_LENGTH                    0x00000002
 
-#define _IPC16_AD1D8IP_POSITION                  0x0000001A
-#define _IPC16_AD1D8IP_MASK                      0x1C000000
-#define _IPC16_AD1D8IP_LENGTH                    0x00000003
+#define _IPC16_ADCD8IP_POSITION                  0x0000001A
+#define _IPC16_ADCD8IP_MASK                      0x1C000000
+#define _IPC16_ADCD8IP_LENGTH                    0x00000003
 
 #define _IPC16_w_POSITION                        0x00000000
 #define _IPC16_w_MASK                            0xFFFFFFFF
 #define _IPC16_w_LENGTH                          0x00000020
 
-#define _IPC17_AD1D9IS_POSITION                  0x00000000
-#define _IPC17_AD1D9IS_MASK                      0x00000003
-#define _IPC17_AD1D9IS_LENGTH                    0x00000002
+#define _IPC17_ADCD9IS_POSITION                  0x00000000
+#define _IPC17_ADCD9IS_MASK                      0x00000003
+#define _IPC17_ADCD9IS_LENGTH                    0x00000002
 
-#define _IPC17_AD1D9IP_POSITION                  0x00000002
-#define _IPC17_AD1D9IP_MASK                      0x0000001C
-#define _IPC17_AD1D9IP_LENGTH                    0x00000003
+#define _IPC17_ADCD9IP_POSITION                  0x00000002
+#define _IPC17_ADCD9IP_MASK                      0x0000001C
+#define _IPC17_ADCD9IP_LENGTH                    0x00000003
 
-#define _IPC17_AD1D10IS_POSITION                 0x00000008
-#define _IPC17_AD1D10IS_MASK                     0x00000300
-#define _IPC17_AD1D10IS_LENGTH                   0x00000002
+#define _IPC17_ADCD10IS_POSITION                 0x00000008
+#define _IPC17_ADCD10IS_MASK                     0x00000300
+#define _IPC17_ADCD10IS_LENGTH                   0x00000002
 
-#define _IPC17_AD1D10IP_POSITION                 0x0000000A
-#define _IPC17_AD1D10IP_MASK                     0x00001C00
-#define _IPC17_AD1D10IP_LENGTH                   0x00000003
+#define _IPC17_ADCD10IP_POSITION                 0x0000000A
+#define _IPC17_ADCD10IP_MASK                     0x00001C00
+#define _IPC17_ADCD10IP_LENGTH                   0x00000003
 
-#define _IPC17_AD1D11IS_POSITION                 0x00000010
-#define _IPC17_AD1D11IS_MASK                     0x00030000
-#define _IPC17_AD1D11IS_LENGTH                   0x00000002
+#define _IPC17_ADCD11IS_POSITION                 0x00000010
+#define _IPC17_ADCD11IS_MASK                     0x00030000
+#define _IPC17_ADCD11IS_LENGTH                   0x00000002
 
-#define _IPC17_AD1D11IP_POSITION                 0x00000012
-#define _IPC17_AD1D11IP_MASK                     0x001C0000
-#define _IPC17_AD1D11IP_LENGTH                   0x00000003
+#define _IPC17_ADCD11IP_POSITION                 0x00000012
+#define _IPC17_ADCD11IP_MASK                     0x001C0000
+#define _IPC17_ADCD11IP_LENGTH                   0x00000003
 
-#define _IPC17_AD1D12IS_POSITION                 0x00000018
-#define _IPC17_AD1D12IS_MASK                     0x03000000
-#define _IPC17_AD1D12IS_LENGTH                   0x00000002
+#define _IPC17_ADCD12IS_POSITION                 0x00000018
+#define _IPC17_ADCD12IS_MASK                     0x03000000
+#define _IPC17_ADCD12IS_LENGTH                   0x00000002
 
-#define _IPC17_AD1D12IP_POSITION                 0x0000001A
-#define _IPC17_AD1D12IP_MASK                     0x1C000000
-#define _IPC17_AD1D12IP_LENGTH                   0x00000003
+#define _IPC17_ADCD12IP_POSITION                 0x0000001A
+#define _IPC17_ADCD12IP_MASK                     0x1C000000
+#define _IPC17_ADCD12IP_LENGTH                   0x00000003
 
 #define _IPC17_w_POSITION                        0x00000000
 #define _IPC17_w_MASK                            0xFFFFFFFF
 #define _IPC17_w_LENGTH                          0x00000020
 
-#define _IPC18_AD1D13IS_POSITION                 0x00000000
-#define _IPC18_AD1D13IS_MASK                     0x00000003
-#define _IPC18_AD1D13IS_LENGTH                   0x00000002
+#define _IPC18_ADCD13IS_POSITION                 0x00000000
+#define _IPC18_ADCD13IS_MASK                     0x00000003
+#define _IPC18_ADCD13IS_LENGTH                   0x00000002
 
-#define _IPC18_AD1D13IP_POSITION                 0x00000002
-#define _IPC18_AD1D13IP_MASK                     0x0000001C
-#define _IPC18_AD1D13IP_LENGTH                   0x00000003
+#define _IPC18_ADCD13IP_POSITION                 0x00000002
+#define _IPC18_ADCD13IP_MASK                     0x0000001C
+#define _IPC18_ADCD13IP_LENGTH                   0x00000003
 
-#define _IPC18_AD1D14IS_POSITION                 0x00000008
-#define _IPC18_AD1D14IS_MASK                     0x00000300
-#define _IPC18_AD1D14IS_LENGTH                   0x00000002
+#define _IPC18_ADCD14IS_POSITION                 0x00000008
+#define _IPC18_ADCD14IS_MASK                     0x00000300
+#define _IPC18_ADCD14IS_LENGTH                   0x00000002
 
-#define _IPC18_AD1D14IP_POSITION                 0x0000000A
-#define _IPC18_AD1D14IP_MASK                     0x00001C00
-#define _IPC18_AD1D14IP_LENGTH                   0x00000003
+#define _IPC18_ADCD14IP_POSITION                 0x0000000A
+#define _IPC18_ADCD14IP_MASK                     0x00001C00
+#define _IPC18_ADCD14IP_LENGTH                   0x00000003
 
-#define _IPC18_AD1D15IS_POSITION                 0x00000010
-#define _IPC18_AD1D15IS_MASK                     0x00030000
-#define _IPC18_AD1D15IS_LENGTH                   0x00000002
+#define _IPC18_ADCD15IS_POSITION                 0x00000010
+#define _IPC18_ADCD15IS_MASK                     0x00030000
+#define _IPC18_ADCD15IS_LENGTH                   0x00000002
 
-#define _IPC18_AD1D15IP_POSITION                 0x00000012
-#define _IPC18_AD1D15IP_MASK                     0x001C0000
-#define _IPC18_AD1D15IP_LENGTH                   0x00000003
+#define _IPC18_ADCD15IP_POSITION                 0x00000012
+#define _IPC18_ADCD15IP_MASK                     0x001C0000
+#define _IPC18_ADCD15IP_LENGTH                   0x00000003
 
-#define _IPC18_AD1D16IS_POSITION                 0x00000018
-#define _IPC18_AD1D16IS_MASK                     0x03000000
-#define _IPC18_AD1D16IS_LENGTH                   0x00000002
+#define _IPC18_ADCD16IS_POSITION                 0x00000018
+#define _IPC18_ADCD16IS_MASK                     0x03000000
+#define _IPC18_ADCD16IS_LENGTH                   0x00000002
 
-#define _IPC18_AD1D16IP_POSITION                 0x0000001A
-#define _IPC18_AD1D16IP_MASK                     0x1C000000
-#define _IPC18_AD1D16IP_LENGTH                   0x00000003
+#define _IPC18_ADCD16IP_POSITION                 0x0000001A
+#define _IPC18_ADCD16IP_MASK                     0x1C000000
+#define _IPC18_ADCD16IP_LENGTH                   0x00000003
 
 #define _IPC18_w_POSITION                        0x00000000
 #define _IPC18_w_MASK                            0xFFFFFFFF
 #define _IPC18_w_LENGTH                          0x00000020
 
-#define _IPC19_AD1D17IS_POSITION                 0x00000000
-#define _IPC19_AD1D17IS_MASK                     0x00000003
-#define _IPC19_AD1D17IS_LENGTH                   0x00000002
+#define _IPC19_ADCD17IS_POSITION                 0x00000000
+#define _IPC19_ADCD17IS_MASK                     0x00000003
+#define _IPC19_ADCD17IS_LENGTH                   0x00000002
 
-#define _IPC19_AD1D17IP_POSITION                 0x00000002
-#define _IPC19_AD1D17IP_MASK                     0x0000001C
-#define _IPC19_AD1D17IP_LENGTH                   0x00000003
+#define _IPC19_ADCD17IP_POSITION                 0x00000002
+#define _IPC19_ADCD17IP_MASK                     0x0000001C
+#define _IPC19_ADCD17IP_LENGTH                   0x00000003
 
-#define _IPC19_AD1D18IS_POSITION                 0x00000008
-#define _IPC19_AD1D18IS_MASK                     0x00000300
-#define _IPC19_AD1D18IS_LENGTH                   0x00000002
+#define _IPC19_ADCD18IS_POSITION                 0x00000008
+#define _IPC19_ADCD18IS_MASK                     0x00000300
+#define _IPC19_ADCD18IS_LENGTH                   0x00000002
 
-#define _IPC19_AD1D18IP_POSITION                 0x0000000A
-#define _IPC19_AD1D18IP_MASK                     0x00001C00
-#define _IPC19_AD1D18IP_LENGTH                   0x00000003
+#define _IPC19_ADCD18IP_POSITION                 0x0000000A
+#define _IPC19_ADCD18IP_MASK                     0x00001C00
+#define _IPC19_ADCD18IP_LENGTH                   0x00000003
 
-#define _IPC19_AD1D19IS_POSITION                 0x00000010
-#define _IPC19_AD1D19IS_MASK                     0x00030000
-#define _IPC19_AD1D19IS_LENGTH                   0x00000002
+#define _IPC19_ADCD19IS_POSITION                 0x00000010
+#define _IPC19_ADCD19IS_MASK                     0x00030000
+#define _IPC19_ADCD19IS_LENGTH                   0x00000002
 
-#define _IPC19_AD1D19IP_POSITION                 0x00000012
-#define _IPC19_AD1D19IP_MASK                     0x001C0000
-#define _IPC19_AD1D19IP_LENGTH                   0x00000003
+#define _IPC19_ADCD19IP_POSITION                 0x00000012
+#define _IPC19_ADCD19IP_MASK                     0x001C0000
+#define _IPC19_ADCD19IP_LENGTH                   0x00000003
 
-#define _IPC19_AD1D20IS_POSITION                 0x00000018
-#define _IPC19_AD1D20IS_MASK                     0x03000000
-#define _IPC19_AD1D20IS_LENGTH                   0x00000002
+#define _IPC19_ADCD20IS_POSITION                 0x00000018
+#define _IPC19_ADCD20IS_MASK                     0x03000000
+#define _IPC19_ADCD20IS_LENGTH                   0x00000002
 
-#define _IPC19_AD1D20IP_POSITION                 0x0000001A
-#define _IPC19_AD1D20IP_MASK                     0x1C000000
-#define _IPC19_AD1D20IP_LENGTH                   0x00000003
+#define _IPC19_ADCD20IP_POSITION                 0x0000001A
+#define _IPC19_ADCD20IP_MASK                     0x1C000000
+#define _IPC19_ADCD20IP_LENGTH                   0x00000003
 
 #define _IPC19_w_POSITION                        0x00000000
 #define _IPC19_w_MASK                            0xFFFFFFFF
 #define _IPC19_w_LENGTH                          0x00000020
 
-#define _IPC20_AD1D21IS_POSITION                 0x00000000
-#define _IPC20_AD1D21IS_MASK                     0x00000003
-#define _IPC20_AD1D21IS_LENGTH                   0x00000002
+#define _IPC20_ADCD21IS_POSITION                 0x00000000
+#define _IPC20_ADCD21IS_MASK                     0x00000003
+#define _IPC20_ADCD21IS_LENGTH                   0x00000002
 
-#define _IPC20_AD1D21IP_POSITION                 0x00000002
-#define _IPC20_AD1D21IP_MASK                     0x0000001C
-#define _IPC20_AD1D21IP_LENGTH                   0x00000003
+#define _IPC20_ADCD21IP_POSITION                 0x00000002
+#define _IPC20_ADCD21IP_MASK                     0x0000001C
+#define _IPC20_ADCD21IP_LENGTH                   0x00000003
 
-#define _IPC20_AD1D22IS_POSITION                 0x00000008
-#define _IPC20_AD1D22IS_MASK                     0x00000300
-#define _IPC20_AD1D22IS_LENGTH                   0x00000002
+#define _IPC20_ADCD22IS_POSITION                 0x00000008
+#define _IPC20_ADCD22IS_MASK                     0x00000300
+#define _IPC20_ADCD22IS_LENGTH                   0x00000002
 
-#define _IPC20_AD1D22IP_POSITION                 0x0000000A
-#define _IPC20_AD1D22IP_MASK                     0x00001C00
-#define _IPC20_AD1D22IP_LENGTH                   0x00000003
+#define _IPC20_ADCD22IP_POSITION                 0x0000000A
+#define _IPC20_ADCD22IP_MASK                     0x00001C00
+#define _IPC20_ADCD22IP_LENGTH                   0x00000003
 
-#define _IPC20_AD1D23IS_POSITION                 0x00000010
-#define _IPC20_AD1D23IS_MASK                     0x00030000
-#define _IPC20_AD1D23IS_LENGTH                   0x00000002
+#define _IPC20_ADCD23IS_POSITION                 0x00000010
+#define _IPC20_ADCD23IS_MASK                     0x00030000
+#define _IPC20_ADCD23IS_LENGTH                   0x00000002
 
-#define _IPC20_AD1D23IP_POSITION                 0x00000012
-#define _IPC20_AD1D23IP_MASK                     0x001C0000
-#define _IPC20_AD1D23IP_LENGTH                   0x00000003
+#define _IPC20_ADCD23IP_POSITION                 0x00000012
+#define _IPC20_ADCD23IP_MASK                     0x001C0000
+#define _IPC20_ADCD23IP_LENGTH                   0x00000003
 
-#define _IPC20_AD1D24IS_POSITION                 0x00000018
-#define _IPC20_AD1D24IS_MASK                     0x03000000
-#define _IPC20_AD1D24IS_LENGTH                   0x00000002
+#define _IPC20_ADCD24IS_POSITION                 0x00000018
+#define _IPC20_ADCD24IS_MASK                     0x03000000
+#define _IPC20_ADCD24IS_LENGTH                   0x00000002
 
-#define _IPC20_AD1D24IP_POSITION                 0x0000001A
-#define _IPC20_AD1D24IP_MASK                     0x1C000000
-#define _IPC20_AD1D24IP_LENGTH                   0x00000003
+#define _IPC20_ADCD24IP_POSITION                 0x0000001A
+#define _IPC20_ADCD24IP_MASK                     0x1C000000
+#define _IPC20_ADCD24IP_LENGTH                   0x00000003
 
 #define _IPC20_w_POSITION                        0x00000000
 #define _IPC20_w_MASK                            0xFFFFFFFF
 #define _IPC20_w_LENGTH                          0x00000020
 
-#define _IPC21_AD1D25IS_POSITION                 0x00000000
-#define _IPC21_AD1D25IS_MASK                     0x00000003
-#define _IPC21_AD1D25IS_LENGTH                   0x00000002
+#define _IPC21_ADCD25IS_POSITION                 0x00000000
+#define _IPC21_ADCD25IS_MASK                     0x00000003
+#define _IPC21_ADCD25IS_LENGTH                   0x00000002
 
-#define _IPC21_AD1D25IP_POSITION                 0x00000002
-#define _IPC21_AD1D25IP_MASK                     0x0000001C
-#define _IPC21_AD1D25IP_LENGTH                   0x00000003
+#define _IPC21_ADCD25IP_POSITION                 0x00000002
+#define _IPC21_ADCD25IP_MASK                     0x0000001C
+#define _IPC21_ADCD25IP_LENGTH                   0x00000003
 
-#define _IPC21_AD1D26IS_POSITION                 0x00000008
-#define _IPC21_AD1D26IS_MASK                     0x00000300
-#define _IPC21_AD1D26IS_LENGTH                   0x00000002
+#define _IPC21_ADCD26IS_POSITION                 0x00000008
+#define _IPC21_ADCD26IS_MASK                     0x00000300
+#define _IPC21_ADCD26IS_LENGTH                   0x00000002
 
-#define _IPC21_AD1D26IP_POSITION                 0x0000000A
-#define _IPC21_AD1D26IP_MASK                     0x00001C00
-#define _IPC21_AD1D26IP_LENGTH                   0x00000003
+#define _IPC21_ADCD26IP_POSITION                 0x0000000A
+#define _IPC21_ADCD26IP_MASK                     0x00001C00
+#define _IPC21_ADCD26IP_LENGTH                   0x00000003
 
-#define _IPC21_AD1D27IS_POSITION                 0x00000010
-#define _IPC21_AD1D27IS_MASK                     0x00030000
-#define _IPC21_AD1D27IS_LENGTH                   0x00000002
+#define _IPC21_ADCD27IS_POSITION                 0x00000010
+#define _IPC21_ADCD27IS_MASK                     0x00030000
+#define _IPC21_ADCD27IS_LENGTH                   0x00000002
 
-#define _IPC21_AD1D27IP_POSITION                 0x00000012
-#define _IPC21_AD1D27IP_MASK                     0x001C0000
-#define _IPC21_AD1D27IP_LENGTH                   0x00000003
+#define _IPC21_ADCD27IP_POSITION                 0x00000012
+#define _IPC21_ADCD27IP_MASK                     0x001C0000
+#define _IPC21_ADCD27IP_LENGTH                   0x00000003
 
-#define _IPC21_AD1D28IS_POSITION                 0x00000018
-#define _IPC21_AD1D28IS_MASK                     0x03000000
-#define _IPC21_AD1D28IS_LENGTH                   0x00000002
+#define _IPC21_ADCD28IS_POSITION                 0x00000018
+#define _IPC21_ADCD28IS_MASK                     0x03000000
+#define _IPC21_ADCD28IS_LENGTH                   0x00000002
 
-#define _IPC21_AD1D28IP_POSITION                 0x0000001A
-#define _IPC21_AD1D28IP_MASK                     0x1C000000
-#define _IPC21_AD1D28IP_LENGTH                   0x00000003
+#define _IPC21_ADCD28IP_POSITION                 0x0000001A
+#define _IPC21_ADCD28IP_MASK                     0x1C000000
+#define _IPC21_ADCD28IP_LENGTH                   0x00000003
 
 #define _IPC21_w_POSITION                        0x00000000
 #define _IPC21_w_MASK                            0xFFFFFFFF
 #define _IPC21_w_LENGTH                          0x00000020
 
-#define _IPC22_AD1D29IS_POSITION                 0x00000000
-#define _IPC22_AD1D29IS_MASK                     0x00000003
-#define _IPC22_AD1D29IS_LENGTH                   0x00000002
+#define _IPC22_ADCD29IS_POSITION                 0x00000000
+#define _IPC22_ADCD29IS_MASK                     0x00000003
+#define _IPC22_ADCD29IS_LENGTH                   0x00000002
 
-#define _IPC22_AD1D29IP_POSITION                 0x00000002
-#define _IPC22_AD1D29IP_MASK                     0x0000001C
-#define _IPC22_AD1D29IP_LENGTH                   0x00000003
+#define _IPC22_ADCD29IP_POSITION                 0x00000002
+#define _IPC22_ADCD29IP_MASK                     0x0000001C
+#define _IPC22_ADCD29IP_LENGTH                   0x00000003
 
-#define _IPC22_AD1D30IS_POSITION                 0x00000008
-#define _IPC22_AD1D30IS_MASK                     0x00000300
-#define _IPC22_AD1D30IS_LENGTH                   0x00000002
+#define _IPC22_ADCD30IS_POSITION                 0x00000008
+#define _IPC22_ADCD30IS_MASK                     0x00000300
+#define _IPC22_ADCD30IS_LENGTH                   0x00000002
 
-#define _IPC22_AD1D30IP_POSITION                 0x0000000A
-#define _IPC22_AD1D30IP_MASK                     0x00001C00
-#define _IPC22_AD1D30IP_LENGTH                   0x00000003
+#define _IPC22_ADCD30IP_POSITION                 0x0000000A
+#define _IPC22_ADCD30IP_MASK                     0x00001C00
+#define _IPC22_ADCD30IP_LENGTH                   0x00000003
 
-#define _IPC22_AD1D31IS_POSITION                 0x00000010
-#define _IPC22_AD1D31IS_MASK                     0x00030000
-#define _IPC22_AD1D31IS_LENGTH                   0x00000002
+#define _IPC22_ADCD31IS_POSITION                 0x00000010
+#define _IPC22_ADCD31IS_MASK                     0x00030000
+#define _IPC22_ADCD31IS_LENGTH                   0x00000002
 
-#define _IPC22_AD1D31IP_POSITION                 0x00000012
-#define _IPC22_AD1D31IP_MASK                     0x001C0000
-#define _IPC22_AD1D31IP_LENGTH                   0x00000003
+#define _IPC22_ADCD31IP_POSITION                 0x00000012
+#define _IPC22_ADCD31IP_MASK                     0x001C0000
+#define _IPC22_ADCD31IP_LENGTH                   0x00000003
 
-#define _IPC22_AD1D32IS_POSITION                 0x00000018
-#define _IPC22_AD1D32IS_MASK                     0x03000000
-#define _IPC22_AD1D32IS_LENGTH                   0x00000002
+#define _IPC22_ADCD32IS_POSITION                 0x00000018
+#define _IPC22_ADCD32IS_MASK                     0x03000000
+#define _IPC22_ADCD32IS_LENGTH                   0x00000002
 
-#define _IPC22_AD1D32IP_POSITION                 0x0000001A
-#define _IPC22_AD1D32IP_MASK                     0x1C000000
-#define _IPC22_AD1D32IP_LENGTH                   0x00000003
+#define _IPC22_ADCD32IP_POSITION                 0x0000001A
+#define _IPC22_ADCD32IP_MASK                     0x1C000000
+#define _IPC22_ADCD32IP_LENGTH                   0x00000003
 
 #define _IPC22_w_POSITION                        0x00000000
 #define _IPC22_w_MASK                            0xFFFFFFFF
 #define _IPC22_w_LENGTH                          0x00000020
 
-#define _IPC23_AD1D33IS_POSITION                 0x00000000
-#define _IPC23_AD1D33IS_MASK                     0x00000003
-#define _IPC23_AD1D33IS_LENGTH                   0x00000002
+#define _IPC23_ADCD33IS_POSITION                 0x00000000
+#define _IPC23_ADCD33IS_MASK                     0x00000003
+#define _IPC23_ADCD33IS_LENGTH                   0x00000002
 
-#define _IPC23_AD1D33IP_POSITION                 0x00000002
-#define _IPC23_AD1D33IP_MASK                     0x0000001C
-#define _IPC23_AD1D33IP_LENGTH                   0x00000003
+#define _IPC23_ADCD33IP_POSITION                 0x00000002
+#define _IPC23_ADCD33IP_MASK                     0x0000001C
+#define _IPC23_ADCD33IP_LENGTH                   0x00000003
 
-#define _IPC23_AD1D34IS_POSITION                 0x00000008
-#define _IPC23_AD1D34IS_MASK                     0x00000300
-#define _IPC23_AD1D34IS_LENGTH                   0x00000002
+#define _IPC23_ADCD34IS_POSITION                 0x00000008
+#define _IPC23_ADCD34IS_MASK                     0x00000300
+#define _IPC23_ADCD34IS_LENGTH                   0x00000002
 
-#define _IPC23_AD1D34IP_POSITION                 0x0000000A
-#define _IPC23_AD1D34IP_MASK                     0x00001C00
-#define _IPC23_AD1D34IP_LENGTH                   0x00000003
+#define _IPC23_ADCD34IP_POSITION                 0x0000000A
+#define _IPC23_ADCD34IP_MASK                     0x00001C00
+#define _IPC23_ADCD34IP_LENGTH                   0x00000003
 
-#define _IPC23_AD1D35IS_POSITION                 0x00000010
-#define _IPC23_AD1D35IS_MASK                     0x00030000
-#define _IPC23_AD1D35IS_LENGTH                   0x00000002
+#define _IPC23_ADCD35IS_POSITION                 0x00000010
+#define _IPC23_ADCD35IS_MASK                     0x00030000
+#define _IPC23_ADCD35IS_LENGTH                   0x00000002
 
-#define _IPC23_AD1D35IP_POSITION                 0x00000012
-#define _IPC23_AD1D35IP_MASK                     0x001C0000
-#define _IPC23_AD1D35IP_LENGTH                   0x00000003
+#define _IPC23_ADCD35IP_POSITION                 0x00000012
+#define _IPC23_ADCD35IP_MASK                     0x001C0000
+#define _IPC23_ADCD35IP_LENGTH                   0x00000003
 
-#define _IPC23_AD1D36IS_POSITION                 0x00000018
-#define _IPC23_AD1D36IS_MASK                     0x03000000
-#define _IPC23_AD1D36IS_LENGTH                   0x00000002
+#define _IPC23_ADCD36IS_POSITION                 0x00000018
+#define _IPC23_ADCD36IS_MASK                     0x03000000
+#define _IPC23_ADCD36IS_LENGTH                   0x00000002
 
-#define _IPC23_AD1D36IP_POSITION                 0x0000001A
-#define _IPC23_AD1D36IP_MASK                     0x1C000000
-#define _IPC23_AD1D36IP_LENGTH                   0x00000003
+#define _IPC23_ADCD36IP_POSITION                 0x0000001A
+#define _IPC23_ADCD36IP_MASK                     0x1C000000
+#define _IPC23_ADCD36IP_LENGTH                   0x00000003
 
 #define _IPC23_w_POSITION                        0x00000000
 #define _IPC23_w_MASK                            0xFFFFFFFF
 #define _IPC23_w_LENGTH                          0x00000020
 
-#define _IPC24_AD1D37IS_POSITION                 0x00000000
-#define _IPC24_AD1D37IS_MASK                     0x00000003
-#define _IPC24_AD1D37IS_LENGTH                   0x00000002
+#define _IPC24_ADCD37IS_POSITION                 0x00000000
+#define _IPC24_ADCD37IS_MASK                     0x00000003
+#define _IPC24_ADCD37IS_LENGTH                   0x00000002
 
-#define _IPC24_AD1D37IP_POSITION                 0x00000002
-#define _IPC24_AD1D37IP_MASK                     0x0000001C
-#define _IPC24_AD1D37IP_LENGTH                   0x00000003
+#define _IPC24_ADCD37IP_POSITION                 0x00000002
+#define _IPC24_ADCD37IP_MASK                     0x0000001C
+#define _IPC24_ADCD37IP_LENGTH                   0x00000003
 
-#define _IPC24_AD1D38IS_POSITION                 0x00000008
-#define _IPC24_AD1D38IS_MASK                     0x00000300
-#define _IPC24_AD1D38IS_LENGTH                   0x00000002
+#define _IPC24_ADCD38IS_POSITION                 0x00000008
+#define _IPC24_ADCD38IS_MASK                     0x00000300
+#define _IPC24_ADCD38IS_LENGTH                   0x00000002
 
-#define _IPC24_AD1D38IP_POSITION                 0x0000000A
-#define _IPC24_AD1D38IP_MASK                     0x00001C00
-#define _IPC24_AD1D38IP_LENGTH                   0x00000003
+#define _IPC24_ADCD38IP_POSITION                 0x0000000A
+#define _IPC24_ADCD38IP_MASK                     0x00001C00
+#define _IPC24_ADCD38IP_LENGTH                   0x00000003
 
-#define _IPC24_AD1D39IS_POSITION                 0x00000010
-#define _IPC24_AD1D39IS_MASK                     0x00030000
-#define _IPC24_AD1D39IS_LENGTH                   0x00000002
+#define _IPC24_ADCD39IS_POSITION                 0x00000010
+#define _IPC24_ADCD39IS_MASK                     0x00030000
+#define _IPC24_ADCD39IS_LENGTH                   0x00000002
 
-#define _IPC24_AD1D39IP_POSITION                 0x00000012
-#define _IPC24_AD1D39IP_MASK                     0x001C0000
-#define _IPC24_AD1D39IP_LENGTH                   0x00000003
+#define _IPC24_ADCD39IP_POSITION                 0x00000012
+#define _IPC24_ADCD39IP_MASK                     0x001C0000
+#define _IPC24_ADCD39IP_LENGTH                   0x00000003
 
-#define _IPC24_AD1D40IS_POSITION                 0x00000018
-#define _IPC24_AD1D40IS_MASK                     0x03000000
-#define _IPC24_AD1D40IS_LENGTH                   0x00000002
+#define _IPC24_ADCD40IS_POSITION                 0x00000018
+#define _IPC24_ADCD40IS_MASK                     0x03000000
+#define _IPC24_ADCD40IS_LENGTH                   0x00000002
 
-#define _IPC24_AD1D40IP_POSITION                 0x0000001A
-#define _IPC24_AD1D40IP_MASK                     0x1C000000
-#define _IPC24_AD1D40IP_LENGTH                   0x00000003
+#define _IPC24_ADCD40IP_POSITION                 0x0000001A
+#define _IPC24_ADCD40IP_MASK                     0x1C000000
+#define _IPC24_ADCD40IP_LENGTH                   0x00000003
 
 #define _IPC24_w_POSITION                        0x00000000
 #define _IPC24_w_MASK                            0xFFFFFFFF
 #define _IPC24_w_LENGTH                          0x00000020
 
-#define _IPC25_AD1D41IS_POSITION                 0x00000000
-#define _IPC25_AD1D41IS_MASK                     0x00000003
-#define _IPC25_AD1D41IS_LENGTH                   0x00000002
+#define _IPC25_ADCD41IS_POSITION                 0x00000000
+#define _IPC25_ADCD41IS_MASK                     0x00000003
+#define _IPC25_ADCD41IS_LENGTH                   0x00000002
 
-#define _IPC25_AD1D41IP_POSITION                 0x00000002
-#define _IPC25_AD1D41IP_MASK                     0x0000001C
-#define _IPC25_AD1D41IP_LENGTH                   0x00000003
+#define _IPC25_ADCD41IP_POSITION                 0x00000002
+#define _IPC25_ADCD41IP_MASK                     0x0000001C
+#define _IPC25_ADCD41IP_LENGTH                   0x00000003
 
-#define _IPC25_AD1D42IS_POSITION                 0x00000008
-#define _IPC25_AD1D42IS_MASK                     0x00000300
-#define _IPC25_AD1D42IS_LENGTH                   0x00000002
+#define _IPC25_ADCD42IS_POSITION                 0x00000008
+#define _IPC25_ADCD42IS_MASK                     0x00000300
+#define _IPC25_ADCD42IS_LENGTH                   0x00000002
 
-#define _IPC25_AD1D42IP_POSITION                 0x0000000A
-#define _IPC25_AD1D42IP_MASK                     0x00001C00
-#define _IPC25_AD1D42IP_LENGTH                   0x00000003
+#define _IPC25_ADCD42IP_POSITION                 0x0000000A
+#define _IPC25_ADCD42IP_MASK                     0x00001C00
+#define _IPC25_ADCD42IP_LENGTH                   0x00000003
 
-#define _IPC25_AD1D43IS_POSITION                 0x00000010
-#define _IPC25_AD1D43IS_MASK                     0x00030000
-#define _IPC25_AD1D43IS_LENGTH                   0x00000002
+#define _IPC25_ADCD43IS_POSITION                 0x00000010
+#define _IPC25_ADCD43IS_MASK                     0x00030000
+#define _IPC25_ADCD43IS_LENGTH                   0x00000002
 
-#define _IPC25_AD1D43IP_POSITION                 0x00000012
-#define _IPC25_AD1D43IP_MASK                     0x001C0000
-#define _IPC25_AD1D43IP_LENGTH                   0x00000003
+#define _IPC25_ADCD43IP_POSITION                 0x00000012
+#define _IPC25_ADCD43IP_MASK                     0x001C0000
+#define _IPC25_ADCD43IP_LENGTH                   0x00000003
 
-#define _IPC25_AD1D44IS_POSITION                 0x00000018
-#define _IPC25_AD1D44IS_MASK                     0x03000000
-#define _IPC25_AD1D44IS_LENGTH                   0x00000002
+#define _IPC25_ADCD44IS_POSITION                 0x00000018
+#define _IPC25_ADCD44IS_MASK                     0x03000000
+#define _IPC25_ADCD44IS_LENGTH                   0x00000002
 
-#define _IPC25_AD1D44IP_POSITION                 0x0000001A
-#define _IPC25_AD1D44IP_MASK                     0x1C000000
-#define _IPC25_AD1D44IP_LENGTH                   0x00000003
+#define _IPC25_ADCD44IP_POSITION                 0x0000001A
+#define _IPC25_ADCD44IP_MASK                     0x1C000000
+#define _IPC25_ADCD44IP_LENGTH                   0x00000003
 
 #define _IPC25_w_POSITION                        0x00000000
 #define _IPC25_w_MASK                            0xFFFFFFFF
@@ -34360,117 +35018,117 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _IPC49_ADCGRPIP_MASK                     0x0000001C
 #define _IPC49_ADCGRPIP_LENGTH                   0x00000003
 
-#define _IPC49_AD0EIS_POSITION                   0x00000010
-#define _IPC49_AD0EIS_MASK                       0x00030000
-#define _IPC49_AD0EIS_LENGTH                     0x00000002
+#define _IPC49_ADC0EIS_POSITION                  0x00000010
+#define _IPC49_ADC0EIS_MASK                      0x00030000
+#define _IPC49_ADC0EIS_LENGTH                    0x00000002
 
-#define _IPC49_AD0EIP_POSITION                   0x00000012
-#define _IPC49_AD0EIP_MASK                       0x001C0000
-#define _IPC49_AD0EIP_LENGTH                     0x00000003
+#define _IPC49_ADC0EIP_POSITION                  0x00000012
+#define _IPC49_ADC0EIP_MASK                      0x001C0000
+#define _IPC49_ADC0EIP_LENGTH                    0x00000003
 
-#define _IPC49_AD1EIS_POSITION                   0x00000018
-#define _IPC49_AD1EIS_MASK                       0x03000000
-#define _IPC49_AD1EIS_LENGTH                     0x00000002
+#define _IPC49_ADC1EIS_POSITION                  0x00000018
+#define _IPC49_ADC1EIS_MASK                      0x03000000
+#define _IPC49_ADC1EIS_LENGTH                    0x00000002
 
-#define _IPC49_AD1EIP_POSITION                   0x0000001A
-#define _IPC49_AD1EIP_MASK                       0x1C000000
-#define _IPC49_AD1EIP_LENGTH                     0x00000003
+#define _IPC49_ADC1EIP_POSITION                  0x0000001A
+#define _IPC49_ADC1EIP_MASK                      0x1C000000
+#define _IPC49_ADC1EIP_LENGTH                    0x00000003
 
 #define _IPC49_w_POSITION                        0x00000000
 #define _IPC49_w_MASK                            0xFFFFFFFF
 #define _IPC49_w_LENGTH                          0x00000020
 
-#define _IPC50_AD2EIS_POSITION                   0x00000000
-#define _IPC50_AD2EIS_MASK                       0x00000003
-#define _IPC50_AD2EIS_LENGTH                     0x00000002
+#define _IPC50_ADC2EIS_POSITION                  0x00000000
+#define _IPC50_ADC2EIS_MASK                      0x00000003
+#define _IPC50_ADC2EIS_LENGTH                    0x00000002
 
-#define _IPC50_AD2EIP_POSITION                   0x00000002
-#define _IPC50_AD2EIP_MASK                       0x0000001C
-#define _IPC50_AD2EIP_LENGTH                     0x00000003
+#define _IPC50_ADC2EIP_POSITION                  0x00000002
+#define _IPC50_ADC2EIP_MASK                      0x0000001C
+#define _IPC50_ADC2EIP_LENGTH                    0x00000003
 
-#define _IPC50_AD3EIS_POSITION                   0x00000008
-#define _IPC50_AD3EIS_MASK                       0x00000300
-#define _IPC50_AD3EIS_LENGTH                     0x00000002
+#define _IPC50_ADC3EIS_POSITION                  0x00000008
+#define _IPC50_ADC3EIS_MASK                      0x00000300
+#define _IPC50_ADC3EIS_LENGTH                    0x00000002
 
-#define _IPC50_AD3EIP_POSITION                   0x0000000A
-#define _IPC50_AD3EIP_MASK                       0x00001C00
-#define _IPC50_AD3EIP_LENGTH                     0x00000003
+#define _IPC50_ADC3EIP_POSITION                  0x0000000A
+#define _IPC50_ADC3EIP_MASK                      0x00001C00
+#define _IPC50_ADC3EIP_LENGTH                    0x00000003
 
-#define _IPC50_AD4EIS_POSITION                   0x00000010
-#define _IPC50_AD4EIS_MASK                       0x00030000
-#define _IPC50_AD4EIS_LENGTH                     0x00000002
+#define _IPC50_ADC4EIS_POSITION                  0x00000010
+#define _IPC50_ADC4EIS_MASK                      0x00030000
+#define _IPC50_ADC4EIS_LENGTH                    0x00000002
 
-#define _IPC50_AD4EIP_POSITION                   0x00000012
-#define _IPC50_AD4EIP_MASK                       0x001C0000
-#define _IPC50_AD4EIP_LENGTH                     0x00000003
+#define _IPC50_ADC4EIP_POSITION                  0x00000012
+#define _IPC50_ADC4EIP_MASK                      0x001C0000
+#define _IPC50_ADC4EIP_LENGTH                    0x00000003
 
 #define _IPC50_w_POSITION                        0x00000000
 #define _IPC50_w_MASK                            0xFFFFFFFF
 #define _IPC50_w_LENGTH                          0x00000020
 
-#define _IPC51_AD7EIS_POSITION                   0x00000008
-#define _IPC51_AD7EIS_MASK                       0x00000300
-#define _IPC51_AD7EIS_LENGTH                     0x00000002
+#define _IPC51_ADC7EIS_POSITION                  0x00000008
+#define _IPC51_ADC7EIS_MASK                      0x00000300
+#define _IPC51_ADC7EIS_LENGTH                    0x00000002
 
-#define _IPC51_AD7EIP_POSITION                   0x0000000A
-#define _IPC51_AD7EIP_MASK                       0x00001C00
-#define _IPC51_AD7EIP_LENGTH                     0x00000003
+#define _IPC51_ADC7EIP_POSITION                  0x0000000A
+#define _IPC51_ADC7EIP_MASK                      0x00001C00
+#define _IPC51_ADC7EIP_LENGTH                    0x00000003
 
-#define _IPC51_AD0WIS_POSITION                   0x00000010
-#define _IPC51_AD0WIS_MASK                       0x00030000
-#define _IPC51_AD0WIS_LENGTH                     0x00000002
+#define _IPC51_ADC0WIS_POSITION                  0x00000010
+#define _IPC51_ADC0WIS_MASK                      0x00030000
+#define _IPC51_ADC0WIS_LENGTH                    0x00000002
 
-#define _IPC51_AD0WIP_POSITION                   0x00000012
-#define _IPC51_AD0WIP_MASK                       0x001C0000
-#define _IPC51_AD0WIP_LENGTH                     0x00000003
+#define _IPC51_ADC0WIP_POSITION                  0x00000012
+#define _IPC51_ADC0WIP_MASK                      0x001C0000
+#define _IPC51_ADC0WIP_LENGTH                    0x00000003
 
-#define _IPC51_AD1WIS_POSITION                   0x00000018
-#define _IPC51_AD1WIS_MASK                       0x03000000
-#define _IPC51_AD1WIS_LENGTH                     0x00000002
+#define _IPC51_ADC1WIS_POSITION                  0x00000018
+#define _IPC51_ADC1WIS_MASK                      0x03000000
+#define _IPC51_ADC1WIS_LENGTH                    0x00000002
 
-#define _IPC51_AD1WIP_POSITION                   0x0000001A
-#define _IPC51_AD1WIP_MASK                       0x1C000000
-#define _IPC51_AD1WIP_LENGTH                     0x00000003
+#define _IPC51_ADC1WIP_POSITION                  0x0000001A
+#define _IPC51_ADC1WIP_MASK                      0x1C000000
+#define _IPC51_ADC1WIP_LENGTH                    0x00000003
 
 #define _IPC51_w_POSITION                        0x00000000
 #define _IPC51_w_MASK                            0xFFFFFFFF
 #define _IPC51_w_LENGTH                          0x00000020
 
-#define _IPC52_AD2WIS_POSITION                   0x00000000
-#define _IPC52_AD2WIS_MASK                       0x00000003
-#define _IPC52_AD2WIS_LENGTH                     0x00000002
+#define _IPC52_ADC2WIS_POSITION                  0x00000000
+#define _IPC52_ADC2WIS_MASK                      0x00000003
+#define _IPC52_ADC2WIS_LENGTH                    0x00000002
 
-#define _IPC52_AD2WIP_POSITION                   0x00000002
-#define _IPC52_AD2WIP_MASK                       0x0000001C
-#define _IPC52_AD2WIP_LENGTH                     0x00000003
+#define _IPC52_ADC2WIP_POSITION                  0x00000002
+#define _IPC52_ADC2WIP_MASK                      0x0000001C
+#define _IPC52_ADC2WIP_LENGTH                    0x00000003
 
-#define _IPC52_AD3WIS_POSITION                   0x00000008
-#define _IPC52_AD3WIS_MASK                       0x00000300
-#define _IPC52_AD3WIS_LENGTH                     0x00000002
+#define _IPC52_ADC3WIS_POSITION                  0x00000008
+#define _IPC52_ADC3WIS_MASK                      0x00000300
+#define _IPC52_ADC3WIS_LENGTH                    0x00000002
 
-#define _IPC52_AD3WIP_POSITION                   0x0000000A
-#define _IPC52_AD3WIP_MASK                       0x00001C00
-#define _IPC52_AD3WIP_LENGTH                     0x00000003
+#define _IPC52_ADC3WIP_POSITION                  0x0000000A
+#define _IPC52_ADC3WIP_MASK                      0x00001C00
+#define _IPC52_ADC3WIP_LENGTH                    0x00000003
 
-#define _IPC52_AD4WIS_POSITION                   0x00000010
-#define _IPC52_AD4WIS_MASK                       0x00030000
-#define _IPC52_AD4WIS_LENGTH                     0x00000002
+#define _IPC52_ADC4WIS_POSITION                  0x00000010
+#define _IPC52_ADC4WIS_MASK                      0x00030000
+#define _IPC52_ADC4WIS_LENGTH                    0x00000002
 
-#define _IPC52_AD4WIP_POSITION                   0x00000012
-#define _IPC52_AD4WIP_MASK                       0x001C0000
-#define _IPC52_AD4WIP_LENGTH                     0x00000003
+#define _IPC52_ADC4WIP_POSITION                  0x00000012
+#define _IPC52_ADC4WIP_MASK                      0x001C0000
+#define _IPC52_ADC4WIP_LENGTH                    0x00000003
 
 #define _IPC52_w_POSITION                        0x00000000
 #define _IPC52_w_MASK                            0xFFFFFFFF
 #define _IPC52_w_LENGTH                          0x00000020
 
-#define _IPC53_AD7WIS_POSITION                   0x00000008
-#define _IPC53_AD7WIS_MASK                       0x00000300
-#define _IPC53_AD7WIS_LENGTH                     0x00000002
+#define _IPC53_ADC7WIS_POSITION                  0x00000008
+#define _IPC53_ADC7WIS_MASK                      0x00000300
+#define _IPC53_ADC7WIS_LENGTH                    0x00000002
 
-#define _IPC53_AD7WIP_POSITION                   0x0000000A
-#define _IPC53_AD7WIP_MASK                       0x00001C00
-#define _IPC53_AD7WIP_LENGTH                     0x00000003
+#define _IPC53_ADC7WIP_POSITION                  0x0000000A
+#define _IPC53_ADC7WIP_MASK                      0x00001C00
+#define _IPC53_ADC7WIP_LENGTH                    0x00000003
 
 #define _IPC53_w_POSITION                        0x00000000
 #define _IPC53_w_MASK                            0xFFFFFFFF
@@ -34703,6 +35361,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _OFF057_VOFF_POSITION                    0x00000001
 #define _OFF057_VOFF_MASK                        0x0003FFFE
 #define _OFF057_VOFF_LENGTH                      0x00000011
+
+#define _OFF058_VOFF_POSITION                    0x00000001
+#define _OFF058_VOFF_MASK                        0x0003FFFE
+#define _OFF058_VOFF_LENGTH                      0x00000011
 
 #define _OFF059_VOFF_POSITION                    0x00000001
 #define _OFF059_VOFF_MASK                        0x0003FFFE
@@ -40828,6 +41490,14 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _PMCON_ON_MASK                           0x00008000
 #define _PMCON_ON_LENGTH                         0x00000001
 
+#define _PMCON_DUALBUF_POSITION                  0x00000011
+#define _PMCON_DUALBUF_MASK                      0x00020000
+#define _PMCON_DUALBUF_LENGTH                    0x00000001
+
+#define _PMCON_RDSTART_POSITION                  0x00000017
+#define _PMCON_RDSTART_MASK                      0x00800000
+#define _PMCON_RDSTART_LENGTH                    0x00000001
+
 #define _PMCON_CSF0_POSITION                     0x00000006
 #define _PMCON_CSF0_MASK                         0x00000040
 #define _PMCON_CSF0_LENGTH                       0x00000001
@@ -40952,13 +41622,17 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _PMADDR_ADDR_MASK                        0x00003FFF
 #define _PMADDR_ADDR_LENGTH                      0x0000000E
 
+#define _PMADDR_ADDR14_POSITION                  0x0000000E
+#define _PMADDR_ADDR14_MASK                      0x00004000
+#define _PMADDR_ADDR14_LENGTH                    0x00000001
+
+#define _PMADDR_ADDR15_POSITION                  0x0000000F
+#define _PMADDR_ADDR15_MASK                      0x00008000
+#define _PMADDR_ADDR15_LENGTH                    0x00000001
+
 #define _PMADDR_CS_POSITION                      0x0000000E
 #define _PMADDR_CS_MASK                          0x0000C000
 #define _PMADDR_CS_LENGTH                        0x00000002
-
-#define _PMADDR_PADDR_POSITION                   0x00000000
-#define _PMADDR_PADDR_MASK                       0x00003FFF
-#define _PMADDR_PADDR_LENGTH                     0x0000000E
 
 #define _PMADDR_CS1_POSITION                     0x0000000E
 #define _PMADDR_CS1_MASK                         0x00004000
@@ -40989,72 +41663,8 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _PMDIN_w_LENGTH                          0x00000020
 
 #define _PMAEN_PTEN_POSITION                     0x00000000
-#define _PMAEN_PTEN_MASK                         0x0000FFFF
-#define _PMAEN_PTEN_LENGTH                       0x00000010
-
-#define _PMAEN_PTEN0_POSITION                    0x00000000
-#define _PMAEN_PTEN0_MASK                        0x00000001
-#define _PMAEN_PTEN0_LENGTH                      0x00000001
-
-#define _PMAEN_PTEN1_POSITION                    0x00000001
-#define _PMAEN_PTEN1_MASK                        0x00000002
-#define _PMAEN_PTEN1_LENGTH                      0x00000001
-
-#define _PMAEN_PTEN2_POSITION                    0x00000002
-#define _PMAEN_PTEN2_MASK                        0x00000004
-#define _PMAEN_PTEN2_LENGTH                      0x00000001
-
-#define _PMAEN_PTEN3_POSITION                    0x00000003
-#define _PMAEN_PTEN3_MASK                        0x00000008
-#define _PMAEN_PTEN3_LENGTH                      0x00000001
-
-#define _PMAEN_PTEN4_POSITION                    0x00000004
-#define _PMAEN_PTEN4_MASK                        0x00000010
-#define _PMAEN_PTEN4_LENGTH                      0x00000001
-
-#define _PMAEN_PTEN5_POSITION                    0x00000005
-#define _PMAEN_PTEN5_MASK                        0x00000020
-#define _PMAEN_PTEN5_LENGTH                      0x00000001
-
-#define _PMAEN_PTEN6_POSITION                    0x00000006
-#define _PMAEN_PTEN6_MASK                        0x00000040
-#define _PMAEN_PTEN6_LENGTH                      0x00000001
-
-#define _PMAEN_PTEN7_POSITION                    0x00000007
-#define _PMAEN_PTEN7_MASK                        0x00000080
-#define _PMAEN_PTEN7_LENGTH                      0x00000001
-
-#define _PMAEN_PTEN8_POSITION                    0x00000008
-#define _PMAEN_PTEN8_MASK                        0x00000100
-#define _PMAEN_PTEN8_LENGTH                      0x00000001
-
-#define _PMAEN_PTEN9_POSITION                    0x00000009
-#define _PMAEN_PTEN9_MASK                        0x00000200
-#define _PMAEN_PTEN9_LENGTH                      0x00000001
-
-#define _PMAEN_PTEN10_POSITION                   0x0000000A
-#define _PMAEN_PTEN10_MASK                       0x00000400
-#define _PMAEN_PTEN10_LENGTH                     0x00000001
-
-#define _PMAEN_PTEN11_POSITION                   0x0000000B
-#define _PMAEN_PTEN11_MASK                       0x00000800
-#define _PMAEN_PTEN11_LENGTH                     0x00000001
-
-#define _PMAEN_PTEN12_POSITION                   0x0000000C
-#define _PMAEN_PTEN12_MASK                       0x00001000
-#define _PMAEN_PTEN12_LENGTH                     0x00000001
-
-#define _PMAEN_PTEN13_POSITION                   0x0000000D
-#define _PMAEN_PTEN13_MASK                       0x00002000
-#define _PMAEN_PTEN13_LENGTH                     0x00000001
-
-#define _PMAEN_PTEN14_POSITION                   0x0000000E
-#define _PMAEN_PTEN14_MASK                       0x00004000
-#define _PMAEN_PTEN14_LENGTH                     0x00000001
-
-#define _PMAEN_PTEN15_POSITION                   0x0000000F
-#define _PMAEN_PTEN15_MASK                       0x00008000
-#define _PMAEN_PTEN15_LENGTH                     0x00000001
+#define _PMAEN_PTEN_MASK                         0x00FFFFFF
+#define _PMAEN_PTEN_LENGTH                       0x00000018
 
 #define _PMAEN_w_POSITION                        0x00000000
 #define _PMAEN_w_MASK                            0xFFFFFFFF
@@ -41111,6 +41721,70 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _PMSTAT_w_POSITION                       0x00000000
 #define _PMSTAT_w_MASK                           0xFFFFFFFF
 #define _PMSTAT_w_LENGTH                         0x00000020
+
+#define _PMWADDR_WADDR_POSITION                  0x00000000
+#define _PMWADDR_WADDR_MASK                      0x00003FFF
+#define _PMWADDR_WADDR_LENGTH                    0x0000000E
+
+#define _PMWADDR_WADDR14_POSITION                0x0000000E
+#define _PMWADDR_WADDR14_MASK                    0x00004000
+#define _PMWADDR_WADDR14_LENGTH                  0x00000001
+
+#define _PMWADDR_WADDR15_POSITION                0x0000000F
+#define _PMWADDR_WADDR15_MASK                    0x00008000
+#define _PMWADDR_WADDR15_LENGTH                  0x00000001
+
+#define _PMWADDR_WCS_POSITION                    0x0000000E
+#define _PMWADDR_WCS_MASK                        0x0000C000
+#define _PMWADDR_WCS_LENGTH                      0x00000002
+
+#define _PMWADDR_WCS1_POSITION                   0x0000000E
+#define _PMWADDR_WCS1_MASK                       0x00004000
+#define _PMWADDR_WCS1_LENGTH                     0x00000001
+
+#define _PMWADDR_WCS2_POSITION                   0x0000000F
+#define _PMWADDR_WCS2_MASK                       0x00008000
+#define _PMWADDR_WCS2_LENGTH                     0x00000001
+
+#define _PMWADDR_w_POSITION                      0x00000000
+#define _PMWADDR_w_MASK                          0xFFFFFFFF
+#define _PMWADDR_w_LENGTH                        0x00000020
+
+#define _PMRADDR_RADDR_POSITION                  0x00000000
+#define _PMRADDR_RADDR_MASK                      0x00003FFF
+#define _PMRADDR_RADDR_LENGTH                    0x0000000E
+
+#define _PMRADDR_RADDR14_POSITION                0x0000000E
+#define _PMRADDR_RADDR14_MASK                    0x00004000
+#define _PMRADDR_RADDR14_LENGTH                  0x00000001
+
+#define _PMRADDR_RADDR15_POSITION                0x0000000F
+#define _PMRADDR_RADDR15_MASK                    0x00008000
+#define _PMRADDR_RADDR15_LENGTH                  0x00000001
+
+#define _PMRADDR_RCS_POSITION                    0x0000000E
+#define _PMRADDR_RCS_MASK                        0x0000C000
+#define _PMRADDR_RCS_LENGTH                      0x00000002
+
+#define _PMRADDR_RCS1_POSITION                   0x0000000E
+#define _PMRADDR_RCS1_MASK                       0x00004000
+#define _PMRADDR_RCS1_LENGTH                     0x00000001
+
+#define _PMRADDR_RCS2_POSITION                   0x0000000F
+#define _PMRADDR_RCS2_MASK                       0x00008000
+#define _PMRADDR_RCS2_LENGTH                     0x00000001
+
+#define _PMRADDR_w_POSITION                      0x00000000
+#define _PMRADDR_w_MASK                          0xFFFFFFFF
+#define _PMRADDR_w_LENGTH                        0x00000020
+
+#define _PMRDIN_RDATAIN_POSITION                 0x00000000
+#define _PMRDIN_RDATAIN_MASK                     0xFFFFFFFF
+#define _PMRDIN_RDATAIN_LENGTH                   0x00000020
+
+#define _PMRDIN_w_POSITION                       0x00000000
+#define _PMRDIN_w_MASK                           0xFFFFFFFF
+#define _PMRDIN_w_LENGTH                         0x00000020
 
 #define _T1CON_TCS_POSITION                      0x00000001
 #define _T1CON_TCS_MASK                          0x00000002
@@ -44692,86 +45366,6 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _ADCTRG3_TRGSRC11_MASK                   0x1F000000
 #define _ADCTRG3_TRGSRC11_LENGTH                 0x00000005
 
-#define _ADCTRG4_TRGSRC12_POSITION               0x00000000
-#define _ADCTRG4_TRGSRC12_MASK                   0x0000001F
-#define _ADCTRG4_TRGSRC12_LENGTH                 0x00000005
-
-#define _ADCTRG4_TRGSRC13_POSITION               0x00000008
-#define _ADCTRG4_TRGSRC13_MASK                   0x00001F00
-#define _ADCTRG4_TRGSRC13_LENGTH                 0x00000005
-
-#define _ADCTRG4_TRGSRC14_POSITION               0x00000010
-#define _ADCTRG4_TRGSRC14_MASK                   0x001F0000
-#define _ADCTRG4_TRGSRC14_LENGTH                 0x00000005
-
-#define _ADCTRG4_TRGSRC15_POSITION               0x00000018
-#define _ADCTRG4_TRGSRC15_MASK                   0x1F000000
-#define _ADCTRG4_TRGSRC15_LENGTH                 0x00000005
-
-#define _ADCTRG5_TRGSRC16_POSITION               0x00000000
-#define _ADCTRG5_TRGSRC16_MASK                   0x0000001F
-#define _ADCTRG5_TRGSRC16_LENGTH                 0x00000005
-
-#define _ADCTRG5_TRGSRC17_POSITION               0x00000008
-#define _ADCTRG5_TRGSRC17_MASK                   0x00001F00
-#define _ADCTRG5_TRGSRC17_LENGTH                 0x00000005
-
-#define _ADCTRG5_TRGSRC18_POSITION               0x00000010
-#define _ADCTRG5_TRGSRC18_MASK                   0x001F0000
-#define _ADCTRG5_TRGSRC18_LENGTH                 0x00000005
-
-#define _ADCTRG5_TRGSRC19_POSITION               0x00000018
-#define _ADCTRG5_TRGSRC19_MASK                   0x1F000000
-#define _ADCTRG5_TRGSRC19_LENGTH                 0x00000005
-
-#define _ADCTRG6_TRGSRC20_POSITION               0x00000000
-#define _ADCTRG6_TRGSRC20_MASK                   0x0000001F
-#define _ADCTRG6_TRGSRC20_LENGTH                 0x00000005
-
-#define _ADCTRG6_TRGSRC21_POSITION               0x00000008
-#define _ADCTRG6_TRGSRC21_MASK                   0x00001F00
-#define _ADCTRG6_TRGSRC21_LENGTH                 0x00000005
-
-#define _ADCTRG6_TRGSRC22_POSITION               0x00000010
-#define _ADCTRG6_TRGSRC22_MASK                   0x001F0000
-#define _ADCTRG6_TRGSRC22_LENGTH                 0x00000005
-
-#define _ADCTRG6_TRGSRC23_POSITION               0x00000018
-#define _ADCTRG6_TRGSRC23_MASK                   0x1F000000
-#define _ADCTRG6_TRGSRC23_LENGTH                 0x00000005
-
-#define _ADCTRG7_TRGSRC24_POSITION               0x00000000
-#define _ADCTRG7_TRGSRC24_MASK                   0x0000001F
-#define _ADCTRG7_TRGSRC24_LENGTH                 0x00000005
-
-#define _ADCTRG7_TRGSRC25_POSITION               0x00000008
-#define _ADCTRG7_TRGSRC25_MASK                   0x00001F00
-#define _ADCTRG7_TRGSRC25_LENGTH                 0x00000005
-
-#define _ADCTRG7_TRGSRC26_POSITION               0x00000010
-#define _ADCTRG7_TRGSRC26_MASK                   0x001F0000
-#define _ADCTRG7_TRGSRC26_LENGTH                 0x00000005
-
-#define _ADCTRG7_TRGSRC27_POSITION               0x00000018
-#define _ADCTRG7_TRGSRC27_MASK                   0x1F000000
-#define _ADCTRG7_TRGSRC27_LENGTH                 0x00000005
-
-#define _ADCTRG8_TRGSRC28_POSITION               0x00000000
-#define _ADCTRG8_TRGSRC28_MASK                   0x0000001F
-#define _ADCTRG8_TRGSRC28_LENGTH                 0x00000005
-
-#define _ADCTRG8_TRGSRC29_POSITION               0x00000008
-#define _ADCTRG8_TRGSRC29_MASK                   0x00001F00
-#define _ADCTRG8_TRGSRC29_LENGTH                 0x00000005
-
-#define _ADCTRG8_TRGSRC30_POSITION               0x00000010
-#define _ADCTRG8_TRGSRC30_MASK                   0x001F0000
-#define _ADCTRG8_TRGSRC30_LENGTH                 0x00000005
-
-#define _ADCTRG8_TRGSRC31_POSITION               0x00000018
-#define _ADCTRG8_TRGSRC31_MASK                   0x1F000000
-#define _ADCTRG8_TRGSRC31_LENGTH                 0x00000005
-
 #define _ADCCMPCON1_IELOLO_POSITION              0x00000000
 #define _ADCCMPCON1_IELOLO_MASK                  0x00000001
 #define _ADCCMPCON1_IELOLO_LENGTH                0x00000001
@@ -45043,86 +45637,6 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _ADCTRGSNS_LVL11_POSITION                0x0000000B
 #define _ADCTRGSNS_LVL11_MASK                    0x00000800
 #define _ADCTRGSNS_LVL11_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL12_POSITION                0x0000000C
-#define _ADCTRGSNS_LVL12_MASK                    0x00001000
-#define _ADCTRGSNS_LVL12_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL13_POSITION                0x0000000D
-#define _ADCTRGSNS_LVL13_MASK                    0x00002000
-#define _ADCTRGSNS_LVL13_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL14_POSITION                0x0000000E
-#define _ADCTRGSNS_LVL14_MASK                    0x00004000
-#define _ADCTRGSNS_LVL14_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL15_POSITION                0x0000000F
-#define _ADCTRGSNS_LVL15_MASK                    0x00008000
-#define _ADCTRGSNS_LVL15_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL16_POSITION                0x00000010
-#define _ADCTRGSNS_LVL16_MASK                    0x00010000
-#define _ADCTRGSNS_LVL16_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL17_POSITION                0x00000011
-#define _ADCTRGSNS_LVL17_MASK                    0x00020000
-#define _ADCTRGSNS_LVL17_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL18_POSITION                0x00000012
-#define _ADCTRGSNS_LVL18_MASK                    0x00040000
-#define _ADCTRGSNS_LVL18_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL19_POSITION                0x00000013
-#define _ADCTRGSNS_LVL19_MASK                    0x00080000
-#define _ADCTRGSNS_LVL19_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL20_POSITION                0x00000014
-#define _ADCTRGSNS_LVL20_MASK                    0x00100000
-#define _ADCTRGSNS_LVL20_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL21_POSITION                0x00000015
-#define _ADCTRGSNS_LVL21_MASK                    0x00200000
-#define _ADCTRGSNS_LVL21_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL22_POSITION                0x00000016
-#define _ADCTRGSNS_LVL22_MASK                    0x00400000
-#define _ADCTRGSNS_LVL22_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL23_POSITION                0x00000017
-#define _ADCTRGSNS_LVL23_MASK                    0x00800000
-#define _ADCTRGSNS_LVL23_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL24_POSITION                0x00000018
-#define _ADCTRGSNS_LVL24_MASK                    0x01000000
-#define _ADCTRGSNS_LVL24_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL25_POSITION                0x00000019
-#define _ADCTRGSNS_LVL25_MASK                    0x02000000
-#define _ADCTRGSNS_LVL25_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL26_POSITION                0x0000001A
-#define _ADCTRGSNS_LVL26_MASK                    0x04000000
-#define _ADCTRGSNS_LVL26_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL27_POSITION                0x0000001B
-#define _ADCTRGSNS_LVL27_MASK                    0x08000000
-#define _ADCTRGSNS_LVL27_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL28_POSITION                0x0000001C
-#define _ADCTRGSNS_LVL28_MASK                    0x10000000
-#define _ADCTRGSNS_LVL28_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL29_POSITION                0x0000001D
-#define _ADCTRGSNS_LVL29_MASK                    0x20000000
-#define _ADCTRGSNS_LVL29_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL30_POSITION                0x0000001E
-#define _ADCTRGSNS_LVL30_MASK                    0x40000000
-#define _ADCTRGSNS_LVL30_LENGTH                  0x00000001
-
-#define _ADCTRGSNS_LVL31_POSITION                0x0000001F
-#define _ADCTRGSNS_LVL31_MASK                    0x80000000
-#define _ADCTRGSNS_LVL31_LENGTH                  0x00000001
 
 #define _ADC0TIME_SAMC_POSITION                  0x00000000
 #define _ADC0TIME_SAMC_MASK                      0x000003FF
@@ -45640,6 +46154,30 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _ADCANCON_WKUPCLKCNT_MASK                0x0F000000
 #define _ADCANCON_WKUPCLKCNT_LENGTH              0x00000004
 
+#define _ADC0CFG_ADCCFG_POSITION                 0x00000000
+#define _ADC0CFG_ADCCFG_MASK                     0xFFFFFFFF
+#define _ADC0CFG_ADCCFG_LENGTH                   0x00000020
+
+#define _ADC1CFG_ADCCFG_POSITION                 0x00000000
+#define _ADC1CFG_ADCCFG_MASK                     0xFFFFFFFF
+#define _ADC1CFG_ADCCFG_LENGTH                   0x00000020
+
+#define _ADC2CFG_ADCCFG_POSITION                 0x00000000
+#define _ADC2CFG_ADCCFG_MASK                     0xFFFFFFFF
+#define _ADC2CFG_ADCCFG_LENGTH                   0x00000020
+
+#define _ADC3CFG_ADCCFG_POSITION                 0x00000000
+#define _ADC3CFG_ADCCFG_MASK                     0xFFFFFFFF
+#define _ADC3CFG_ADCCFG_LENGTH                   0x00000020
+
+#define _ADC4CFG_ADCCFG_POSITION                 0x00000000
+#define _ADC4CFG_ADCCFG_MASK                     0xFFFFFFFF
+#define _ADC4CFG_ADCCFG_LENGTH                   0x00000020
+
+#define _ADC7CFG_ADCCFG_POSITION                 0x00000000
+#define _ADC7CFG_ADCCFG_MASK                     0xFFFFFFFF
+#define _ADC7CFG_ADCCFG_LENGTH                   0x00000020
+
 #define _ADCSYSCFG0_AN0_POSITION                 0x00000000
 #define _ADCSYSCFG0_AN0_MASK                     0x00000001
 #define _ADCSYSCFG0_AN0_LENGTH                   0x00000001
@@ -45820,29 +46358,81 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _ADCSYSCFG1_AN44_MASK                    0x00001000
 #define _ADCSYSCFG1_AN44_LENGTH                  0x00000001
 
-#define _ADC0CFG_ADCCFG_POSITION                 0x00000000
-#define _ADC0CFG_ADCCFG_MASK                     0xFFFFFFFF
-#define _ADC0CFG_ADCCFG_LENGTH                   0x00000020
+#define _ADCSYSCFG1_AN45_POSITION                0x0000000D
+#define _ADCSYSCFG1_AN45_MASK                    0x00002000
+#define _ADCSYSCFG1_AN45_LENGTH                  0x00000001
 
-#define _ADC1CFG_ADCCFG_POSITION                 0x00000000
-#define _ADC1CFG_ADCCFG_MASK                     0xFFFFFFFF
-#define _ADC1CFG_ADCCFG_LENGTH                   0x00000020
+#define _ADCSYSCFG1_AN46_POSITION                0x0000000E
+#define _ADCSYSCFG1_AN46_MASK                    0x00004000
+#define _ADCSYSCFG1_AN46_LENGTH                  0x00000001
 
-#define _ADC2CFG_ADCCFG_POSITION                 0x00000000
-#define _ADC2CFG_ADCCFG_MASK                     0xFFFFFFFF
-#define _ADC2CFG_ADCCFG_LENGTH                   0x00000020
+#define _ADCSYSCFG1_AN47_POSITION                0x0000000F
+#define _ADCSYSCFG1_AN47_MASK                    0x00008000
+#define _ADCSYSCFG1_AN47_LENGTH                  0x00000001
 
-#define _ADC3CFG_ADCCFG_POSITION                 0x00000000
-#define _ADC3CFG_ADCCFG_MASK                     0xFFFFFFFF
-#define _ADC3CFG_ADCCFG_LENGTH                   0x00000020
+#define _ADCSYSCFG1_AN48_POSITION                0x00000010
+#define _ADCSYSCFG1_AN48_MASK                    0x00010000
+#define _ADCSYSCFG1_AN48_LENGTH                  0x00000001
 
-#define _ADC4CFG_ADCCFG_POSITION                 0x00000000
-#define _ADC4CFG_ADCCFG_MASK                     0xFFFFFFFF
-#define _ADC4CFG_ADCCFG_LENGTH                   0x00000020
+#define _ADCSYSCFG1_AN49_POSITION                0x00000011
+#define _ADCSYSCFG1_AN49_MASK                    0x00020000
+#define _ADCSYSCFG1_AN49_LENGTH                  0x00000001
 
-#define _ADC7CFG_ADCCFG_POSITION                 0x00000000
-#define _ADC7CFG_ADCCFG_MASK                     0xFFFFFFFF
-#define _ADC7CFG_ADCCFG_LENGTH                   0x00000020
+#define _ADCSYSCFG1_AN50_POSITION                0x00000012
+#define _ADCSYSCFG1_AN50_MASK                    0x00040000
+#define _ADCSYSCFG1_AN50_LENGTH                  0x00000001
+
+#define _ADCSYSCFG1_AN51_POSITION                0x00000013
+#define _ADCSYSCFG1_AN51_MASK                    0x00080000
+#define _ADCSYSCFG1_AN51_LENGTH                  0x00000001
+
+#define _ADCSYSCFG1_AN52_POSITION                0x00000014
+#define _ADCSYSCFG1_AN52_MASK                    0x00100000
+#define _ADCSYSCFG1_AN52_LENGTH                  0x00000001
+
+#define _ADCSYSCFG1_AN53_POSITION                0x00000015
+#define _ADCSYSCFG1_AN53_MASK                    0x00200000
+#define _ADCSYSCFG1_AN53_LENGTH                  0x00000001
+
+#define _ADCSYSCFG1_AN54_POSITION                0x00000016
+#define _ADCSYSCFG1_AN54_MASK                    0x00400000
+#define _ADCSYSCFG1_AN54_LENGTH                  0x00000001
+
+#define _ADCSYSCFG1_AN55_POSITION                0x00000017
+#define _ADCSYSCFG1_AN55_MASK                    0x00800000
+#define _ADCSYSCFG1_AN55_LENGTH                  0x00000001
+
+#define _ADCSYSCFG1_AN56_POSITION                0x00000018
+#define _ADCSYSCFG1_AN56_MASK                    0x01000000
+#define _ADCSYSCFG1_AN56_LENGTH                  0x00000001
+
+#define _ADCSYSCFG1_AN57_POSITION                0x00000019
+#define _ADCSYSCFG1_AN57_MASK                    0x02000000
+#define _ADCSYSCFG1_AN57_LENGTH                  0x00000001
+
+#define _ADCSYSCFG1_AN58_POSITION                0x0000001A
+#define _ADCSYSCFG1_AN58_MASK                    0x04000000
+#define _ADCSYSCFG1_AN58_LENGTH                  0x00000001
+
+#define _ADCSYSCFG1_AN59_POSITION                0x0000001B
+#define _ADCSYSCFG1_AN59_MASK                    0x08000000
+#define _ADCSYSCFG1_AN59_LENGTH                  0x00000001
+
+#define _ADCSYSCFG1_AN60_POSITION                0x0000001C
+#define _ADCSYSCFG1_AN60_MASK                    0x10000000
+#define _ADCSYSCFG1_AN60_LENGTH                  0x00000001
+
+#define _ADCSYSCFG1_AN61_POSITION                0x0000001D
+#define _ADCSYSCFG1_AN61_MASK                    0x20000000
+#define _ADCSYSCFG1_AN61_LENGTH                  0x00000001
+
+#define _ADCSYSCFG1_AN62_POSITION                0x0000001E
+#define _ADCSYSCFG1_AN62_MASK                    0x40000000
+#define _ADCSYSCFG1_AN62_LENGTH                  0x00000001
+
+#define _ADCSYSCFG1_AN63_POSITION                0x0000001F
+#define _ADCSYSCFG1_AN63_MASK                    0x80000000
+#define _ADCSYSCFG1_AN63_LENGTH                  0x00000001
 
 #define _ADCDATA0_DATA_POSITION                  0x00000000
 #define _ADCDATA0_DATA_MASK                      0xFFFFFFFF
@@ -46472,6 +47062,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNPDA_w_MASK                            0xFFFFFFFF
 #define _CNPDA_w_LENGTH                          0x00000020
 
+#define _CNCONA_EDGEDETECT_POSITION              0x0000000B
+#define _CNCONA_EDGEDETECT_MASK                  0x00000800
+#define _CNCONA_EDGEDETECT_LENGTH                0x00000001
+
 #define _CNCONA_SIDL_POSITION                    0x0000000D
 #define _CNCONA_SIDL_MASK                        0x00002000
 #define _CNCONA_SIDL_LENGTH                      0x00000001
@@ -46588,13 +47182,101 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNSTATA_w_MASK                          0xFFFFFFFF
 #define _CNSTATA_w_LENGTH                        0x00000020
 
-#define _SRCON1A_SR1A6_POSITION                  0x00000006
-#define _SRCON1A_SR1A6_MASK                      0x00000040
-#define _SRCON1A_SR1A6_LENGTH                    0x00000001
+#define _CNNEA_CNNEA0_POSITION                   0x00000000
+#define _CNNEA_CNNEA0_MASK                       0x00000001
+#define _CNNEA_CNNEA0_LENGTH                     0x00000001
 
-#define _SRCON1A_SR1A7_POSITION                  0x00000007
-#define _SRCON1A_SR1A7_MASK                      0x00000080
-#define _SRCON1A_SR1A7_LENGTH                    0x00000001
+#define _CNNEA_CNNEA1_POSITION                   0x00000001
+#define _CNNEA_CNNEA1_MASK                       0x00000002
+#define _CNNEA_CNNEA1_LENGTH                     0x00000001
+
+#define _CNNEA_CNNEA2_POSITION                   0x00000002
+#define _CNNEA_CNNEA2_MASK                       0x00000004
+#define _CNNEA_CNNEA2_LENGTH                     0x00000001
+
+#define _CNNEA_CNNEA3_POSITION                   0x00000003
+#define _CNNEA_CNNEA3_MASK                       0x00000008
+#define _CNNEA_CNNEA3_LENGTH                     0x00000001
+
+#define _CNNEA_CNNEA4_POSITION                   0x00000004
+#define _CNNEA_CNNEA4_MASK                       0x00000010
+#define _CNNEA_CNNEA4_LENGTH                     0x00000001
+
+#define _CNNEA_CNNEA5_POSITION                   0x00000005
+#define _CNNEA_CNNEA5_MASK                       0x00000020
+#define _CNNEA_CNNEA5_LENGTH                     0x00000001
+
+#define _CNNEA_CNNEA6_POSITION                   0x00000006
+#define _CNNEA_CNNEA6_MASK                       0x00000040
+#define _CNNEA_CNNEA6_LENGTH                     0x00000001
+
+#define _CNNEA_CNNEA7_POSITION                   0x00000007
+#define _CNNEA_CNNEA7_MASK                       0x00000080
+#define _CNNEA_CNNEA7_LENGTH                     0x00000001
+
+#define _CNNEA_CNNEA9_POSITION                   0x00000009
+#define _CNNEA_CNNEA9_MASK                       0x00000200
+#define _CNNEA_CNNEA9_LENGTH                     0x00000001
+
+#define _CNNEA_CNNEA10_POSITION                  0x0000000A
+#define _CNNEA_CNNEA10_MASK                      0x00000400
+#define _CNNEA_CNNEA10_LENGTH                    0x00000001
+
+#define _CNNEA_CNNEA14_POSITION                  0x0000000E
+#define _CNNEA_CNNEA14_MASK                      0x00004000
+#define _CNNEA_CNNEA14_LENGTH                    0x00000001
+
+#define _CNNEA_CNNEA15_POSITION                  0x0000000F
+#define _CNNEA_CNNEA15_MASK                      0x00008000
+#define _CNNEA_CNNEA15_LENGTH                    0x00000001
+
+#define _CNFA_CNFA0_POSITION                     0x00000000
+#define _CNFA_CNFA0_MASK                         0x00000001
+#define _CNFA_CNFA0_LENGTH                       0x00000001
+
+#define _CNFA_CNFA1_POSITION                     0x00000001
+#define _CNFA_CNFA1_MASK                         0x00000002
+#define _CNFA_CNFA1_LENGTH                       0x00000001
+
+#define _CNFA_CNFA2_POSITION                     0x00000002
+#define _CNFA_CNFA2_MASK                         0x00000004
+#define _CNFA_CNFA2_LENGTH                       0x00000001
+
+#define _CNFA_CNFA3_POSITION                     0x00000003
+#define _CNFA_CNFA3_MASK                         0x00000008
+#define _CNFA_CNFA3_LENGTH                       0x00000001
+
+#define _CNFA_CNFA4_POSITION                     0x00000004
+#define _CNFA_CNFA4_MASK                         0x00000010
+#define _CNFA_CNFA4_LENGTH                       0x00000001
+
+#define _CNFA_CNFA5_POSITION                     0x00000005
+#define _CNFA_CNFA5_MASK                         0x00000020
+#define _CNFA_CNFA5_LENGTH                       0x00000001
+
+#define _CNFA_CNFA6_POSITION                     0x00000006
+#define _CNFA_CNFA6_MASK                         0x00000040
+#define _CNFA_CNFA6_LENGTH                       0x00000001
+
+#define _CNFA_CNFA7_POSITION                     0x00000007
+#define _CNFA_CNFA7_MASK                         0x00000080
+#define _CNFA_CNFA7_LENGTH                       0x00000001
+
+#define _CNFA_CNFA9_POSITION                     0x00000009
+#define _CNFA_CNFA9_MASK                         0x00000200
+#define _CNFA_CNFA9_LENGTH                       0x00000001
+
+#define _CNFA_CNFA10_POSITION                    0x0000000A
+#define _CNFA_CNFA10_MASK                        0x00000400
+#define _CNFA_CNFA10_LENGTH                      0x00000001
+
+#define _CNFA_CNFA14_POSITION                    0x0000000E
+#define _CNFA_CNFA14_MASK                        0x00004000
+#define _CNFA_CNFA14_LENGTH                      0x00000001
+
+#define _CNFA_CNFA15_POSITION                    0x0000000F
+#define _CNFA_CNFA15_MASK                        0x00008000
+#define _CNFA_CNFA15_LENGTH                      0x00000001
 
 #define _SRCON0A_SR0A6_POSITION                  0x00000006
 #define _SRCON0A_SR0A6_MASK                      0x00000040
@@ -46603,6 +47285,14 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _SRCON0A_SR0A7_POSITION                  0x00000007
 #define _SRCON0A_SR0A7_MASK                      0x00000080
 #define _SRCON0A_SR0A7_LENGTH                    0x00000001
+
+#define _SRCON1A_SR1A6_POSITION                  0x00000006
+#define _SRCON1A_SR1A6_MASK                      0x00000040
+#define _SRCON1A_SR1A6_LENGTH                    0x00000001
+
+#define _SRCON1A_SR1A7_POSITION                  0x00000007
+#define _SRCON1A_SR1A7_MASK                      0x00000080
+#define _SRCON1A_SR1A7_LENGTH                    0x00000001
 
 #define _ANSELB_ANSB0_POSITION                   0x00000000
 #define _ANSELB_ANSB0_MASK                       0x00000001
@@ -47080,6 +47770,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNPDB_w_MASK                            0xFFFFFFFF
 #define _CNPDB_w_LENGTH                          0x00000020
 
+#define _CNCONB_EDGEDETECT_POSITION              0x0000000B
+#define _CNCONB_EDGEDETECT_MASK                  0x00000800
+#define _CNCONB_EDGEDETECT_LENGTH                0x00000001
+
 #define _CNCONB_SIDL_POSITION                    0x0000000D
 #define _CNCONB_SIDL_MASK                        0x00002000
 #define _CNCONB_SIDL_LENGTH                      0x00000001
@@ -47228,29 +47922,133 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNSTATB_w_MASK                          0xFFFFFFFF
 #define _CNSTATB_w_LENGTH                        0x00000020
 
-#define _SRCON1B_SR1B3_POSITION                  0x00000003
-#define _SRCON1B_SR1B3_MASK                      0x00000008
-#define _SRCON1B_SR1B3_LENGTH                    0x00000001
+#define _CNNEB_CNNEB0_POSITION                   0x00000000
+#define _CNNEB_CNNEB0_MASK                       0x00000001
+#define _CNNEB_CNNEB0_LENGTH                     0x00000001
 
-#define _SRCON1B_SR1B5_POSITION                  0x00000005
-#define _SRCON1B_SR1B5_MASK                      0x00000020
-#define _SRCON1B_SR1B5_LENGTH                    0x00000001
+#define _CNNEB_CNNEB1_POSITION                   0x00000001
+#define _CNNEB_CNNEB1_MASK                       0x00000002
+#define _CNNEB_CNNEB1_LENGTH                     0x00000001
 
-#define _SRCON1B_SR1B8_POSITION                  0x00000008
-#define _SRCON1B_SR1B8_MASK                      0x00000100
-#define _SRCON1B_SR1B8_LENGTH                    0x00000001
+#define _CNNEB_CNNEB2_POSITION                   0x00000002
+#define _CNNEB_CNNEB2_MASK                       0x00000004
+#define _CNNEB_CNNEB2_LENGTH                     0x00000001
 
-#define _SRCON1B_SR1B9_POSITION                  0x00000009
-#define _SRCON1B_SR1B9_MASK                      0x00000200
-#define _SRCON1B_SR1B9_LENGTH                    0x00000001
+#define _CNNEB_CNNEB3_POSITION                   0x00000003
+#define _CNNEB_CNNEB3_MASK                       0x00000008
+#define _CNNEB_CNNEB3_LENGTH                     0x00000001
 
-#define _SRCON1B_SR1B10_POSITION                 0x0000000A
-#define _SRCON1B_SR1B10_MASK                     0x00000400
-#define _SRCON1B_SR1B10_LENGTH                   0x00000001
+#define _CNNEB_CNNEB4_POSITION                   0x00000004
+#define _CNNEB_CNNEB4_MASK                       0x00000010
+#define _CNNEB_CNNEB4_LENGTH                     0x00000001
 
-#define _SRCON1B_SR1B14_POSITION                 0x0000000E
-#define _SRCON1B_SR1B14_MASK                     0x00004000
-#define _SRCON1B_SR1B14_LENGTH                   0x00000001
+#define _CNNEB_CNNEB5_POSITION                   0x00000005
+#define _CNNEB_CNNEB5_MASK                       0x00000020
+#define _CNNEB_CNNEB5_LENGTH                     0x00000001
+
+#define _CNNEB_CNNEB6_POSITION                   0x00000006
+#define _CNNEB_CNNEB6_MASK                       0x00000040
+#define _CNNEB_CNNEB6_LENGTH                     0x00000001
+
+#define _CNNEB_CNNEB7_POSITION                   0x00000007
+#define _CNNEB_CNNEB7_MASK                       0x00000080
+#define _CNNEB_CNNEB7_LENGTH                     0x00000001
+
+#define _CNNEB_CNNEB8_POSITION                   0x00000008
+#define _CNNEB_CNNEB8_MASK                       0x00000100
+#define _CNNEB_CNNEB8_LENGTH                     0x00000001
+
+#define _CNNEB_CNNEB9_POSITION                   0x00000009
+#define _CNNEB_CNNEB9_MASK                       0x00000200
+#define _CNNEB_CNNEB9_LENGTH                     0x00000001
+
+#define _CNNEB_CNNEB10_POSITION                  0x0000000A
+#define _CNNEB_CNNEB10_MASK                      0x00000400
+#define _CNNEB_CNNEB10_LENGTH                    0x00000001
+
+#define _CNNEB_CNNEB11_POSITION                  0x0000000B
+#define _CNNEB_CNNEB11_MASK                      0x00000800
+#define _CNNEB_CNNEB11_LENGTH                    0x00000001
+
+#define _CNNEB_CNNEB12_POSITION                  0x0000000C
+#define _CNNEB_CNNEB12_MASK                      0x00001000
+#define _CNNEB_CNNEB12_LENGTH                    0x00000001
+
+#define _CNNEB_CNNEB13_POSITION                  0x0000000D
+#define _CNNEB_CNNEB13_MASK                      0x00002000
+#define _CNNEB_CNNEB13_LENGTH                    0x00000001
+
+#define _CNNEB_CNNEB14_POSITION                  0x0000000E
+#define _CNNEB_CNNEB14_MASK                      0x00004000
+#define _CNNEB_CNNEB14_LENGTH                    0x00000001
+
+#define _CNNEB_CNNEB15_POSITION                  0x0000000F
+#define _CNNEB_CNNEB15_MASK                      0x00008000
+#define _CNNEB_CNNEB15_LENGTH                    0x00000001
+
+#define _CNFB_CNFB0_POSITION                     0x00000000
+#define _CNFB_CNFB0_MASK                         0x00000001
+#define _CNFB_CNFB0_LENGTH                       0x00000001
+
+#define _CNFB_CNFB1_POSITION                     0x00000001
+#define _CNFB_CNFB1_MASK                         0x00000002
+#define _CNFB_CNFB1_LENGTH                       0x00000001
+
+#define _CNFB_CNFB2_POSITION                     0x00000002
+#define _CNFB_CNFB2_MASK                         0x00000004
+#define _CNFB_CNFB2_LENGTH                       0x00000001
+
+#define _CNFB_CNFB3_POSITION                     0x00000003
+#define _CNFB_CNFB3_MASK                         0x00000008
+#define _CNFB_CNFB3_LENGTH                       0x00000001
+
+#define _CNFB_CNFB4_POSITION                     0x00000004
+#define _CNFB_CNFB4_MASK                         0x00000010
+#define _CNFB_CNFB4_LENGTH                       0x00000001
+
+#define _CNFB_CNFB5_POSITION                     0x00000005
+#define _CNFB_CNFB5_MASK                         0x00000020
+#define _CNFB_CNFB5_LENGTH                       0x00000001
+
+#define _CNFB_CNFB6_POSITION                     0x00000006
+#define _CNFB_CNFB6_MASK                         0x00000040
+#define _CNFB_CNFB6_LENGTH                       0x00000001
+
+#define _CNFB_CNFB7_POSITION                     0x00000007
+#define _CNFB_CNFB7_MASK                         0x00000080
+#define _CNFB_CNFB7_LENGTH                       0x00000001
+
+#define _CNFB_CNFB8_POSITION                     0x00000008
+#define _CNFB_CNFB8_MASK                         0x00000100
+#define _CNFB_CNFB8_LENGTH                       0x00000001
+
+#define _CNFB_CNFB9_POSITION                     0x00000009
+#define _CNFB_CNFB9_MASK                         0x00000200
+#define _CNFB_CNFB9_LENGTH                       0x00000001
+
+#define _CNFB_CNFB10_POSITION                    0x0000000A
+#define _CNFB_CNFB10_MASK                        0x00000400
+#define _CNFB_CNFB10_LENGTH                      0x00000001
+
+#define _CNFB_CNFB11_POSITION                    0x0000000B
+#define _CNFB_CNFB11_MASK                        0x00000800
+#define _CNFB_CNFB11_LENGTH                      0x00000001
+
+#define _CNFB_CNFB12_POSITION                    0x0000000C
+#define _CNFB_CNFB12_MASK                        0x00001000
+#define _CNFB_CNFB12_LENGTH                      0x00000001
+
+#define _CNFB_CNFB13_POSITION                    0x0000000D
+#define _CNFB_CNFB13_MASK                        0x00002000
+#define _CNFB_CNFB13_LENGTH                      0x00000001
+
+#define _CNFB_CNFB14_POSITION                    0x0000000E
+#define _CNFB_CNFB14_MASK                        0x00004000
+#define _CNFB_CNFB14_LENGTH                      0x00000001
+
+#define _CNFB_CNFB15_POSITION                    0x0000000F
+#define _CNFB_CNFB15_MASK                        0x00008000
+#define _CNFB_CNFB15_LENGTH                      0x00000001
 
 #define _SRCON0B_SR0B3_POSITION                  0x00000003
 #define _SRCON0B_SR0B3_MASK                      0x00000008
@@ -47275,6 +48073,30 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _SRCON0B_SR0B14_POSITION                 0x0000000E
 #define _SRCON0B_SR0B14_MASK                     0x00004000
 #define _SRCON0B_SR0B14_LENGTH                   0x00000001
+
+#define _SRCON1B_SR1B3_POSITION                  0x00000003
+#define _SRCON1B_SR1B3_MASK                      0x00000008
+#define _SRCON1B_SR1B3_LENGTH                    0x00000001
+
+#define _SRCON1B_SR1B5_POSITION                  0x00000005
+#define _SRCON1B_SR1B5_MASK                      0x00000020
+#define _SRCON1B_SR1B5_LENGTH                    0x00000001
+
+#define _SRCON1B_SR1B8_POSITION                  0x00000008
+#define _SRCON1B_SR1B8_MASK                      0x00000100
+#define _SRCON1B_SR1B8_LENGTH                    0x00000001
+
+#define _SRCON1B_SR1B9_POSITION                  0x00000009
+#define _SRCON1B_SR1B9_MASK                      0x00000200
+#define _SRCON1B_SR1B9_LENGTH                    0x00000001
+
+#define _SRCON1B_SR1B10_POSITION                 0x0000000A
+#define _SRCON1B_SR1B10_MASK                     0x00000400
+#define _SRCON1B_SR1B10_LENGTH                   0x00000001
+
+#define _SRCON1B_SR1B14_POSITION                 0x0000000E
+#define _SRCON1B_SR1B14_MASK                     0x00004000
+#define _SRCON1B_SR1B14_LENGTH                   0x00000001
 
 #define _ANSELC_ANSC1_POSITION                   0x00000001
 #define _ANSELC_ANSC1_MASK                       0x00000002
@@ -47512,6 +48334,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNPDC_w_MASK                            0xFFFFFFFF
 #define _CNPDC_w_LENGTH                          0x00000020
 
+#define _CNCONC_EDGEDETECT_POSITION              0x0000000B
+#define _CNCONC_EDGEDETECT_MASK                  0x00000800
+#define _CNCONC_EDGEDETECT_LENGTH                0x00000001
+
 #define _CNCONC_SIDL_POSITION                    0x0000000D
 #define _CNCONC_SIDL_MASK                        0x00002000
 #define _CNCONC_SIDL_LENGTH                      0x00000001
@@ -47595,6 +48421,70 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNSTATC_w_POSITION                      0x00000000
 #define _CNSTATC_w_MASK                          0xFFFFFFFF
 #define _CNSTATC_w_LENGTH                        0x00000020
+
+#define _CNNEC_CNNEC1_POSITION                   0x00000001
+#define _CNNEC_CNNEC1_MASK                       0x00000002
+#define _CNNEC_CNNEC1_LENGTH                     0x00000001
+
+#define _CNNEC_CNNEC2_POSITION                   0x00000002
+#define _CNNEC_CNNEC2_MASK                       0x00000004
+#define _CNNEC_CNNEC2_LENGTH                     0x00000001
+
+#define _CNNEC_CNNEC3_POSITION                   0x00000003
+#define _CNNEC_CNNEC3_MASK                       0x00000008
+#define _CNNEC_CNNEC3_LENGTH                     0x00000001
+
+#define _CNNEC_CNNEC4_POSITION                   0x00000004
+#define _CNNEC_CNNEC4_MASK                       0x00000010
+#define _CNNEC_CNNEC4_LENGTH                     0x00000001
+
+#define _CNNEC_CNNEC12_POSITION                  0x0000000C
+#define _CNNEC_CNNEC12_MASK                      0x00001000
+#define _CNNEC_CNNEC12_LENGTH                    0x00000001
+
+#define _CNNEC_CNNEC13_POSITION                  0x0000000D
+#define _CNNEC_CNNEC13_MASK                      0x00002000
+#define _CNNEC_CNNEC13_LENGTH                    0x00000001
+
+#define _CNNEC_CNNEC14_POSITION                  0x0000000E
+#define _CNNEC_CNNEC14_MASK                      0x00004000
+#define _CNNEC_CNNEC14_LENGTH                    0x00000001
+
+#define _CNNEC_CNNEC15_POSITION                  0x0000000F
+#define _CNNEC_CNNEC15_MASK                      0x00008000
+#define _CNNEC_CNNEC15_LENGTH                    0x00000001
+
+#define _CNFC_CNFC1_POSITION                     0x00000001
+#define _CNFC_CNFC1_MASK                         0x00000002
+#define _CNFC_CNFC1_LENGTH                       0x00000001
+
+#define _CNFC_CNFC2_POSITION                     0x00000002
+#define _CNFC_CNFC2_MASK                         0x00000004
+#define _CNFC_CNFC2_LENGTH                       0x00000001
+
+#define _CNFC_CNFC3_POSITION                     0x00000003
+#define _CNFC_CNFC3_MASK                         0x00000008
+#define _CNFC_CNFC3_LENGTH                       0x00000001
+
+#define _CNFC_CNFC4_POSITION                     0x00000004
+#define _CNFC_CNFC4_MASK                         0x00000010
+#define _CNFC_CNFC4_LENGTH                       0x00000001
+
+#define _CNFC_CNFC12_POSITION                    0x0000000C
+#define _CNFC_CNFC12_MASK                        0x00001000
+#define _CNFC_CNFC12_LENGTH                      0x00000001
+
+#define _CNFC_CNFC13_POSITION                    0x0000000D
+#define _CNFC_CNFC13_MASK                        0x00002000
+#define _CNFC_CNFC13_LENGTH                      0x00000001
+
+#define _CNFC_CNFC14_POSITION                    0x0000000E
+#define _CNFC_CNFC14_MASK                        0x00004000
+#define _CNFC_CNFC14_LENGTH                      0x00000001
+
+#define _CNFC_CNFC15_POSITION                    0x0000000F
+#define _CNFC_CNFC15_MASK                        0x00008000
+#define _CNFC_CNFC15_LENGTH                      0x00000001
 
 #define _ANSELD_ANSD14_POSITION                  0x0000000E
 #define _ANSELD_ANSD14_MASK                      0x00004000
@@ -47992,6 +48882,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNPDD_w_MASK                            0xFFFFFFFF
 #define _CNPDD_w_LENGTH                          0x00000020
 
+#define _CNCOND_EDGEDETECT_POSITION              0x0000000B
+#define _CNCOND_EDGEDETECT_MASK                  0x00000800
+#define _CNCOND_EDGEDETECT_LENGTH                0x00000001
+
 #define _CNCOND_SIDL_POSITION                    0x0000000D
 #define _CNCOND_SIDL_MASK                        0x00002000
 #define _CNCOND_SIDL_LENGTH                      0x00000001
@@ -48131,6 +49025,126 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNSTATD_w_POSITION                      0x00000000
 #define _CNSTATD_w_MASK                          0xFFFFFFFF
 #define _CNSTATD_w_LENGTH                        0x00000020
+
+#define _CNNED_CNNED0_POSITION                   0x00000000
+#define _CNNED_CNNED0_MASK                       0x00000001
+#define _CNNED_CNNED0_LENGTH                     0x00000001
+
+#define _CNNED_CNNED1_POSITION                   0x00000001
+#define _CNNED_CNNED1_MASK                       0x00000002
+#define _CNNED_CNNED1_LENGTH                     0x00000001
+
+#define _CNNED_CNNED2_POSITION                   0x00000002
+#define _CNNED_CNNED2_MASK                       0x00000004
+#define _CNNED_CNNED2_LENGTH                     0x00000001
+
+#define _CNNED_CNNED3_POSITION                   0x00000003
+#define _CNNED_CNNED3_MASK                       0x00000008
+#define _CNNED_CNNED3_LENGTH                     0x00000001
+
+#define _CNNED_CNNED4_POSITION                   0x00000004
+#define _CNNED_CNNED4_MASK                       0x00000010
+#define _CNNED_CNNED4_LENGTH                     0x00000001
+
+#define _CNNED_CNNED5_POSITION                   0x00000005
+#define _CNNED_CNNED5_MASK                       0x00000020
+#define _CNNED_CNNED5_LENGTH                     0x00000001
+
+#define _CNNED_CNNED6_POSITION                   0x00000006
+#define _CNNED_CNNED6_MASK                       0x00000040
+#define _CNNED_CNNED6_LENGTH                     0x00000001
+
+#define _CNNED_CNNED7_POSITION                   0x00000007
+#define _CNNED_CNNED7_MASK                       0x00000080
+#define _CNNED_CNNED7_LENGTH                     0x00000001
+
+#define _CNNED_CNNED9_POSITION                   0x00000009
+#define _CNNED_CNNED9_MASK                       0x00000200
+#define _CNNED_CNNED9_LENGTH                     0x00000001
+
+#define _CNNED_CNNED10_POSITION                  0x0000000A
+#define _CNNED_CNNED10_MASK                      0x00000400
+#define _CNNED_CNNED10_LENGTH                    0x00000001
+
+#define _CNNED_CNNED11_POSITION                  0x0000000B
+#define _CNNED_CNNED11_MASK                      0x00000800
+#define _CNNED_CNNED11_LENGTH                    0x00000001
+
+#define _CNNED_CNNED12_POSITION                  0x0000000C
+#define _CNNED_CNNED12_MASK                      0x00001000
+#define _CNNED_CNNED12_LENGTH                    0x00000001
+
+#define _CNNED_CNNED13_POSITION                  0x0000000D
+#define _CNNED_CNNED13_MASK                      0x00002000
+#define _CNNED_CNNED13_LENGTH                    0x00000001
+
+#define _CNNED_CNNED14_POSITION                  0x0000000E
+#define _CNNED_CNNED14_MASK                      0x00004000
+#define _CNNED_CNNED14_LENGTH                    0x00000001
+
+#define _CNNED_CNNED15_POSITION                  0x0000000F
+#define _CNNED_CNNED15_MASK                      0x00008000
+#define _CNNED_CNNED15_LENGTH                    0x00000001
+
+#define _CNFD_CNFD0_POSITION                     0x00000000
+#define _CNFD_CNFD0_MASK                         0x00000001
+#define _CNFD_CNFD0_LENGTH                       0x00000001
+
+#define _CNFD_CNFD1_POSITION                     0x00000001
+#define _CNFD_CNFD1_MASK                         0x00000002
+#define _CNFD_CNFD1_LENGTH                       0x00000001
+
+#define _CNFD_CNFD2_POSITION                     0x00000002
+#define _CNFD_CNFD2_MASK                         0x00000004
+#define _CNFD_CNFD2_LENGTH                       0x00000001
+
+#define _CNFD_CNFD3_POSITION                     0x00000003
+#define _CNFD_CNFD3_MASK                         0x00000008
+#define _CNFD_CNFD3_LENGTH                       0x00000001
+
+#define _CNFD_CNFD4_POSITION                     0x00000004
+#define _CNFD_CNFD4_MASK                         0x00000010
+#define _CNFD_CNFD4_LENGTH                       0x00000001
+
+#define _CNFD_CNFD5_POSITION                     0x00000005
+#define _CNFD_CNFD5_MASK                         0x00000020
+#define _CNFD_CNFD5_LENGTH                       0x00000001
+
+#define _CNFD_CNFD6_POSITION                     0x00000006
+#define _CNFD_CNFD6_MASK                         0x00000040
+#define _CNFD_CNFD6_LENGTH                       0x00000001
+
+#define _CNFD_CNFD7_POSITION                     0x00000007
+#define _CNFD_CNFD7_MASK                         0x00000080
+#define _CNFD_CNFD7_LENGTH                       0x00000001
+
+#define _CNFD_CNFD9_POSITION                     0x00000009
+#define _CNFD_CNFD9_MASK                         0x00000200
+#define _CNFD_CNFD9_LENGTH                       0x00000001
+
+#define _CNFD_CNFD10_POSITION                    0x0000000A
+#define _CNFD_CNFD10_MASK                        0x00000400
+#define _CNFD_CNFD10_LENGTH                      0x00000001
+
+#define _CNFD_CNFD11_POSITION                    0x0000000B
+#define _CNFD_CNFD11_MASK                        0x00000800
+#define _CNFD_CNFD11_LENGTH                      0x00000001
+
+#define _CNFD_CNFD12_POSITION                    0x0000000C
+#define _CNFD_CNFD12_MASK                        0x00001000
+#define _CNFD_CNFD12_LENGTH                      0x00000001
+
+#define _CNFD_CNFD13_POSITION                    0x0000000D
+#define _CNFD_CNFD13_MASK                        0x00002000
+#define _CNFD_CNFD13_LENGTH                      0x00000001
+
+#define _CNFD_CNFD14_POSITION                    0x0000000E
+#define _CNFD_CNFD14_MASK                        0x00004000
+#define _CNFD_CNFD14_LENGTH                      0x00000001
+
+#define _CNFD_CNFD15_POSITION                    0x0000000F
+#define _CNFD_CNFD15_MASK                        0x00008000
+#define _CNFD_CNFD15_LENGTH                      0x00000001
 
 #define _ANSELE_ANSE4_POSITION                   0x00000004
 #define _ANSELE_ANSE4_MASK                       0x00000010
@@ -48424,6 +49438,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNPDE_w_MASK                            0xFFFFFFFF
 #define _CNPDE_w_LENGTH                          0x00000020
 
+#define _CNCONE_EDGEDETECT_POSITION              0x0000000B
+#define _CNCONE_EDGEDETECT_MASK                  0x00000800
+#define _CNCONE_EDGEDETECT_LENGTH                0x00000001
+
 #define _CNCONE_SIDL_POSITION                    0x0000000D
 #define _CNCONE_SIDL_MASK                        0x00002000
 #define _CNCONE_SIDL_LENGTH                      0x00000001
@@ -48524,21 +49542,85 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNSTATE_w_MASK                          0xFFFFFFFF
 #define _CNSTATE_w_LENGTH                        0x00000020
 
-#define _SRCON1E_SR1E0_POSITION                  0x00000000
-#define _SRCON1E_SR1E0_MASK                      0x00000001
-#define _SRCON1E_SR1E0_LENGTH                    0x00000001
+#define _CNNEE_CNNEE0_POSITION                   0x00000000
+#define _CNNEE_CNNEE0_MASK                       0x00000001
+#define _CNNEE_CNNEE0_LENGTH                     0x00000001
 
-#define _SRCON1E_SR1E1_POSITION                  0x00000001
-#define _SRCON1E_SR1E1_MASK                      0x00000002
-#define _SRCON1E_SR1E1_LENGTH                    0x00000001
+#define _CNNEE_CNNEE1_POSITION                   0x00000001
+#define _CNNEE_CNNEE1_MASK                       0x00000002
+#define _CNNEE_CNNEE1_LENGTH                     0x00000001
 
-#define _SRCON1E_SR1E2_POSITION                  0x00000002
-#define _SRCON1E_SR1E2_MASK                      0x00000004
-#define _SRCON1E_SR1E2_LENGTH                    0x00000001
+#define _CNNEE_CNNEE2_POSITION                   0x00000002
+#define _CNNEE_CNNEE2_MASK                       0x00000004
+#define _CNNEE_CNNEE2_LENGTH                     0x00000001
 
-#define _SRCON1E_SR1E3_POSITION                  0x00000003
-#define _SRCON1E_SR1E3_MASK                      0x00000008
-#define _SRCON1E_SR1E3_LENGTH                    0x00000001
+#define _CNNEE_CNNEE3_POSITION                   0x00000003
+#define _CNNEE_CNNEE3_MASK                       0x00000008
+#define _CNNEE_CNNEE3_LENGTH                     0x00000001
+
+#define _CNNEE_CNNEE4_POSITION                   0x00000004
+#define _CNNEE_CNNEE4_MASK                       0x00000010
+#define _CNNEE_CNNEE4_LENGTH                     0x00000001
+
+#define _CNNEE_CNNEE5_POSITION                   0x00000005
+#define _CNNEE_CNNEE5_MASK                       0x00000020
+#define _CNNEE_CNNEE5_LENGTH                     0x00000001
+
+#define _CNNEE_CNNEE6_POSITION                   0x00000006
+#define _CNNEE_CNNEE6_MASK                       0x00000040
+#define _CNNEE_CNNEE6_LENGTH                     0x00000001
+
+#define _CNNEE_CNNEE7_POSITION                   0x00000007
+#define _CNNEE_CNNEE7_MASK                       0x00000080
+#define _CNNEE_CNNEE7_LENGTH                     0x00000001
+
+#define _CNNEE_CNNEE8_POSITION                   0x00000008
+#define _CNNEE_CNNEE8_MASK                       0x00000100
+#define _CNNEE_CNNEE8_LENGTH                     0x00000001
+
+#define _CNNEE_CNNEE9_POSITION                   0x00000009
+#define _CNNEE_CNNEE9_MASK                       0x00000200
+#define _CNNEE_CNNEE9_LENGTH                     0x00000001
+
+#define _CNFE_CNFE0_POSITION                     0x00000000
+#define _CNFE_CNFE0_MASK                         0x00000001
+#define _CNFE_CNFE0_LENGTH                       0x00000001
+
+#define _CNFE_CNFE1_POSITION                     0x00000001
+#define _CNFE_CNFE1_MASK                         0x00000002
+#define _CNFE_CNFE1_LENGTH                       0x00000001
+
+#define _CNFE_CNFE2_POSITION                     0x00000002
+#define _CNFE_CNFE2_MASK                         0x00000004
+#define _CNFE_CNFE2_LENGTH                       0x00000001
+
+#define _CNFE_CNFE3_POSITION                     0x00000003
+#define _CNFE_CNFE3_MASK                         0x00000008
+#define _CNFE_CNFE3_LENGTH                       0x00000001
+
+#define _CNFE_CNFE4_POSITION                     0x00000004
+#define _CNFE_CNFE4_MASK                         0x00000010
+#define _CNFE_CNFE4_LENGTH                       0x00000001
+
+#define _CNFE_CNFE5_POSITION                     0x00000005
+#define _CNFE_CNFE5_MASK                         0x00000020
+#define _CNFE_CNFE5_LENGTH                       0x00000001
+
+#define _CNFE_CNFE6_POSITION                     0x00000006
+#define _CNFE_CNFE6_MASK                         0x00000040
+#define _CNFE_CNFE6_LENGTH                       0x00000001
+
+#define _CNFE_CNFE7_POSITION                     0x00000007
+#define _CNFE_CNFE7_MASK                         0x00000080
+#define _CNFE_CNFE7_LENGTH                       0x00000001
+
+#define _CNFE_CNFE8_POSITION                     0x00000008
+#define _CNFE_CNFE8_MASK                         0x00000100
+#define _CNFE_CNFE8_LENGTH                       0x00000001
+
+#define _CNFE_CNFE9_POSITION                     0x00000009
+#define _CNFE_CNFE9_MASK                         0x00000200
+#define _CNFE_CNFE9_LENGTH                       0x00000001
 
 #define _SRCON0E_SR0E0_POSITION                  0x00000000
 #define _SRCON0E_SR0E0_MASK                      0x00000001
@@ -48555,6 +49637,22 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _SRCON0E_SR0E3_POSITION                  0x00000003
 #define _SRCON0E_SR0E3_MASK                      0x00000008
 #define _SRCON0E_SR0E3_LENGTH                    0x00000001
+
+#define _SRCON1E_SR1E0_POSITION                  0x00000000
+#define _SRCON1E_SR1E0_MASK                      0x00000001
+#define _SRCON1E_SR1E0_LENGTH                    0x00000001
+
+#define _SRCON1E_SR1E1_POSITION                  0x00000001
+#define _SRCON1E_SR1E1_MASK                      0x00000002
+#define _SRCON1E_SR1E1_LENGTH                    0x00000001
+
+#define _SRCON1E_SR1E2_POSITION                  0x00000002
+#define _SRCON1E_SR1E2_MASK                      0x00000004
+#define _SRCON1E_SR1E2_LENGTH                    0x00000001
+
+#define _SRCON1E_SR1E3_POSITION                  0x00000003
+#define _SRCON1E_SR1E3_MASK                      0x00000008
+#define _SRCON1E_SR1E3_LENGTH                    0x00000001
 
 #define _ANSELF_ANSF12_POSITION                  0x0000000C
 #define _ANSELF_ANSF12_MASK                      0x00001000
@@ -48808,6 +49906,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNPDF_w_MASK                            0xFFFFFFFF
 #define _CNPDF_w_LENGTH                          0x00000020
 
+#define _CNCONF_EDGEDETECT_POSITION              0x0000000B
+#define _CNCONF_EDGEDETECT_MASK                  0x00000800
+#define _CNCONF_EDGEDETECT_LENGTH                0x00000001
+
 #define _CNCONF_SIDL_POSITION                    0x0000000D
 #define _CNCONF_SIDL_MASK                        0x00002000
 #define _CNCONF_SIDL_LENGTH                      0x00000001
@@ -48900,13 +50002,77 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNSTATF_w_MASK                          0xFFFFFFFF
 #define _CNSTATF_w_LENGTH                        0x00000020
 
-#define _SRCON1F_SR1F0_POSITION                  0x00000000
-#define _SRCON1F_SR1F0_MASK                      0x00000001
-#define _SRCON1F_SR1F0_LENGTH                    0x00000001
+#define _CNNEF_CNNEF0_POSITION                   0x00000000
+#define _CNNEF_CNNEF0_MASK                       0x00000001
+#define _CNNEF_CNNEF0_LENGTH                     0x00000001
 
-#define _SRCON1F_SR1F1_POSITION                  0x00000001
-#define _SRCON1F_SR1F1_MASK                      0x00000002
-#define _SRCON1F_SR1F1_LENGTH                    0x00000001
+#define _CNNEF_CNNEF1_POSITION                   0x00000001
+#define _CNNEF_CNNEF1_MASK                       0x00000002
+#define _CNNEF_CNNEF1_LENGTH                     0x00000001
+
+#define _CNNEF_CNNEF2_POSITION                   0x00000002
+#define _CNNEF_CNNEF2_MASK                       0x00000004
+#define _CNNEF_CNNEF2_LENGTH                     0x00000001
+
+#define _CNNEF_CNNEF3_POSITION                   0x00000003
+#define _CNNEF_CNNEF3_MASK                       0x00000008
+#define _CNNEF_CNNEF3_LENGTH                     0x00000001
+
+#define _CNNEF_CNNEF4_POSITION                   0x00000004
+#define _CNNEF_CNNEF4_MASK                       0x00000010
+#define _CNNEF_CNNEF4_LENGTH                     0x00000001
+
+#define _CNNEF_CNNEF5_POSITION                   0x00000005
+#define _CNNEF_CNNEF5_MASK                       0x00000020
+#define _CNNEF_CNNEF5_LENGTH                     0x00000001
+
+#define _CNNEF_CNNEF8_POSITION                   0x00000008
+#define _CNNEF_CNNEF8_MASK                       0x00000100
+#define _CNNEF_CNNEF8_LENGTH                     0x00000001
+
+#define _CNNEF_CNNEF12_POSITION                  0x0000000C
+#define _CNNEF_CNNEF12_MASK                      0x00001000
+#define _CNNEF_CNNEF12_LENGTH                    0x00000001
+
+#define _CNNEF_CNNEF13_POSITION                  0x0000000D
+#define _CNNEF_CNNEF13_MASK                      0x00002000
+#define _CNNEF_CNNEF13_LENGTH                    0x00000001
+
+#define _CNFF_CNFF0_POSITION                     0x00000000
+#define _CNFF_CNFF0_MASK                         0x00000001
+#define _CNFF_CNFF0_LENGTH                       0x00000001
+
+#define _CNFF_CNFF1_POSITION                     0x00000001
+#define _CNFF_CNFF1_MASK                         0x00000002
+#define _CNFF_CNFF1_LENGTH                       0x00000001
+
+#define _CNFF_CNFF2_POSITION                     0x00000002
+#define _CNFF_CNFF2_MASK                         0x00000004
+#define _CNFF_CNFF2_LENGTH                       0x00000001
+
+#define _CNFF_CNFF3_POSITION                     0x00000003
+#define _CNFF_CNFF3_MASK                         0x00000008
+#define _CNFF_CNFF3_LENGTH                       0x00000001
+
+#define _CNFF_CNFF4_POSITION                     0x00000004
+#define _CNFF_CNFF4_MASK                         0x00000010
+#define _CNFF_CNFF4_LENGTH                       0x00000001
+
+#define _CNFF_CNFF5_POSITION                     0x00000005
+#define _CNFF_CNFF5_MASK                         0x00000020
+#define _CNFF_CNFF5_LENGTH                       0x00000001
+
+#define _CNFF_CNFF8_POSITION                     0x00000008
+#define _CNFF_CNFF8_MASK                         0x00000100
+#define _CNFF_CNFF8_LENGTH                       0x00000001
+
+#define _CNFF_CNFF12_POSITION                    0x0000000C
+#define _CNFF_CNFF12_MASK                        0x00001000
+#define _CNFF_CNFF12_LENGTH                      0x00000001
+
+#define _CNFF_CNFF13_POSITION                    0x0000000D
+#define _CNFF_CNFF13_MASK                        0x00002000
+#define _CNFF_CNFF13_LENGTH                      0x00000001
 
 #define _SRCON0F_SR0F0_POSITION                  0x00000000
 #define _SRCON0F_SR0F0_MASK                      0x00000001
@@ -48915,6 +50081,14 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _SRCON0F_SR0F1_POSITION                  0x00000001
 #define _SRCON0F_SR0F1_MASK                      0x00000002
 #define _SRCON0F_SR0F1_LENGTH                    0x00000001
+
+#define _SRCON1F_SR1F0_POSITION                  0x00000000
+#define _SRCON1F_SR1F0_MASK                      0x00000001
+#define _SRCON1F_SR1F0_LENGTH                    0x00000001
+
+#define _SRCON1F_SR1F1_POSITION                  0x00000001
+#define _SRCON1F_SR1F1_MASK                      0x00000002
+#define _SRCON1F_SR1F1_LENGTH                    0x00000001
 
 #define _ANSELG_ANSG6_POSITION                   0x00000006
 #define _ANSELG_ANSG6_MASK                       0x00000040
@@ -49204,6 +50378,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNPDG_w_MASK                            0xFFFFFFFF
 #define _CNPDG_w_LENGTH                          0x00000020
 
+#define _CNCONG_EDGEDETECT_POSITION              0x0000000B
+#define _CNCONG_EDGEDETECT_MASK                  0x00000800
+#define _CNCONG_EDGEDETECT_LENGTH                0x00000001
+
 #define _CNCONG_SIDL_POSITION                    0x0000000D
 #define _CNCONG_SIDL_MASK                        0x00002000
 #define _CNCONG_SIDL_LENGTH                      0x00000001
@@ -49304,25 +50482,85 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNSTATG_w_MASK                          0xFFFFFFFF
 #define _CNSTATG_w_LENGTH                        0x00000020
 
-#define _SRCON1G_SR1G6_POSITION                  0x00000006
-#define _SRCON1G_SR1G6_MASK                      0x00000040
-#define _SRCON1G_SR1G6_LENGTH                    0x00000001
+#define _CNNEG_CNNEG0_POSITION                   0x00000000
+#define _CNNEG_CNNEG0_MASK                       0x00000001
+#define _CNNEG_CNNEG0_LENGTH                     0x00000001
 
-#define _SRCON1G_SR1G9_POSITION                  0x00000009
-#define _SRCON1G_SR1G9_MASK                      0x00000200
-#define _SRCON1G_SR1G9_LENGTH                    0x00000001
+#define _CNNEG_CNNEG1_POSITION                   0x00000001
+#define _CNNEG_CNNEG1_MASK                       0x00000002
+#define _CNNEG_CNNEG1_LENGTH                     0x00000001
 
-#define _SRCON1G_SR1G12_POSITION                 0x0000000C
-#define _SRCON1G_SR1G12_MASK                     0x00001000
-#define _SRCON1G_SR1G12_LENGTH                   0x00000001
+#define _CNNEG_CNNEG6_POSITION                   0x00000006
+#define _CNNEG_CNNEG6_MASK                       0x00000040
+#define _CNNEG_CNNEG6_LENGTH                     0x00000001
 
-#define _SRCON1G_SR1G13_POSITION                 0x0000000D
-#define _SRCON1G_SR1G13_MASK                     0x00002000
-#define _SRCON1G_SR1G13_LENGTH                   0x00000001
+#define _CNNEG_CNNEG7_POSITION                   0x00000007
+#define _CNNEG_CNNEG7_MASK                       0x00000080
+#define _CNNEG_CNNEG7_LENGTH                     0x00000001
 
-#define _SRCON1G_SR1G14_POSITION                 0x0000000E
-#define _SRCON1G_SR1G14_MASK                     0x00004000
-#define _SRCON1G_SR1G14_LENGTH                   0x00000001
+#define _CNNEG_CNNEG8_POSITION                   0x00000008
+#define _CNNEG_CNNEG8_MASK                       0x00000100
+#define _CNNEG_CNNEG8_LENGTH                     0x00000001
+
+#define _CNNEG_CNNEG9_POSITION                   0x00000009
+#define _CNNEG_CNNEG9_MASK                       0x00000200
+#define _CNNEG_CNNEG9_LENGTH                     0x00000001
+
+#define _CNNEG_CNNEG12_POSITION                  0x0000000C
+#define _CNNEG_CNNEG12_MASK                      0x00001000
+#define _CNNEG_CNNEG12_LENGTH                    0x00000001
+
+#define _CNNEG_CNNEG13_POSITION                  0x0000000D
+#define _CNNEG_CNNEG13_MASK                      0x00002000
+#define _CNNEG_CNNEG13_LENGTH                    0x00000001
+
+#define _CNNEG_CNNEG14_POSITION                  0x0000000E
+#define _CNNEG_CNNEG14_MASK                      0x00004000
+#define _CNNEG_CNNEG14_LENGTH                    0x00000001
+
+#define _CNNEG_CNNEG15_POSITION                  0x0000000F
+#define _CNNEG_CNNEG15_MASK                      0x00008000
+#define _CNNEG_CNNEG15_LENGTH                    0x00000001
+
+#define _CNFG_CNFG0_POSITION                     0x00000000
+#define _CNFG_CNFG0_MASK                         0x00000001
+#define _CNFG_CNFG0_LENGTH                       0x00000001
+
+#define _CNFG_CNFG1_POSITION                     0x00000001
+#define _CNFG_CNFG1_MASK                         0x00000002
+#define _CNFG_CNFG1_LENGTH                       0x00000001
+
+#define _CNFG_CNFG6_POSITION                     0x00000006
+#define _CNFG_CNFG6_MASK                         0x00000040
+#define _CNFG_CNFG6_LENGTH                       0x00000001
+
+#define _CNFG_CNFG7_POSITION                     0x00000007
+#define _CNFG_CNFG7_MASK                         0x00000080
+#define _CNFG_CNFG7_LENGTH                       0x00000001
+
+#define _CNFG_CNFG8_POSITION                     0x00000008
+#define _CNFG_CNFG8_MASK                         0x00000100
+#define _CNFG_CNFG8_LENGTH                       0x00000001
+
+#define _CNFG_CNFG9_POSITION                     0x00000009
+#define _CNFG_CNFG9_MASK                         0x00000200
+#define _CNFG_CNFG9_LENGTH                       0x00000001
+
+#define _CNFG_CNFG12_POSITION                    0x0000000C
+#define _CNFG_CNFG12_MASK                        0x00001000
+#define _CNFG_CNFG12_LENGTH                      0x00000001
+
+#define _CNFG_CNFG13_POSITION                    0x0000000D
+#define _CNFG_CNFG13_MASK                        0x00002000
+#define _CNFG_CNFG13_LENGTH                      0x00000001
+
+#define _CNFG_CNFG14_POSITION                    0x0000000E
+#define _CNFG_CNFG14_MASK                        0x00004000
+#define _CNFG_CNFG14_LENGTH                      0x00000001
+
+#define _CNFG_CNFG15_POSITION                    0x0000000F
+#define _CNFG_CNFG15_MASK                        0x00008000
+#define _CNFG_CNFG15_LENGTH                      0x00000001
 
 #define _SRCON0G_SR0G6_POSITION                  0x00000006
 #define _SRCON0G_SR0G6_MASK                      0x00000040
@@ -49343,6 +50581,26 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _SRCON0G_SR0G14_POSITION                 0x0000000E
 #define _SRCON0G_SR0G14_MASK                     0x00004000
 #define _SRCON0G_SR0G14_LENGTH                   0x00000001
+
+#define _SRCON1G_SR1G6_POSITION                  0x00000006
+#define _SRCON1G_SR1G6_MASK                      0x00000040
+#define _SRCON1G_SR1G6_LENGTH                    0x00000001
+
+#define _SRCON1G_SR1G9_POSITION                  0x00000009
+#define _SRCON1G_SR1G9_MASK                      0x00000200
+#define _SRCON1G_SR1G9_LENGTH                    0x00000001
+
+#define _SRCON1G_SR1G12_POSITION                 0x0000000C
+#define _SRCON1G_SR1G12_MASK                     0x00001000
+#define _SRCON1G_SR1G12_LENGTH                   0x00000001
+
+#define _SRCON1G_SR1G13_POSITION                 0x0000000D
+#define _SRCON1G_SR1G13_MASK                     0x00002000
+#define _SRCON1G_SR1G13_LENGTH                   0x00000001
+
+#define _SRCON1G_SR1G14_POSITION                 0x0000000E
+#define _SRCON1G_SR1G14_MASK                     0x00004000
+#define _SRCON1G_SR1G14_LENGTH                   0x00000001
 
 #define _ANSELH_ANSH0_POSITION                   0x00000000
 #define _ANSELH_ANSH0_MASK                       0x00000001
@@ -49776,6 +51034,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNPDH_w_MASK                            0xFFFFFFFF
 #define _CNPDH_w_LENGTH                          0x00000020
 
+#define _CNCONH_EDGEDETECT_POSITION              0x0000000B
+#define _CNCONH_EDGEDETECT_MASK                  0x00000800
+#define _CNCONH_EDGEDETECT_LENGTH                0x00000001
+
 #define _CNCONH_SIDL_POSITION                    0x0000000D
 #define _CNCONH_SIDL_MASK                        0x00002000
 #define _CNCONH_SIDL_LENGTH                      0x00000001
@@ -49923,6 +51185,134 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNSTATH_w_POSITION                      0x00000000
 #define _CNSTATH_w_MASK                          0xFFFFFFFF
 #define _CNSTATH_w_LENGTH                        0x00000020
+
+#define _CNNEH_CNNEH0_POSITION                   0x00000000
+#define _CNNEH_CNNEH0_MASK                       0x00000001
+#define _CNNEH_CNNEH0_LENGTH                     0x00000001
+
+#define _CNNEH_CNNEH1_POSITION                   0x00000001
+#define _CNNEH_CNNEH1_MASK                       0x00000002
+#define _CNNEH_CNNEH1_LENGTH                     0x00000001
+
+#define _CNNEH_CNNEH2_POSITION                   0x00000002
+#define _CNNEH_CNNEH2_MASK                       0x00000004
+#define _CNNEH_CNNEH2_LENGTH                     0x00000001
+
+#define _CNNEH_CNNEH3_POSITION                   0x00000003
+#define _CNNEH_CNNEH3_MASK                       0x00000008
+#define _CNNEH_CNNEH3_LENGTH                     0x00000001
+
+#define _CNNEH_CNNEH4_POSITION                   0x00000004
+#define _CNNEH_CNNEH4_MASK                       0x00000010
+#define _CNNEH_CNNEH4_LENGTH                     0x00000001
+
+#define _CNNEH_CNNEH5_POSITION                   0x00000005
+#define _CNNEH_CNNEH5_MASK                       0x00000020
+#define _CNNEH_CNNEH5_LENGTH                     0x00000001
+
+#define _CNNEH_CNNEH6_POSITION                   0x00000006
+#define _CNNEH_CNNEH6_MASK                       0x00000040
+#define _CNNEH_CNNEH6_LENGTH                     0x00000001
+
+#define _CNNEH_CNNEH7_POSITION                   0x00000007
+#define _CNNEH_CNNEH7_MASK                       0x00000080
+#define _CNNEH_CNNEH7_LENGTH                     0x00000001
+
+#define _CNNEH_CNNEH8_POSITION                   0x00000008
+#define _CNNEH_CNNEH8_MASK                       0x00000100
+#define _CNNEH_CNNEH8_LENGTH                     0x00000001
+
+#define _CNNEH_CNNEH9_POSITION                   0x00000009
+#define _CNNEH_CNNEH9_MASK                       0x00000200
+#define _CNNEH_CNNEH9_LENGTH                     0x00000001
+
+#define _CNNEH_CNNEH10_POSITION                  0x0000000A
+#define _CNNEH_CNNEH10_MASK                      0x00000400
+#define _CNNEH_CNNEH10_LENGTH                    0x00000001
+
+#define _CNNEH_CNNEH11_POSITION                  0x0000000B
+#define _CNNEH_CNNEH11_MASK                      0x00000800
+#define _CNNEH_CNNEH11_LENGTH                    0x00000001
+
+#define _CNNEH_CNNEH12_POSITION                  0x0000000C
+#define _CNNEH_CNNEH12_MASK                      0x00001000
+#define _CNNEH_CNNEH12_LENGTH                    0x00000001
+
+#define _CNNEH_CNNEH13_POSITION                  0x0000000D
+#define _CNNEH_CNNEH13_MASK                      0x00002000
+#define _CNNEH_CNNEH13_LENGTH                    0x00000001
+
+#define _CNNEH_CNNEH14_POSITION                  0x0000000E
+#define _CNNEH_CNNEH14_MASK                      0x00004000
+#define _CNNEH_CNNEH14_LENGTH                    0x00000001
+
+#define _CNNEH_CNNEH15_POSITION                  0x0000000F
+#define _CNNEH_CNNEH15_MASK                      0x00008000
+#define _CNNEH_CNNEH15_LENGTH                    0x00000001
+
+#define _CNFH_CNFH0_POSITION                     0x00000000
+#define _CNFH_CNFH0_MASK                         0x00000001
+#define _CNFH_CNFH0_LENGTH                       0x00000001
+
+#define _CNFH_CNFH1_POSITION                     0x00000001
+#define _CNFH_CNFH1_MASK                         0x00000002
+#define _CNFH_CNFH1_LENGTH                       0x00000001
+
+#define _CNFH_CNFH2_POSITION                     0x00000002
+#define _CNFH_CNFH2_MASK                         0x00000004
+#define _CNFH_CNFH2_LENGTH                       0x00000001
+
+#define _CNFH_CNFH3_POSITION                     0x00000003
+#define _CNFH_CNFH3_MASK                         0x00000008
+#define _CNFH_CNFH3_LENGTH                       0x00000001
+
+#define _CNFH_CNFH4_POSITION                     0x00000004
+#define _CNFH_CNFH4_MASK                         0x00000010
+#define _CNFH_CNFH4_LENGTH                       0x00000001
+
+#define _CNFH_CNFH5_POSITION                     0x00000005
+#define _CNFH_CNFH5_MASK                         0x00000020
+#define _CNFH_CNFH5_LENGTH                       0x00000001
+
+#define _CNFH_CNFH6_POSITION                     0x00000006
+#define _CNFH_CNFH6_MASK                         0x00000040
+#define _CNFH_CNFH6_LENGTH                       0x00000001
+
+#define _CNFH_CNFH7_POSITION                     0x00000007
+#define _CNFH_CNFH7_MASK                         0x00000080
+#define _CNFH_CNFH7_LENGTH                       0x00000001
+
+#define _CNFH_CNFH8_POSITION                     0x00000008
+#define _CNFH_CNFH8_MASK                         0x00000100
+#define _CNFH_CNFH8_LENGTH                       0x00000001
+
+#define _CNFH_CNFH9_POSITION                     0x00000009
+#define _CNFH_CNFH9_MASK                         0x00000200
+#define _CNFH_CNFH9_LENGTH                       0x00000001
+
+#define _CNFH_CNFH10_POSITION                    0x0000000A
+#define _CNFH_CNFH10_MASK                        0x00000400
+#define _CNFH_CNFH10_LENGTH                      0x00000001
+
+#define _CNFH_CNFH11_POSITION                    0x0000000B
+#define _CNFH_CNFH11_MASK                        0x00000800
+#define _CNFH_CNFH11_LENGTH                      0x00000001
+
+#define _CNFH_CNFH12_POSITION                    0x0000000C
+#define _CNFH_CNFH12_MASK                        0x00001000
+#define _CNFH_CNFH12_LENGTH                      0x00000001
+
+#define _CNFH_CNFH13_POSITION                    0x0000000D
+#define _CNFH_CNFH13_MASK                        0x00002000
+#define _CNFH_CNFH13_LENGTH                      0x00000001
+
+#define _CNFH_CNFH14_POSITION                    0x0000000E
+#define _CNFH_CNFH14_MASK                        0x00004000
+#define _CNFH_CNFH14_LENGTH                      0x00000001
+
+#define _CNFH_CNFH15_POSITION                    0x0000000F
+#define _CNFH_CNFH15_MASK                        0x00008000
+#define _CNFH_CNFH15_LENGTH                      0x00000001
 
 #define _ANSELJ_ANSJ8_POSITION                   0x00000008
 #define _ANSELJ_ANSJ8_MASK                       0x00000100
@@ -50348,6 +51738,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNPDJ_w_MASK                            0xFFFFFFFF
 #define _CNPDJ_w_LENGTH                          0x00000020
 
+#define _CNCONJ_EDGEDETECT_POSITION              0x0000000B
+#define _CNCONJ_EDGEDETECT_MASK                  0x00000800
+#define _CNCONJ_EDGEDETECT_LENGTH                0x00000001
+
 #define _CNCONJ_SIDL_POSITION                    0x0000000D
 #define _CNCONJ_SIDL_MASK                        0x00002000
 #define _CNCONJ_SIDL_LENGTH                      0x00000001
@@ -50496,9 +51890,133 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNSTATJ_w_MASK                          0xFFFFFFFF
 #define _CNSTATJ_w_LENGTH                        0x00000020
 
-#define _ANSELK_w_POSITION                       0x00000000
-#define _ANSELK_w_MASK                           0xFFFFFFFF
-#define _ANSELK_w_LENGTH                         0x00000020
+#define _CNNEJ_CNNEJ0_POSITION                   0x00000000
+#define _CNNEJ_CNNEJ0_MASK                       0x00000001
+#define _CNNEJ_CNNEJ0_LENGTH                     0x00000001
+
+#define _CNNEJ_CNNEJ1_POSITION                   0x00000001
+#define _CNNEJ_CNNEJ1_MASK                       0x00000002
+#define _CNNEJ_CNNEJ1_LENGTH                     0x00000001
+
+#define _CNNEJ_CNNEJ2_POSITION                   0x00000002
+#define _CNNEJ_CNNEJ2_MASK                       0x00000004
+#define _CNNEJ_CNNEJ2_LENGTH                     0x00000001
+
+#define _CNNEJ_CNNEJ3_POSITION                   0x00000003
+#define _CNNEJ_CNNEJ3_MASK                       0x00000008
+#define _CNNEJ_CNNEJ3_LENGTH                     0x00000001
+
+#define _CNNEJ_CNNEJ4_POSITION                   0x00000004
+#define _CNNEJ_CNNEJ4_MASK                       0x00000010
+#define _CNNEJ_CNNEJ4_LENGTH                     0x00000001
+
+#define _CNNEJ_CNNEJ5_POSITION                   0x00000005
+#define _CNNEJ_CNNEJ5_MASK                       0x00000020
+#define _CNNEJ_CNNEJ5_LENGTH                     0x00000001
+
+#define _CNNEJ_CNNEJ6_POSITION                   0x00000006
+#define _CNNEJ_CNNEJ6_MASK                       0x00000040
+#define _CNNEJ_CNNEJ6_LENGTH                     0x00000001
+
+#define _CNNEJ_CNNEJ7_POSITION                   0x00000007
+#define _CNNEJ_CNNEJ7_MASK                       0x00000080
+#define _CNNEJ_CNNEJ7_LENGTH                     0x00000001
+
+#define _CNNEJ_CNNEJ8_POSITION                   0x00000008
+#define _CNNEJ_CNNEJ8_MASK                       0x00000100
+#define _CNNEJ_CNNEJ8_LENGTH                     0x00000001
+
+#define _CNNEJ_CNNEJ9_POSITION                   0x00000009
+#define _CNNEJ_CNNEJ9_MASK                       0x00000200
+#define _CNNEJ_CNNEJ9_LENGTH                     0x00000001
+
+#define _CNNEJ_CNNEJ10_POSITION                  0x0000000A
+#define _CNNEJ_CNNEJ10_MASK                      0x00000400
+#define _CNNEJ_CNNEJ10_LENGTH                    0x00000001
+
+#define _CNNEJ_CNNEJ11_POSITION                  0x0000000B
+#define _CNNEJ_CNNEJ11_MASK                      0x00000800
+#define _CNNEJ_CNNEJ11_LENGTH                    0x00000001
+
+#define _CNNEJ_CNNEJ12_POSITION                  0x0000000C
+#define _CNNEJ_CNNEJ12_MASK                      0x00001000
+#define _CNNEJ_CNNEJ12_LENGTH                    0x00000001
+
+#define _CNNEJ_CNNEJ13_POSITION                  0x0000000D
+#define _CNNEJ_CNNEJ13_MASK                      0x00002000
+#define _CNNEJ_CNNEJ13_LENGTH                    0x00000001
+
+#define _CNNEJ_CNNEJ14_POSITION                  0x0000000E
+#define _CNNEJ_CNNEJ14_MASK                      0x00004000
+#define _CNNEJ_CNNEJ14_LENGTH                    0x00000001
+
+#define _CNNEJ_CNNEJ15_POSITION                  0x0000000F
+#define _CNNEJ_CNNEJ15_MASK                      0x00008000
+#define _CNNEJ_CNNEJ15_LENGTH                    0x00000001
+
+#define _CNFJ_CNFJ0_POSITION                     0x00000000
+#define _CNFJ_CNFJ0_MASK                         0x00000001
+#define _CNFJ_CNFJ0_LENGTH                       0x00000001
+
+#define _CNFJ_CNFJ1_POSITION                     0x00000001
+#define _CNFJ_CNFJ1_MASK                         0x00000002
+#define _CNFJ_CNFJ1_LENGTH                       0x00000001
+
+#define _CNFJ_CNFJ2_POSITION                     0x00000002
+#define _CNFJ_CNFJ2_MASK                         0x00000004
+#define _CNFJ_CNFJ2_LENGTH                       0x00000001
+
+#define _CNFJ_CNFJ3_POSITION                     0x00000003
+#define _CNFJ_CNFJ3_MASK                         0x00000008
+#define _CNFJ_CNFJ3_LENGTH                       0x00000001
+
+#define _CNFJ_CNFJ4_POSITION                     0x00000004
+#define _CNFJ_CNFJ4_MASK                         0x00000010
+#define _CNFJ_CNFJ4_LENGTH                       0x00000001
+
+#define _CNFJ_CNFJ5_POSITION                     0x00000005
+#define _CNFJ_CNFJ5_MASK                         0x00000020
+#define _CNFJ_CNFJ5_LENGTH                       0x00000001
+
+#define _CNFJ_CNFJ6_POSITION                     0x00000006
+#define _CNFJ_CNFJ6_MASK                         0x00000040
+#define _CNFJ_CNFJ6_LENGTH                       0x00000001
+
+#define _CNFJ_CNFJ7_POSITION                     0x00000007
+#define _CNFJ_CNFJ7_MASK                         0x00000080
+#define _CNFJ_CNFJ7_LENGTH                       0x00000001
+
+#define _CNFJ_CNFJ8_POSITION                     0x00000008
+#define _CNFJ_CNFJ8_MASK                         0x00000100
+#define _CNFJ_CNFJ8_LENGTH                       0x00000001
+
+#define _CNFJ_CNFJ9_POSITION                     0x00000009
+#define _CNFJ_CNFJ9_MASK                         0x00000200
+#define _CNFJ_CNFJ9_LENGTH                       0x00000001
+
+#define _CNFJ_CNFJ10_POSITION                    0x0000000A
+#define _CNFJ_CNFJ10_MASK                        0x00000400
+#define _CNFJ_CNFJ10_LENGTH                      0x00000001
+
+#define _CNFJ_CNFJ11_POSITION                    0x0000000B
+#define _CNFJ_CNFJ11_MASK                        0x00000800
+#define _CNFJ_CNFJ11_LENGTH                      0x00000001
+
+#define _CNFJ_CNFJ12_POSITION                    0x0000000C
+#define _CNFJ_CNFJ12_MASK                        0x00001000
+#define _CNFJ_CNFJ12_LENGTH                      0x00000001
+
+#define _CNFJ_CNFJ13_POSITION                    0x0000000D
+#define _CNFJ_CNFJ13_MASK                        0x00002000
+#define _CNFJ_CNFJ13_LENGTH                      0x00000001
+
+#define _CNFJ_CNFJ14_POSITION                    0x0000000E
+#define _CNFJ_CNFJ14_MASK                        0x00004000
+#define _CNFJ_CNFJ14_LENGTH                      0x00000001
+
+#define _CNFJ_CNFJ15_POSITION                    0x0000000F
+#define _CNFJ_CNFJ15_MASK                        0x00008000
+#define _CNFJ_CNFJ15_LENGTH                      0x00000001
 
 #define _TRISK_TRISK0_POSITION                   0x00000000
 #define _TRISK_TRISK0_MASK                       0x00000001
@@ -50716,6 +52234,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNPDK_w_MASK                            0xFFFFFFFF
 #define _CNPDK_w_LENGTH                          0x00000020
 
+#define _CNCONK_EDGEDETECT_POSITION              0x0000000B
+#define _CNCONK_EDGEDETECT_MASK                  0x00000800
+#define _CNCONK_EDGEDETECT_LENGTH                0x00000001
+
 #define _CNCONK_SIDL_POSITION                    0x0000000D
 #define _CNCONK_SIDL_MASK                        0x00002000
 #define _CNCONK_SIDL_LENGTH                      0x00000001
@@ -50799,6 +52321,70 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _CNSTATK_w_POSITION                      0x00000000
 #define _CNSTATK_w_MASK                          0xFFFFFFFF
 #define _CNSTATK_w_LENGTH                        0x00000020
+
+#define _CNNEK_CNNEK0_POSITION                   0x00000000
+#define _CNNEK_CNNEK0_MASK                       0x00000001
+#define _CNNEK_CNNEK0_LENGTH                     0x00000001
+
+#define _CNNEK_CNNEK1_POSITION                   0x00000001
+#define _CNNEK_CNNEK1_MASK                       0x00000002
+#define _CNNEK_CNNEK1_LENGTH                     0x00000001
+
+#define _CNNEK_CNNEK2_POSITION                   0x00000002
+#define _CNNEK_CNNEK2_MASK                       0x00000004
+#define _CNNEK_CNNEK2_LENGTH                     0x00000001
+
+#define _CNNEK_CNNEK3_POSITION                   0x00000003
+#define _CNNEK_CNNEK3_MASK                       0x00000008
+#define _CNNEK_CNNEK3_LENGTH                     0x00000001
+
+#define _CNNEK_CNNEK4_POSITION                   0x00000004
+#define _CNNEK_CNNEK4_MASK                       0x00000010
+#define _CNNEK_CNNEK4_LENGTH                     0x00000001
+
+#define _CNNEK_CNNEK5_POSITION                   0x00000005
+#define _CNNEK_CNNEK5_MASK                       0x00000020
+#define _CNNEK_CNNEK5_LENGTH                     0x00000001
+
+#define _CNNEK_CNNEK6_POSITION                   0x00000006
+#define _CNNEK_CNNEK6_MASK                       0x00000040
+#define _CNNEK_CNNEK6_LENGTH                     0x00000001
+
+#define _CNNEK_CNNEK7_POSITION                   0x00000007
+#define _CNNEK_CNNEK7_MASK                       0x00000080
+#define _CNNEK_CNNEK7_LENGTH                     0x00000001
+
+#define _CNFK_CNFK0_POSITION                     0x00000000
+#define _CNFK_CNFK0_MASK                         0x00000001
+#define _CNFK_CNFK0_LENGTH                       0x00000001
+
+#define _CNFK_CNFK1_POSITION                     0x00000001
+#define _CNFK_CNFK1_MASK                         0x00000002
+#define _CNFK_CNFK1_LENGTH                       0x00000001
+
+#define _CNFK_CNFK2_POSITION                     0x00000002
+#define _CNFK_CNFK2_MASK                         0x00000004
+#define _CNFK_CNFK2_LENGTH                       0x00000001
+
+#define _CNFK_CNFK3_POSITION                     0x00000003
+#define _CNFK_CNFK3_MASK                         0x00000008
+#define _CNFK_CNFK3_LENGTH                       0x00000001
+
+#define _CNFK_CNFK4_POSITION                     0x00000004
+#define _CNFK_CNFK4_MASK                         0x00000010
+#define _CNFK_CNFK4_LENGTH                       0x00000001
+
+#define _CNFK_CNFK5_POSITION                     0x00000005
+#define _CNFK_CNFK5_MASK                         0x00000020
+#define _CNFK_CNFK5_LENGTH                       0x00000001
+
+#define _CNFK_CNFK6_POSITION                     0x00000006
+#define _CNFK_CNFK6_MASK                         0x00000040
+#define _CNFK_CNFK6_LENGTH                       0x00000001
+
+#define _CNFK_CNFK7_POSITION                     0x00000007
+#define _CNFK_CNFK7_MASK                         0x00000080
+#define _CNFK_CNFK7_LENGTH                       0x00000001
 
 #define _C1CON_DNCNT_POSITION                    0x00000000
 #define _C1CON_DNCNT_MASK                        0x0000001F
@@ -62345,8 +63931,8 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _EBISMT2_RDYMODE_LENGTH                  0x00000001
 
 #define _EBIFTRPD_TRPD_POSITION                  0x00000000
-#define _EBIFTRPD_TRPD_MASK                      0xFFFFFFFF
-#define _EBIFTRPD_TRPD_LENGTH                    0x00000020
+#define _EBIFTRPD_TRPD_MASK                      0x7FFFFFFF
+#define _EBIFTRPD_TRPD_LENGTH                    0x0000001F
 
 #define _EBISMCON_SMRP_POSITION                  0x00000000
 #define _EBISMCON_SMRP_MASK                      0x00000001
@@ -62416,6 +64002,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _SQI1XCON1_DDRDATA_MASK                  0x10000000
 #define _SQI1XCON1_DDRDATA_LENGTH                0x00000001
 
+#define _SQI1XCON1_SDRCMD_POSITION               0x0000001D
+#define _SQI1XCON1_SDRCMD_MASK                   0x20000000
+#define _SQI1XCON1_SDRCMD_LENGTH                 0x00000001
+
 #define _SQI1XCON2_MODECODE_POSITION             0x00000000
 #define _SQI1XCON2_MODECODE_MASK                 0x000000FF
 #define _SQI1XCON2_MODECODE_LENGTH               0x00000008
@@ -62460,17 +64050,17 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _SQI1CFG_RESET_MASK                      0x00010000
 #define _SQI1CFG_RESET_LENGTH                    0x00000001
 
-#define _SQI1CFG_TXFIFORST_POSITION              0x00000011
-#define _SQI1CFG_TXFIFORST_MASK                  0x00020000
-#define _SQI1CFG_TXFIFORST_LENGTH                0x00000001
+#define _SQI1CFG_TXBUFRST_POSITION               0x00000011
+#define _SQI1CFG_TXBUFRST_MASK                   0x00020000
+#define _SQI1CFG_TXBUFRST_LENGTH                 0x00000001
 
-#define _SQI1CFG_RXFIFORST_POSITION              0x00000012
-#define _SQI1CFG_RXFIFORST_MASK                  0x00040000
-#define _SQI1CFG_RXFIFORST_LENGTH                0x00000001
+#define _SQI1CFG_RXBUFRST_POSITION               0x00000012
+#define _SQI1CFG_RXBUFRST_MASK                   0x00040000
+#define _SQI1CFG_RXBUFRST_LENGTH                 0x00000001
 
-#define _SQI1CFG_CONFIFORST_POSITION             0x00000013
-#define _SQI1CFG_CONFIFORST_MASK                 0x00080000
-#define _SQI1CFG_CONFIFORST_LENGTH               0x00000001
+#define _SQI1CFG_CONBUFRST_POSITION              0x00000013
+#define _SQI1CFG_CONBUFRST_MASK                  0x00080000
+#define _SQI1CFG_CONBUFRST_LENGTH                0x00000001
 
 #define _SQI1CFG_DATAEN_POSITION                 0x00000014
 #define _SQI1CFG_DATAEN_MASK                     0x00300000
@@ -62521,24 +64111,24 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _SQI1CLKCON_STABLE_LENGTH                0x00000001
 
 #define _SQI1CLKCON_CLKDIV_POSITION              0x00000008
-#define _SQI1CLKCON_CLKDIV_MASK                  0x0003FF00
-#define _SQI1CLKCON_CLKDIV_LENGTH                0x0000000A
+#define _SQI1CLKCON_CLKDIV_MASK                  0x0007FF00
+#define _SQI1CLKCON_CLKDIV_LENGTH                0x0000000B
 
 #define _SQI1CMDTHR_RXCMDTHR_POSITION            0x00000000
-#define _SQI1CMDTHR_RXCMDTHR_MASK                0x0000001F
-#define _SQI1CMDTHR_RXCMDTHR_LENGTH              0x00000005
+#define _SQI1CMDTHR_RXCMDTHR_MASK                0x0000003F
+#define _SQI1CMDTHR_RXCMDTHR_LENGTH              0x00000006
 
 #define _SQI1CMDTHR_TXCMDTHR_POSITION            0x00000008
-#define _SQI1CMDTHR_TXCMDTHR_MASK                0x00001F00
-#define _SQI1CMDTHR_TXCMDTHR_LENGTH              0x00000005
+#define _SQI1CMDTHR_TXCMDTHR_MASK                0x00003F00
+#define _SQI1CMDTHR_TXCMDTHR_LENGTH              0x00000006
 
 #define _SQI1INTTHR_RXINTTHR_POSITION            0x00000000
-#define _SQI1INTTHR_RXINTTHR_MASK                0x0000001F
-#define _SQI1INTTHR_RXINTTHR_LENGTH              0x00000005
+#define _SQI1INTTHR_RXINTTHR_MASK                0x0000003F
+#define _SQI1INTTHR_RXINTTHR_LENGTH              0x00000006
 
 #define _SQI1INTTHR_TXINTTHR_POSITION            0x00000008
-#define _SQI1INTTHR_TXINTTHR_MASK                0x00001F00
-#define _SQI1INTTHR_TXINTTHR_LENGTH              0x00000005
+#define _SQI1INTTHR_TXINTTHR_MASK                0x00003F00
+#define _SQI1INTTHR_TXINTTHR_LENGTH              0x00000006
 
 #define _SQI1INTEN_TXEMPTYIE_POSITION            0x00000000
 #define _SQI1INTEN_TXEMPTYIE_MASK                0x00000001
@@ -62644,13 +64234,13 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _SQI1RXDATA_RXDATA_MASK                  0xFFFFFFFF
 #define _SQI1RXDATA_RXDATA_LENGTH                0x00000020
 
-#define _SQI1STAT1_RXFIFOCNT_POSITION            0x00000000
-#define _SQI1STAT1_RXFIFOCNT_MASK                0x000000FF
-#define _SQI1STAT1_RXFIFOCNT_LENGTH              0x00000008
+#define _SQI1STAT1_RXBUFCNT_POSITION             0x00000000
+#define _SQI1STAT1_RXBUFCNT_MASK                 0x0000003F
+#define _SQI1STAT1_RXBUFCNT_LENGTH               0x00000006
 
-#define _SQI1STAT1_TXFIFOFREE_POSITION           0x00000010
-#define _SQI1STAT1_TXFIFOFREE_MASK               0x00FF0000
-#define _SQI1STAT1_TXFIFOFREE_LENGTH             0x00000008
+#define _SQI1STAT1_TXBUFFREE_POSITION            0x00000010
+#define _SQI1STAT1_TXBUFFREE_MASK                0x003F0000
+#define _SQI1STAT1_TXBUFFREE_LENGTH              0x00000006
 
 #define _SQI1STAT2_TXOV_POSITION                 0x00000000
 #define _SQI1STAT2_TXOV_MASK                     0x00000001
@@ -62660,25 +64250,25 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _SQI1STAT2_RXUN_MASK                     0x00000002
 #define _SQI1STAT2_RXUN_LENGTH                   0x00000001
 
-#define _SQI1STAT2_SDID0_POSITION                0x00000003
-#define _SQI1STAT2_SDID0_MASK                    0x00000008
-#define _SQI1STAT2_SDID0_LENGTH                  0x00000001
+#define _SQI1STAT2_SQID0_POSITION                0x00000003
+#define _SQI1STAT2_SQID0_MASK                    0x00000008
+#define _SQI1STAT2_SQID0_LENGTH                  0x00000001
 
-#define _SQI1STAT2_SDID1_POSITION                0x00000004
-#define _SQI1STAT2_SDID1_MASK                    0x00000010
-#define _SQI1STAT2_SDID1_LENGTH                  0x00000001
+#define _SQI1STAT2_SQID1_POSITION                0x00000004
+#define _SQI1STAT2_SQID1_MASK                    0x00000010
+#define _SQI1STAT2_SQID1_LENGTH                  0x00000001
 
-#define _SQI1STAT2_SDID2_POSITION                0x00000005
-#define _SQI1STAT2_SDID2_MASK                    0x00000020
-#define _SQI1STAT2_SDID2_LENGTH                  0x00000001
+#define _SQI1STAT2_SQID2_POSITION                0x00000005
+#define _SQI1STAT2_SQID2_MASK                    0x00000020
+#define _SQI1STAT2_SQID2_LENGTH                  0x00000001
 
-#define _SQI1STAT2_SDID3_POSITION                0x00000006
-#define _SQI1STAT2_SDID3_MASK                    0x00000040
-#define _SQI1STAT2_SDID3_LENGTH                  0x00000001
+#define _SQI1STAT2_SQID3_POSITION                0x00000006
+#define _SQI1STAT2_SQID3_MASK                    0x00000040
+#define _SQI1STAT2_SQID3_LENGTH                  0x00000001
 
 #define _SQI1STAT2_CONAVAIL_POSITION             0x00000007
-#define _SQI1STAT2_CONAVAIL_MASK                 0x00000F80
-#define _SQI1STAT2_CONAVAIL_LENGTH               0x00000005
+#define _SQI1STAT2_CONAVAIL_MASK                 0x00000780
+#define _SQI1STAT2_CONAVAIL_LENGTH               0x00000004
 
 #define _SQI1STAT2_CMDSTAT_POSITION              0x00000010
 #define _SQI1STAT2_CMDSTAT_MASK                  0x00030000
@@ -62725,8 +64315,8 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _SQI1BDPOLLCON_POLLCON_LENGTH            0x00000010
 
 #define _SQI1BDTXDSTAT_TXCURBUFLEN_POSITION      0x00000000
-#define _SQI1BDTXDSTAT_TXCURBUFLEN_MASK          0x000000FF
-#define _SQI1BDTXDSTAT_TXCURBUFLEN_LENGTH        0x00000008
+#define _SQI1BDTXDSTAT_TXCURBUFLEN_MASK          0x000001FF
+#define _SQI1BDTXDSTAT_TXCURBUFLEN_LENGTH        0x00000009
 
 #define _SQI1BDTXDSTAT_TXBUFCNT_POSITION         0x00000010
 #define _SQI1BDTXDSTAT_TXBUFCNT_MASK             0x001F0000
@@ -62737,8 +64327,8 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _SQI1BDTXDSTAT_TXSTATE_LENGTH            0x00000004
 
 #define _SQI1BDRXDSTAT_RXCURBUFLEN_POSITION      0x00000000
-#define _SQI1BDRXDSTAT_RXCURBUFLEN_MASK          0x000000FF
-#define _SQI1BDRXDSTAT_RXCURBUFLEN_LENGTH        0x00000008
+#define _SQI1BDRXDSTAT_RXCURBUFLEN_MASK          0x000001FF
+#define _SQI1BDRXDSTAT_RXCURBUFLEN_LENGTH        0x00000009
 
 #define _SQI1BDRXDSTAT_RXBUFCNT_POSITION         0x00000010
 #define _SQI1BDRXDSTAT_RXBUFCNT_MASK             0x001F0000
@@ -62749,8 +64339,8 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _SQI1BDRXDSTAT_RXSTATE_LENGTH            0x00000004
 
 #define _SQI1THR_THRES_POSITION                  0x00000000
-#define _SQI1THR_THRES_MASK                      0x0000007F
-#define _SQI1THR_THRES_LENGTH                    0x00000007
+#define _SQI1THR_THRES_MASK                      0x0000000F
+#define _SQI1THR_THRES_LENGTH                    0x00000004
 
 #define _SQI1INTSIGEN_TXEMPTYISE_POSITION        0x00000000
 #define _SQI1INTSIGEN_TXEMPTYISE_MASK            0x00000001
@@ -62792,9 +64382,9 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _SQI1INTSIGEN_BDDONEISE_MASK             0x00000200
 #define _SQI1INTSIGEN_BDDONEISE_LENGTH           0x00000001
 
-#define _SQI1INTSIGEN_PKTDONEISE_POSITION        0x0000000A
-#define _SQI1INTSIGEN_PKTDONEISE_MASK            0x00000400
-#define _SQI1INTSIGEN_PKTDONEISE_LENGTH          0x00000001
+#define _SQI1INTSIGEN_PKTCOMPISE_POSITION        0x0000000A
+#define _SQI1INTSIGEN_PKTCOMPISE_MASK            0x00000400
+#define _SQI1INTSIGEN_PKTCOMPISE_LENGTH          0x00000001
 
 #define _SQI1INTSIGEN_DMAEISE_POSITION           0x0000000B
 #define _SQI1INTSIGEN_DMAEISE_MASK               0x00000800
@@ -62808,17 +64398,13 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _SQI1TAPCON_DATAOUTDLY_MASK              0x000000F0
 #define _SQI1TAPCON_DATAOUTDLY_LENGTH            0x00000004
 
-#define _SQI1TAPCON_CLKINDLY_POSITION            0x00000008
-#define _SQI1TAPCON_CLKINDLY_MASK                0x00003F00
-#define _SQI1TAPCON_CLKINDLY_LENGTH              0x00000006
+#define _SQI1TAPCON_SDRCLKINDLY_POSITION         0x00000008
+#define _SQI1TAPCON_SDRCLKINDLY_MASK             0x00003F00
+#define _SQI1TAPCON_SDRCLKINDLY_LENGTH           0x00000006
 
 #define _SQI1MEMSTAT_STATCMD_POSITION            0x00000000
-#define _SQI1MEMSTAT_STATCMD_MASK                0x000000FF
-#define _SQI1MEMSTAT_STATCMD_LENGTH              0x00000008
-
-#define _SQI1MEMSTAT_STATDATA_POSITION           0x00000008
-#define _SQI1MEMSTAT_STATDATA_MASK               0x0000FF00
-#define _SQI1MEMSTAT_STATDATA_LENGTH             0x00000008
+#define _SQI1MEMSTAT_STATCMD_MASK                0x0000FFFF
+#define _SQI1MEMSTAT_STATCMD_LENGTH              0x00000010
 
 #define _SQI1MEMSTAT_STATBYTES_POSITION          0x00000010
 #define _SQI1MEMSTAT_STATBYTES_MASK              0x00030000
@@ -65948,6 +67534,34 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _USBLMPR2_LPMFADDR_MASK                  0x00007F00
 #define _USBLMPR2_LPMFADDR_LENGTH                0x00000007
 
+#define _USBLPMP2_LPMST_POSITION                 0x00000000
+#define _USBLPMP2_LPMST_MASK                     0x00000001
+#define _USBLPMP2_LPMST_LENGTH                   0x00000001
+
+#define _USBLPMP2_LPMNY_POSITION                 0x00000001
+#define _USBLPMP2_LPMNY_MASK                     0x00000002
+#define _USBLPMP2_LPMNY_LENGTH                   0x00000001
+
+#define _USBLPMP2_LPMACK_POSITION                0x00000002
+#define _USBLPMP2_LPMACK_MASK                    0x00000004
+#define _USBLPMP2_LPMACK_LENGTH                  0x00000001
+
+#define _USBLPMP2_LPMNC_POSITION                 0x00000003
+#define _USBLPMP2_LPMNC_MASK                     0x00000008
+#define _USBLPMP2_LPMNC_LENGTH                   0x00000001
+
+#define _USBLPMP2_LPMRES_POSITION                0x00000004
+#define _USBLPMP2_LPMRES_MASK                    0x00000010
+#define _USBLPMP2_LPMRES_LENGTH                  0x00000001
+
+#define _USBLPMP2_LPMERR_POSITION                0x00000005
+#define _USBLPMP2_LPMERR_MASK                    0x00000020
+#define _USBLPMP2_LPMERR_LENGTH                  0x00000001
+
+#define _USBLPMP2_LPMFADDR_POSITION              0x00000008
+#define _USBLPMP2_LPMFADDR_MASK                  0x00007F00
+#define _USBLPMP2_LPMFADDR_LENGTH                0x00000007
+
 #define _CEVER_ID_POSITION                       0x00000000
 #define _CEVER_ID_MASK                           0x0000FFFF
 #define _CEVER_ID_LENGTH                         0x00000010
@@ -66091,6 +67705,10 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _RNGCON_CONT_POSITION                    0x0000000A
 #define _RNGCON_CONT_MASK                        0x00000400
 #define _RNGCON_CONT_LENGTH                      0x00000001
+
+#define _RNGCON_TRNGMODE_POSITION                0x0000000B
+#define _RNGCON_TRNGMODE_MASK                    0x00000800
+#define _RNGCON_TRNGMODE_LENGTH                  0x00000001
 
 #define _RNGCON_LOAD_POSITION                    0x0000000C
 #define _RNGCON_LOAD_MASK                        0x00001000
@@ -68328,10 +69946,6 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _DEVCFG0_FSLEEP_MASK                     0x00000400
 #define _DEVCFG0_FSLEEP_LENGTH                   0x00000001
 
-#define _DEVCFG0_FDBGWP_POSITION                 0x0000000B
-#define _DEVCFG0_FDBGWP_MASK                     0x00000800
-#define _DEVCFG0_FDBGWP_LENGTH                   0x00000001
-
 #define _DEVCFG0_DBGPER_POSITION                 0x0000000C
 #define _DEVCFG0_DBGPER_MASK                     0x00007000
 #define _DEVCFG0_DBGPER_LENGTH                   0x00000003
@@ -68339,6 +69953,22 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _DEVCFG0_SMCLR_POSITION                  0x0000000F
 #define _DEVCFG0_SMCLR_MASK                      0x00008000
 #define _DEVCFG0_SMCLR_LENGTH                    0x00000001
+
+#define _DEVCFG0_SOSCGAIN_POSITION               0x00000010
+#define _DEVCFG0_SOSCGAIN_MASK                   0x00030000
+#define _DEVCFG0_SOSCGAIN_LENGTH                 0x00000002
+
+#define _DEVCFG0_SOSCBOOST_POSITION              0x00000012
+#define _DEVCFG0_SOSCBOOST_MASK                  0x00040000
+#define _DEVCFG0_SOSCBOOST_LENGTH                0x00000001
+
+#define _DEVCFG0_POSCGAIN_POSITION               0x00000013
+#define _DEVCFG0_POSCGAIN_MASK                   0x00180000
+#define _DEVCFG0_POSCGAIN_LENGTH                 0x00000002
+
+#define _DEVCFG0_POSCBOOST_POSITION              0x00000015
+#define _DEVCFG0_POSCBOOST_MASK                  0x00200000
+#define _DEVCFG0_POSCBOOST_LENGTH                0x00000001
 
 #define _DEVCFG0_EJTAGBEN_POSITION               0x0000001E
 #define _DEVCFG0_EJTAGBEN_MASK                   0x40000000
@@ -68536,10 +70166,6 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _ADEVCFG0_FSLEEP_MASK                    0x00000400
 #define _ADEVCFG0_FSLEEP_LENGTH                  0x00000001
 
-#define _ADEVCFG0_FDBGWP_POSITION                0x0000000B
-#define _ADEVCFG0_FDBGWP_MASK                    0x00000800
-#define _ADEVCFG0_FDBGWP_LENGTH                  0x00000001
-
 #define _ADEVCFG0_DBGPER_POSITION                0x0000000C
 #define _ADEVCFG0_DBGPER_MASK                    0x00007000
 #define _ADEVCFG0_DBGPER_LENGTH                  0x00000003
@@ -68547,6 +70173,22 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _ADEVCFG0_SMCLR_POSITION                 0x0000000F
 #define _ADEVCFG0_SMCLR_MASK                     0x00008000
 #define _ADEVCFG0_SMCLR_LENGTH                   0x00000001
+
+#define _ADEVCFG0_SOSCGAIN_POSITION              0x00000010
+#define _ADEVCFG0_SOSCGAIN_MASK                  0x00030000
+#define _ADEVCFG0_SOSCGAIN_LENGTH                0x00000002
+
+#define _ADEVCFG0_SOSCBOOST_POSITION             0x00000012
+#define _ADEVCFG0_SOSCBOOST_MASK                 0x00040000
+#define _ADEVCFG0_SOSCBOOST_LENGTH               0x00000001
+
+#define _ADEVCFG0_POSCGAIN_POSITION              0x00000013
+#define _ADEVCFG0_POSCGAIN_MASK                  0x00180000
+#define _ADEVCFG0_POSCGAIN_LENGTH                0x00000002
+
+#define _ADEVCFG0_POSCBOOST_POSITION             0x00000015
+#define _ADEVCFG0_POSCBOOST_MASK                 0x00200000
+#define _ADEVCFG0_POSCBOOST_LENGTH               0x00000001
 
 #define _ADEVCFG0_EJTAGBEN_POSITION              0x0000001E
 #define _ADEVCFG0_EJTAGBEN_MASK                  0x40000000
@@ -68579,6 +70221,414 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _ASEQ0_w_POSITION                        0x00000000
 #define _ASEQ0_w_MASK                            0xFFFFFFFF
 #define _ASEQ0_w_LENGTH                          0x00000020
+
+#define _AUBADEVCFG3_USERID_POSITION             0x00000000
+#define _AUBADEVCFG3_USERID_MASK                 0x0000FFFF
+#define _AUBADEVCFG3_USERID_LENGTH               0x00000010
+
+#define _AUBADEVCFG3_FMIIEN_POSITION             0x00000018
+#define _AUBADEVCFG3_FMIIEN_MASK                 0x01000000
+#define _AUBADEVCFG3_FMIIEN_LENGTH               0x00000001
+
+#define _AUBADEVCFG3_FETHIO_POSITION             0x00000019
+#define _AUBADEVCFG3_FETHIO_MASK                 0x02000000
+#define _AUBADEVCFG3_FETHIO_LENGTH               0x00000001
+
+#define _AUBADEVCFG3_PGL1WAY_POSITION            0x0000001B
+#define _AUBADEVCFG3_PGL1WAY_MASK                0x08000000
+#define _AUBADEVCFG3_PGL1WAY_LENGTH              0x00000001
+
+#define _AUBADEVCFG3_PMDL1WAY_POSITION           0x0000001C
+#define _AUBADEVCFG3_PMDL1WAY_MASK               0x10000000
+#define _AUBADEVCFG3_PMDL1WAY_LENGTH             0x00000001
+
+#define _AUBADEVCFG3_IOL1WAY_POSITION            0x0000001D
+#define _AUBADEVCFG3_IOL1WAY_MASK                0x20000000
+#define _AUBADEVCFG3_IOL1WAY_LENGTH              0x00000001
+
+#define _AUBADEVCFG3_FUSBIDIO_POSITION           0x0000001E
+#define _AUBADEVCFG3_FUSBIDIO_MASK               0x40000000
+#define _AUBADEVCFG3_FUSBIDIO_LENGTH             0x00000001
+
+#define _AUBADEVCFG3_w_POSITION                  0x00000000
+#define _AUBADEVCFG3_w_MASK                      0xFFFFFFFF
+#define _AUBADEVCFG3_w_LENGTH                    0x00000020
+
+#define _AUBADEVCFG2_FPLLIDIV_POSITION           0x00000000
+#define _AUBADEVCFG2_FPLLIDIV_MASK               0x00000007
+#define _AUBADEVCFG2_FPLLIDIV_LENGTH             0x00000003
+
+#define _AUBADEVCFG2_FPLLRNG_POSITION            0x00000004
+#define _AUBADEVCFG2_FPLLRNG_MASK                0x00000070
+#define _AUBADEVCFG2_FPLLRNG_LENGTH              0x00000003
+
+#define _AUBADEVCFG2_FPLLICLK_POSITION           0x00000007
+#define _AUBADEVCFG2_FPLLICLK_MASK               0x00000080
+#define _AUBADEVCFG2_FPLLICLK_LENGTH             0x00000001
+
+#define _AUBADEVCFG2_FPLLMULT_POSITION           0x00000008
+#define _AUBADEVCFG2_FPLLMULT_MASK               0x00007F00
+#define _AUBADEVCFG2_FPLLMULT_LENGTH             0x00000007
+
+#define _AUBADEVCFG2_FPLLODIV_POSITION           0x00000010
+#define _AUBADEVCFG2_FPLLODIV_MASK               0x00070000
+#define _AUBADEVCFG2_FPLLODIV_LENGTH             0x00000003
+
+#define _AUBADEVCFG2_UPLLFSEL_POSITION           0x0000001E
+#define _AUBADEVCFG2_UPLLFSEL_MASK               0x40000000
+#define _AUBADEVCFG2_UPLLFSEL_LENGTH             0x00000001
+
+#define _AUBADEVCFG2_w_POSITION                  0x00000000
+#define _AUBADEVCFG2_w_MASK                      0xFFFFFFFF
+#define _AUBADEVCFG2_w_LENGTH                    0x00000020
+
+#define _AUBADEVCFG1_FNOSC_POSITION              0x00000000
+#define _AUBADEVCFG1_FNOSC_MASK                  0x00000007
+#define _AUBADEVCFG1_FNOSC_LENGTH                0x00000003
+
+#define _AUBADEVCFG1_DMTINTV_POSITION            0x00000003
+#define _AUBADEVCFG1_DMTINTV_MASK                0x00000038
+#define _AUBADEVCFG1_DMTINTV_LENGTH              0x00000003
+
+#define _AUBADEVCFG1_FSOSCEN_POSITION            0x00000006
+#define _AUBADEVCFG1_FSOSCEN_MASK                0x00000040
+#define _AUBADEVCFG1_FSOSCEN_LENGTH              0x00000001
+
+#define _AUBADEVCFG1_IESO_POSITION               0x00000007
+#define _AUBADEVCFG1_IESO_MASK                   0x00000080
+#define _AUBADEVCFG1_IESO_LENGTH                 0x00000001
+
+#define _AUBADEVCFG1_POSCMOD_POSITION            0x00000008
+#define _AUBADEVCFG1_POSCMOD_MASK                0x00000300
+#define _AUBADEVCFG1_POSCMOD_LENGTH              0x00000002
+
+#define _AUBADEVCFG1_OSCIOFNC_POSITION           0x0000000A
+#define _AUBADEVCFG1_OSCIOFNC_MASK               0x00000400
+#define _AUBADEVCFG1_OSCIOFNC_LENGTH             0x00000001
+
+#define _AUBADEVCFG1_FCKSM_POSITION              0x0000000E
+#define _AUBADEVCFG1_FCKSM_MASK                  0x0000C000
+#define _AUBADEVCFG1_FCKSM_LENGTH                0x00000002
+
+#define _AUBADEVCFG1_WDTPS_POSITION              0x00000010
+#define _AUBADEVCFG1_WDTPS_MASK                  0x001F0000
+#define _AUBADEVCFG1_WDTPS_LENGTH                0x00000005
+
+#define _AUBADEVCFG1_WDTSPGM_POSITION            0x00000015
+#define _AUBADEVCFG1_WDTSPGM_MASK                0x00200000
+#define _AUBADEVCFG1_WDTSPGM_LENGTH              0x00000001
+
+#define _AUBADEVCFG1_WINDIS_POSITION             0x00000016
+#define _AUBADEVCFG1_WINDIS_MASK                 0x00400000
+#define _AUBADEVCFG1_WINDIS_LENGTH               0x00000001
+
+#define _AUBADEVCFG1_FWDTEN_POSITION             0x00000017
+#define _AUBADEVCFG1_FWDTEN_MASK                 0x00800000
+#define _AUBADEVCFG1_FWDTEN_LENGTH               0x00000001
+
+#define _AUBADEVCFG1_FWDTWINSZ_POSITION          0x00000018
+#define _AUBADEVCFG1_FWDTWINSZ_MASK              0x03000000
+#define _AUBADEVCFG1_FWDTWINSZ_LENGTH            0x00000002
+
+#define _AUBADEVCFG1_DMTCNT_POSITION             0x0000001A
+#define _AUBADEVCFG1_DMTCNT_MASK                 0x7C000000
+#define _AUBADEVCFG1_DMTCNT_LENGTH               0x00000005
+
+#define _AUBADEVCFG1_FDMTEN_POSITION             0x0000001F
+#define _AUBADEVCFG1_FDMTEN_MASK                 0x80000000
+#define _AUBADEVCFG1_FDMTEN_LENGTH               0x00000001
+
+#define _AUBADEVCFG1_w_POSITION                  0x00000000
+#define _AUBADEVCFG1_w_MASK                      0xFFFFFFFF
+#define _AUBADEVCFG1_w_LENGTH                    0x00000020
+
+#define _AUBADEVCFG0_DEBUG_POSITION              0x00000000
+#define _AUBADEVCFG0_DEBUG_MASK                  0x00000003
+#define _AUBADEVCFG0_DEBUG_LENGTH                0x00000002
+
+#define _AUBADEVCFG0_JTAGEN_POSITION             0x00000002
+#define _AUBADEVCFG0_JTAGEN_MASK                 0x00000004
+#define _AUBADEVCFG0_JTAGEN_LENGTH               0x00000001
+
+#define _AUBADEVCFG0_ICESEL_POSITION             0x00000003
+#define _AUBADEVCFG0_ICESEL_MASK                 0x00000018
+#define _AUBADEVCFG0_ICESEL_LENGTH               0x00000002
+
+#define _AUBADEVCFG0_TRCEN_POSITION              0x00000005
+#define _AUBADEVCFG0_TRCEN_MASK                  0x00000020
+#define _AUBADEVCFG0_TRCEN_LENGTH                0x00000001
+
+#define _AUBADEVCFG0_BOOTISA_POSITION            0x00000006
+#define _AUBADEVCFG0_BOOTISA_MASK                0x00000040
+#define _AUBADEVCFG0_BOOTISA_LENGTH              0x00000001
+
+#define _AUBADEVCFG0_FECCCON_POSITION            0x00000008
+#define _AUBADEVCFG0_FECCCON_MASK                0x00000300
+#define _AUBADEVCFG0_FECCCON_LENGTH              0x00000002
+
+#define _AUBADEVCFG0_FSLEEP_POSITION             0x0000000A
+#define _AUBADEVCFG0_FSLEEP_MASK                 0x00000400
+#define _AUBADEVCFG0_FSLEEP_LENGTH               0x00000001
+
+#define _AUBADEVCFG0_DBGPER_POSITION             0x0000000C
+#define _AUBADEVCFG0_DBGPER_MASK                 0x00007000
+#define _AUBADEVCFG0_DBGPER_LENGTH               0x00000003
+
+#define _AUBADEVCFG0_SMCLR_POSITION              0x0000000F
+#define _AUBADEVCFG0_SMCLR_MASK                  0x00008000
+#define _AUBADEVCFG0_SMCLR_LENGTH                0x00000001
+
+#define _AUBADEVCFG0_SOSCGAIN_POSITION           0x00000010
+#define _AUBADEVCFG0_SOSCGAIN_MASK               0x00030000
+#define _AUBADEVCFG0_SOSCGAIN_LENGTH             0x00000002
+
+#define _AUBADEVCFG0_SOSCBOOST_POSITION          0x00000012
+#define _AUBADEVCFG0_SOSCBOOST_MASK              0x00040000
+#define _AUBADEVCFG0_SOSCBOOST_LENGTH            0x00000001
+
+#define _AUBADEVCFG0_POSCGAIN_POSITION           0x00000013
+#define _AUBADEVCFG0_POSCGAIN_MASK               0x00180000
+#define _AUBADEVCFG0_POSCGAIN_LENGTH             0x00000002
+
+#define _AUBADEVCFG0_POSCBOOST_POSITION          0x00000015
+#define _AUBADEVCFG0_POSCBOOST_MASK              0x00200000
+#define _AUBADEVCFG0_POSCBOOST_LENGTH            0x00000001
+
+#define _AUBADEVCFG0_EJTAGBEN_POSITION           0x0000001E
+#define _AUBADEVCFG0_EJTAGBEN_MASK               0x40000000
+#define _AUBADEVCFG0_EJTAGBEN_LENGTH             0x00000001
+
+#define _AUBADEVCFG0_FDEBUG_POSITION             0x00000000
+#define _AUBADEVCFG0_FDEBUG_MASK                 0x00000003
+#define _AUBADEVCFG0_FDEBUG_LENGTH               0x00000002
+
+#define _AUBADEVCFG0_w_POSITION                  0x00000000
+#define _AUBADEVCFG0_w_MASK                      0xFFFFFFFF
+#define _AUBADEVCFG0_w_LENGTH                    0x00000020
+
+#define _AUBADEVCP0_CP_POSITION                  0x0000001C
+#define _AUBADEVCP0_CP_MASK                      0x10000000
+#define _AUBADEVCP0_CP_LENGTH                    0x00000001
+
+#define _AUBADEVCP0_w_POSITION                   0x00000000
+#define _AUBADEVCP0_w_MASK                       0xFFFFFFFF
+#define _AUBADEVCP0_w_LENGTH                     0x00000020
+
+#define _AUBASEQ0_TSEQ_POSITION                  0x00000000
+#define _AUBASEQ0_TSEQ_MASK                      0x0000FFFF
+#define _AUBASEQ0_TSEQ_LENGTH                    0x00000010
+
+#define _AUBASEQ0_CSEQ_POSITION                  0x00000010
+#define _AUBASEQ0_CSEQ_MASK                      0xFFFF0000
+#define _AUBASEQ0_CSEQ_LENGTH                    0x00000010
+
+#define _AUBASEQ0_w_POSITION                     0x00000000
+#define _AUBASEQ0_w_MASK                         0xFFFFFFFF
+#define _AUBASEQ0_w_LENGTH                       0x00000020
+
+#define _UBADEVCFG3_USERID_POSITION              0x00000000
+#define _UBADEVCFG3_USERID_MASK                  0x0000FFFF
+#define _UBADEVCFG3_USERID_LENGTH                0x00000010
+
+#define _UBADEVCFG3_FMIIEN_POSITION              0x00000018
+#define _UBADEVCFG3_FMIIEN_MASK                  0x01000000
+#define _UBADEVCFG3_FMIIEN_LENGTH                0x00000001
+
+#define _UBADEVCFG3_FETHIO_POSITION              0x00000019
+#define _UBADEVCFG3_FETHIO_MASK                  0x02000000
+#define _UBADEVCFG3_FETHIO_LENGTH                0x00000001
+
+#define _UBADEVCFG3_PGL1WAY_POSITION             0x0000001B
+#define _UBADEVCFG3_PGL1WAY_MASK                 0x08000000
+#define _UBADEVCFG3_PGL1WAY_LENGTH               0x00000001
+
+#define _UBADEVCFG3_PMDL1WAY_POSITION            0x0000001C
+#define _UBADEVCFG3_PMDL1WAY_MASK                0x10000000
+#define _UBADEVCFG3_PMDL1WAY_LENGTH              0x00000001
+
+#define _UBADEVCFG3_IOL1WAY_POSITION             0x0000001D
+#define _UBADEVCFG3_IOL1WAY_MASK                 0x20000000
+#define _UBADEVCFG3_IOL1WAY_LENGTH               0x00000001
+
+#define _UBADEVCFG3_FUSBIDIO_POSITION            0x0000001E
+#define _UBADEVCFG3_FUSBIDIO_MASK                0x40000000
+#define _UBADEVCFG3_FUSBIDIO_LENGTH              0x00000001
+
+#define _UBADEVCFG3_w_POSITION                   0x00000000
+#define _UBADEVCFG3_w_MASK                       0xFFFFFFFF
+#define _UBADEVCFG3_w_LENGTH                     0x00000020
+
+#define _UBADEVCFG2_FPLLIDIV_POSITION            0x00000000
+#define _UBADEVCFG2_FPLLIDIV_MASK                0x00000007
+#define _UBADEVCFG2_FPLLIDIV_LENGTH              0x00000003
+
+#define _UBADEVCFG2_FPLLRNG_POSITION             0x00000004
+#define _UBADEVCFG2_FPLLRNG_MASK                 0x00000070
+#define _UBADEVCFG2_FPLLRNG_LENGTH               0x00000003
+
+#define _UBADEVCFG2_FPLLICLK_POSITION            0x00000007
+#define _UBADEVCFG2_FPLLICLK_MASK                0x00000080
+#define _UBADEVCFG2_FPLLICLK_LENGTH              0x00000001
+
+#define _UBADEVCFG2_FPLLMULT_POSITION            0x00000008
+#define _UBADEVCFG2_FPLLMULT_MASK                0x00007F00
+#define _UBADEVCFG2_FPLLMULT_LENGTH              0x00000007
+
+#define _UBADEVCFG2_FPLLODIV_POSITION            0x00000010
+#define _UBADEVCFG2_FPLLODIV_MASK                0x00070000
+#define _UBADEVCFG2_FPLLODIV_LENGTH              0x00000003
+
+#define _UBADEVCFG2_UPLLFSEL_POSITION            0x0000001E
+#define _UBADEVCFG2_UPLLFSEL_MASK                0x40000000
+#define _UBADEVCFG2_UPLLFSEL_LENGTH              0x00000001
+
+#define _UBADEVCFG2_w_POSITION                   0x00000000
+#define _UBADEVCFG2_w_MASK                       0xFFFFFFFF
+#define _UBADEVCFG2_w_LENGTH                     0x00000020
+
+#define _UBADEVCFG1_FNOSC_POSITION               0x00000000
+#define _UBADEVCFG1_FNOSC_MASK                   0x00000007
+#define _UBADEVCFG1_FNOSC_LENGTH                 0x00000003
+
+#define _UBADEVCFG1_DMTINTV_POSITION             0x00000003
+#define _UBADEVCFG1_DMTINTV_MASK                 0x00000038
+#define _UBADEVCFG1_DMTINTV_LENGTH               0x00000003
+
+#define _UBADEVCFG1_FSOSCEN_POSITION             0x00000006
+#define _UBADEVCFG1_FSOSCEN_MASK                 0x00000040
+#define _UBADEVCFG1_FSOSCEN_LENGTH               0x00000001
+
+#define _UBADEVCFG1_IESO_POSITION                0x00000007
+#define _UBADEVCFG1_IESO_MASK                    0x00000080
+#define _UBADEVCFG1_IESO_LENGTH                  0x00000001
+
+#define _UBADEVCFG1_POSCMOD_POSITION             0x00000008
+#define _UBADEVCFG1_POSCMOD_MASK                 0x00000300
+#define _UBADEVCFG1_POSCMOD_LENGTH               0x00000002
+
+#define _UBADEVCFG1_OSCIOFNC_POSITION            0x0000000A
+#define _UBADEVCFG1_OSCIOFNC_MASK                0x00000400
+#define _UBADEVCFG1_OSCIOFNC_LENGTH              0x00000001
+
+#define _UBADEVCFG1_FCKSM_POSITION               0x0000000E
+#define _UBADEVCFG1_FCKSM_MASK                   0x0000C000
+#define _UBADEVCFG1_FCKSM_LENGTH                 0x00000002
+
+#define _UBADEVCFG1_WDTPS_POSITION               0x00000010
+#define _UBADEVCFG1_WDTPS_MASK                   0x001F0000
+#define _UBADEVCFG1_WDTPS_LENGTH                 0x00000005
+
+#define _UBADEVCFG1_WDTSPGM_POSITION             0x00000015
+#define _UBADEVCFG1_WDTSPGM_MASK                 0x00200000
+#define _UBADEVCFG1_WDTSPGM_LENGTH               0x00000001
+
+#define _UBADEVCFG1_WINDIS_POSITION              0x00000016
+#define _UBADEVCFG1_WINDIS_MASK                  0x00400000
+#define _UBADEVCFG1_WINDIS_LENGTH                0x00000001
+
+#define _UBADEVCFG1_FWDTEN_POSITION              0x00000017
+#define _UBADEVCFG1_FWDTEN_MASK                  0x00800000
+#define _UBADEVCFG1_FWDTEN_LENGTH                0x00000001
+
+#define _UBADEVCFG1_FWDTWINSZ_POSITION           0x00000018
+#define _UBADEVCFG1_FWDTWINSZ_MASK               0x03000000
+#define _UBADEVCFG1_FWDTWINSZ_LENGTH             0x00000002
+
+#define _UBADEVCFG1_DMTCNT_POSITION              0x0000001A
+#define _UBADEVCFG1_DMTCNT_MASK                  0x7C000000
+#define _UBADEVCFG1_DMTCNT_LENGTH                0x00000005
+
+#define _UBADEVCFG1_FDMTEN_POSITION              0x0000001F
+#define _UBADEVCFG1_FDMTEN_MASK                  0x80000000
+#define _UBADEVCFG1_FDMTEN_LENGTH                0x00000001
+
+#define _UBADEVCFG1_w_POSITION                   0x00000000
+#define _UBADEVCFG1_w_MASK                       0xFFFFFFFF
+#define _UBADEVCFG1_w_LENGTH                     0x00000020
+
+#define _UBADEVCFG0_DEBUG_POSITION               0x00000000
+#define _UBADEVCFG0_DEBUG_MASK                   0x00000003
+#define _UBADEVCFG0_DEBUG_LENGTH                 0x00000002
+
+#define _UBADEVCFG0_JTAGEN_POSITION              0x00000002
+#define _UBADEVCFG0_JTAGEN_MASK                  0x00000004
+#define _UBADEVCFG0_JTAGEN_LENGTH                0x00000001
+
+#define _UBADEVCFG0_ICESEL_POSITION              0x00000003
+#define _UBADEVCFG0_ICESEL_MASK                  0x00000018
+#define _UBADEVCFG0_ICESEL_LENGTH                0x00000002
+
+#define _UBADEVCFG0_TRCEN_POSITION               0x00000005
+#define _UBADEVCFG0_TRCEN_MASK                   0x00000020
+#define _UBADEVCFG0_TRCEN_LENGTH                 0x00000001
+
+#define _UBADEVCFG0_BOOTISA_POSITION             0x00000006
+#define _UBADEVCFG0_BOOTISA_MASK                 0x00000040
+#define _UBADEVCFG0_BOOTISA_LENGTH               0x00000001
+
+#define _UBADEVCFG0_FECCCON_POSITION             0x00000008
+#define _UBADEVCFG0_FECCCON_MASK                 0x00000300
+#define _UBADEVCFG0_FECCCON_LENGTH               0x00000002
+
+#define _UBADEVCFG0_FSLEEP_POSITION              0x0000000A
+#define _UBADEVCFG0_FSLEEP_MASK                  0x00000400
+#define _UBADEVCFG0_FSLEEP_LENGTH                0x00000001
+
+#define _UBADEVCFG0_DBGPER_POSITION              0x0000000C
+#define _UBADEVCFG0_DBGPER_MASK                  0x00007000
+#define _UBADEVCFG0_DBGPER_LENGTH                0x00000003
+
+#define _UBADEVCFG0_SMCLR_POSITION               0x0000000F
+#define _UBADEVCFG0_SMCLR_MASK                   0x00008000
+#define _UBADEVCFG0_SMCLR_LENGTH                 0x00000001
+
+#define _UBADEVCFG0_SOSCGAIN_POSITION            0x00000010
+#define _UBADEVCFG0_SOSCGAIN_MASK                0x00030000
+#define _UBADEVCFG0_SOSCGAIN_LENGTH              0x00000002
+
+#define _UBADEVCFG0_SOSCBOOST_POSITION           0x00000012
+#define _UBADEVCFG0_SOSCBOOST_MASK               0x00040000
+#define _UBADEVCFG0_SOSCBOOST_LENGTH             0x00000001
+
+#define _UBADEVCFG0_POSCGAIN_POSITION            0x00000013
+#define _UBADEVCFG0_POSCGAIN_MASK                0x00180000
+#define _UBADEVCFG0_POSCGAIN_LENGTH              0x00000002
+
+#define _UBADEVCFG0_POSCBOOST_POSITION           0x00000015
+#define _UBADEVCFG0_POSCBOOST_MASK               0x00200000
+#define _UBADEVCFG0_POSCBOOST_LENGTH             0x00000001
+
+#define _UBADEVCFG0_EJTAGBEN_POSITION            0x0000001E
+#define _UBADEVCFG0_EJTAGBEN_MASK                0x40000000
+#define _UBADEVCFG0_EJTAGBEN_LENGTH              0x00000001
+
+#define _UBADEVCFG0_FDEBUG_POSITION              0x00000000
+#define _UBADEVCFG0_FDEBUG_MASK                  0x00000003
+#define _UBADEVCFG0_FDEBUG_LENGTH                0x00000002
+
+#define _UBADEVCFG0_w_POSITION                   0x00000000
+#define _UBADEVCFG0_w_MASK                       0xFFFFFFFF
+#define _UBADEVCFG0_w_LENGTH                     0x00000020
+
+#define _UBADEVCP0_CP_POSITION                   0x0000001C
+#define _UBADEVCP0_CP_MASK                       0x10000000
+#define _UBADEVCP0_CP_LENGTH                     0x00000001
+
+#define _UBADEVCP0_w_POSITION                    0x00000000
+#define _UBADEVCP0_w_MASK                        0xFFFFFFFF
+#define _UBADEVCP0_w_LENGTH                      0x00000020
+
+#define _UBASEQ0_TSEQ_POSITION                   0x00000000
+#define _UBASEQ0_TSEQ_MASK                       0x0000FFFF
+#define _UBASEQ0_TSEQ_LENGTH                     0x00000010
+
+#define _UBASEQ0_CSEQ_POSITION                   0x00000010
+#define _UBASEQ0_CSEQ_MASK                       0xFFFF0000
+#define _UBASEQ0_CSEQ_LENGTH                     0x00000010
+
+#define _UBASEQ0_w_POSITION                      0x00000000
+#define _UBASEQ0_w_MASK                          0xFFFFFFFF
+#define _UBASEQ0_w_LENGTH                        0x00000020
 
 #define _ABF1DEVCFG3_USERID_POSITION             0x00000000
 #define _ABF1DEVCFG3_USERID_MASK                 0x0000FFFF
@@ -68728,10 +70778,6 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _ABF1DEVCFG0_FSLEEP_MASK                 0x00000400
 #define _ABF1DEVCFG0_FSLEEP_LENGTH               0x00000001
 
-#define _ABF1DEVCFG0_FDBGWP_POSITION             0x0000000B
-#define _ABF1DEVCFG0_FDBGWP_MASK                 0x00000800
-#define _ABF1DEVCFG0_FDBGWP_LENGTH               0x00000001
-
 #define _ABF1DEVCFG0_DBGPER_POSITION             0x0000000C
 #define _ABF1DEVCFG0_DBGPER_MASK                 0x00007000
 #define _ABF1DEVCFG0_DBGPER_LENGTH               0x00000003
@@ -68739,6 +70785,22 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _ABF1DEVCFG0_SMCLR_POSITION              0x0000000F
 #define _ABF1DEVCFG0_SMCLR_MASK                  0x00008000
 #define _ABF1DEVCFG0_SMCLR_LENGTH                0x00000001
+
+#define _ABF1DEVCFG0_SOSCGAIN_POSITION           0x00000010
+#define _ABF1DEVCFG0_SOSCGAIN_MASK               0x00030000
+#define _ABF1DEVCFG0_SOSCGAIN_LENGTH             0x00000002
+
+#define _ABF1DEVCFG0_SOSCBOOST_POSITION          0x00000012
+#define _ABF1DEVCFG0_SOSCBOOST_MASK              0x00040000
+#define _ABF1DEVCFG0_SOSCBOOST_LENGTH            0x00000001
+
+#define _ABF1DEVCFG0_POSCGAIN_POSITION           0x00000013
+#define _ABF1DEVCFG0_POSCGAIN_MASK               0x00180000
+#define _ABF1DEVCFG0_POSCGAIN_LENGTH             0x00000002
+
+#define _ABF1DEVCFG0_POSCBOOST_POSITION          0x00000015
+#define _ABF1DEVCFG0_POSCBOOST_MASK              0x00200000
+#define _ABF1DEVCFG0_POSCBOOST_LENGTH            0x00000001
 
 #define _ABF1DEVCFG0_EJTAGBEN_POSITION           0x0000001E
 #define _ABF1DEVCFG0_EJTAGBEN_MASK               0x40000000
@@ -68920,10 +70982,6 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _BF1DEVCFG0_FSLEEP_MASK                  0x00000400
 #define _BF1DEVCFG0_FSLEEP_LENGTH                0x00000001
 
-#define _BF1DEVCFG0_FDBGWP_POSITION              0x0000000B
-#define _BF1DEVCFG0_FDBGWP_MASK                  0x00000800
-#define _BF1DEVCFG0_FDBGWP_LENGTH                0x00000001
-
 #define _BF1DEVCFG0_DBGPER_POSITION              0x0000000C
 #define _BF1DEVCFG0_DBGPER_MASK                  0x00007000
 #define _BF1DEVCFG0_DBGPER_LENGTH                0x00000003
@@ -68931,6 +70989,22 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _BF1DEVCFG0_SMCLR_POSITION               0x0000000F
 #define _BF1DEVCFG0_SMCLR_MASK                   0x00008000
 #define _BF1DEVCFG0_SMCLR_LENGTH                 0x00000001
+
+#define _BF1DEVCFG0_SOSCGAIN_POSITION            0x00000010
+#define _BF1DEVCFG0_SOSCGAIN_MASK                0x00030000
+#define _BF1DEVCFG0_SOSCGAIN_LENGTH              0x00000002
+
+#define _BF1DEVCFG0_SOSCBOOST_POSITION           0x00000012
+#define _BF1DEVCFG0_SOSCBOOST_MASK               0x00040000
+#define _BF1DEVCFG0_SOSCBOOST_LENGTH             0x00000001
+
+#define _BF1DEVCFG0_POSCGAIN_POSITION            0x00000013
+#define _BF1DEVCFG0_POSCGAIN_MASK                0x00180000
+#define _BF1DEVCFG0_POSCGAIN_LENGTH              0x00000002
+
+#define _BF1DEVCFG0_POSCBOOST_POSITION           0x00000015
+#define _BF1DEVCFG0_POSCBOOST_MASK               0x00200000
+#define _BF1DEVCFG0_POSCBOOST_LENGTH             0x00000001
 
 #define _BF1DEVCFG0_EJTAGBEN_POSITION            0x0000001E
 #define _BF1DEVCFG0_EJTAGBEN_MASK                0x40000000
@@ -69112,10 +71186,6 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _ABF2DEVCFG0_FSLEEP_MASK                 0x00000400
 #define _ABF2DEVCFG0_FSLEEP_LENGTH               0x00000001
 
-#define _ABF2DEVCFG0_FDBGWP_POSITION             0x0000000B
-#define _ABF2DEVCFG0_FDBGWP_MASK                 0x00000800
-#define _ABF2DEVCFG0_FDBGWP_LENGTH               0x00000001
-
 #define _ABF2DEVCFG0_DBGPER_POSITION             0x0000000C
 #define _ABF2DEVCFG0_DBGPER_MASK                 0x00007000
 #define _ABF2DEVCFG0_DBGPER_LENGTH               0x00000003
@@ -69123,6 +71193,22 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _ABF2DEVCFG0_SMCLR_POSITION              0x0000000F
 #define _ABF2DEVCFG0_SMCLR_MASK                  0x00008000
 #define _ABF2DEVCFG0_SMCLR_LENGTH                0x00000001
+
+#define _ABF2DEVCFG0_SOSCGAIN_POSITION           0x00000010
+#define _ABF2DEVCFG0_SOSCGAIN_MASK               0x00030000
+#define _ABF2DEVCFG0_SOSCGAIN_LENGTH             0x00000002
+
+#define _ABF2DEVCFG0_SOSCBOOST_POSITION          0x00000012
+#define _ABF2DEVCFG0_SOSCBOOST_MASK              0x00040000
+#define _ABF2DEVCFG0_SOSCBOOST_LENGTH            0x00000001
+
+#define _ABF2DEVCFG0_POSCGAIN_POSITION           0x00000013
+#define _ABF2DEVCFG0_POSCGAIN_MASK               0x00180000
+#define _ABF2DEVCFG0_POSCGAIN_LENGTH             0x00000002
+
+#define _ABF2DEVCFG0_POSCBOOST_POSITION          0x00000015
+#define _ABF2DEVCFG0_POSCBOOST_MASK              0x00200000
+#define _ABF2DEVCFG0_POSCBOOST_LENGTH            0x00000001
 
 #define _ABF2DEVCFG0_EJTAGBEN_POSITION           0x0000001E
 #define _ABF2DEVCFG0_EJTAGBEN_MASK               0x40000000
@@ -69304,10 +71390,6 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _BF2DEVCFG0_FSLEEP_MASK                  0x00000400
 #define _BF2DEVCFG0_FSLEEP_LENGTH                0x00000001
 
-#define _BF2DEVCFG0_FDBGWP_POSITION              0x0000000B
-#define _BF2DEVCFG0_FDBGWP_MASK                  0x00000800
-#define _BF2DEVCFG0_FDBGWP_LENGTH                0x00000001
-
 #define _BF2DEVCFG0_DBGPER_POSITION              0x0000000C
 #define _BF2DEVCFG0_DBGPER_MASK                  0x00007000
 #define _BF2DEVCFG0_DBGPER_LENGTH                0x00000003
@@ -69315,6 +71397,22 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _BF2DEVCFG0_SMCLR_POSITION               0x0000000F
 #define _BF2DEVCFG0_SMCLR_MASK                   0x00008000
 #define _BF2DEVCFG0_SMCLR_LENGTH                 0x00000001
+
+#define _BF2DEVCFG0_SOSCGAIN_POSITION            0x00000010
+#define _BF2DEVCFG0_SOSCGAIN_MASK                0x00030000
+#define _BF2DEVCFG0_SOSCGAIN_LENGTH              0x00000002
+
+#define _BF2DEVCFG0_SOSCBOOST_POSITION           0x00000012
+#define _BF2DEVCFG0_SOSCBOOST_MASK               0x00040000
+#define _BF2DEVCFG0_SOSCBOOST_LENGTH             0x00000001
+
+#define _BF2DEVCFG0_POSCGAIN_POSITION            0x00000013
+#define _BF2DEVCFG0_POSCGAIN_MASK                0x00180000
+#define _BF2DEVCFG0_POSCGAIN_LENGTH              0x00000002
+
+#define _BF2DEVCFG0_POSCBOOST_POSITION           0x00000015
+#define _BF2DEVCFG0_POSCBOOST_MASK               0x00200000
+#define _BF2DEVCFG0_POSCBOOST_LENGTH             0x00000001
 
 #define _BF2DEVCFG0_EJTAGBEN_POSITION            0x0000001E
 #define _BF2DEVCFG0_EJTAGBEN_MASK                0x40000000
@@ -69393,64 +71491,65 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _INPUT_CAPTURE_9_ERROR_VECTOR            41
 #define _INPUT_CAPTURE_9_VECTOR                  42
 #define _OUTPUT_COMPARE_9_VECTOR                 43
-#define _ADC1_VECTOR                             44
-#define _ADC1_DC1_VECTOR                         46
-#define _ADC1_DC2_VECTOR                         47
-#define _ADC1_DC3_VECTOR                         48
-#define _ADC1_DC4_VECTOR                         49
-#define _ADC1_DC5_VECTOR                         50
-#define _ADC1_DC6_VECTOR                         51
-#define _ADC1_DF1_VECTOR                         52
-#define _ADC1_DF2_VECTOR                         53
-#define _ADC1_DF3_VECTOR                         54
-#define _ADC1_DF4_VECTOR                         55
-#define _ADC1_DF5_VECTOR                         56
-#define _ADC1_DF6_VECTOR                         57
-#define _ADC1_DATA0_VECTOR                       59
-#define _ADC1_DATA1_VECTOR                       60
-#define _ADC1_DATA2_VECTOR                       61
-#define _ADC1_DATA3_VECTOR                       62
-#define _ADC1_DATA4_VECTOR                       63
-#define _ADC1_DATA5_VECTOR                       64
-#define _ADC1_DATA6_VECTOR                       65
-#define _ADC1_DATA7_VECTOR                       66
-#define _ADC1_DATA8_VECTOR                       67
-#define _ADC1_DATA9_VECTOR                       68
-#define _ADC1_DATA10_VECTOR                      69
-#define _ADC1_DATA11_VECTOR                      70
-#define _ADC1_DATA12_VECTOR                      71
-#define _ADC1_DATA13_VECTOR                      72
-#define _ADC1_DATA14_VECTOR                      73
-#define _ADC1_DATA15_VECTOR                      74
-#define _ADC1_DATA16_VECTOR                      75
-#define _ADC1_DATA17_VECTOR                      76
-#define _ADC1_DATA18_VECTOR                      77
-#define _ADC1_DATA19_VECTOR                      78
-#define _ADC1_DATA20_VECTOR                      79
-#define _ADC1_DATA21_VECTOR                      80
-#define _ADC1_DATA22_VECTOR                      81
-#define _ADC1_DATA23_VECTOR                      82
-#define _ADC1_DATA24_VECTOR                      83
-#define _ADC1_DATA25_VECTOR                      84
-#define _ADC1_DATA26_VECTOR                      85
-#define _ADC1_DATA27_VECTOR                      86
-#define _ADC1_DATA28_VECTOR                      87
-#define _ADC1_DATA29_VECTOR                      88
-#define _ADC1_DATA30_VECTOR                      89
-#define _ADC1_DATA31_VECTOR                      90
-#define _ADC1_DATA32_VECTOR                      91
-#define _ADC1_DATA33_VECTOR                      92
-#define _ADC1_DATA34_VECTOR                      93
-#define _ADC1_DATA35_VECTOR                      94
-#define _ADC1_DATA36_VECTOR                      95
-#define _ADC1_DATA37_VECTOR                      96
-#define _ADC1_DATA38_VECTOR                      97
-#define _ADC1_DATA39_VECTOR                      98
-#define _ADC1_DATA40_VECTOR                      99
-#define _ADC1_DATA41_VECTOR                      100
-#define _ADC1_DATA42_VECTOR                      101
-#define _ADC1_DATA43_VECTOR                      102
-#define _ADC1_DATA44_VECTOR                      103
+#define _ADC_VECTOR                              44
+#define _ADC_DC1_VECTOR                          46
+#define _ADC_DC2_VECTOR                          47
+#define _ADC_DC3_VECTOR                          48
+#define _ADC_DC4_VECTOR                          49
+#define _ADC_DC5_VECTOR                          50
+#define _ADC_DC6_VECTOR                          51
+#define _ADC_DF1_VECTOR                          52
+#define _ADC_DF2_VECTOR                          53
+#define _ADC_DF3_VECTOR                          54
+#define _ADC_DF4_VECTOR                          55
+#define _ADC_DF5_VECTOR                          56
+#define _ADC_DF6_VECTOR                          57
+#define _ADC_FAULT_VECTOR                        58
+#define _ADC_DATA0_VECTOR                        59
+#define _ADC_DATA1_VECTOR                        60
+#define _ADC_DATA2_VECTOR                        61
+#define _ADC_DATA3_VECTOR                        62
+#define _ADC_DATA4_VECTOR                        63
+#define _ADC_DATA5_VECTOR                        64
+#define _ADC_DATA6_VECTOR                        65
+#define _ADC_DATA7_VECTOR                        66
+#define _ADC_DATA8_VECTOR                        67
+#define _ADC_DATA9_VECTOR                        68
+#define _ADC_DATA10_VECTOR                       69
+#define _ADC_DATA11_VECTOR                       70
+#define _ADC_DATA12_VECTOR                       71
+#define _ADC_DATA13_VECTOR                       72
+#define _ADC_DATA14_VECTOR                       73
+#define _ADC_DATA15_VECTOR                       74
+#define _ADC_DATA16_VECTOR                       75
+#define _ADC_DATA17_VECTOR                       76
+#define _ADC_DATA18_VECTOR                       77
+#define _ADC_DATA19_VECTOR                       78
+#define _ADC_DATA20_VECTOR                       79
+#define _ADC_DATA21_VECTOR                       80
+#define _ADC_DATA22_VECTOR                       81
+#define _ADC_DATA23_VECTOR                       82
+#define _ADC_DATA24_VECTOR                       83
+#define _ADC_DATA25_VECTOR                       84
+#define _ADC_DATA26_VECTOR                       85
+#define _ADC_DATA27_VECTOR                       86
+#define _ADC_DATA28_VECTOR                       87
+#define _ADC_DATA29_VECTOR                       88
+#define _ADC_DATA30_VECTOR                       89
+#define _ADC_DATA31_VECTOR                       90
+#define _ADC_DATA32_VECTOR                       91
+#define _ADC_DATA33_VECTOR                       92
+#define _ADC_DATA34_VECTOR                       93
+#define _ADC_DATA35_VECTOR                       94
+#define _ADC_DATA36_VECTOR                       95
+#define _ADC_DATA37_VECTOR                       96
+#define _ADC_DATA38_VECTOR                       97
+#define _ADC_DATA39_VECTOR                       98
+#define _ADC_DATA40_VECTOR                       99
+#define _ADC_DATA41_VECTOR                       100
+#define _ADC_DATA42_VECTOR                       101
+#define _ADC_DATA43_VECTOR                       102
+#define _ADC_DATA44_VECTOR                       103
 #define _CORE_PERF_COUNT_VECTOR                  104
 #define _CORE_FAST_DEBUG_CHAN_VECTOR             105
 #define _SYSTEM_BUS_PROTECTION_VECTOR            106
@@ -69554,7 +71653,185 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #define _ADC4_WARM_VECTOR                        210
 #define _ADC7_WARM_VECTOR                        213
 
-/*  The following device macros are predefined by the MPLAB XC32
+/* Device Peripherals */
+#define _CAN1
+#define _CAN2
+#define _CFG
+#define _CMP
+#define _CMP1
+#define _CMP2
+#define _CRU
+#define _CRYPTO
+#define _CVR
+#define _DMAC
+#define _DMT
+#define _EBI
+#define _ETH
+#define _I2C1
+#define _I2C2
+#define _I2C3
+#define _I2C4
+#define _I2C5
+#define _ICAP1
+#define _ICAP2
+#define _ICAP3
+#define _ICAP4
+#define _ICAP5
+#define _ICAP6
+#define _ICAP7
+#define _ICAP8
+#define _ICAP9
+#define _INT
+#define _NVM
+#define _OCMP1
+#define _OCMP2
+#define _OCMP3
+#define _OCMP4
+#define _OCMP5
+#define _OCMP6
+#define _OCMP7
+#define _OCMP8
+#define _OCMP9
+#define _PCACHE
+#define _PMP
+#define _PORTA
+#define _PORTB
+#define _PORTC
+#define _PORTD
+#define _PORTE
+#define _PORTF
+#define _PORTG
+#define _PORTH
+#define _PORTJ
+#define _PORTK
+#define _RNG
+#define _RTCC
+#define _SB
+#define _SPI1
+#define _SPI2
+#define _SPI3
+#define _SPI4
+#define _SPI5
+#define _SPI6
+#define _SQI1
+#define _TMR1
+#define _TMR2
+#define _TMR23
+#define _TMR3
+#define _TMR4
+#define _TMR45
+#define _TMR5
+#define _TMR6
+#define _TMR67
+#define _TMR7
+#define _TMR8
+#define _TMR89
+#define _TMR9
+#define _UART1
+#define _UART2
+#define _UART3
+#define _UART4
+#define _UART5
+#define _UART6
+#define _UARTAB
+#define _UARTCD
+#define _UARTEF
+#define _UARTGH
+#define _UARTJK
+#define _UARTLM
+#define _USB
+#define __DDPSTAT
+
+/* Base Addresses for Peripherals */
+#define _CAN1_BASE_ADDRESS                       0xBF880000
+#define _CAN2_BASE_ADDRESS                       0xBF881000
+#define _CFG_BASE_ADDRESS                        0xBF800000
+#define _CMP1_BASE_ADDRESS                       0xBF84C000
+#define _CMP2_BASE_ADDRESS                       0xBF84C010
+#define _CMP_BASE_ADDRESS                        0xBF84C000
+#define _CRU_BASE_ADDRESS                        0xBF801200
+#define _CRYPTO_BASE_ADDRESS                     0xBF8E5000
+#define _CVR_BASE_ADDRESS                        0xBF800E00
+#define _DMAC_BASE_ADDRESS                       0xBF811000
+#define _DMT_BASE_ADDRESS                        0xBF800A00
+#define _EBI_BASE_ADDRESS                        0xBF8E1014
+#define _ETH_BASE_ADDRESS                        0xBF882000
+#define _I2C1_BASE_ADDRESS                       0xBF820000
+#define _I2C2_BASE_ADDRESS                       0xBF820200
+#define _I2C3_BASE_ADDRESS                       0xBF820400
+#define _I2C4_BASE_ADDRESS                       0xBF820600
+#define _I2C5_BASE_ADDRESS                       0xBF820800
+#define _ICAP1_BASE_ADDRESS                      0xBF842000
+#define _ICAP2_BASE_ADDRESS                      0xBF842200
+#define _ICAP3_BASE_ADDRESS                      0xBF842400
+#define _ICAP4_BASE_ADDRESS                      0xBF842600
+#define _ICAP5_BASE_ADDRESS                      0xBF842800
+#define _ICAP6_BASE_ADDRESS                      0xBF842A00
+#define _ICAP7_BASE_ADDRESS                      0xBF842C00
+#define _ICAP8_BASE_ADDRESS                      0xBF842E00
+#define _ICAP9_BASE_ADDRESS                      0xBF843000
+#define _INT_BASE_ADDRESS                        0xBF810000
+#define _NVM_BASE_ADDRESS                        0xBF800600
+#define _OCMP1_BASE_ADDRESS                      0xBF844000
+#define _OCMP2_BASE_ADDRESS                      0xBF844200
+#define _OCMP3_BASE_ADDRESS                      0xBF844400
+#define _OCMP4_BASE_ADDRESS                      0xBF844600
+#define _OCMP5_BASE_ADDRESS                      0xBF844800
+#define _OCMP6_BASE_ADDRESS                      0xBF844A00
+#define _OCMP7_BASE_ADDRESS                      0xBF844C00
+#define _OCMP8_BASE_ADDRESS                      0xBF844E00
+#define _OCMP9_BASE_ADDRESS                      0xBF845000
+#define _PCACHE_BASE_ADDRESS                     0xBF8E0000
+#define _PMP_BASE_ADDRESS                        0xBF82E000
+#define _PORTA_BASE_ADDRESS                      0xBF860020
+#define _PORTB_BASE_ADDRESS                      0xBF860120
+#define _PORTC_BASE_ADDRESS                      0xBF860220
+#define _PORTD_BASE_ADDRESS                      0xBF860320
+#define _PORTE_BASE_ADDRESS                      0xBF860420
+#define _PORTF_BASE_ADDRESS                      0xBF860520
+#define _PORTG_BASE_ADDRESS                      0xBF860620
+#define _PORTH_BASE_ADDRESS                      0xBF860720
+#define _PORTJ_BASE_ADDRESS                      0xBF860820
+#define _PORTK_BASE_ADDRESS                      0xBF860920
+#define _RNG_BASE_ADDRESS                        0xBF8E6000
+#define _RTCC_BASE_ADDRESS                       0xBF800C00
+#define _SB_BASE_ADDRESS                         0xBF8F0510
+#define _SPI1_BASE_ADDRESS                       0xBF821000
+#define _SPI2_BASE_ADDRESS                       0xBF821200
+#define _SPI3_BASE_ADDRESS                       0xBF821400
+#define _SPI4_BASE_ADDRESS                       0xBF821600
+#define _SPI5_BASE_ADDRESS                       0xBF821800
+#define _SPI6_BASE_ADDRESS                       0xBF821A00
+#define _SQI1_BASE_ADDRESS                       0xBF8E2000
+#define _TMR1_BASE_ADDRESS                       0xBF840000
+#define _TMR23_BASE_ADDRESS                      0xBF840200
+#define _TMR2_BASE_ADDRESS                       0xBF840200
+#define _TMR3_BASE_ADDRESS                       0xBF840400
+#define _TMR45_BASE_ADDRESS                      0xBF840600
+#define _TMR4_BASE_ADDRESS                       0xBF840600
+#define _TMR5_BASE_ADDRESS                       0xBF840800
+#define _TMR67_BASE_ADDRESS                      0xBF840A00
+#define _TMR6_BASE_ADDRESS                       0xBF840A00
+#define _TMR7_BASE_ADDRESS                       0xBF840C00
+#define _TMR89_BASE_ADDRESS                      0xBF840E00
+#define _TMR8_BASE_ADDRESS                       0xBF840E00
+#define _TMR9_BASE_ADDRESS                       0xBF841000
+#define _UART1_BASE_ADDRESS                      0xBF822000
+#define _UART2_BASE_ADDRESS                      0xBF822200
+#define _UART3_BASE_ADDRESS                      0xBF822400
+#define _UART4_BASE_ADDRESS                      0xBF822600
+#define _UART5_BASE_ADDRESS                      0xBF822800
+#define _UART6_BASE_ADDRESS                      0xBF822A00
+#define _UARTAB_BASE_ADDRESS                     0xBF822000
+#define _UARTCD_BASE_ADDRESS                     0xBF822200
+#define _UARTEF_BASE_ADDRESS                     0xBF822400
+#define _UARTGH_BASE_ADDRESS                     0xBF822600
+#define _UARTJK_BASE_ADDRESS                     0xBF822800
+#define _UARTLM_BASE_ADDRESS                     0xBF822A00
+#define _USB_BASE_ADDRESS                        0xBF8E3000
+#define __DDPSTAT_BASE_ADDRESS                   0xBF801140
+
+/*  The following device macros are predefined by the chipKIT
  *  compiler when compiling with the -mprocessor=<device> option.
  *  We also define them here to help the MPLAB X editor evaluate
  *  them correctly.
@@ -69619,6 +71896,9 @@ extern volatile __BF2SEQ0bits_t BF2SEQ0bits __asm__ ("BF2SEQ0") __attribute__((s
 #endif
 #ifndef __PIC32_HAS_DSPR2
 # define __PIC32_HAS_DSPR2 1
+#endif
+#ifndef __PIC32_HAS_FPU64
+# define __PIC32_HAS_FPU64 1
 #endif
 
 #endif

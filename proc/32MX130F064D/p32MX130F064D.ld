@@ -1,8 +1,8 @@
 /*--------------------------------------------------------------------------
  * MPLAB XC Compiler -  PIC32MX130F064D linker script
- * Build date : Dec 02 2014
+ * Build date : May 01 2015
  * 
- * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
@@ -551,7 +551,7 @@ SECTIONS
   } >kseg0_program_mem
   .ctors   :
   {
-    /* XC32 uses crtbegin.o to find the start of
+    /* chipKIT uses crtbegin.o to find the start of
        the constructors, so we make sure it is
        first.  Because this is a wildcard, it
        doesn't matter if the user does not

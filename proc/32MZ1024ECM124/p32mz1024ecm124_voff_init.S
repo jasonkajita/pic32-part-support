@@ -1,7 +1,7 @@
  #-------------------------------------------------------------------------
  # MPLAB XC Compiler -  PIC32MZ1024ECM124 vector-offset initialization module
  # 
- # Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ # Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
  # All rights reserved.
  # 
  # This software is developed by Microchip Technology Inc. and its

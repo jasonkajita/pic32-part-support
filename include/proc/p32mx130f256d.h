@@ -1,6 +1,10 @@
 /*-------------------------------------------------------------------------
  * PIC32MX130F256D processor header
+ * Build date : May 01 2015
  *
+ * Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * All rights reserved.
+ * 
  * This software is developed by Microchip Technology Inc. and its
  * subsidiaries ("Microchip").
  * 
@@ -29,7 +33,7 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
- *-------------------------------------------------------------------------*/
+ */
 
 #pragma once
 #ifndef __32MX130F256D_H
@@ -2272,8 +2276,7 @@ extern volatile unsigned int        REFOTRIMINV __attribute__((section("sfrs")))
 extern volatile unsigned int        CFGCON __attribute__((section("sfrs")));
 typedef struct {
   unsigned TDOEN:1;
-  unsigned :1;
-  unsigned TROEN:1;
+  unsigned :2;
   unsigned JTAGEN:1;
   unsigned :8;
   unsigned PMDLOCK:1;
@@ -2283,8 +2286,7 @@ extern volatile __CFGCONbits_t CFGCONbits __asm__ ("CFGCON") __attribute__((sect
 extern volatile unsigned int        DDPCON __attribute__((section("sfrs")));
 typedef struct {
   unsigned TDOEN:1;
-  unsigned :1;
-  unsigned TROEN:1;
+  unsigned :2;
   unsigned JTAGEN:1;
   unsigned :8;
   unsigned PMDLOCK:1;
@@ -3380,10 +3382,18 @@ extern volatile unsigned int        DCH0INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0INTINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHSSA:32;
+} __DCH0SSAbits_t;
+extern volatile __DCH0SSAbits_t DCH0SSAbits __asm__ ("DCH0SSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SSAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHDSA:32;
+} __DCH0DSAbits_t;
+extern volatile __DCH0DSAbits_t DCH0DSAbits __asm__ ("DCH0DSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DSAINV __attribute__((section("sfrs")));
@@ -3487,10 +3497,18 @@ extern volatile unsigned int        DCH1INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1INTINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHSSA:32;
+} __DCH1SSAbits_t;
+extern volatile __DCH1SSAbits_t DCH1SSAbits __asm__ ("DCH1SSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SSAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHDSA:32;
+} __DCH1DSAbits_t;
+extern volatile __DCH1DSAbits_t DCH1DSAbits __asm__ ("DCH1DSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DSAINV __attribute__((section("sfrs")));
@@ -3594,10 +3612,18 @@ extern volatile unsigned int        DCH2INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2INTINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHSSA:32;
+} __DCH2SSAbits_t;
+extern volatile __DCH2SSAbits_t DCH2SSAbits __asm__ ("DCH2SSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SSAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHDSA:32;
+} __DCH2DSAbits_t;
+extern volatile __DCH2DSAbits_t DCH2DSAbits __asm__ ("DCH2DSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DSAINV __attribute__((section("sfrs")));
@@ -3701,10 +3727,18 @@ extern volatile unsigned int        DCH3INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3INTINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHSSA:32;
+} __DCH3SSAbits_t;
+extern volatile __DCH3SSAbits_t DCH3SSAbits __asm__ ("DCH3SSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SSAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DSA __attribute__((section("sfrs")));
+typedef struct {
+  unsigned CHDSA:32;
+} __DCH3DSAbits_t;
+extern volatile __DCH3DSAbits_t DCH3DSAbits __asm__ ("DCH3DSA") __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DSAINV __attribute__((section("sfrs")));
@@ -4343,12 +4377,7 @@ extern volatile unsigned int        LATAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        ODCA __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned ODCA0:1;
-    unsigned ODCA1:1;
-    unsigned ODCA2:1;
-    unsigned ODCA3:1;
-    unsigned ODCA4:1;
-    unsigned :2;
+    unsigned :7;
     unsigned ODCA7:1;
     unsigned ODCA8:1;
     unsigned ODCA9:1;
@@ -4574,10 +4603,7 @@ extern volatile unsigned int        LATBINV __attribute__((section("sfrs")));
 extern volatile unsigned int        ODCB __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned ODCB0:1;
-    unsigned ODCB1:1;
-    unsigned ODCB2:1;
-    unsigned ODCB3:1;
+    unsigned :4;
     unsigned ODCB4:1;
     unsigned ODCB5:1;
     unsigned ODCB6:1;
@@ -4586,10 +4612,6 @@ typedef union {
     unsigned ODCB9:1;
     unsigned ODCB10:1;
     unsigned ODCB11:1;
-    unsigned ODCB12:1;
-    unsigned ODCB13:1;
-    unsigned ODCB14:1;
-    unsigned ODCB15:1;
   };
   struct {
     unsigned w:32;
@@ -4812,10 +4834,7 @@ extern volatile unsigned int        LATCINV __attribute__((section("sfrs")));
 extern volatile unsigned int        ODCC __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned ODCC0:1;
-    unsigned ODCC1:1;
-    unsigned ODCC2:1;
-    unsigned ODCC3:1;
+    unsigned :4;
     unsigned ODCC4:1;
     unsigned ODCC5:1;
     unsigned ODCC6:1;
@@ -4995,8 +5014,8 @@ typedef union {
     unsigned JTAGEN:1;
     unsigned ICESEL:2;
     unsigned :5;
-    unsigned PWP:9;
-    unsigned :5;
+    unsigned PWP:6;
+    unsigned :8;
     unsigned BWP:1;
     unsigned :3;
     unsigned CP:1;
@@ -9862,10 +9881,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _CFGCON_TDOEN_MASK                       0x00000001
 #define _CFGCON_TDOEN_LENGTH                     0x00000001
 
-#define _CFGCON_TROEN_POSITION                   0x00000002
-#define _CFGCON_TROEN_MASK                       0x00000004
-#define _CFGCON_TROEN_LENGTH                     0x00000001
-
 #define _CFGCON_JTAGEN_POSITION                  0x00000003
 #define _CFGCON_JTAGEN_MASK                      0x00000008
 #define _CFGCON_JTAGEN_LENGTH                    0x00000001
@@ -9881,10 +9896,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DDPCON_TDOEN_POSITION                   0x00000000
 #define _DDPCON_TDOEN_MASK                       0x00000001
 #define _DDPCON_TDOEN_LENGTH                     0x00000001
-
-#define _DDPCON_TROEN_POSITION                   0x00000002
-#define _DDPCON_TROEN_MASK                       0x00000004
-#define _DDPCON_TROEN_LENGTH                     0x00000001
 
 #define _DDPCON_JTAGEN_POSITION                  0x00000003
 #define _DDPCON_JTAGEN_MASK                      0x00000008
@@ -11554,6 +11565,14 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DCH0INT_w_MASK                          0xFFFFFFFF
 #define _DCH0INT_w_LENGTH                        0x00000020
 
+#define _DCH0SSA_CHSSA_POSITION                  0x00000000
+#define _DCH0SSA_CHSSA_MASK                      0xFFFFFFFF
+#define _DCH0SSA_CHSSA_LENGTH                    0x00000020
+
+#define _DCH0DSA_CHDSA_POSITION                  0x00000000
+#define _DCH0DSA_CHDSA_MASK                      0xFFFFFFFF
+#define _DCH0DSA_CHDSA_LENGTH                    0x00000020
+
 #define _DCH1CON_CHPRI_POSITION                  0x00000000
 #define _DCH1CON_CHPRI_MASK                      0x00000003
 #define _DCH1CON_CHPRI_LENGTH                    0x00000002
@@ -11689,6 +11708,14 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DCH1INT_w_POSITION                      0x00000000
 #define _DCH1INT_w_MASK                          0xFFFFFFFF
 #define _DCH1INT_w_LENGTH                        0x00000020
+
+#define _DCH1SSA_CHSSA_POSITION                  0x00000000
+#define _DCH1SSA_CHSSA_MASK                      0xFFFFFFFF
+#define _DCH1SSA_CHSSA_LENGTH                    0x00000020
+
+#define _DCH1DSA_CHDSA_POSITION                  0x00000000
+#define _DCH1DSA_CHDSA_MASK                      0xFFFFFFFF
+#define _DCH1DSA_CHDSA_LENGTH                    0x00000020
 
 #define _DCH2CON_CHPRI_POSITION                  0x00000000
 #define _DCH2CON_CHPRI_MASK                      0x00000003
@@ -11826,6 +11853,14 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DCH2INT_w_MASK                          0xFFFFFFFF
 #define _DCH2INT_w_LENGTH                        0x00000020
 
+#define _DCH2SSA_CHSSA_POSITION                  0x00000000
+#define _DCH2SSA_CHSSA_MASK                      0xFFFFFFFF
+#define _DCH2SSA_CHSSA_LENGTH                    0x00000020
+
+#define _DCH2DSA_CHDSA_POSITION                  0x00000000
+#define _DCH2DSA_CHDSA_MASK                      0xFFFFFFFF
+#define _DCH2DSA_CHDSA_LENGTH                    0x00000020
+
 #define _DCH3CON_CHPRI_POSITION                  0x00000000
 #define _DCH3CON_CHPRI_MASK                      0x00000003
 #define _DCH3CON_CHPRI_LENGTH                    0x00000002
@@ -11961,6 +11996,14 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DCH3INT_w_POSITION                      0x00000000
 #define _DCH3INT_w_MASK                          0xFFFFFFFF
 #define _DCH3INT_w_LENGTH                        0x00000020
+
+#define _DCH3SSA_CHSSA_POSITION                  0x00000000
+#define _DCH3SSA_CHSSA_MASK                      0xFFFFFFFF
+#define _DCH3SSA_CHSSA_LENGTH                    0x00000020
+
+#define _DCH3DSA_CHDSA_POSITION                  0x00000000
+#define _DCH3DSA_CHDSA_MASK                      0xFFFFFFFF
+#define _DCH3DSA_CHDSA_LENGTH                    0x00000020
 
 #define _U1OTGIR_VBUSVDIF_POSITION               0x00000000
 #define _U1OTGIR_VBUSVDIF_MASK                   0x00000001
@@ -12946,26 +12989,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _LATA_w_MASK                             0xFFFFFFFF
 #define _LATA_w_LENGTH                           0x00000020
 
-#define _ODCA_ODCA0_POSITION                     0x00000000
-#define _ODCA_ODCA0_MASK                         0x00000001
-#define _ODCA_ODCA0_LENGTH                       0x00000001
-
-#define _ODCA_ODCA1_POSITION                     0x00000001
-#define _ODCA_ODCA1_MASK                         0x00000002
-#define _ODCA_ODCA1_LENGTH                       0x00000001
-
-#define _ODCA_ODCA2_POSITION                     0x00000002
-#define _ODCA_ODCA2_MASK                         0x00000004
-#define _ODCA_ODCA2_LENGTH                       0x00000001
-
-#define _ODCA_ODCA3_POSITION                     0x00000003
-#define _ODCA_ODCA3_MASK                         0x00000008
-#define _ODCA_ODCA3_LENGTH                       0x00000001
-
-#define _ODCA_ODCA4_POSITION                     0x00000004
-#define _ODCA_ODCA4_MASK                         0x00000010
-#define _ODCA_ODCA4_LENGTH                       0x00000001
-
 #define _ODCA_ODCA7_POSITION                     0x00000007
 #define _ODCA_ODCA7_MASK                         0x00000080
 #define _ODCA_ODCA7_LENGTH                       0x00000001
@@ -13398,22 +13421,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _LATB_w_MASK                             0xFFFFFFFF
 #define _LATB_w_LENGTH                           0x00000020
 
-#define _ODCB_ODCB0_POSITION                     0x00000000
-#define _ODCB_ODCB0_MASK                         0x00000001
-#define _ODCB_ODCB0_LENGTH                       0x00000001
-
-#define _ODCB_ODCB1_POSITION                     0x00000001
-#define _ODCB_ODCB1_MASK                         0x00000002
-#define _ODCB_ODCB1_LENGTH                       0x00000001
-
-#define _ODCB_ODCB2_POSITION                     0x00000002
-#define _ODCB_ODCB2_MASK                         0x00000004
-#define _ODCB_ODCB2_LENGTH                       0x00000001
-
-#define _ODCB_ODCB3_POSITION                     0x00000003
-#define _ODCB_ODCB3_MASK                         0x00000008
-#define _ODCB_ODCB3_LENGTH                       0x00000001
-
 #define _ODCB_ODCB4_POSITION                     0x00000004
 #define _ODCB_ODCB4_MASK                         0x00000010
 #define _ODCB_ODCB4_LENGTH                       0x00000001
@@ -13445,22 +13452,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _ODCB_ODCB11_POSITION                    0x0000000B
 #define _ODCB_ODCB11_MASK                        0x00000800
 #define _ODCB_ODCB11_LENGTH                      0x00000001
-
-#define _ODCB_ODCB12_POSITION                    0x0000000C
-#define _ODCB_ODCB12_MASK                        0x00001000
-#define _ODCB_ODCB12_LENGTH                      0x00000001
-
-#define _ODCB_ODCB13_POSITION                    0x0000000D
-#define _ODCB_ODCB13_MASK                        0x00002000
-#define _ODCB_ODCB13_LENGTH                      0x00000001
-
-#define _ODCB_ODCB14_POSITION                    0x0000000E
-#define _ODCB_ODCB14_MASK                        0x00004000
-#define _ODCB_ODCB14_LENGTH                      0x00000001
-
-#define _ODCB_ODCB15_POSITION                    0x0000000F
-#define _ODCB_ODCB15_MASK                        0x00008000
-#define _ODCB_ODCB15_LENGTH                      0x00000001
 
 #define _ODCB_w_POSITION                         0x00000000
 #define _ODCB_w_MASK                             0xFFFFFFFF
@@ -13902,22 +13893,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _LATC_w_MASK                             0xFFFFFFFF
 #define _LATC_w_LENGTH                           0x00000020
 
-#define _ODCC_ODCC0_POSITION                     0x00000000
-#define _ODCC_ODCC0_MASK                         0x00000001
-#define _ODCC_ODCC0_LENGTH                       0x00000001
-
-#define _ODCC_ODCC1_POSITION                     0x00000001
-#define _ODCC_ODCC1_MASK                         0x00000002
-#define _ODCC_ODCC1_LENGTH                       0x00000001
-
-#define _ODCC_ODCC2_POSITION                     0x00000002
-#define _ODCC_ODCC2_MASK                         0x00000004
-#define _ODCC_ODCC2_LENGTH                       0x00000001
-
-#define _ODCC_ODCC3_POSITION                     0x00000003
-#define _ODCC_ODCC3_MASK                         0x00000008
-#define _ODCC_ODCC3_LENGTH                       0x00000001
-
 #define _ODCC_ODCC4_POSITION                     0x00000004
 #define _ODCC_ODCC4_MASK                         0x00000010
 #define _ODCC_ODCC4_LENGTH                       0x00000001
@@ -14235,8 +14210,8 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DEVCFG0_ICESEL_LENGTH                   0x00000002
 
 #define _DEVCFG0_PWP_POSITION                    0x0000000A
-#define _DEVCFG0_PWP_MASK                        0x0007FC00
-#define _DEVCFG0_PWP_LENGTH                      0x00000009
+#define _DEVCFG0_PWP_MASK                        0x0000FC00
+#define _DEVCFG0_PWP_LENGTH                      0x00000006
 
 #define _DEVCFG0_BWP_POSITION                    0x00000018
 #define _DEVCFG0_BWP_MASK                        0x01000000
@@ -14371,6 +14346,10 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _BMX
 #define _CFG
 #define _CMP
+#define _CMP1
+#define _CMP2
+#define _CMP3
+#define _CTMU
 #define _CVR
 #define _DMAC
 #define _DMAC0
@@ -14378,7 +14357,9 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DMAC2
 #define _DMAC3
 #define _I2C1
+#define _I2C1A
 #define _I2C2
+#define _I2C2A
 #define _ICAP1
 #define _ICAP2
 #define _ICAP3
@@ -14402,25 +14383,35 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _SPI2
 #define _TMR1
 #define _TMR2
+#define _TMR23
 #define _TMR3
 #define _TMR4
+#define _TMR45
 #define _TMR5
 #define _UART1
+#define _UART1A
 #define _UART2
+#define _UART3A
 #define _WDT
 
 /* Base Addresses for Peripherals */
 #define _ADC10_BASE_ADDRESS                      0xBF809000
 #define _BMX_BASE_ADDRESS                        0xBF882000
 #define _CFG_BASE_ADDRESS                        0xBF80F200
+#define _CMP1_BASE_ADDRESS                       0xBF80A000
+#define _CMP2_BASE_ADDRESS                       0xBF80A010
+#define _CMP3_BASE_ADDRESS                       0xBF80A020
 #define _CMP_BASE_ADDRESS                        0xBF80A000
+#define _CTMU_BASE_ADDRESS                       0xBF80A200
 #define _CVR_BASE_ADDRESS                        0xBF809800
-#define _DMAC_BASE_ADDRESS                       0xBF883000
 #define _DMAC0_BASE_ADDRESS                      0xBF883060
 #define _DMAC1_BASE_ADDRESS                      0xBF883120
 #define _DMAC2_BASE_ADDRESS                      0xBF8831E0
 #define _DMAC3_BASE_ADDRESS                      0xBF8832A0
+#define _DMAC_BASE_ADDRESS                       0xBF883000
+#define _I2C1A_BASE_ADDRESS                      0xBF805000
 #define _I2C1_BASE_ADDRESS                       0xBF805000
+#define _I2C2A_BASE_ADDRESS                      0xBF805100
 #define _I2C2_BASE_ADDRESS                       0xBF805100
 #define _ICAP1_BASE_ADDRESS                      0xBF802000
 #define _ICAP2_BASE_ADDRESS                      0xBF802200
@@ -14436,23 +14427,27 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _OCMP5_BASE_ADDRESS                      0xBF803800
 #define _OSC_BASE_ADDRESS                        0xBF80F000
 #define _PMP_BASE_ADDRESS                        0xBF807000
-#define _PORTA_BASE_ADDRESS                      0xBF886000
-#define _PORTB_BASE_ADDRESS                      0xBF886100
-#define _PORTC_BASE_ADDRESS                      0xBF886200
+#define _PORTA_BASE_ADDRESS                      0xBF886020
+#define _PORTB_BASE_ADDRESS                      0xBF886120
+#define _PORTC_BASE_ADDRESS                      0xBF886220
 #define _RCON_BASE_ADDRESS                       0xBF80F600
 #define _RTCC_BASE_ADDRESS                       0xBF800200
 #define _SPI1_BASE_ADDRESS                       0xBF805800
 #define _SPI2_BASE_ADDRESS                       0xBF805A00
 #define _TMR1_BASE_ADDRESS                       0xBF800600
+#define _TMR23_BASE_ADDRESS                      0xBF800800
 #define _TMR2_BASE_ADDRESS                       0xBF800800
 #define _TMR3_BASE_ADDRESS                       0xBF800A00
+#define _TMR45_BASE_ADDRESS                      0xBF800C00
 #define _TMR4_BASE_ADDRESS                       0xBF800C00
 #define _TMR5_BASE_ADDRESS                       0xBF800E00
+#define _UART1A_BASE_ADDRESS                     0xBF806000
 #define _UART1_BASE_ADDRESS                      0xBF806000
 #define _UART2_BASE_ADDRESS                      0xBF806200
+#define _UART3A_BASE_ADDRESS                     0xBF806200
 #define _WDT_BASE_ADDRESS                        0xBF800000
 
-/*  The following device macros are predefined by the MPLAB XC32
+/*  The following device macros are predefined by the chipKIT
  *  compiler when compiling with the -mprocessor=<device> option.
  *  We also define them here to help the MPLAB X editor evaluate
  *  them correctly.
@@ -14462,6 +14457,18 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #endif
 #ifndef __32MX130F256D__
 #  define __32MX130F256D__ 1
+#endif
+#ifndef __XC__
+#  define __XC__ 1
+#endif
+#ifndef __XC
+#  define __XC 1
+#endif
+#ifndef __XC32__
+#  define __XC32__ 1
+#endif
+#ifndef __XC32
+#  define __XC32 1
 #endif
 #ifndef __PIC32MX
 #  define __PIC32MX 1

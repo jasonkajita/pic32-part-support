@@ -33,7 +33,7 @@
  *
  ********************************************************************/
 #ifdef __LIBBUILD__
-	.file	1 "/MPLAB XC32 -- math-library weak-function gettimeofday"
+	.file	1 "/chipKIT -- math-library weak-function gettimeofday"
 	.loc 1 0
 	.section .mdebug.abi32
 	.previous

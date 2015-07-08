@@ -1,8 +1,8 @@
 /*-------------------------------------------------------------------------
  * PIC32MX230F128L processor header
- * Build date : Dec 02 2014
+ * Build date : May 01 2015
  *
- * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
@@ -21443,6 +21443,9 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _BMX
 #define _CFG
 #define _CMP
+#define _CMP1
+#define _CMP2
+#define _CMP3
 #define _CTMU
 #define _CVR
 #define _DMAC
@@ -21451,7 +21454,9 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DMAC2
 #define _DMAC3
 #define _I2C1
+#define _I2C1A
 #define _I2C2
+#define _I2C2A
 #define _ICAP1
 #define _ICAP2
 #define _ICAP3
@@ -21481,14 +21486,20 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _SPI4
 #define _TMR1
 #define _TMR2
+#define _TMR23
 #define _TMR3
 #define _TMR4
+#define _TMR45
 #define _TMR5
 #define _UART1
+#define _UART1A
 #define _UART2
 #define _UART3
+#define _UART3A
 #define _UART4
 #define _UART5
+#define _UART7A
+#define _UART9A
 #define _USB
 #define _WDT
 
@@ -21496,15 +21507,20 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _ADC10_BASE_ADDRESS                      0xBF809000
 #define _BMX_BASE_ADDRESS                        0xBF882000
 #define _CFG_BASE_ADDRESS                        0xBF80F200
+#define _CMP1_BASE_ADDRESS                       0xBF80A000
+#define _CMP2_BASE_ADDRESS                       0xBF80A010
+#define _CMP3_BASE_ADDRESS                       0xBF80A020
 #define _CMP_BASE_ADDRESS                        0xBF80A000
 #define _CTMU_BASE_ADDRESS                       0xBF80A200
 #define _CVR_BASE_ADDRESS                        0xBF809800
-#define _DMAC_BASE_ADDRESS                       0xBF883000
 #define _DMAC0_BASE_ADDRESS                      0xBF883060
 #define _DMAC1_BASE_ADDRESS                      0xBF883120
 #define _DMAC2_BASE_ADDRESS                      0xBF8831E0
 #define _DMAC3_BASE_ADDRESS                      0xBF8832A0
+#define _DMAC_BASE_ADDRESS                       0xBF883000
+#define _I2C1A_BASE_ADDRESS                      0xBF805000
 #define _I2C1_BASE_ADDRESS                       0xBF805000
+#define _I2C2A_BASE_ADDRESS                      0xBF805100
 #define _I2C2_BASE_ADDRESS                       0xBF805100
 #define _ICAP1_BASE_ADDRESS                      0xBF802000
 #define _ICAP2_BASE_ADDRESS                      0xBF802200
@@ -21520,13 +21536,13 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _OCMP5_BASE_ADDRESS                      0xBF803800
 #define _OSC_BASE_ADDRESS                        0xBF80F000
 #define _PMP_BASE_ADDRESS                        0xBF807000
-#define _PORTA_BASE_ADDRESS                      0xBF886000
-#define _PORTB_BASE_ADDRESS                      0xBF886100
-#define _PORTC_BASE_ADDRESS                      0xBF886200
-#define _PORTD_BASE_ADDRESS                      0xBF886300
-#define _PORTE_BASE_ADDRESS                      0xBF886400
-#define _PORTF_BASE_ADDRESS                      0xBF886500
-#define _PORTG_BASE_ADDRESS                      0xBF886600
+#define _PORTA_BASE_ADDRESS                      0xBF886020
+#define _PORTB_BASE_ADDRESS                      0xBF886120
+#define _PORTC_BASE_ADDRESS                      0xBF886220
+#define _PORTD_BASE_ADDRESS                      0xBF886320
+#define _PORTE_BASE_ADDRESS                      0xBF886420
+#define _PORTF_BASE_ADDRESS                      0xBF886520
+#define _PORTG_BASE_ADDRESS                      0xBF886620
 #define _RCON_BASE_ADDRESS                       0xBF80F600
 #define _RTCC_BASE_ADDRESS                       0xBF800200
 #define _SPI1_BASE_ADDRESS                       0xBF805800
@@ -21534,19 +21550,25 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _SPI3_BASE_ADDRESS                       0xBF805C00
 #define _SPI4_BASE_ADDRESS                       0xBF805E00
 #define _TMR1_BASE_ADDRESS                       0xBF800600
+#define _TMR23_BASE_ADDRESS                      0xBF800800
 #define _TMR2_BASE_ADDRESS                       0xBF800800
 #define _TMR3_BASE_ADDRESS                       0xBF800A00
+#define _TMR45_BASE_ADDRESS                      0xBF800C00
 #define _TMR4_BASE_ADDRESS                       0xBF800C00
 #define _TMR5_BASE_ADDRESS                       0xBF800E00
+#define _UART1A_BASE_ADDRESS                     0xBF806000
 #define _UART1_BASE_ADDRESS                      0xBF806000
 #define _UART2_BASE_ADDRESS                      0xBF806200
+#define _UART3A_BASE_ADDRESS                     0xBF806200
 #define _UART3_BASE_ADDRESS                      0xBF806400
 #define _UART4_BASE_ADDRESS                      0xBF806600
 #define _UART5_BASE_ADDRESS                      0xBF806800
-#define _USB_BASE_ADDRESS                        0xBF885000
+#define _UART7A_BASE_ADDRESS                     0xBF806600
+#define _UART9A_BASE_ADDRESS                     0xBF806800
+#define _USB_BASE_ADDRESS                        0xBF885040
 #define _WDT_BASE_ADDRESS                        0xBF800000
 
-/*  The following device macros are predefined by the MPLAB XC32
+/*  The following device macros are predefined by the chipKIT
  *  compiler when compiling with the -mprocessor=<device> option.
  *  We also define them here to help the MPLAB X editor evaluate
  *  them correctly.

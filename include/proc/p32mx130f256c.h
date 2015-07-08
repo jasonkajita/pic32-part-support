@@ -14055,7 +14055,7 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _UART2_BASE_ADDRESS                      0xBF806200
 #define _WDT_BASE_ADDRESS                        0xBF800000
 
-/*  The following device macros are predefined by the MPLAB XC32
+/*  The following device macros are predefined by the chipKIT
  *  compiler when compiling with the -mprocessor=<device> option.
  *  We also define them here to help the MPLAB X editor evaluate
  *  them correctly.

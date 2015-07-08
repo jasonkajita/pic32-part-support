@@ -1,8 +1,8 @@
 /*--------------------------------------------------------------------------
  * MPLAB XC Compiler -  PIC32MZ2048ECG100 linker script
- * Build date : Dec 02 2014
+ * Build date : May 01 2015
  * 
- * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
@@ -146,7 +146,40 @@ MEMORY
   config_BFC0FFF8             : ORIGIN = 0xBFC0FFF8, LENGTH = 0x4
   config_BFC0FFFC             : ORIGIN = 0xBFC0FFFC, LENGTH = 0x4
   lowerbootaliaslastpage      : ORIGIN = 0xBFC10000, LENGTH = 0x4000
-  upperbootalias              : ORIGIN = 0xBFC20000, LENGTH = 0x14000
+  upperbootalias              : ORIGIN = 0xBFC20000, LENGTH = 0xFF00
+  config_BFC2FF40             : ORIGIN = 0xBFC2FF40, LENGTH = 0x4
+  config_BFC2FF44             : ORIGIN = 0xBFC2FF44, LENGTH = 0x4
+  config_BFC2FF48             : ORIGIN = 0xBFC2FF48, LENGTH = 0x4
+  config_BFC2FF4C             : ORIGIN = 0xBFC2FF4C, LENGTH = 0x4
+  config_BFC2FF50             : ORIGIN = 0xBFC2FF50, LENGTH = 0x4
+  config_BFC2FF54             : ORIGIN = 0xBFC2FF54, LENGTH = 0x4
+  config_BFC2FF58             : ORIGIN = 0xBFC2FF58, LENGTH = 0x4
+  config_BFC2FF5C             : ORIGIN = 0xBFC2FF5C, LENGTH = 0x4
+  config_BFC2FF60             : ORIGIN = 0xBFC2FF60, LENGTH = 0x4
+  config_BFC2FF64             : ORIGIN = 0xBFC2FF64, LENGTH = 0x4
+  config_BFC2FF68             : ORIGIN = 0xBFC2FF68, LENGTH = 0x4
+  config_BFC2FF6C             : ORIGIN = 0xBFC2FF6C, LENGTH = 0x4
+  config_BFC2FF70             : ORIGIN = 0xBFC2FF70, LENGTH = 0x4
+  config_BFC2FF74             : ORIGIN = 0xBFC2FF74, LENGTH = 0x4
+  config_BFC2FF78             : ORIGIN = 0xBFC2FF78, LENGTH = 0x4
+  config_BFC2FF7C             : ORIGIN = 0xBFC2FF7C, LENGTH = 0x4
+  config_BFC2FFC0             : ORIGIN = 0xBFC2FFC0, LENGTH = 0x4
+  config_BFC2FFC4             : ORIGIN = 0xBFC2FFC4, LENGTH = 0x4
+  config_BFC2FFC8             : ORIGIN = 0xBFC2FFC8, LENGTH = 0x4
+  config_BFC2FFCC             : ORIGIN = 0xBFC2FFCC, LENGTH = 0x4
+  config_BFC2FFD0             : ORIGIN = 0xBFC2FFD0, LENGTH = 0x4
+  config_BFC2FFD4             : ORIGIN = 0xBFC2FFD4, LENGTH = 0x4
+  config_BFC2FFD8             : ORIGIN = 0xBFC2FFD8, LENGTH = 0x4
+  config_BFC2FFDC             : ORIGIN = 0xBFC2FFDC, LENGTH = 0x4
+  config_BFC2FFE0             : ORIGIN = 0xBFC2FFE0, LENGTH = 0x4
+  config_BFC2FFE4             : ORIGIN = 0xBFC2FFE4, LENGTH = 0x4
+  config_BFC2FFE8             : ORIGIN = 0xBFC2FFE8, LENGTH = 0x4
+  config_BFC2FFEC             : ORIGIN = 0xBFC2FFEC, LENGTH = 0x4
+  config_BFC2FFF0             : ORIGIN = 0xBFC2FFF0, LENGTH = 0x4
+  config_BFC2FFF4             : ORIGIN = 0xBFC2FFF4, LENGTH = 0x4
+  config_BFC2FFF8             : ORIGIN = 0xBFC2FFF8, LENGTH = 0x4
+  config_BFC2FFFC             : ORIGIN = 0xBFC2FFFC, LENGTH = 0x4
+  upperbootaliaslastpage      : ORIGIN = 0xBFC30000, LENGTH = 0x4000
   boot1                       : ORIGIN = 0xBFC40000, LENGTH = 0xFF00
   config_BFC4FF40             : ORIGIN = 0xBFC4FF40, LENGTH = 0x4
   config_BFC4FF44             : ORIGIN = 0xBFC4FF44, LENGTH = 0x4
@@ -226,6 +259,8 @@ MEMORY
   sfrs                        : ORIGIN = 0xBF800000, LENGTH = 0x100000
   configsfrs_BFC0FF40         : ORIGIN = 0xBFC0FF40, LENGTH = 0x40
   configsfrs_BFC0FFC0         : ORIGIN = 0xBFC0FFC0, LENGTH = 0x40
+  configsfrs_BFC2FF40         : ORIGIN = 0xBFC2FF40, LENGTH = 0x40
+  configsfrs_BFC2FFC0         : ORIGIN = 0xBFC2FFC0, LENGTH = 0x40
   configsfrs_BFC4FF40         : ORIGIN = 0xBFC4FF40, LENGTH = 0x40
   configsfrs_BFC4FFC0         : ORIGIN = 0xBFC4FFC0, LENGTH = 0x40
   configsfrs_BFC54000         : ORIGIN = 0xBFC54000, LENGTH = 0x14
@@ -340,6 +375,102 @@ SECTIONS
   .config_BFC0FFFC : {
     KEEP(*(.config_BFC0FFFC))
   } > config_BFC0FFFC
+  .config_BFC2FF40 : {
+    KEEP(*(.config_BFC2FF40))
+  } > config_BFC2FF40
+  .config_BFC2FF44 : {
+    KEEP(*(.config_BFC2FF44))
+  } > config_BFC2FF44
+  .config_BFC2FF48 : {
+    KEEP(*(.config_BFC2FF48))
+  } > config_BFC2FF48
+  .config_BFC2FF4C : {
+    KEEP(*(.config_BFC2FF4C))
+  } > config_BFC2FF4C
+  .config_BFC2FF50 : {
+    KEEP(*(.config_BFC2FF50))
+  } > config_BFC2FF50
+  .config_BFC2FF54 : {
+    KEEP(*(.config_BFC2FF54))
+  } > config_BFC2FF54
+  .config_BFC2FF58 : {
+    KEEP(*(.config_BFC2FF58))
+  } > config_BFC2FF58
+  .config_BFC2FF5C : {
+    KEEP(*(.config_BFC2FF5C))
+  } > config_BFC2FF5C
+  .config_BFC2FF60 : {
+    KEEP(*(.config_BFC2FF60))
+  } > config_BFC2FF60
+  .config_BFC2FF64 : {
+    KEEP(*(.config_BFC2FF64))
+  } > config_BFC2FF64
+  .config_BFC2FF68 : {
+    KEEP(*(.config_BFC2FF68))
+  } > config_BFC2FF68
+  .config_BFC2FF6C : {
+    KEEP(*(.config_BFC2FF6C))
+  } > config_BFC2FF6C
+  .config_BFC2FF70 : {
+    KEEP(*(.config_BFC2FF70))
+  } > config_BFC2FF70
+  .config_BFC2FF74 : {
+    KEEP(*(.config_BFC2FF74))
+  } > config_BFC2FF74
+  .config_BFC2FF78 : {
+    KEEP(*(.config_BFC2FF78))
+  } > config_BFC2FF78
+  .config_BFC2FF7C : {
+    KEEP(*(.config_BFC2FF7C))
+  } > config_BFC2FF7C
+  .config_BFC2FFC0 : {
+    KEEP(*(.config_BFC2FFC0))
+  } > config_BFC2FFC0
+  .config_BFC2FFC4 : {
+    KEEP(*(.config_BFC2FFC4))
+  } > config_BFC2FFC4
+  .config_BFC2FFC8 : {
+    KEEP(*(.config_BFC2FFC8))
+  } > config_BFC2FFC8
+  .config_BFC2FFCC : {
+    KEEP(*(.config_BFC2FFCC))
+  } > config_BFC2FFCC
+  .config_BFC2FFD0 : {
+    KEEP(*(.config_BFC2FFD0))
+  } > config_BFC2FFD0
+  .config_BFC2FFD4 : {
+    KEEP(*(.config_BFC2FFD4))
+  } > config_BFC2FFD4
+  .config_BFC2FFD8 : {
+    KEEP(*(.config_BFC2FFD8))
+  } > config_BFC2FFD8
+  .config_BFC2FFDC : {
+    KEEP(*(.config_BFC2FFDC))
+  } > config_BFC2FFDC
+  .config_BFC2FFE0 : {
+    KEEP(*(.config_BFC2FFE0))
+  } > config_BFC2FFE0
+  .config_BFC2FFE4 : {
+    KEEP(*(.config_BFC2FFE4))
+  } > config_BFC2FFE4
+  .config_BFC2FFE8 : {
+    KEEP(*(.config_BFC2FFE8))
+  } > config_BFC2FFE8
+  .config_BFC2FFEC : {
+    KEEP(*(.config_BFC2FFEC))
+  } > config_BFC2FFEC
+  .config_BFC2FFF0 : {
+    KEEP(*(.config_BFC2FFF0))
+  } > config_BFC2FFF0
+  .config_BFC2FFF4 : {
+    KEEP(*(.config_BFC2FFF4))
+  } > config_BFC2FFF4
+  .config_BFC2FFF8 : {
+    KEEP(*(.config_BFC2FFF8))
+  } > config_BFC2FFF8
+  .config_BFC2FFFC : {
+    KEEP(*(.config_BFC2FFFC))
+  } > config_BFC2FFFC
   .config_BFC4FF40 : {
     KEEP(*(.config_BFC4FF40))
   } > config_BFC4FF40
@@ -1173,7 +1304,7 @@ SECTIONS
   } >kseg0_program_mem
   .ctors   :
   {
-    /* XC32 uses crtbegin.o to find the start of
+    /* chipKIT uses crtbegin.o to find the start of
        the constructors, so we make sure it is
        first.  Because this is a wildcard, it
        doesn't matter if the user does not

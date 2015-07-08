@@ -1,8 +1,8 @@
 /*-------------------------------------------------------------------------
  * PIC32MX151F128H processor header
- * Build date : Dec 02 2014
+ * Build date : May 01 2015
  *
- * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
@@ -15697,8 +15697,14 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _DMAC1
 #define _DMAC2
 #define _DMAC3
+#define _DMAC4
+#define _DMAC5
+#define _DMAC6
+#define _DMAC7
 #define _I2C1
+#define _I2C1A
 #define _I2C2
+#define _I2C2A
 #define _ICAP1
 #define _ICAP2
 #define _INT
@@ -15714,6 +15720,7 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _PORTB
 #define _PORTC
 #define _RCON
+#define _RTCC
 #define _SPI1
 #define _SPI2
 #define _TMR1
@@ -15722,6 +15729,7 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _TMR4
 #define _TMR5
 #define _UART1
+#define _UART1A
 #define _USB
 #define _WDT
 
@@ -15731,12 +15739,18 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _BMX_BASE_ADDRESS                        0xBF882000
 #define _CFG_BASE_ADDRESS                        0xBF80F200
 #define _CIC_BASE_ADDRESS                        0xBF80A400
-#define _DMAC_BASE_ADDRESS                       0xBF883000
 #define _DMAC0_BASE_ADDRESS                      0xBF883060
 #define _DMAC1_BASE_ADDRESS                      0xBF883120
 #define _DMAC2_BASE_ADDRESS                      0xBF8831E0
 #define _DMAC3_BASE_ADDRESS                      0xBF8832A0
+#define _DMAC4_BASE_ADDRESS                      0xBF883360
+#define _DMAC5_BASE_ADDRESS                      0xBF883420
+#define _DMAC6_BASE_ADDRESS                      0xBF8834E0
+#define _DMAC7_BASE_ADDRESS                      0xBF8835A0
+#define _DMAC_BASE_ADDRESS                       0xBF883000
+#define _I2C1A_BASE_ADDRESS                      0xBF805000
 #define _I2C1_BASE_ADDRESS                       0xBF805000
+#define _I2C2A_BASE_ADDRESS                      0xBF805100
 #define _I2C2_BASE_ADDRESS                       0xBF805100
 #define _ICAP1_BASE_ADDRESS                      0xBF802000
 #define _ICAP2_BASE_ADDRESS                      0xBF802200
@@ -15749,10 +15763,11 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _OCMP5_BASE_ADDRESS                      0xBF803800
 #define _OCMP6_BASE_ADDRESS                      0xBF803A00
 #define _OSC_BASE_ADDRESS                        0xBF80F000
-#define _PORTA_BASE_ADDRESS                      0xBF886000
-#define _PORTB_BASE_ADDRESS                      0xBF886100
-#define _PORTC_BASE_ADDRESS                      0xBF886200
+#define _PORTA_BASE_ADDRESS                      0xBF886200
+#define _PORTB_BASE_ADDRESS                      0xBF886300
+#define _PORTC_BASE_ADDRESS                      0xBF886400
 #define _RCON_BASE_ADDRESS                       0xBF80F600
+#define _RTCC_BASE_ADDRESS                       0xBF80A420
 #define _SPI1_BASE_ADDRESS                       0xBF805800
 #define _SPI2_BASE_ADDRESS                       0xBF805A00
 #define _TMR1_BASE_ADDRESS                       0xBF800600
@@ -15760,11 +15775,12 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _TMR3_BASE_ADDRESS                       0xBF800A00
 #define _TMR4_BASE_ADDRESS                       0xBF800C00
 #define _TMR5_BASE_ADDRESS                       0xBF800E00
+#define _UART1A_BASE_ADDRESS                     0xBF806000
 #define _UART1_BASE_ADDRESS                      0xBF806000
-#define _USB_BASE_ADDRESS                        0xBF885040
+#define _USB_BASE_ADDRESS                        0xBF885220
 #define _WDT_BASE_ADDRESS                        0xBF800000
 
-/*  The following device macros are predefined by the MPLAB XC32
+/*  The following device macros are predefined by the chipKIT
  *  compiler when compiling with the -mprocessor=<device> option.
  *  We also define them here to help the MPLAB X editor evaluate
  *  them correctly.
