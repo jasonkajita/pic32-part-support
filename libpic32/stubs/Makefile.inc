@@ -14,6 +14,7 @@ LIBOBJ += remove.o
 LIBOBJ += close.o
 LIBOBJ += getenv.o
 LIBOBJ += rename.o
+LIBOBJ += fstat.o
 LIBOBJ += open.o
 LIBOBJ += unlink.o
 LIBOBJ += kill.o
