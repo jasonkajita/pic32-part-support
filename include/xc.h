@@ -39,7 +39,7 @@
 #ifndef __XC_H
 #define __XC_H
 
-#if defined (__LANGUAGE_C__) || defined (__LANGUAGE_C_PLUS_PLUS)
+#if defined (__LANGUAGE_C__) || defined (__LANGUAGE_C_PLUS_PLUS) || defined (__LANGUAGE_ASSEMBLY__)
 
 #ifdef __cplusplus
 extern "C" {
