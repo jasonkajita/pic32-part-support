@@ -8,7 +8,7 @@
  * Processor:       PIC32
  *
  * Compiler:        chipKIT
- *                  MPLAB X IDE
+ *                  
  * Company:         Microchip Technology Inc.
  *
  * Software License Agreement
@@ -356,9 +356,16 @@ _ramfunc_done:
         mtc0    t1,_CP0_EBASE
 
         ##################################################################
-        # Initialize IntCtl register
+        # Initialize IntCtl/INTCON.VS register with _vector_spacing
         ##################################################################
         la      t1,_vector_spacing
+#if defined(INIT_INTCONVS)
+        la      t0, INTCON
+        lw      t2, 0(t0)
+        li      t2, 0
+        ins     t2, t1, 16,7
+        sw      t2, 0(t0)
+#endif
         li      t2,0                    # Clear t2 and
         ins     t2,t1,5,5               # shift value to VS field
         mtc0    t2,_CP0_INTCTL
@@ -387,6 +394,7 @@ _ramfunc_done:
         # - Exception level is normal <EXL = 0>
         # - Interrupts are disabled <IE = 0>
         # - DSPr2 ASE is enabled for devices that support it <MX = 1>
+        # - FPU64 is enabled for devices that support it <CU1=1> & <FR=1>
         ##################################################################
         mfc0    t0,_CP0_CONFIG
         ext     t1,t0,22,1              # Extract UDI from Config register
@@ -397,8 +405,21 @@ _ramfunc_done:
         li      t2, 0x01000000          # Set the Status.MX bit to enable DSP
         or      t0,t2,t0
 #endif
+#if defined(INIT_FPU64)
+        li      t2, 0x24000000          # Set the Status.CU1 and Status.FR bits to
+        or      t0,t2,t0                # enable the FPU in FR64 mode
+#endif
+
         or      t0,t1,t0                # Include Status.CEE (from UDI)
         mtc0    t0,_CP0_STATUS
+
+#if defined(INIT_FPU64)
+                                        # FPU Control and Status
+        li      t2,0x1000000            # FCSR: RM=0, FS=1, FO=0, FN=0
+                                        # Enables: 0b00000 E=1, V=0, Z=0, O=0, U=0, I=0
+        ctc1    t2, $31                 # High perf on denormal operands & tiny results
+#endif
+        ehb
 
         ##################################################################
         # Call the "on bootstrap" procedure
@@ -434,6 +455,7 @@ _ramfunc_done:
         # Jumps to _bootstrap_exception_handler
         ##################################################################
         .section .bev_handler,code,keep
+        .align 2
         .set noreorder
         .ent _bev_exception
 _bev_exception:
@@ -448,6 +470,7 @@ _bev_exception:
         # Jumps to _general_exception_context
         ##################################################################
         .section .gen_handler,code
+        .align 2
         .set noreorder
         .ent _gen_exception
 _gen_exception:
@@ -463,6 +486,7 @@ _gen_exception:
         # Jumps to _simple_tlb_refill_exception_context
         ##################################################################
         .section .simple_tlb_refill_vector,code,keep
+        .align 2
         .set noreorder
         .ent simple_tlb_refill_vector
 simple_tlb_refill_vector:
@@ -479,6 +503,7 @@ simple_tlb_refill_vector:
         # Jumps to _cache_err_exception_context
         ##################################################################
         .section .cache_err_vector,code,keep
+        .align 2
         .set noreorder
         .ent _cache_err_vector
 _cache_err_vector:
@@ -490,6 +515,7 @@ _cache_err_vector:
 #endif
 
         .section .text.main_entry,code,keep
+        .align 2
         .ent _main_entry
 _main_entry:
 
@@ -512,7 +538,8 @@ _main_entry:
 
         # Call main
         ##################################################################
-        jal main
+        la    	t0,main
+        jalr 	t0
         nop
 
 #if defined(CALL_EXIT)
