@@ -1,8 +1,8 @@
 /*--------------------------------------------------------------------------
  * MPLAB XC Compiler -  MEC1408 linker script
- * Build date : Apr 29 2015
+ * Build date : Feb 18 2016
  * 
- * Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
@@ -59,14 +59,18 @@ PROVIDE(_min_heap_size = 0x400) ;
 INPUT("processor.o")
 
 /*************************************************************************
- * For interrupt vector handling
+ * Symbols used for interrupt-vector table generation
+ * To override the defaults, define the _vector_spacing & _ebase_address
+ * symbols using the --defsym linker opt as shown in these examples:
+ *   xc32-gcc src.c -Wl,--defsym=_vector_spacing=2
+ *   xc32-gcc src.c -Wl,--defsym=_ebase_address=0x9D001000
  *************************************************************************/
-PROVIDE(_vector_spacing = 0x00000001);
+PROVIDE(_vector_spacing = 0x0001);
 PROVIDE(_ebase_address = 0xBFD00000);
 
 /*************************************************************************
  * Memory Address Equates
- * _RESET_ADDR                    -- Reset Vector
+ * _RESET_ADDR                    -- Reset Vector or entry point
  * _GEN_EXCPT_ADDR                -- General Exception Vector
  *************************************************************************/
 _RESET_ADDR                    = 0xBFD00000;
@@ -79,6 +83,8 @@ _GEN_EXCPT_ADDR                = _ebase_address + 0x180;
  * Only sections specifically assigned to these regions can be allocated
  * into these regions.
  *************************************************************************/
+
+
 MEMORY
 {
   kseg0_program_mem     (rx)  : ORIGIN = 0xBFCF0000, LENGTH = 0x28000
@@ -142,7 +148,7 @@ SECTIONS
   *  Upon a successful SPI load and verification, BootROM 
   *  will jump into the Application. We expect the jump address 
   *  to be .startup(reset handler) of the application because 
-  *  .startup runs the chipKIT startup code and calls C main.
+  *  .startup runs the XC32 startup code and calls C main.
   *  Since application .startup is never entered on a real HW 
   *  reset/nmi/soft-reset it can be located anywhere in SRAM 
   *  CODE space.
@@ -206,7 +212,7 @@ SECTIONS
   } >kseg0_program_mem
   .ctors   :
   {
-    /* chipKIT uses crtbegin.o to find the start of
+    /* XC32 uses crtbegin.o to find the start of
        the constructors, so we make sure it is
        first.  Because this is a wildcard, it
        doesn't matter if the user does not

@@ -7,7 +7,7 @@
  *
  * Processor:       PIC32
  *
- * Compiler:        chipKIT
+ * Compiler:        MPLAB XC32
  *
  * Company:         Microchip Technology Inc.
  *
@@ -44,8 +44,8 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  *-------------------------------------------------------------------------*/
- 
-#pragma once 
+
+#pragma once
 #ifndef __ATTRIBS_H
 #define __ATTRIBS_H
 
@@ -88,9 +88,9 @@
  * memory.
  *****************************************************************************/
 #if (__C32_VERSION__ < 200)
-#define __ramfunc__ __attribute__ ((section(".ramfunc"), unique_section))
+#define __ramfunc__ __attribute__ ((section(".ramfunc"), unique_section,noinline))
 #else
-#define __ramfunc__ __attribute__ ((ramfunc,section(".ramfunc"),unique_section))
+#define __ramfunc__ __attribute__ ((ramfunc,section(".ramfunc"),unique_section,noinline))
 #endif
 
 /*****************************************************************************
@@ -108,13 +108,13 @@
 #if (__C32_VERSION__ < 200)
 #if !defined(far)
 #define __longramfunc__ __attribute__ ((section(".ramfunc"), far,\
-                                        unique_section))
+                                        unique_section,noinline))
 #elif !defined(longcall)
 #define __longramfunc__ __attribute__ ((section(".ramfunc"), longcall,\
-                                        unique_section))
+                                        unique_section,noinline))
 #elif !defined(long_call)
 #define __longramfunc__ __attribute__ ((section(".ramfunc"), long_call,\
-                                        unique_section))
+                                        unique_section,noinline))
 #else
 #error Cannot use __longramfunc__ macro because 'far', 'longcall', & 'long_call' are defined
 #endif
@@ -122,13 +122,13 @@
 #else /* __C32_VERSION__ */
 #if !defined(far)
 #define __longramfunc__ __attribute__ ((ramfunc,section(".ramfunc"),far,\
-                                        unique_section))
+                                        unique_section,noinline))
 #elif !defined(longcall)
 #define __longramfunc__ __attribute__ ((ramfunc,section(".ramfunc"),longcall,\
-                                        unique_section))
+                                        unique_section,noinline))
 #elif !defined(long_call)
 #define __longramfunc__ __attribute__ ((ramfunc,section(".ramfunc"),long_call,\
-                                        unique_section))
+                                        unique_section,noinline))
 #else
 #error Cannot use __longramfunc__ macro because 'far', 'longcall', & 'long_call' are defined
 #endif

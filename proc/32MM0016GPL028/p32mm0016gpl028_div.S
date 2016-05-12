@@ -1,7 +1,7 @@
  #-------------------------------------------------------------------------
  # MPLAB XC Compiler -  PIC32MM0016GPL028 processor Default ISR Vectors module
  # 
- # Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ # Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  # All rights reserved.
  # 
  # This software is developed by Microchip Technology Inc. and its
@@ -86,7 +86,5 @@
   .word __vector_dispatch_45
   .word __vector_dispatch_46
   .word __vector_dispatch_47
-  .word __vector_dispatch_48
-  .word __vector_dispatch_49
 #endif
 

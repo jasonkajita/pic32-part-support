@@ -1,8 +1,8 @@
 Daytona Configuration Word Definitions: 0001
 CWORD:BFC017C4:FFFFFFFF:FFFFFFFF
 CSETTING:00000002:ALTCMP:Alternate Comparator1 Pins Location Enable bit
-CVALUE:00000000:ON:Alternate Comparator1 pins are used
-CVALUE:00000002:OFF:Primary Comparator1 pins are used
+CVALUE:00000000:ON:Alternate C1INB pin is used
+CVALUE:00000002:OFF:Primary C1INB pin is used
 CSETTING:00000008:SOSCHP:Secondary Oscillator High Power Enable bit
 CVALUE:00000000:ON:SOSC oprerates in high power mode
 CVALUE:00000008:OFF:SOSC oprerates in normal power mode.
@@ -10,6 +10,7 @@ CSETTING:00000010:ALTI2C:Alternate I2C1 Pins Location Enable bit
 CVALUE:00000000:ON:Alternate I2C1 pins are used
 CVALUE:00000010:OFF:Primary I2C1 pins are used
 CSETTING:FFFF8000:USERID:User ID bits
+CVALUE:00000000:00000000:Range is from 0 to 0x1ffff
 CWORD:BFC017C8:FFFFFFFF:FFFFFFFF
 CSETTING:00000004:JTAGEN:JTAG Enable bit
 CVALUE:00000000:OFF:JTAG is disabled
@@ -28,7 +29,7 @@ CVALUE:00000003:BOR3:Brown-out Reset enabled in hardware; SBOREN bit disabled
 CSETTING:00000004:RETVR:Retention Voltage Regulator Enable bit
 CVALUE:00000000:ON:Retention regulator is enabled and controlled by RETEN bit during sleep
 CVALUE:00000004:OFF:Retention regulator is disabled
-CSETTING:00000008:LPBOREN:Downside Voltage Protection Enable bit
+CSETTING:00000008:LPBOREN:Low Power Brown-out Enable bit
 CVALUE:00000000:OFF:Low power BOR is disabled
 CVALUE:00000008:ON:Low power BOR is enabled, when main BOR is disabled
 CWORD:BFC017D0:FFFFFFFF:FFFFFFFF
@@ -102,9 +103,9 @@ CVALUE:00000005:LPRC:Low power RC oscillator (LPRC)
 CSETTING:00000010:PLLSRC:System PLL Input Clock Selection bit
 CVALUE:00000000:PRI:Primary oscillator is selected as PLL reference input on device reset
 CVALUE:00000010:FRC:FRC oscillator is selected as PLL reference input on device reset
-CSETTING:00000040:LPOSCEN:Secondary Oscillator Low Power Mode Enable bit
-CVALUE:00000000:OFF:Secondary oscillator (SOSC) low power mode is disabled
-CVALUE:00000040:ON:Secondary oscillator (SOSC) low power mode is enabled
+CSETTING:00000040:SOSCEN:Secondary Oscillator Enable bit
+CVALUE:00000000:OFF:Secondary oscillator (SOSC) is disabled
+CVALUE:00000040:ON:Secondary oscillator (SOSC) is enabled
 CSETTING:00000080:IESO:Two Speed Startup Enable bit
 CVALUE:00000000:OFF:Two speed startup is disabled
 CVALUE:00000080:ON:Two speed startup is enabled
@@ -117,8 +118,8 @@ CSETTING:00000400:OSCIOFNC:System Clock on CLKO Pin Enable bit
 CVALUE:00000000:ON:System clock is connected to CLKO/OSC2 pin
 CVALUE:00000400:OFF:OSCO pin operates as a normal I/O
 CSETTING:00001000:SOSCSEL:Secondary Oscillator External Clock Enable bit
-CVALUE:00000000:ON:External clock connected to SOSCI pin is used 
-CVALUE:00001000:OFF:Crystal is used
+CVALUE:00000000:ON:External clock is connected to SOSCO pin (RA4 and RB4 are controlled by I/O port registers)
+CVALUE:00001000:OFF:Crystal is used (RA4 and RB4 are controlled by SOSC)
 CSETTING:0000C000:FCKSM:Clock Switching and Fail-Safe Clock Monitor Enable bits
 CVALUE:00000000:CSDCMD:Clock switching is disabled; Fail-safe clock monitor is disabled
 CVALUE:00004000:CSECMD:Clock switching is enabled; Fail-safe clock monitor is disabled

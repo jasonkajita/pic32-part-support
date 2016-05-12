@@ -1,18 +1,13 @@
 Daytona Configuration Word Definitions: 0001
 CWORD:BFC00BF0:FFFFFFFF:FFFFFFFF
 CSETTING:0000FFFF:USERID:
+CVALUE:00000000:00000000:Range is from 0 to 0xffff
 CSETTING:10000000:PMDL1WAY:Peripheral Module Disable Configuration
 CVALUE:00000000:OFF:Allow multiple reconfigurations
 CVALUE:10000000:ON:Allow only one reconfiguration
 CSETTING:20000000:IOL1WAY:Peripheral Pin Select Configuration
 CVALUE:00000000:OFF:Allow multiple reconfigurations
 CVALUE:20000000:ON:Allow only one reconfiguration
-CSETTING:40000000:FUSBIDIO:USB USID Selection
-CVALUE:00000000:OFF:Controlled by Port Function
-CVALUE:40000000:ON:Controlled by the USB Module
-CSETTING:80000000:FVBUSONIO:USB VBUS ON Selection
-CVALUE:00000000:OFF:Controlled by Port Function
-CVALUE:80000000:ON:Controlled by USB Module
 CWORD:BFC00BF4:FFFFFFFF:FFFFFFFF
 CSETTING:00000007:FPLLIDIV:PLL Input Divider
 CVALUE:00000000:DIV_1:1x Divider

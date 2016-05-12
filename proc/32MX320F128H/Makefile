@@ -5,31 +5,37 @@ OUTPUTFILE=processor.o
 
 ISRFILE=default_isr_vectors.o
 
+ISRFILE_PIC=default_isr_vectors_pic.o
+
 STARTUP_OPTIONS = -D__LIBBUILD__
 STARTUP_OPTIONS += -DPIC32MX
 STARTUP_OPTIONS += -D__PIC32_HAS_MIPS32R2
+STARTUP_OPTIONS += -DINIT_DATA
 STARTUP_OPTIONS += -DPIC32_SRS_SET_COUNT=2
 
-STARTUPOBJ += crt0_mips32r2.o mcrt0_mips32r2.o crti_mips32r2.o crtn_mips32r2.o cpprt0_mips32r2.o
+STARTUPOBJ += crt0_mips32r2.o mcrt0_mips32r2.o crti_mips32r2.o crtn_mips32r2.o cpprt0_mips32r2.o crt0_mips32r2_pic.o cpprt0_mips32r2_pic.o
 
-all: $(OUTPUTFILE) $(ISRFILE) $(STARTUPOBJ)
+all: $(OUTPUTFILE) $(ISRFILE) $(ISRFILE_PIC) $(STARTUPOBJ)
 
-install: $(OUTPUTFILE) $(ISRFILE) $(STARTUPOBJ)
+install: $(OUTPUTFILE) $(ISRFILE) $(ISRFILE_PIC) $(STARTUPOBJ)
 
-install-proc: $(OUTPUTFILE) $(ISRFILE) $(STARTUPOBJ)
+install-proc: $(OUTPUTFILE) $(ISRFILE) $(ISRFILE_PIC) $(STARTUPOBJ)
 
 install-baseline:
 
 install-src:
 
 clean:
-	rm -rf $(OUTPUTFILE) $(ISRFILE) $(STARTUPOBJ)
+	rm -rf $(OUTPUTFILE) $(ISRFILE) $(ISRFILE_PIC) $(STARTUPOBJ)
 
 $(OUTPUTFILE): p32mx320f128h.S
 	$(CC) -c -o $@ $(SIZE_OPTION) $?
 
 $(ISRFILE): p32mx320f128h_div.S
 	$(CC) -c -o $@ $(SIZE_OPTION) $?
+
+$(ISRFILE_PIC): p32mx320f128h_div.S
+	$(CC) -fPIC -G0 -c -o $@ $(SIZE_OPTION) $?
 
 mcrt0_mips32r2.o: ../../libpic32/startup/crt0.S
 	$(CC) $(ASFLAGS) -mips32r2 -mno-mips16 -mno-micromips -D__32MX320F128H__ -c -DMCRT0 -I$(ROOT)/../../include $(STARTUP_OPTIONS) $< -o $@
@@ -49,5 +55,13 @@ crti_mips32r2.o: ../../libpic32/startup/crti.s
 
 crtn_mips32r2.o: ../../libpic32/startup/crtn.s
 	$(CC) $(ASFLAGS) -mips32r2 -mno-mips16 -mno-micromips -D__32MX320F128H__ -c -I$(ROOT)/../../include $(STARTUP_OPTIONS) $< -o $@
+	$(STRIP) $(STRIPFLAGS) $@
+
+crt0_mips32r2_pic.o: ../../libpic32/startup/crt0_pic.S
+	$(CC)  -fPIC -G0 $(ASFLAGS) -mips32r2 -mno-mips16 -mno-micromips -D__32MX320F128H__ -c -I$(ROOT)/../../include $(STARTUP_OPTIONS) $< -o $@
+	$(STRIP) $(STRIPFLAGS) $@
+
+cpprt0_mips32r2_pic.o: ../../libpic32/startup/crt0_pic.S
+	$(CC)  -fPIC -G0 $(ASFLAGS) -mips32r2 -mno-mips16 -mno-micromips -D__32MX320F128H__ -c -DCPP_INIT -I$(ROOT)/../../include $(STARTUP_OPTIONS) $< -o $@
 	$(STRIP) $(STRIPFLAGS) $@
 

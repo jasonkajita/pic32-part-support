@@ -1,7 +1,7 @@
  #-------------------------------------------------------------------------
  # MPLAB XC Compiler -  PIC32MZ2048EFM064 vector-offset initialization module
  # 
- # Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ # Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  # All rights reserved.
  # 
  # This software is developed by Microchip Technology Inc. and its
@@ -83,7 +83,7 @@
   .word __vector_offset_42
   .word __vector_offset_43
   .word __vector_offset_44
-  .section .__vector_offset_BF8105F8_data,data,keep,address(0xBF8105F8)
+  .word __vector_offset_45
   .word __vector_offset_46
   .word __vector_offset_47
   .word __vector_offset_48

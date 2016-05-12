@@ -1,7 +1,7 @@
  #-------------------------------------------------------------------------
  # MPLAB XC Compiler -  PIC32MZ2048ECM064 processor definition module
  # 
- # Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ # Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  # All rights reserved.
  # 
  # This software is developed by Microchip Technology Inc. and its

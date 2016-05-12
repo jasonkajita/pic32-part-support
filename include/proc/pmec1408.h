@@ -1,8 +1,8 @@
 /*-------------------------------------------------------------------------
  * MEC1408 processor header
- * Build date : Apr 29 2015
+ * Build date : Feb 18 2016
  *
- * Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
@@ -45,7 +45,8 @@
 extern "C" {
 #endif
 
-extern volatile unsigned int        _ICDCON __attribute__((section("sfrs")));
+#define _ICDCON _ICDCON
+extern volatile unsigned int   _ICDCON __attribute__((section("sfrs")));
 typedef struct {
   unsigned USER_CODE_VALID:1;
   unsigned SLPBKEN:1;
@@ -56,14 +57,16 @@ typedef struct {
   unsigned FRZ:1;
 } ___ICDCONbits_t;
 extern volatile ___ICDCONbits_t _ICDCONbits __asm__ ("_ICDCON") __attribute__((section("sfrs")));
-extern volatile unsigned int        _ICDSTAT __attribute__((section("sfrs")));
+#define _ICDSTAT _ICDSTAT
+extern volatile unsigned int   _ICDSTAT __attribute__((section("sfrs")));
 typedef struct {
   unsigned :1;
   unsigned WDTBF:1;
   unsigned SLPBF:1;
 } ___ICDSTATbits_t;
 extern volatile ___ICDSTATbits_t _ICDSTATbits __asm__ ("_ICDSTAT") __attribute__((section("sfrs")));
-extern volatile unsigned int        TEST_MODE_CTL __attribute__((section("sfrs")));
+#define TEST_MODE_CTL TEST_MODE_CTL
+extern volatile unsigned int   TEST_MODE_CTL __attribute__((section("sfrs")));
 typedef struct {
   unsigned TEST_MODE_EN:1;
   unsigned :1;
@@ -168,7 +171,15 @@ extern volatile __TEST_MODE_CTLbits_t TEST_MODE_CTLbits __asm__ ("TEST_MODE_CTL"
 
 /* Base Addresses for Peripherals */
 
-/*  The following device macros are predefined by the chipKIT
+/* Default Memory-region macros */
+#define __KSEG0_PROGRAM_MEM_BASE                 0xBFCF0000
+#define __KSEG0_PROGRAM_MEM_LENGTH               0x28000
+#define __KSEG1_DATA_MEM_BASE                    0xBFD18000
+#define __KSEG1_DATA_MEM_LENGTH                  0x8000
+#define __SFRS_BASE                              0xA0000000
+#define __SFRS_LENGTH                            0x100000
+
+/*  The following device macros are predefined by the MPLAB XC32
  *  compiler when compiling with the -mprocessor=<device> option.
  *  We also define them here to help the MPLAB X editor evaluate
  *  them correctly.
@@ -209,12 +220,14 @@ extern volatile __TEST_MODE_CTLbits_t TEST_MODE_CTLbits __asm__ ("TEST_MODE_CTL"
 #ifndef __PIC32_HAS_MCUASE
 # define __PIC32_HAS_MCUASE 1
 #endif
-
-/* include generic header file for backwards compatibility with old C32 v1.xx code */
-/* WARNING: Macros from this file are deprecated and should not be used in new     */
-/*          source code.                                                           */
-#include "ppic32mx.h"
-
-
+#ifndef __PIC32_HAS_SSX
+# define __PIC32_HAS_SSX 1
+#endif
+#ifndef __PIC32_HAS_INIT_DATA
+# define __PIC32_HAS_INIT_DATA 1
+#endif
+#ifndef __PIC32_SRS_SET_COUNT
+# define __PIC32_SRS_SET_COUNT 1
+#endif
 
 #endif
