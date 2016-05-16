@@ -41,7 +41,7 @@
 
 #include <xc.h>
 
-extern void __attribute__((nomips16, noreturn, far)) __pic32_software_reset();
+extern void __attribute__((nomips16, noreturn, far, weak)) __pic32_software_reset();
 void __attribute__((weak)) __exception_handler_break(void);
 extern void _DEBUGGER  __attribute__((weak));
 
@@ -49,7 +49,7 @@ void __attribute__((weak, naked, nomips16, noreturn, section(".vector_default"))
 {
   if (&_DEBUGGER != 0 && __exception_handler_break)
     __asm__ volatile ("sdbbp 0");
-   
-  __pic32_software_reset();
+  else if (__pic32_software_reset) 
+    __pic32_software_reset();
 }
 

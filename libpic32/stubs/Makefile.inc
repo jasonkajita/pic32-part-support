@@ -32,16 +32,23 @@ LIBOBJ += pic32_software_reset.o
 # LIBOBJ += stubs.o getenv.o 
 # LIBOBJ += raise.o signal.o localeconv.o setlocale.o isatty.o
 
-SUPOBJ  += pic32_software_reset.o pic32_software_reset-mm.o
+SUPOBJ  += pic32_software_reset.o pic32_software_reset_pic.o pic32_software_reset-mm.o pic32_software_reset_pic-mm.o
 
 sbrk.o: sbrk.c
 	$(CC) $(CFLAGS) -c -DPAGESIZE=128 $< -o $@
 
 pic32_software_reset.o: pic32_software_reset.S
-	$(CC) -c -D__LIBBUILD__ $< -o $@
+	$(CC) -mno-float -c -D__LIBBUILD__ $< -o $@
 	$(STRIP) $(STRIPFLAGS) $@
 
 pic32_software_reset-mm.o: pic32_software_reset.S
-	$(CC) -g -mmicromips -D__USE_MICROMIPS=1 -c -D__LIBBUILD__ $< -o $@
+	$(CC) -mno-float -g -mmicromips -D__USE_MICROMIPS=1 -c -D__LIBBUILD__ $< -o $@
 	$(STRIP) $(STRIPFLAGS) $@
  
+pic32_software_reset_pic.o: pic32_software_reset.S
+	$(CC) -fPIC -G0 -mno-float -c -D__LIBBUILD__ $< -o $@
+	$(STRIP) $(STRIPFLAGS) $@
+
+pic32_software_reset_pic-mm.o: pic32_software_reset.S
+	$(CC) -fPIC -G0 -mno-float -g -mmicromips -D__USE_MICROMIPS=1 -c -D__LIBBUILD__ $< -o $@
+	$(STRIP) $(STRIPFLAGS) $@

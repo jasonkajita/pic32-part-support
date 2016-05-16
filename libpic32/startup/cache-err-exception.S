@@ -7,8 +7,8 @@
  *
  * Processor:       PIC32
  *
- * Compiler:        chipKIT v1.00
- *                  MPLAB X IDE
+ * Compiler:        chipKIT
+ 
  * Company:         Microchip Technology Inc.
  *
  * Software License Agreement

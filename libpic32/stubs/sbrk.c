@@ -213,20 +213,20 @@ _sbrk_init (void)
 
     /* end of heap must be inside memory region #0 (and above base) */
     if (max < min || max >= rtop) {
-        if (rtop > min)
-            /* use top of region as top of heap */
-            /* XXX what about poss overlap with stack? */
-            max = rtop;
-        else
-            /* can't determine a good heap top */
-            return;
+	if (rtop > min)
+	    /* use top of region as top of heap */
+	    /* XXX what about poss overlap with stack? */
+	    max = rtop;
+	else
+	    /* can't determine a good heap top */
+	    return;
     }
 
     /* put minbrk/maxbrk in same kernel virtual segment as data */
     if (IS_KVA1 (_end)) {
-        /* kseg1: uncached data segment */
-        _minbrk = PA_TO_KVA1 (min);
-        _maxbrk = PA_TO_KVA1 (max);
+	/* kseg1: uncached data segment */
+	_minbrk = PA_TO_KVA1 (min);
+	_maxbrk = PA_TO_KVA1 (max);
     }
     else if (IS_KVA0 (_end)) {
 	/* kseg0: cached data segmnt */
@@ -247,41 +247,39 @@ void *
 _sbrk (int n)
 {
     void *newbrk, *p;
-    extern char _min_stack_size[];
-    char *sp = (char *)&sp;
-
+    
 #if 0
     pthread_mutex_lock (&sbmx);
 #endif
     if (!curbrk) {
-        _sbrk_init ();
-        if (!curbrk) {
-            errno = ENOMEM;
+	_sbrk_init ();
+	if (!curbrk) {
+	    errno = ENOMEM;
 #if 0
-            pthread_mutex_unlock (&sbmx);
+	    pthread_mutex_unlock (&sbmx);
 #endif
-            return (void *)-1;
-        }
+	    return (void *)-1;
+	}
     }
 
     p = curbrk;
     newbrk = curbrk + n;
     if (n > 0) {
-        if (newbrk < curbrk || newbrk > (sp - (char *)&_min_stack_size)) {
-            errno = ENOMEM;
+	if (newbrk < curbrk || newbrk > _maxbrk) {
+	    errno = ENOMEM;
 #if 0
-            pthread_mutex_unlock (&sbmx);
+	    pthread_mutex_unlock (&sbmx);
 #endif
-            return (void *)-1;
-        }
+	    return (void *)-1;
+	}
     } else {
-        if (newbrk > curbrk || newbrk < _minbrk) {
-            errno = EINVAL;
+	if (newbrk > curbrk || newbrk < _minbrk) {
+	    errno = EINVAL;
 #if 0
-            pthread_mutex_unlock (&sbmx);
+	    pthread_mutex_unlock (&sbmx);
 #endif
-            return (void *)-1;
-        }
+	    return (void *)-1;
+	}
     }
     curbrk = newbrk;
 

@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------------
- * MPLAB XC Compiler
+ * chipKIT Compiler
  * 
  * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.

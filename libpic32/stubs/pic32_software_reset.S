@@ -26,6 +26,7 @@ __pic32_software_reset:
 	di
 	ehb
 
+#if !defined (__PIC__)
 0:
 	li	$3,0xaa990000
 	lui	$2,%hi(SYSKEY)
@@ -43,7 +44,25 @@ __pic32_software_reset:
 
 	j	0b
 	nop
+#else
+0:
+	lw	$2,%got(SYSKEY)($28)
+	sw	$0,0($2)
+	li	$3,0xaa990000
+	addiu	$3,$3,0x6655
+	sw	$3,0($2)
+	li	$3,0x55660000
+	ori	$3,$3,0x99aa
+	sw	$3,0($2)
 
+	li	$3,1
+	lw	$2,%got(RSWRSTSET)($28)
+	sw	$3,0($2)
+	lw	$2,%got(RSWRST)($28)
+	lw	$2,0($2)
+	j	0b
+	nop
+#endif
 	.set	macro
 	.set	reorder
 

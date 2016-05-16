@@ -1,9 +1,9 @@
 /*********************************************************************
  *
- *                  C Runtime Startup
+ *          C Runtime Startup for Position Independent Code
  *
  *********************************************************************
- * Filename:        crt0.S
+ * Filename:        crt0_pic.S
  *
  * Processor:       PIC32
  *
@@ -52,7 +52,7 @@
    # Replace the standard debugging information with a simple filename. This
    # prevents the library build directory from showing up in MPLAB IDE. It
    # also effectively disables source-line debugging.
-   .file 1 "libpic32/startup/crt0.S"
+   .file 1 "libpic32/startup/crt0_pic.S"
    .loc 1 0
 #endif
 
@@ -61,12 +61,8 @@
 #endif
 
 #if !defined(PIC32_SRS_SET_COUNT)
-#  if defined(__PIC32_SRS_SET_COUNT)
-#    define PIC32_SRS_SET_COUNT __PIC32_SRS_SET_COUNT
-#  else
-#    warning PIC32_SRS_SET_COUNT not defined on build line
-#    define PIC32_SRS_SET_COUNT 2
-#  endif
+# warning PIC32_SRS_SET_COUNT not defined on build line
+# define PIC32_SRS_SET_COUNT 2
 #endif
 
 #if defined(__PIC32MX) || defined(__PIC32MM) || defined(__PIC32MZ)
@@ -76,9 +72,9 @@
 /* This file contains 32-bit assembly code */
        .set nomips16
 
-        ##################################################################
-        # Entry point of the entire application
-        ##################################################################
+##################################################################
+# Entry point of the entire application
+##################################################################
         .section .reset,code,keep
         .align 2
         .set noreorder
@@ -94,7 +90,7 @@
 
 #if (defined(__PIC32_HAS_MICROMIPS)) && (defined(__PIC32_HAS_MIPS32R2))
 _reset:
-        .word 0x10000003     /* MIPS32:    branch forward 0x10 bytes from here  */
+        .word 0x10000004     /* MIPS32:    branch forward 0x10 bytes from here  */
                              /* MicroMIPS: ADDI32 $0, $0, 0x0007 (nop)          */
                              /* DO NOT change the relative branch               */
 
@@ -153,24 +149,11 @@ _startup:
         ext     k0,k0,19,1              # Extract NMI bit
         beqz    k0,_no_nmi
         nop
-        la      k0,_nmi_handler
-        jr      k0
+        lw	t9, %call16(_nmi_handler)(gp)
+        jr 	t9
         nop
 _no_nmi:
 
-        ##################################################################
-        # Initialize Stack Pointer
-        #   _stack is initialized by the linker script to point to the
-        #    starting location of the stack in DRM
-        ##################################################################
-        la      sp,_stack
-
-        ##################################################################
-        # Initialize Global Pointer
-        #   _gp is initialized by the linker script to point to "middle"
-        #   of the small variables region
-        ##################################################################
-        la      gp,_gp
 
 #if (PIC32_SRS_SET_COUNT == 2)
         ##################################################################
@@ -225,35 +208,39 @@ _no_nmi:
         ##################################################################
         # Call the "on reset" procedure
         ##################################################################
-        la      t0,_on_reset
-        jalr    t0
+        lw	t9, %call16(_on_reset)(gp)
+        jalr 	t9
         nop
 
-#if defined(INIT_MMU_MZ_FIXED) || defined(__PIC32_HAS_MMU_MZ_FIXED)
+#if 0 /* Check for PIC */
+#if defined(INIT_MMU_MZ_FIXED)
         ##################################################################
         # Initialize TLB for fixed mapping to EBI and SQI
         ##################################################################
         .extern __pic32_tlb_init_ebi_sqi
-        la      t0,__pic32_tlb_init_ebi_sqi
-        jalr    t0
+        lw	t9,%call16(__pic32_tlb_init_ebi_sqi)(gp)
+        jalr    t9
         nop
 #endif
 
-#if defined(INIT_L1_CACHE) || defined(__PIC32_HAS_L1CACHE)
+#if defined(INIT_L1_CACHE)
         ##################################################################
         # Initialize L1 cache register
         ##################################################################
         .extern __pic32_init_cache
-        la      t0,__pic32_init_cache
-        jalr    t0
+        lw	t9,%call16(__pic32_init_cache)(gp)
+        jalr    t9
         nop
 #endif
 
+#if defined(INIT_DATA)
         ##################################################################
         # Clear uninitialized data sections
         ##################################################################
-        la      t0,_bss_begin
-        la      t1,_bss_end
+        lw	v0,%got(_bss_begin)(gp)
+        lw	t0,0(v0)
+        lw	v0,%got(_bss_end)(gp)
+        lw	t0,0(v0)
         b       _bss_check
         nop
 
@@ -266,15 +253,17 @@ _bss_init:
 _bss_check:
         bltu    t0,t1,_bss_init
         nop
+#endif /* INIT_DATA */
 
-#if defined(INIT_DATA) || defined(__PIC32_HAS_INIT_DATA)
+#if defined(INIT_DATA)
         ##################################################################
         # Initialize data using the linker-generated .dinit table
         ##################################################################
         .equiv FMT_CLEAR,0
         .equiv FMT_COPY,1
 _dinit_init:
-        la      t0,_dinit_addr
+        lw	v0,%got(_dinit_addr)(gp)
+        lw	t0,0(v0)
 
 #define SRC t0
 #define DST t1
@@ -316,34 +305,7 @@ _dinit_end:
         nop
 9:
 #endif /* INIT_DATA */
-
-        ##################################################################
-        # If there are no RAM functions, skip the next section --
-        # initializing bus matrix registers.
-        ##################################################################
-        la      t1,_ramfunc_begin
-        beqz    t1,_ramfunc_done
-        nop
-
-#if defined(INIT_SSX) || defined(__PIC32_HAS_SSX)
-  /* No initialization required */
-#else /* Use BMX */
-        ##################################################################
-        # Initialize bus matrix registers if RAM functions exist in the
-        # application
-        ##################################################################
-        la      t1,_bmxdkpba_address
-        la      t2,BMXDKPBA
-        sw      t1,0(t2)
-        la      t1,_bmxdudba_address
-        la      t2,BMXDUDBA
-        sw      t1,0(t2)
-        la      t1,_bmxdupba_address
-        la      t2,BMXDUPBA
-        sw      t1,0(t2)
-#endif /* INIT_SSX */
-
-_ramfunc_done:
+#endif /* Check for PIC */
 
         ##################################################################
         # Initialize CP0 registers
@@ -359,22 +321,16 @@ _ramfunc_done:
         mtc0    t2,_CP0_COMPARE
 
         ##################################################################
-        # Ensure BEV set and Initialize EBase register
+        # Initialize EBase register
         ##################################################################
-        li      t0, (1<<22)
-        mfc0    t2,_CP0_STATUS
-        or      t2,t0,t2               # Set BEV bit 22
-        mtc0    t2,_CP0_STATUS
-
-        la      t1,_ebase_address
-        ehb
+        lw	t1,%got(_ebase_address)(gp)
         mtc0    t1,_CP0_EBASE
 
         ##################################################################
         # Initialize IntCtl/INTCON.VS register with _vector_spacing
         ##################################################################
-        la      t1,_vector_spacing
-#if defined(INIT_INTCONVS) || defined(__PIC32_HAS_INTCONVS)
+        lw      t1,%got(_vector_spacing)(gp) 
+#if defined(INIT_INTCONVS)
         la      t0, INTCON
         lw      t2, 0(t0)
         li      t2, 0
@@ -419,11 +375,11 @@ _ramfunc_done:
         sll     t1,t1,17                # Move UDI to Status.CEE location
         mfc0    t0,_CP0_STATUS
         and     t0,t0,0x00580000        # Preserve SR, NMI, and BEV
-#if defined(INIT_DSPR2) || defined(__PIC32_HAS_DSPR2)
+#if defined(INIT_DSPR2)
         li      t2, 0x01000000          # Set the Status.MX bit to enable DSP
         or      t0,t2,t0
 #endif
-#if defined(INIT_FPU64) || defined(__PIC32_HAS_FPU64)
+#if defined(INIT_FPU64)
         li      t2, 0x24000000          # Set the Status.CU1 and Status.FR bits to
         or      t0,t2,t0                # enable the FPU in FR64 mode
 #endif
@@ -431,7 +387,7 @@ _ramfunc_done:
         or      t0,t1,t0                # Include Status.CEE (from UDI)
         mtc0    t0,_CP0_STATUS
 
-#if defined(INIT_FPU64) || defined(__PIC32_HAS_FPU64)
+#if defined(INIT_FPU64)
                                         # FPU Control and Status
         li      t2,0x1000000            # FCSR: RM=0, FS=1, FO=0, FN=0
                                         # Enables: 0b00000 E=1, V=0, Z=0, O=0, U=0, I=0
@@ -442,8 +398,8 @@ _ramfunc_done:
         ##################################################################
         # Call the "on bootstrap" procedure
         ##################################################################
-        la      t0,_on_bootstrap
-        jalr    t0
+        lw	t9,%call16(_on_bootstrap)(gp)
+        jalr    t9
         nop
 
         ##################################################################
@@ -462,10 +418,11 @@ _ramfunc_done:
         ##################################################################
         and     a0,a0,0
         and     a1,a1,0
-        la      t0,_main_entry
-        jr      t0
+        lw	t9,%call16(_main_entry)(gp)
+        jr      t9
         nop
 
+        .globl _startup
         .end _startup
 
         ##################################################################
@@ -477,10 +434,10 @@ _ramfunc_done:
         .set noreorder
         .ent _bev_exception
 _bev_exception:
-        la        k0,_bootstrap_exception_handler
-        jr        k0
+	lw	t9,%call16(_bootstrap_exception_handler)(gp)
+        jr        t9
         nop
-
+        .globl _bev_exception
         .end _bev_exception
 
         ##################################################################
@@ -492,13 +449,15 @@ _bev_exception:
         .set noreorder
         .ent _gen_exception
 _gen_exception:
-0:      la      k0,_general_exception_context
-        jr      k0
+0:
+        lw	t9,%call16(_general_exception_context)(gp)
+        jr      t9
         nop
 
         .end _gen_exception
 
-#if defined(INIT_MMU_MZ_FIXED) || defined(__PIC32_HAS_MMU_MZ_FIXED)
+#if 0 /* Check for PIC */
+#if defined(INIT_MMU_MZ_FIXED)
         ##################################################################
         # Simple TLB-Refill Exception Vector
         # Jumps to _simple_tlb_refill_exception_context
@@ -508,14 +467,14 @@ _gen_exception:
         .set noreorder
         .ent simple_tlb_refill_vector
 simple_tlb_refill_vector:
-        la      k0,_simple_tlb_refill_exception_context
-        jr      k0
+        lw	t9,%call16(_simple_tlb_refill_exception_context)(gp)
+        jr      t9
         nop
 
         .end simple_tlb_refill_vector
 #endif
 
-#if defined(INIT_L1_CACHE) || defined(__PIC32_HAS_L1CACHE)
+#if defined(INIT_L1_CACHE)
         ##################################################################
         # Cache-Error Exception Vector Handler
         # Jumps to _cache_err_exception_context
@@ -525,30 +484,36 @@ simple_tlb_refill_vector:
         .set noreorder
         .ent _cache_err_vector
 _cache_err_vector:
-        la      k0,_cache_err_exception_context
-        jr      k0
+	lw	t9,%call16(_cache_err_exception_context)(gp)
+        jr      t9
         nop
 
         .end _cache_err_vector
 #endif
+#endif /* Check for PIC */
 
         .section .text.main_entry,code,keep
         .align 2
+        .global _main_entry
         .ent _main_entry
 _main_entry:
+
+
+#if 0
 
 #if defined(CPP_INIT)
         .weak _init
         # call .init section to run constructors etc
-        lui	a0,%hi(_init)
-        addiu	sp,sp,-24
-        addiu	a0,a0,%lo(_init)
-        beq	a0,$0,2f
-        sw	$31,20(sp)	 #,
-        jalr	a0
+
+        lw     t9,%call16(_init)
+        beq    t9,$0,2f
+        jalr   t9
         nop
+
 2:
 #endif
+
+#endif 
         and     a0,a0,0
         and     a1,a1,0
 
@@ -556,15 +521,16 @@ _main_entry:
 
         # Call main
         ##################################################################
-        la    	t0,main
-        jalr 	t0
+        lw	t9,%call16(main)(gp)
+        jalr 	t9
         nop
 
 #if defined(CALL_EXIT)
         ##################################################################
         # Call exit()
         ##################################################################
-        jal exit
+        lw	t9,%call16(exit)(gp)
+        jalr    t9
         nop
 #endif
 
@@ -575,14 +541,19 @@ _main_entry:
         .weak __exception_handler_break
 __crt0_exit:
 1:
-        la      v0,__exception_handler_break
-        beq     v0,0,0f
+        lw	t9,%call16(__exception_handler_break)(gp)
+        beq     t9,0,0f
         nop
-        jalr    v0
+        jalr    t9
         nop
 
 0:      b       1b
         nop
+
+        addiu	sp,sp,32
+
+        .set	macro
+        .set	reorder
 
         .globl __crt0_exit
         .end _main_entry

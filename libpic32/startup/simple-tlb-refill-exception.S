@@ -7,8 +7,8 @@
  *
  * Processor:       PIC32
  *
- * Compiler:        chipKIT v1.00
- *                  MPLAB X IDE
+ * Compiler:        chipKIT
+ 
  * Company:         Microchip Technology Inc.
  *
  * Software License Agreement
@@ -93,9 +93,15 @@ _simple_tlb_refill_exception_context:
   # Pass Cause and Status to the handler function
 0: mfc0 a0, _CP0_CAUSE
    mfc0 a1, _CP0_STATUS
+#if defined(__PIC__)   
+   lw   t9, %call16(_simple_tlb_refill_exception_handler)(gp)
+   jalr t9
+   nop
+#else
    la   v0, _simple_tlb_refill_exception_handler
    jalr v0
    nop
+#endif
 
    lw t0, 80(sp)
    mthi t0
