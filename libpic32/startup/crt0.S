@@ -8,14 +8,14 @@
  * Processor:       PIC32
  *
  * Compiler:        chipKIT
- *                  
+ 
  * Company:         Microchip Technology Inc.
  *
  * Software License Agreement
  *
  * Copyright (c) 2014, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
- * 
+ *
  * This software is developed by Microchip Technology Inc. and its
  * subsidiaries ("Microchip").
  *
@@ -61,10 +61,17 @@
 #endif
 
 #if !defined(PIC32_SRS_SET_COUNT)
-# warning PIC32_SRS_SET_COUNT not defined on build line
-# define PIC32_SRS_SET_COUNT 2
+#  if defined(__PIC32_SRS_SET_COUNT)
+#    define PIC32_SRS_SET_COUNT __PIC32_SRS_SET_COUNT
+#  else
+#    warning PIC32_SRS_SET_COUNT not defined on build line
+#    define PIC32_SRS_SET_COUNT 2
+#  endif
 #endif
 
+#if defined(__PIC32MX) || defined(__PIC32MM) || defined(__PIC32MZ)
+#define INIT_DATA 1
+#endif
 
 /* This file contains 32-bit assembly code */
        .set nomips16
@@ -222,7 +229,7 @@ _no_nmi:
         jalr    t0
         nop
 
-#if defined(INIT_MMU_MZ_FIXED)
+#if defined(INIT_MMU_MZ_FIXED) || defined(__PIC32_HAS_MMU_MZ_FIXED)
         ##################################################################
         # Initialize TLB for fixed mapping to EBI and SQI
         ##################################################################
@@ -232,7 +239,7 @@ _no_nmi:
         nop
 #endif
 
-#if defined(INIT_L1_CACHE)
+#if defined(INIT_L1_CACHE) || defined(__PIC32_HAS_L1CACHE)
         ##################################################################
         # Initialize L1 cache register
         ##################################################################
@@ -260,6 +267,7 @@ _bss_check:
         bltu    t0,t1,_bss_init
         nop
 
+#if defined(INIT_DATA) || defined(__PIC32_HAS_INIT_DATA)
         ##################################################################
         # Initialize data using the linker-generated .dinit table
         ##################################################################
@@ -307,6 +315,7 @@ _dinit_end:
         bne     DST,$0,0b
         nop
 9:
+#endif /* INIT_DATA */
 
         ##################################################################
         # If there are no RAM functions, skip the next section --
@@ -316,7 +325,7 @@ _dinit_end:
         beqz    t1,_ramfunc_done
         nop
 
-#if defined(INIT_SSX)
+#if defined(INIT_SSX) || defined(__PIC32_HAS_SSX)
   /* No initialization required */
 #else /* Use BMX */
         ##################################################################
@@ -350,20 +359,29 @@ _ramfunc_done:
         mtc0    t2,_CP0_COMPARE
 
         ##################################################################
-        # Initialize EBase register
+        # Ensure BEV set and Initialize EBase register
         ##################################################################
+        li      t0, (1<<22)
+        mfc0    t2,_CP0_STATUS
+        or      t2,t0,t2               # Set BEV bit 22
+        mtc0    t2,_CP0_STATUS
+
         la      t1,_ebase_address
+        ehb
         mtc0    t1,_CP0_EBASE
 
         ##################################################################
         # Initialize IntCtl/INTCON.VS register with _vector_spacing
         ##################################################################
         la      t1,_vector_spacing
-#if defined(INIT_INTCONVS)
+#if defined(INIT_INTCONVS) || defined(__PIC32_HAS_INTCONVS)
         la      t0, INTCON
         lw      t2, 0(t0)
         li      t2, 0
-        ins     t2, t1, 16,7
+        ins     t2, t1, 16, 7
+#if defined(__PIC32MM) && defined(_INTCON_MVEC_MASK)
+        ori     t2, t2, _INTCON_MVEC_MASK
+#endif
         sw      t2, 0(t0)
 #endif
         li      t2,0                    # Clear t2 and
@@ -387,7 +405,7 @@ _ramfunc_done:
         # - Preserve soft reset <SR> and non-maskable interrupt <NMI>
         # - CorExtend enabled based on whether CorExtend User Defined
         #   Instructions have been implemented <CEE = Config<UDI>>
-        # - Disable any pending interrups <IM7..IM2 = 0, IM1..IM0 = 0>
+        # - Disable any pending interrupts <IM7..IM2 = 0, IM1..IM0 = 0>
         # - Disable hardware interrupts <IPL7:IPL2 = 0>
         # - Base mode is Kernel mode <UM = 0>
         # - Error level is normal <ERL = 0>
@@ -401,11 +419,11 @@ _ramfunc_done:
         sll     t1,t1,17                # Move UDI to Status.CEE location
         mfc0    t0,_CP0_STATUS
         and     t0,t0,0x00580000        # Preserve SR, NMI, and BEV
-#if defined(INIT_DSPR2)
+#if defined(INIT_DSPR2) || defined(__PIC32_HAS_DSPR2)
         li      t2, 0x01000000          # Set the Status.MX bit to enable DSP
         or      t0,t2,t0
 #endif
-#if defined(INIT_FPU64)
+#if defined(INIT_FPU64) || defined(__PIC32_HAS_FPU64)
         li      t2, 0x24000000          # Set the Status.CU1 and Status.FR bits to
         or      t0,t2,t0                # enable the FPU in FR64 mode
 #endif
@@ -413,7 +431,7 @@ _ramfunc_done:
         or      t0,t1,t0                # Include Status.CEE (from UDI)
         mtc0    t0,_CP0_STATUS
 
-#if defined(INIT_FPU64)
+#if defined(INIT_FPU64) || defined(__PIC32_HAS_FPU64)
                                         # FPU Control and Status
         li      t2,0x1000000            # FCSR: RM=0, FS=1, FO=0, FN=0
                                         # Enables: 0b00000 E=1, V=0, Z=0, O=0, U=0, I=0
@@ -480,7 +498,7 @@ _gen_exception:
 
         .end _gen_exception
 
-#if defined(INIT_MMU_MZ_FIXED)
+#if defined(INIT_MMU_MZ_FIXED) || defined(__PIC32_HAS_MMU_MZ_FIXED)
         ##################################################################
         # Simple TLB-Refill Exception Vector
         # Jumps to _simple_tlb_refill_exception_context
@@ -497,7 +515,7 @@ simple_tlb_refill_vector:
         .end simple_tlb_refill_vector
 #endif
 
-#if defined(INIT_L1_CACHE)
+#if defined(INIT_L1_CACHE) || defined(__PIC32_HAS_L1CACHE)
         ##################################################################
         # Cache-Error Exception Vector Handler
         # Jumps to _cache_err_exception_context

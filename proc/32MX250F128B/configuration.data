@@ -1,6 +1,7 @@
 Daytona Configuration Word Definitions: 0001
 CWORD:BFC00BF0:FFFFFFFF:FFFFFFFF
 CSETTING:0000FFFF:USERID:
+CVALUE:00000000:00000000:Range is from 0 to 0xffff
 CSETTING:10000000:PMDL1WAY:Peripheral Module Disable Configuration
 CVALUE:00000000:OFF:Allow multiple reconfigurations
 CVALUE:10000000:ON:Allow only one reconfiguration

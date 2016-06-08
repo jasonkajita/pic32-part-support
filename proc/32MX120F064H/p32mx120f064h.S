@@ -1,7 +1,7 @@
  #-------------------------------------------------------------------------
  # MPLAB XC Compiler -  PIC32MX120F064H processor definition module
  # 
- # Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ # Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  # All rights reserved.
  # 
  # This software is developed by Microchip Technology Inc. and its
@@ -2216,86 +2216,6 @@ DCH3DATSET = 0xBF883358
   .global DCH3DATSET
 DCH3DATINV = 0xBF88335C
   .global DCH3DATINV
-ANSELA = 0xBF886000
-  .global ANSELA
-ANSELACLR = 0xBF886004
-  .global ANSELACLR
-ANSELASET = 0xBF886008
-  .global ANSELASET
-ANSELAINV = 0xBF88600C
-  .global ANSELAINV
-TRISA = 0xBF886010
-  .global TRISA
-TRISACLR = 0xBF886014
-  .global TRISACLR
-TRISASET = 0xBF886018
-  .global TRISASET
-TRISAINV = 0xBF88601C
-  .global TRISAINV
-PORTA = 0xBF886020
-  .global PORTA
-PORTACLR = 0xBF886024
-  .global PORTACLR
-PORTASET = 0xBF886028
-  .global PORTASET
-PORTAINV = 0xBF88602C
-  .global PORTAINV
-LATA = 0xBF886030
-  .global LATA
-LATACLR = 0xBF886034
-  .global LATACLR
-LATASET = 0xBF886038
-  .global LATASET
-LATAINV = 0xBF88603C
-  .global LATAINV
-ODCA = 0xBF886040
-  .global ODCA
-ODCACLR = 0xBF886044
-  .global ODCACLR
-ODCASET = 0xBF886048
-  .global ODCASET
-ODCAINV = 0xBF88604C
-  .global ODCAINV
-CNPUA = 0xBF886050
-  .global CNPUA
-CNPUACLR = 0xBF886054
-  .global CNPUACLR
-CNPUASET = 0xBF886058
-  .global CNPUASET
-CNPUAINV = 0xBF88605C
-  .global CNPUAINV
-CNPDA = 0xBF886060
-  .global CNPDA
-CNPDACLR = 0xBF886064
-  .global CNPDACLR
-CNPDASET = 0xBF886068
-  .global CNPDASET
-CNPDAINV = 0xBF88606C
-  .global CNPDAINV
-CNCONA = 0xBF886070
-  .global CNCONA
-CNCONACLR = 0xBF886074
-  .global CNCONACLR
-CNCONASET = 0xBF886078
-  .global CNCONASET
-CNCONAINV = 0xBF88607C
-  .global CNCONAINV
-CNENA = 0xBF886080
-  .global CNENA
-CNENACLR = 0xBF886084
-  .global CNENACLR
-CNENASET = 0xBF886088
-  .global CNENASET
-CNENAINV = 0xBF88608C
-  .global CNENAINV
-CNSTATA = 0xBF886090
-  .global CNSTATA
-CNSTATACLR = 0xBF886094
-  .global CNSTATACLR
-CNSTATASET = 0xBF886098
-  .global CNSTATASET
-CNSTATAINV = 0xBF88609C
-  .global CNSTATAINV
 ANSELB = 0xBF886100
   .global ANSELB
 ANSELBCLR = 0xBF886104

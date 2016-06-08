@@ -1,8 +1,8 @@
 /*--------------------------------------------------------------------------
  * MPLAB XC Compiler -  PIC32MZ2048EFG064 linker script
- * Build date : May 01 2015
+ * Build date : Feb 18 2016
  * 
- * Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
@@ -61,12 +61,6 @@ PROVIDE(_min_stack_size = 0x400) ;
  *************************************************************************/
 INPUT("processor.o")
 
-/*************************************************************************
- * Processor-specific peripheral libraries are optional
- *************************************************************************/
-OPTIONAL("libmchp_peripheral.a")
-OPTIONAL("libmchp_peripheral_32MZ2048EFG064.a")
-
 
 /*************************************************************************
  * Vector-offset initialization
@@ -74,14 +68,17 @@ OPTIONAL("libmchp_peripheral_32MZ2048EFG064.a")
 OPTIONAL("vector_offset_init.o")
 
 /*************************************************************************
- * For interrupt vector handling
+ * Symbols used for interrupt-vector table generation
+ * To override the defaults, define the _ebase_address symbol using
+ * the --defsym linker opt as shown in this example:
+ *   xc32-gcc src.c -Wl,--defsym=_ebase_address=0x9D001000
  *************************************************************************/
-PROVIDE(_vector_spacing = 0x00000001);
+PROVIDE(_vector_spacing = 0x0001);
 PROVIDE(_ebase_address = 0x9D000000);
 
 /*************************************************************************
  * Memory Address Equates
- * _RESET_ADDR                    -- Reset Vector
+ * _RESET_ADDR                    -- Reset Vector or entry point
  * _BEV_EXCPT_ADDR                -- Boot exception Vector
  * _DBG_EXCPT_ADDR                -- In-circuit Debugging Exception Vector
  * _SIMPLE_TLB_REFILL_EXCPT_ADDR  -- Simple TLB-Refill Exception Vector
@@ -107,6 +104,8 @@ _GEN_EXCPT_ADDR                = _ebase_address + 0x180;
  * The config_<address> sections are used to locate the config words at
  * their absolute addresses.
  *************************************************************************/
+
+
 MEMORY
 {
   kseg0_program_mem     (rx)  : ORIGIN = 0x9D000000, LENGTH = 0x200000
@@ -1281,7 +1280,7 @@ SECTIONS
   } >kseg0_program_mem
   .ctors   :
   {
-    /* chipKIT uses crtbegin.o to find the start of
+    /* XC32 uses crtbegin.o to find the start of
        the constructors, so we make sure it is
        first.  Because this is a wildcard, it
        doesn't matter if the user does not
@@ -1632,7 +1631,7 @@ __pic32_tlb_3_entrylo1 = __pic32_tlb_3_entrylo0 | 0x00040000 ;
  *  called by the default C startup code (crt0_<isa>.o),
  *  uses the table created in the .tlb_init_values output
  *  section to initialize the Translation Lookaside buffer (TLB)
- *  of the Memory Mangagement Unit (MMU).
+ *  of the Memory Management Unit (MMU).
  */
 SECTIONS
 {

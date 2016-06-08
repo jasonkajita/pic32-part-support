@@ -1,8 +1,8 @@
 /*-------------------------------------------------------------------------
  * PIC32MX530F128L processor header
- * Build date : May 01 2015
+ * Build date : Feb 18 2016
  *
- * Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
@@ -45,7 +45,8 @@
 extern "C" {
 #endif
 
-extern volatile unsigned int        WDTCON __attribute__((section("sfrs")));
+#define WDTCON WDTCON
+extern volatile unsigned int   WDTCON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned WDTCLR:1;
@@ -78,7 +79,8 @@ extern volatile __WDTCONbits_t WDTCONbits __asm__ ("WDTCON") __attribute__((sect
 extern volatile unsigned int        WDTCONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        WDTCONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        WDTCONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        RTCCON __attribute__((section("sfrs")));
+#define RTCCON RTCCON
+extern volatile unsigned int   RTCCON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RTCOE:1;
@@ -102,7 +104,8 @@ extern volatile __RTCCONbits_t RTCCONbits __asm__ ("RTCCON") __attribute__((sect
 extern volatile unsigned int        RTCCONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        RTCCONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        RTCCONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        RTCALRM __attribute__((section("sfrs")));
+#define RTCALRM RTCALRM
+extern volatile unsigned int   RTCALRM __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ARPT:8;
@@ -120,7 +123,8 @@ extern volatile __RTCALRMbits_t RTCALRMbits __asm__ ("RTCALRM") __attribute__((s
 extern volatile unsigned int        RTCALRMCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        RTCALRMSET __attribute__((section("sfrs")));
 extern volatile unsigned int        RTCALRMINV __attribute__((section("sfrs")));
-extern volatile unsigned int        RTCTIME __attribute__((section("sfrs")));
+#define RTCTIME RTCTIME
+extern volatile unsigned int   RTCTIME __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :8;
@@ -139,7 +143,8 @@ extern volatile __RTCTIMEbits_t RTCTIMEbits __asm__ ("RTCTIME") __attribute__((s
 extern volatile unsigned int        RTCTIMECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        RTCTIMESET __attribute__((section("sfrs")));
 extern volatile unsigned int        RTCTIMEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        RTCDATE __attribute__((section("sfrs")));
+#define RTCDATE RTCDATE
+extern volatile unsigned int   RTCDATE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned WDAY01:4;
@@ -159,7 +164,8 @@ extern volatile __RTCDATEbits_t RTCDATEbits __asm__ ("RTCDATE") __attribute__((s
 extern volatile unsigned int        RTCDATECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        RTCDATESET __attribute__((section("sfrs")));
 extern volatile unsigned int        RTCDATEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        ALRMTIME __attribute__((section("sfrs")));
+#define ALRMTIME ALRMTIME
+extern volatile unsigned int   ALRMTIME __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :8;
@@ -178,7 +184,8 @@ extern volatile __ALRMTIMEbits_t ALRMTIMEbits __asm__ ("ALRMTIME") __attribute__
 extern volatile unsigned int        ALRMTIMECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        ALRMTIMESET __attribute__((section("sfrs")));
 extern volatile unsigned int        ALRMTIMEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        ALRMDATE __attribute__((section("sfrs")));
+#define ALRMDATE ALRMDATE
+extern volatile unsigned int   ALRMDATE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned WDAY01:4;
@@ -196,7 +203,8 @@ extern volatile __ALRMDATEbits_t ALRMDATEbits __asm__ ("ALRMDATE") __attribute__
 extern volatile unsigned int        ALRMDATECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        ALRMDATESET __attribute__((section("sfrs")));
 extern volatile unsigned int        ALRMDATEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        T1CON __attribute__((section("sfrs")));
+#define T1CON T1CON
+extern volatile unsigned int   T1CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :1;
@@ -232,15 +240,18 @@ extern volatile __T1CONbits_t T1CONbits __asm__ ("T1CON") __attribute__((section
 extern volatile unsigned int        T1CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        T1CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        T1CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        TMR1 __attribute__((section("sfrs")));
+#define TMR1 TMR1
+extern volatile unsigned int   TMR1 __attribute__((section("sfrs")));
 extern volatile unsigned int        TMR1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        TMR1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        TMR1INV __attribute__((section("sfrs")));
-extern volatile unsigned int        PR1 __attribute__((section("sfrs")));
+#define PR1 PR1
+extern volatile unsigned int   PR1 __attribute__((section("sfrs")));
 extern volatile unsigned int        PR1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PR1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        PR1INV __attribute__((section("sfrs")));
-extern volatile unsigned int        T2CON __attribute__((section("sfrs")));
+#define T2CON T2CON
+extern volatile unsigned int   T2CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :1;
@@ -274,15 +285,18 @@ extern volatile __T2CONbits_t T2CONbits __asm__ ("T2CON") __attribute__((section
 extern volatile unsigned int        T2CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        T2CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        T2CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        TMR2 __attribute__((section("sfrs")));
+#define TMR2 TMR2
+extern volatile unsigned int   TMR2 __attribute__((section("sfrs")));
 extern volatile unsigned int        TMR2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        TMR2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        TMR2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        PR2 __attribute__((section("sfrs")));
+#define PR2 PR2
+extern volatile unsigned int   PR2 __attribute__((section("sfrs")));
 extern volatile unsigned int        PR2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PR2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        PR2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        T3CON __attribute__((section("sfrs")));
+#define T3CON T3CON
+extern volatile unsigned int   T3CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :1;
@@ -315,15 +329,18 @@ extern volatile __T3CONbits_t T3CONbits __asm__ ("T3CON") __attribute__((section
 extern volatile unsigned int        T3CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        T3CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        T3CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        TMR3 __attribute__((section("sfrs")));
+#define TMR3 TMR3
+extern volatile unsigned int   TMR3 __attribute__((section("sfrs")));
 extern volatile unsigned int        TMR3CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        TMR3SET __attribute__((section("sfrs")));
 extern volatile unsigned int        TMR3INV __attribute__((section("sfrs")));
-extern volatile unsigned int        PR3 __attribute__((section("sfrs")));
+#define PR3 PR3
+extern volatile unsigned int   PR3 __attribute__((section("sfrs")));
 extern volatile unsigned int        PR3CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PR3SET __attribute__((section("sfrs")));
 extern volatile unsigned int        PR3INV __attribute__((section("sfrs")));
-extern volatile unsigned int        T4CON __attribute__((section("sfrs")));
+#define T4CON T4CON
+extern volatile unsigned int   T4CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :1;
@@ -357,15 +374,18 @@ extern volatile __T4CONbits_t T4CONbits __asm__ ("T4CON") __attribute__((section
 extern volatile unsigned int        T4CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        T4CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        T4CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        TMR4 __attribute__((section("sfrs")));
+#define TMR4 TMR4
+extern volatile unsigned int   TMR4 __attribute__((section("sfrs")));
 extern volatile unsigned int        TMR4CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        TMR4SET __attribute__((section("sfrs")));
 extern volatile unsigned int        TMR4INV __attribute__((section("sfrs")));
-extern volatile unsigned int        PR4 __attribute__((section("sfrs")));
+#define PR4 PR4
+extern volatile unsigned int   PR4 __attribute__((section("sfrs")));
 extern volatile unsigned int        PR4CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PR4SET __attribute__((section("sfrs")));
 extern volatile unsigned int        PR4INV __attribute__((section("sfrs")));
-extern volatile unsigned int        T5CON __attribute__((section("sfrs")));
+#define T5CON T5CON
+extern volatile unsigned int   T5CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :1;
@@ -398,15 +418,18 @@ extern volatile __T5CONbits_t T5CONbits __asm__ ("T5CON") __attribute__((section
 extern volatile unsigned int        T5CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        T5CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        T5CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        TMR5 __attribute__((section("sfrs")));
+#define TMR5 TMR5
+extern volatile unsigned int   TMR5 __attribute__((section("sfrs")));
 extern volatile unsigned int        TMR5CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        TMR5SET __attribute__((section("sfrs")));
 extern volatile unsigned int        TMR5INV __attribute__((section("sfrs")));
-extern volatile unsigned int        PR5 __attribute__((section("sfrs")));
+#define PR5 PR5
+extern volatile unsigned int   PR5 __attribute__((section("sfrs")));
 extern volatile unsigned int        PR5CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PR5SET __attribute__((section("sfrs")));
 extern volatile unsigned int        PR5INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IC1CON __attribute__((section("sfrs")));
+#define IC1CON IC1CON
+extern volatile unsigned int   IC1CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ICM:3;
@@ -441,8 +464,10 @@ extern volatile __IC1CONbits_t IC1CONbits __asm__ ("IC1CON") __attribute__((sect
 extern volatile unsigned int        IC1CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IC1CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        IC1CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        IC1BUF __attribute__((section("sfrs")));
-extern volatile unsigned int        IC2CON __attribute__((section("sfrs")));
+#define IC1BUF IC1BUF
+extern volatile unsigned int   IC1BUF __attribute__((section("sfrs")));
+#define IC2CON IC2CON
+extern volatile unsigned int   IC2CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ICM:3;
@@ -477,8 +502,10 @@ extern volatile __IC2CONbits_t IC2CONbits __asm__ ("IC2CON") __attribute__((sect
 extern volatile unsigned int        IC2CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IC2CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        IC2CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        IC2BUF __attribute__((section("sfrs")));
-extern volatile unsigned int        IC3CON __attribute__((section("sfrs")));
+#define IC2BUF IC2BUF
+extern volatile unsigned int   IC2BUF __attribute__((section("sfrs")));
+#define IC3CON IC3CON
+extern volatile unsigned int   IC3CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ICM:3;
@@ -513,8 +540,10 @@ extern volatile __IC3CONbits_t IC3CONbits __asm__ ("IC3CON") __attribute__((sect
 extern volatile unsigned int        IC3CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IC3CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        IC3CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        IC3BUF __attribute__((section("sfrs")));
-extern volatile unsigned int        IC4CON __attribute__((section("sfrs")));
+#define IC3BUF IC3BUF
+extern volatile unsigned int   IC3BUF __attribute__((section("sfrs")));
+#define IC4CON IC4CON
+extern volatile unsigned int   IC4CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ICM:3;
@@ -549,8 +578,10 @@ extern volatile __IC4CONbits_t IC4CONbits __asm__ ("IC4CON") __attribute__((sect
 extern volatile unsigned int        IC4CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IC4CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        IC4CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        IC4BUF __attribute__((section("sfrs")));
-extern volatile unsigned int        IC5CON __attribute__((section("sfrs")));
+#define IC4BUF IC4BUF
+extern volatile unsigned int   IC4BUF __attribute__((section("sfrs")));
+#define IC5CON IC5CON
+extern volatile unsigned int   IC5CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ICM:3;
@@ -585,8 +616,10 @@ extern volatile __IC5CONbits_t IC5CONbits __asm__ ("IC5CON") __attribute__((sect
 extern volatile unsigned int        IC5CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IC5CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        IC5CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        IC5BUF __attribute__((section("sfrs")));
-extern volatile unsigned int        OC1CON __attribute__((section("sfrs")));
+#define IC5BUF IC5BUF
+extern volatile unsigned int   IC5BUF __attribute__((section("sfrs")));
+#define OC1CON OC1CON
+extern volatile unsigned int   OC1CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned OCM:3;
@@ -615,15 +648,18 @@ extern volatile __OC1CONbits_t OC1CONbits __asm__ ("OC1CON") __attribute__((sect
 extern volatile unsigned int        OC1CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        OC1CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        OC1CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        OC1R __attribute__((section("sfrs")));
+#define OC1R OC1R
+extern volatile unsigned int   OC1R __attribute__((section("sfrs")));
 extern volatile unsigned int        OC1RCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        OC1RSET __attribute__((section("sfrs")));
 extern volatile unsigned int        OC1RINV __attribute__((section("sfrs")));
-extern volatile unsigned int        OC1RS __attribute__((section("sfrs")));
+#define OC1RS OC1RS
+extern volatile unsigned int   OC1RS __attribute__((section("sfrs")));
 extern volatile unsigned int        OC1RSCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        OC1RSSET __attribute__((section("sfrs")));
 extern volatile unsigned int        OC1RSINV __attribute__((section("sfrs")));
-extern volatile unsigned int        OC2CON __attribute__((section("sfrs")));
+#define OC2CON OC2CON
+extern volatile unsigned int   OC2CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned OCM:3;
@@ -652,15 +688,18 @@ extern volatile __OC2CONbits_t OC2CONbits __asm__ ("OC2CON") __attribute__((sect
 extern volatile unsigned int        OC2CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        OC2CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        OC2CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        OC2R __attribute__((section("sfrs")));
+#define OC2R OC2R
+extern volatile unsigned int   OC2R __attribute__((section("sfrs")));
 extern volatile unsigned int        OC2RCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        OC2RSET __attribute__((section("sfrs")));
 extern volatile unsigned int        OC2RINV __attribute__((section("sfrs")));
-extern volatile unsigned int        OC2RS __attribute__((section("sfrs")));
+#define OC2RS OC2RS
+extern volatile unsigned int   OC2RS __attribute__((section("sfrs")));
 extern volatile unsigned int        OC2RSCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        OC2RSSET __attribute__((section("sfrs")));
 extern volatile unsigned int        OC2RSINV __attribute__((section("sfrs")));
-extern volatile unsigned int        OC3CON __attribute__((section("sfrs")));
+#define OC3CON OC3CON
+extern volatile unsigned int   OC3CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned OCM:3;
@@ -689,15 +728,18 @@ extern volatile __OC3CONbits_t OC3CONbits __asm__ ("OC3CON") __attribute__((sect
 extern volatile unsigned int        OC3CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        OC3CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        OC3CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        OC3R __attribute__((section("sfrs")));
+#define OC3R OC3R
+extern volatile unsigned int   OC3R __attribute__((section("sfrs")));
 extern volatile unsigned int        OC3RCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        OC3RSET __attribute__((section("sfrs")));
 extern volatile unsigned int        OC3RINV __attribute__((section("sfrs")));
-extern volatile unsigned int        OC3RS __attribute__((section("sfrs")));
+#define OC3RS OC3RS
+extern volatile unsigned int   OC3RS __attribute__((section("sfrs")));
 extern volatile unsigned int        OC3RSCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        OC3RSSET __attribute__((section("sfrs")));
 extern volatile unsigned int        OC3RSINV __attribute__((section("sfrs")));
-extern volatile unsigned int        OC4CON __attribute__((section("sfrs")));
+#define OC4CON OC4CON
+extern volatile unsigned int   OC4CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned OCM:3;
@@ -726,15 +768,18 @@ extern volatile __OC4CONbits_t OC4CONbits __asm__ ("OC4CON") __attribute__((sect
 extern volatile unsigned int        OC4CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        OC4CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        OC4CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        OC4R __attribute__((section("sfrs")));
+#define OC4R OC4R
+extern volatile unsigned int   OC4R __attribute__((section("sfrs")));
 extern volatile unsigned int        OC4RCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        OC4RSET __attribute__((section("sfrs")));
 extern volatile unsigned int        OC4RINV __attribute__((section("sfrs")));
-extern volatile unsigned int        OC4RS __attribute__((section("sfrs")));
+#define OC4RS OC4RS
+extern volatile unsigned int   OC4RS __attribute__((section("sfrs")));
 extern volatile unsigned int        OC4RSCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        OC4RSSET __attribute__((section("sfrs")));
 extern volatile unsigned int        OC4RSINV __attribute__((section("sfrs")));
-extern volatile unsigned int        OC5CON __attribute__((section("sfrs")));
+#define OC5CON OC5CON
+extern volatile unsigned int   OC5CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned OCM:3;
@@ -763,15 +808,18 @@ extern volatile __OC5CONbits_t OC5CONbits __asm__ ("OC5CON") __attribute__((sect
 extern volatile unsigned int        OC5CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        OC5CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        OC5CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        OC5R __attribute__((section("sfrs")));
+#define OC5R OC5R
+extern volatile unsigned int   OC5R __attribute__((section("sfrs")));
 extern volatile unsigned int        OC5RCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        OC5RSET __attribute__((section("sfrs")));
 extern volatile unsigned int        OC5RINV __attribute__((section("sfrs")));
-extern volatile unsigned int        OC5RS __attribute__((section("sfrs")));
+#define OC5RS OC5RS
+extern volatile unsigned int   OC5RS __attribute__((section("sfrs")));
 extern volatile unsigned int        OC5RSCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        OC5RSSET __attribute__((section("sfrs")));
 extern volatile unsigned int        OC5RSINV __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C1ACON __attribute__((section("sfrs")));
+#define I2C1ACON I2C1ACON
+extern volatile unsigned int   I2C1ACON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned SEN:1;
@@ -804,7 +852,8 @@ typedef union {
   };
 } __I2C1ACONbits_t;
 extern volatile __I2C1ACONbits_t I2C1ACONbits __asm__ ("I2C1ACON") __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C1CON __attribute__((section("sfrs")));
+#define I2C1CON I2C1CON
+extern volatile unsigned int   I2C1CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned SEN:1;
@@ -843,7 +892,8 @@ extern volatile unsigned int        I2C1ACONSET __attribute__((section("sfrs")))
 extern volatile unsigned int        I2C1CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1ACONINV __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C1ASTAT __attribute__((section("sfrs")));
+#define I2C1ASTAT I2C1ASTAT
+extern volatile unsigned int   I2C1ASTAT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TBF:1;
@@ -870,7 +920,8 @@ typedef union {
   };
 } __I2C1ASTATbits_t;
 extern volatile __I2C1ASTATbits_t I2C1ASTATbits __asm__ ("I2C1ASTAT") __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C1STAT __attribute__((section("sfrs")));
+#define I2C1STAT I2C1STAT
+extern volatile unsigned int   I2C1STAT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TBF:1;
@@ -903,41 +954,52 @@ extern volatile unsigned int        I2C1ASTATSET __attribute__((section("sfrs"))
 extern volatile unsigned int        I2C1STATSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1ASTATINV __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1STATINV __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C1AADD __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C1ADD __attribute__((section("sfrs")));
+#define I2C1AADD I2C1AADD
+extern volatile unsigned int   I2C1AADD __attribute__((section("sfrs")));
+#define I2C1ADD I2C1ADD
+extern volatile unsigned int   I2C1ADD __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1AADDCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1ADDCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1AADDSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1ADDSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1AADDINV __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1ADDINV __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C1AMSK __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C1MSK __attribute__((section("sfrs")));
+#define I2C1AMSK I2C1AMSK
+extern volatile unsigned int   I2C1AMSK __attribute__((section("sfrs")));
+#define I2C1MSK I2C1MSK
+extern volatile unsigned int   I2C1MSK __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1AMSKCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1MSKCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1AMSKSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1MSKSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1AMSKINV __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1MSKINV __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C1ABRG __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C1BRG __attribute__((section("sfrs")));
+#define I2C1ABRG I2C1ABRG
+extern volatile unsigned int   I2C1ABRG __attribute__((section("sfrs")));
+#define I2C1BRG I2C1BRG
+extern volatile unsigned int   I2C1BRG __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1ABRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1BRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1ABRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1BRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1ABRGINV __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1BRGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C1ATRN __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C1TRN __attribute__((section("sfrs")));
+#define I2C1ATRN I2C1ATRN
+extern volatile unsigned int   I2C1ATRN __attribute__((section("sfrs")));
+#define I2C1TRN I2C1TRN
+extern volatile unsigned int   I2C1TRN __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1ATRNCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1TRNCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1ATRNSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1TRNSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1ATRNINV __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C1TRNINV __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C1ARCV __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C1RCV __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C2ACON __attribute__((section("sfrs")));
+#define I2C1ARCV I2C1ARCV
+extern volatile unsigned int   I2C1ARCV __attribute__((section("sfrs")));
+#define I2C1RCV I2C1RCV
+extern volatile unsigned int   I2C1RCV __attribute__((section("sfrs")));
+#define I2C2ACON I2C2ACON
+extern volatile unsigned int   I2C2ACON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned SEN:1;
@@ -970,7 +1032,8 @@ typedef union {
   };
 } __I2C2ACONbits_t;
 extern volatile __I2C2ACONbits_t I2C2ACONbits __asm__ ("I2C2ACON") __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C2CON __attribute__((section("sfrs")));
+#define I2C2CON I2C2CON
+extern volatile unsigned int   I2C2CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned SEN:1;
@@ -1009,7 +1072,8 @@ extern volatile unsigned int        I2C2ACONSET __attribute__((section("sfrs")))
 extern volatile unsigned int        I2C2CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2ACONINV __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C2ASTAT __attribute__((section("sfrs")));
+#define I2C2ASTAT I2C2ASTAT
+extern volatile unsigned int   I2C2ASTAT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TBF:1;
@@ -1036,7 +1100,8 @@ typedef union {
   };
 } __I2C2ASTATbits_t;
 extern volatile __I2C2ASTATbits_t I2C2ASTATbits __asm__ ("I2C2ASTAT") __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C2STAT __attribute__((section("sfrs")));
+#define I2C2STAT I2C2STAT
+extern volatile unsigned int   I2C2STAT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TBF:1;
@@ -1069,41 +1134,52 @@ extern volatile unsigned int        I2C2ASTATSET __attribute__((section("sfrs"))
 extern volatile unsigned int        I2C2STATSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2ASTATINV __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2STATINV __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C2AADD __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C2ADD __attribute__((section("sfrs")));
+#define I2C2AADD I2C2AADD
+extern volatile unsigned int   I2C2AADD __attribute__((section("sfrs")));
+#define I2C2ADD I2C2ADD
+extern volatile unsigned int   I2C2ADD __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2AADDCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2ADDCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2AADDSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2ADDSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2AADDINV __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2ADDINV __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C2AMSK __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C2MSK __attribute__((section("sfrs")));
+#define I2C2AMSK I2C2AMSK
+extern volatile unsigned int   I2C2AMSK __attribute__((section("sfrs")));
+#define I2C2MSK I2C2MSK
+extern volatile unsigned int   I2C2MSK __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2AMSKCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2MSKCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2AMSKSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2MSKSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2AMSKINV __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2MSKINV __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C2ABRG __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C2BRG __attribute__((section("sfrs")));
+#define I2C2ABRG I2C2ABRG
+extern volatile unsigned int   I2C2ABRG __attribute__((section("sfrs")));
+#define I2C2BRG I2C2BRG
+extern volatile unsigned int   I2C2BRG __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2ABRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2BRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2ABRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2BRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2ABRGINV __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2BRGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C2ATRN __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C2TRN __attribute__((section("sfrs")));
+#define I2C2ATRN I2C2ATRN
+extern volatile unsigned int   I2C2ATRN __attribute__((section("sfrs")));
+#define I2C2TRN I2C2TRN
+extern volatile unsigned int   I2C2TRN __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2ATRNCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2TRNCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2ATRNSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2TRNSET __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2ATRNINV __attribute__((section("sfrs")));
 extern volatile unsigned int        I2C2TRNINV __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C2ARCV __attribute__((section("sfrs")));
-extern volatile unsigned int        I2C2RCV __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI1CON __attribute__((section("sfrs")));
+#define I2C2ARCV I2C2ARCV
+extern volatile unsigned int   I2C2ARCV __attribute__((section("sfrs")));
+#define I2C2RCV I2C2RCV
+extern volatile unsigned int   I2C2RCV __attribute__((section("sfrs")));
+#define SPI1CON SPI1CON
+extern volatile unsigned int   SPI1CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned SRXISEL:2;
@@ -1139,7 +1215,8 @@ extern volatile __SPI1CONbits_t SPI1CONbits __asm__ ("SPI1CON") __attribute__((s
 extern volatile unsigned int        SPI1CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI1CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI1CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI1STAT __attribute__((section("sfrs")));
+#define SPI1STAT SPI1STAT
+extern volatile unsigned int   SPI1STAT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned SPIRBF:1;
@@ -1167,12 +1244,15 @@ extern volatile __SPI1STATbits_t SPI1STATbits __asm__ ("SPI1STAT") __attribute__
 extern volatile unsigned int        SPI1STATCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI1STATSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI1STATINV __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI1BUF __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI1BRG __attribute__((section("sfrs")));
+#define SPI1BUF SPI1BUF
+extern volatile unsigned int   SPI1BUF __attribute__((section("sfrs")));
+#define SPI1BRG SPI1BRG
+extern volatile unsigned int   SPI1BRG __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI1BRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI1BRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI1BRGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI1CON2 __attribute__((section("sfrs")));
+#define SPI1CON2 SPI1CON2
+extern volatile unsigned int   SPI1CON2 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned AUDMOD:2;
@@ -1200,7 +1280,8 @@ extern volatile __SPI1CON2bits_t SPI1CON2bits __asm__ ("SPI1CON2") __attribute__
 extern volatile unsigned int        SPI1CON2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI1CON2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI1CON2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI2CON __attribute__((section("sfrs")));
+#define SPI2CON SPI2CON
+extern volatile unsigned int   SPI2CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned SRXISEL:2;
@@ -1236,7 +1317,8 @@ extern volatile __SPI2CONbits_t SPI2CONbits __asm__ ("SPI2CON") __attribute__((s
 extern volatile unsigned int        SPI2CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI2CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI2CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI2STAT __attribute__((section("sfrs")));
+#define SPI2STAT SPI2STAT
+extern volatile unsigned int   SPI2STAT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned SPIRBF:1;
@@ -1264,12 +1346,15 @@ extern volatile __SPI2STATbits_t SPI2STATbits __asm__ ("SPI2STAT") __attribute__
 extern volatile unsigned int        SPI2STATCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI2STATSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI2STATINV __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI2BUF __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI2BRG __attribute__((section("sfrs")));
+#define SPI2BUF SPI2BUF
+extern volatile unsigned int   SPI2BUF __attribute__((section("sfrs")));
+#define SPI2BRG SPI2BRG
+extern volatile unsigned int   SPI2BRG __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI2BRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI2BRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI2BRGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI2CON2 __attribute__((section("sfrs")));
+#define SPI2CON2 SPI2CON2
+extern volatile unsigned int   SPI2CON2 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned AUDMOD:2;
@@ -1297,7 +1382,8 @@ extern volatile __SPI2CON2bits_t SPI2CON2bits __asm__ ("SPI2CON2") __attribute__
 extern volatile unsigned int        SPI2CON2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI2CON2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI2CON2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI3CON __attribute__((section("sfrs")));
+#define SPI3CON SPI3CON
+extern volatile unsigned int   SPI3CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned SRXISEL:2;
@@ -1333,7 +1419,8 @@ extern volatile __SPI3CONbits_t SPI3CONbits __asm__ ("SPI3CON") __attribute__((s
 extern volatile unsigned int        SPI3CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI3CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI3CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI3STAT __attribute__((section("sfrs")));
+#define SPI3STAT SPI3STAT
+extern volatile unsigned int   SPI3STAT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned SPIRBF:1;
@@ -1361,12 +1448,15 @@ extern volatile __SPI3STATbits_t SPI3STATbits __asm__ ("SPI3STAT") __attribute__
 extern volatile unsigned int        SPI3STATCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI3STATSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI3STATINV __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI3BUF __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI3BRG __attribute__((section("sfrs")));
+#define SPI3BUF SPI3BUF
+extern volatile unsigned int   SPI3BUF __attribute__((section("sfrs")));
+#define SPI3BRG SPI3BRG
+extern volatile unsigned int   SPI3BRG __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI3BRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI3BRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI3BRGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI3CON2 __attribute__((section("sfrs")));
+#define SPI3CON2 SPI3CON2
+extern volatile unsigned int   SPI3CON2 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned AUDMOD:2;
@@ -1394,7 +1484,8 @@ extern volatile __SPI3CON2bits_t SPI3CON2bits __asm__ ("SPI3CON2") __attribute__
 extern volatile unsigned int        SPI3CON2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI3CON2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI3CON2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI4CON __attribute__((section("sfrs")));
+#define SPI4CON SPI4CON
+extern volatile unsigned int   SPI4CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned SRXISEL:2;
@@ -1430,7 +1521,8 @@ extern volatile __SPI4CONbits_t SPI4CONbits __asm__ ("SPI4CON") __attribute__((s
 extern volatile unsigned int        SPI4CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI4CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI4CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI4STAT __attribute__((section("sfrs")));
+#define SPI4STAT SPI4STAT
+extern volatile unsigned int   SPI4STAT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned SPIRBF:1;
@@ -1458,12 +1550,15 @@ extern volatile __SPI4STATbits_t SPI4STATbits __asm__ ("SPI4STAT") __attribute__
 extern volatile unsigned int        SPI4STATCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI4STATSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI4STATINV __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI4BUF __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI4BRG __attribute__((section("sfrs")));
+#define SPI4BUF SPI4BUF
+extern volatile unsigned int   SPI4BUF __attribute__((section("sfrs")));
+#define SPI4BRG SPI4BRG
+extern volatile unsigned int   SPI4BRG __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI4BRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI4BRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI4BRGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        SPI4CON2 __attribute__((section("sfrs")));
+#define SPI4CON2 SPI4CON2
+extern volatile unsigned int   SPI4CON2 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned AUDMOD:2;
@@ -1491,7 +1586,8 @@ extern volatile __SPI4CON2bits_t SPI4CON2bits __asm__ ("SPI4CON2") __attribute__
 extern volatile unsigned int        SPI4CON2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI4CON2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        SPI4CON2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1AMODE __attribute__((section("sfrs")));
+#define U1AMODE U1AMODE
+extern volatile unsigned int   U1AMODE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned STSEL:1;
@@ -1528,7 +1624,8 @@ typedef union {
   };
 } __U1AMODEbits_t;
 extern volatile __U1AMODEbits_t U1AMODEbits __asm__ ("U1AMODE") __attribute__((section("sfrs")));
-extern volatile unsigned int        U1MODE __attribute__((section("sfrs")));
+#define U1MODE U1MODE
+extern volatile unsigned int   U1MODE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned STSEL:1;
@@ -1571,7 +1668,8 @@ extern volatile unsigned int        U1AMODESET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1MODESET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1AMODEINV __attribute__((section("sfrs")));
 extern volatile unsigned int        U1MODEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1ASTA __attribute__((section("sfrs")));
+#define U1ASTA U1ASTA
+extern volatile unsigned int   U1ASTA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned URXDA:1;
@@ -1608,7 +1706,8 @@ typedef union {
   };
 } __U1ASTAbits_t;
 extern volatile __U1ASTAbits_t U1ASTAbits __asm__ ("U1ASTA") __attribute__((section("sfrs")));
-extern volatile unsigned int        U1STA __attribute__((section("sfrs")));
+#define U1STA U1STA
+extern volatile unsigned int   U1STA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned URXDA:1;
@@ -1651,19 +1750,26 @@ extern volatile unsigned int        U1ASTASET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1STASET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1ASTAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        U1STAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1ATXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U1TXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U1ARXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U1RXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U1ABRG __attribute__((section("sfrs")));
-extern volatile unsigned int        U1BRG __attribute__((section("sfrs")));
+#define U1ATXREG U1ATXREG
+extern volatile unsigned int   U1ATXREG __attribute__((section("sfrs")));
+#define U1TXREG U1TXREG
+extern volatile unsigned int   U1TXREG __attribute__((section("sfrs")));
+#define U1ARXREG U1ARXREG
+extern volatile unsigned int   U1ARXREG __attribute__((section("sfrs")));
+#define U1RXREG U1RXREG
+extern volatile unsigned int   U1RXREG __attribute__((section("sfrs")));
+#define U1ABRG U1ABRG
+extern volatile unsigned int   U1ABRG __attribute__((section("sfrs")));
+#define U1BRG U1BRG
+extern volatile unsigned int   U1BRG __attribute__((section("sfrs")));
 extern volatile unsigned int        U1ABRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1BRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1ABRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1BRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1ABRGINV __attribute__((section("sfrs")));
 extern volatile unsigned int        U1BRGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U2MODE __attribute__((section("sfrs")));
+#define U2MODE U2MODE
+extern volatile unsigned int   U2MODE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned STSEL:1;
@@ -1700,7 +1806,8 @@ typedef union {
   };
 } __U2MODEbits_t;
 extern volatile __U2MODEbits_t U2MODEbits __asm__ ("U2MODE") __attribute__((section("sfrs")));
-extern volatile unsigned int        U3AMODE __attribute__((section("sfrs")));
+#define U3AMODE U3AMODE
+extern volatile unsigned int   U3AMODE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned STSEL:1;
@@ -1743,7 +1850,8 @@ extern volatile unsigned int        U2MODESET __attribute__((section("sfrs")));
 extern volatile unsigned int        U3AMODESET __attribute__((section("sfrs")));
 extern volatile unsigned int        U2MODEINV __attribute__((section("sfrs")));
 extern volatile unsigned int        U3AMODEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U2STA __attribute__((section("sfrs")));
+#define U2STA U2STA
+extern volatile unsigned int   U2STA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned URXDA:1;
@@ -1780,7 +1888,8 @@ typedef union {
   };
 } __U2STAbits_t;
 extern volatile __U2STAbits_t U2STAbits __asm__ ("U2STA") __attribute__((section("sfrs")));
-extern volatile unsigned int        U3ASTA __attribute__((section("sfrs")));
+#define U3ASTA U3ASTA
+extern volatile unsigned int   U3ASTA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned URXDA:1;
@@ -1823,19 +1932,26 @@ extern volatile unsigned int        U2STASET __attribute__((section("sfrs")));
 extern volatile unsigned int        U3ASTASET __attribute__((section("sfrs")));
 extern volatile unsigned int        U2STAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        U3ASTAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U2TXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U3ATXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U2RXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U3ARXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U2BRG __attribute__((section("sfrs")));
-extern volatile unsigned int        U3ABRG __attribute__((section("sfrs")));
+#define U2TXREG U2TXREG
+extern volatile unsigned int   U2TXREG __attribute__((section("sfrs")));
+#define U3ATXREG U3ATXREG
+extern volatile unsigned int   U3ATXREG __attribute__((section("sfrs")));
+#define U2RXREG U2RXREG
+extern volatile unsigned int   U2RXREG __attribute__((section("sfrs")));
+#define U3ARXREG U3ARXREG
+extern volatile unsigned int   U3ARXREG __attribute__((section("sfrs")));
+#define U2BRG U2BRG
+extern volatile unsigned int   U2BRG __attribute__((section("sfrs")));
+#define U3ABRG U3ABRG
+extern volatile unsigned int   U3ABRG __attribute__((section("sfrs")));
 extern volatile unsigned int        U2BRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U3ABRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U2BRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        U3ABRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        U2BRGINV __attribute__((section("sfrs")));
 extern volatile unsigned int        U3ABRGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U3MODE __attribute__((section("sfrs")));
+#define U3MODE U3MODE
+extern volatile unsigned int   U3MODE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned STSEL:1;
@@ -1872,7 +1988,8 @@ typedef union {
   };
 } __U3MODEbits_t;
 extern volatile __U3MODEbits_t U3MODEbits __asm__ ("U3MODE") __attribute__((section("sfrs")));
-extern volatile unsigned int        U5aMODE __attribute__((section("sfrs")));
+#define U5aMODE U5aMODE
+extern volatile unsigned int   U5aMODE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned STSEL:1;
@@ -1915,7 +2032,8 @@ extern volatile unsigned int        U3MODESET __attribute__((section("sfrs")));
 extern volatile unsigned int        U5aMODESET __attribute__((section("sfrs")));
 extern volatile unsigned int        U3MODEINV __attribute__((section("sfrs")));
 extern volatile unsigned int        U5aMODEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U3STA __attribute__((section("sfrs")));
+#define U3STA U3STA
+extern volatile unsigned int   U3STA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned URXDA:1;
@@ -1952,7 +2070,8 @@ typedef union {
   };
 } __U3STAbits_t;
 extern volatile __U3STAbits_t U3STAbits __asm__ ("U3STA") __attribute__((section("sfrs")));
-extern volatile unsigned int        U5aSTA __attribute__((section("sfrs")));
+#define U5aSTA U5aSTA
+extern volatile unsigned int   U5aSTA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned URXDA:1;
@@ -1995,19 +2114,26 @@ extern volatile unsigned int        U3STASET __attribute__((section("sfrs")));
 extern volatile unsigned int        U5aSTASET __attribute__((section("sfrs")));
 extern volatile unsigned int        U3STAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        U5aSTAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U3TXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U5aTXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U3RXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U5aRXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U3BRG __attribute__((section("sfrs")));
-extern volatile unsigned int        U5aBRG __attribute__((section("sfrs")));
+#define U3TXREG U3TXREG
+extern volatile unsigned int   U3TXREG __attribute__((section("sfrs")));
+#define U5aTXREG U5aTXREG
+extern volatile unsigned int   U5aTXREG __attribute__((section("sfrs")));
+#define U3RXREG U3RXREG
+extern volatile unsigned int   U3RXREG __attribute__((section("sfrs")));
+#define U5aRXREG U5aRXREG
+extern volatile unsigned int   U5aRXREG __attribute__((section("sfrs")));
+#define U3BRG U3BRG
+extern volatile unsigned int   U3BRG __attribute__((section("sfrs")));
+#define U5aBRG U5aBRG
+extern volatile unsigned int   U5aBRG __attribute__((section("sfrs")));
 extern volatile unsigned int        U3BRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U5aBRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U3BRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        U5aBRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        U3BRGINV __attribute__((section("sfrs")));
 extern volatile unsigned int        U5aBRGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U4MODE __attribute__((section("sfrs")));
+#define U4MODE U4MODE
+extern volatile unsigned int   U4MODE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned STSEL:1;
@@ -2044,7 +2170,8 @@ typedef union {
   };
 } __U4MODEbits_t;
 extern volatile __U4MODEbits_t U4MODEbits __asm__ ("U4MODE") __attribute__((section("sfrs")));
-extern volatile unsigned int        U7AMODE __attribute__((section("sfrs")));
+#define U7AMODE U7AMODE
+extern volatile unsigned int   U7AMODE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned STSEL:1;
@@ -2087,7 +2214,8 @@ extern volatile unsigned int        U4MODESET __attribute__((section("sfrs")));
 extern volatile unsigned int        U7AMODESET __attribute__((section("sfrs")));
 extern volatile unsigned int        U4MODEINV __attribute__((section("sfrs")));
 extern volatile unsigned int        U7AMODEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U4STA __attribute__((section("sfrs")));
+#define U4STA U4STA
+extern volatile unsigned int   U4STA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned URXDA:1;
@@ -2124,7 +2252,8 @@ typedef union {
   };
 } __U4STAbits_t;
 extern volatile __U4STAbits_t U4STAbits __asm__ ("U4STA") __attribute__((section("sfrs")));
-extern volatile unsigned int        U7ASTA __attribute__((section("sfrs")));
+#define U7ASTA U7ASTA
+extern volatile unsigned int   U7ASTA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned URXDA:1;
@@ -2167,19 +2296,26 @@ extern volatile unsigned int        U4STASET __attribute__((section("sfrs")));
 extern volatile unsigned int        U7ASTASET __attribute__((section("sfrs")));
 extern volatile unsigned int        U4STAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        U7ASTAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U4TXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U7ATXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U4RXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U7ARXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U4BRG __attribute__((section("sfrs")));
-extern volatile unsigned int        U7ABRG __attribute__((section("sfrs")));
+#define U4TXREG U4TXREG
+extern volatile unsigned int   U4TXREG __attribute__((section("sfrs")));
+#define U7ATXREG U7ATXREG
+extern volatile unsigned int   U7ATXREG __attribute__((section("sfrs")));
+#define U4RXREG U4RXREG
+extern volatile unsigned int   U4RXREG __attribute__((section("sfrs")));
+#define U7ARXREG U7ARXREG
+extern volatile unsigned int   U7ARXREG __attribute__((section("sfrs")));
+#define U4BRG U4BRG
+extern volatile unsigned int   U4BRG __attribute__((section("sfrs")));
+#define U7ABRG U7ABRG
+extern volatile unsigned int   U7ABRG __attribute__((section("sfrs")));
 extern volatile unsigned int        U4BRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U7ABRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U4BRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        U7ABRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        U4BRGINV __attribute__((section("sfrs")));
 extern volatile unsigned int        U7ABRGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U5MODE __attribute__((section("sfrs")));
+#define U5MODE U5MODE
+extern volatile unsigned int   U5MODE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned STSEL:1;
@@ -2216,7 +2352,8 @@ typedef union {
   };
 } __U5MODEbits_t;
 extern volatile __U5MODEbits_t U5MODEbits __asm__ ("U5MODE") __attribute__((section("sfrs")));
-extern volatile unsigned int        U9AMODE __attribute__((section("sfrs")));
+#define U9AMODE U9AMODE
+extern volatile unsigned int   U9AMODE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned STSEL:1;
@@ -2259,7 +2396,8 @@ extern volatile unsigned int        U5MODESET __attribute__((section("sfrs")));
 extern volatile unsigned int        U9AMODESET __attribute__((section("sfrs")));
 extern volatile unsigned int        U5MODEINV __attribute__((section("sfrs")));
 extern volatile unsigned int        U9AMODEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U5STA __attribute__((section("sfrs")));
+#define U5STA U5STA
+extern volatile unsigned int   U5STA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned URXDA:1;
@@ -2296,7 +2434,8 @@ typedef union {
   };
 } __U5STAbits_t;
 extern volatile __U5STAbits_t U5STAbits __asm__ ("U5STA") __attribute__((section("sfrs")));
-extern volatile unsigned int        U9ASTA __attribute__((section("sfrs")));
+#define U9ASTA U9ASTA
+extern volatile unsigned int   U9ASTA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned URXDA:1;
@@ -2339,19 +2478,26 @@ extern volatile unsigned int        U5STASET __attribute__((section("sfrs")));
 extern volatile unsigned int        U9ASTASET __attribute__((section("sfrs")));
 extern volatile unsigned int        U5STAINV __attribute__((section("sfrs")));
 extern volatile unsigned int        U9ASTAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U5TXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U9ATXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U5RXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U9ARXREG __attribute__((section("sfrs")));
-extern volatile unsigned int        U5BRG __attribute__((section("sfrs")));
-extern volatile unsigned int        U9ABRG __attribute__((section("sfrs")));
+#define U5TXREG U5TXREG
+extern volatile unsigned int   U5TXREG __attribute__((section("sfrs")));
+#define U9ATXREG U9ATXREG
+extern volatile unsigned int   U9ATXREG __attribute__((section("sfrs")));
+#define U5RXREG U5RXREG
+extern volatile unsigned int   U5RXREG __attribute__((section("sfrs")));
+#define U9ARXREG U9ARXREG
+extern volatile unsigned int   U9ARXREG __attribute__((section("sfrs")));
+#define U5BRG U5BRG
+extern volatile unsigned int   U5BRG __attribute__((section("sfrs")));
+#define U9ABRG U9ABRG
+extern volatile unsigned int   U9ABRG __attribute__((section("sfrs")));
 extern volatile unsigned int        U5BRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U9ABRGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U5BRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        U9ABRGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        U5BRGINV __attribute__((section("sfrs")));
 extern volatile unsigned int        U9ABRGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        PMCON __attribute__((section("sfrs")));
+#define PMCON PMCON
+extern volatile unsigned int   PMCON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RDSP:1;
@@ -2395,7 +2541,8 @@ extern volatile __PMCONbits_t PMCONbits __asm__ ("PMCON") __attribute__((section
 extern volatile unsigned int        PMCONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMCONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMCONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        PMMODE __attribute__((section("sfrs")));
+#define PMMODE PMMODE
+extern volatile unsigned int   PMMODE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned WAITE:2;
@@ -2432,7 +2579,8 @@ extern volatile __PMMODEbits_t PMMODEbits __asm__ ("PMMODE") __attribute__((sect
 extern volatile unsigned int        PMMODECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMMODESET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMMODEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        PMADDR __attribute__((section("sfrs")));
+#define PMADDR PMADDR
+extern volatile unsigned int   PMADDR __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ADDR:14;
@@ -2456,7 +2604,8 @@ extern volatile __PMADDRbits_t PMADDRbits __asm__ ("PMADDR") __attribute__((sect
 extern volatile unsigned int        PMADDRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMADDRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMADDRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        PMDOUT __attribute__((section("sfrs")));
+#define PMDOUT PMDOUT
+extern volatile unsigned int   PMDOUT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned DATAOUT:32;
@@ -2469,7 +2618,8 @@ extern volatile __PMDOUTbits_t PMDOUTbits __asm__ ("PMDOUT") __attribute__((sect
 extern volatile unsigned int        PMDOUTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMDOUTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMDOUTINV __attribute__((section("sfrs")));
-extern volatile unsigned int        PMDIN __attribute__((section("sfrs")));
+#define PMDIN PMDIN
+extern volatile unsigned int   PMDIN __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned DATAIN:32;
@@ -2482,7 +2632,8 @@ extern volatile __PMDINbits_t PMDINbits __asm__ ("PMDIN") __attribute__((section
 extern volatile unsigned int        PMDINCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMDINSET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMDININV __attribute__((section("sfrs")));
-extern volatile unsigned int        PMAEN __attribute__((section("sfrs")));
+#define PMAEN PMAEN
+extern volatile unsigned int   PMAEN __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned PTEN:24;
@@ -2495,7 +2646,8 @@ extern volatile __PMAENbits_t PMAENbits __asm__ ("PMAEN") __attribute__((section
 extern volatile unsigned int        PMAENCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMAENSET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMAENINV __attribute__((section("sfrs")));
-extern volatile unsigned int        PMSTAT __attribute__((section("sfrs")));
+#define PMSTAT PMSTAT
+extern volatile unsigned int   PMSTAT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned OB0E:1;
@@ -2521,7 +2673,8 @@ extern volatile __PMSTATbits_t PMSTATbits __asm__ ("PMSTAT") __attribute__((sect
 extern volatile unsigned int        PMSTATCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMSTATSET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMSTATINV __attribute__((section("sfrs")));
-extern volatile unsigned int        PMWADDR __attribute__((section("sfrs")));
+#define PMWADDR PMWADDR
+extern volatile unsigned int   PMWADDR __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned WADDR:14;
@@ -2545,7 +2698,8 @@ extern volatile __PMWADDRbits_t PMWADDRbits __asm__ ("PMWADDR") __attribute__((s
 extern volatile unsigned int        PMWADDRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMWADDRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMWADDRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        PMRADDR __attribute__((section("sfrs")));
+#define PMRADDR PMRADDR
+extern volatile unsigned int   PMRADDR __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RADDR:14;
@@ -2569,7 +2723,8 @@ extern volatile __PMRADDRbits_t PMRADDRbits __asm__ ("PMRADDR") __attribute__((s
 extern volatile unsigned int        PMRADDRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMRADDRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMRADDRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        PMRDIN __attribute__((section("sfrs")));
+#define PMRDIN PMRDIN
+extern volatile unsigned int   PMRDIN __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RDATAIN:32;
@@ -2582,7 +2737,8 @@ extern volatile __PMRDINbits_t PMRDINbits __asm__ ("PMRDIN") __attribute__((sect
 extern volatile unsigned int        PMRDINCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMRDINSET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMRDININV __attribute__((section("sfrs")));
-extern volatile unsigned int        AD1CON1 __attribute__((section("sfrs")));
+#define AD1CON1 AD1CON1
+extern volatile unsigned int   AD1CON1 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned DONE:1;
@@ -2620,7 +2776,8 @@ extern volatile __AD1CON1bits_t AD1CON1bits __asm__ ("AD1CON1") __attribute__((s
 extern volatile unsigned int        AD1CON1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        AD1CON1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        AD1CON1INV __attribute__((section("sfrs")));
-extern volatile unsigned int        AD1CON2 __attribute__((section("sfrs")));
+#define AD1CON2 AD1CON2
+extern volatile unsigned int   AD1CON2 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ALTS:1;
@@ -2653,7 +2810,8 @@ extern volatile __AD1CON2bits_t AD1CON2bits __asm__ ("AD1CON2") __attribute__((s
 extern volatile unsigned int        AD1CON2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        AD1CON2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        AD1CON2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        AD1CON3 __attribute__((section("sfrs")));
+#define AD1CON3 AD1CON3
+extern volatile unsigned int   AD1CON3 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ADCS:8;
@@ -2684,7 +2842,8 @@ extern volatile __AD1CON3bits_t AD1CON3bits __asm__ ("AD1CON3") __attribute__((s
 extern volatile unsigned int        AD1CON3CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        AD1CON3SET __attribute__((section("sfrs")));
 extern volatile unsigned int        AD1CON3INV __attribute__((section("sfrs")));
-extern volatile unsigned int        AD1CHS __attribute__((section("sfrs")));
+#define AD1CHS AD1CHS
+extern volatile unsigned int   AD1CHS __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :16;
@@ -2717,7 +2876,8 @@ extern volatile __AD1CHSbits_t AD1CHSbits __asm__ ("AD1CHS") __attribute__((sect
 extern volatile unsigned int        AD1CHSCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        AD1CHSSET __attribute__((section("sfrs")));
 extern volatile unsigned int        AD1CHSINV __attribute__((section("sfrs")));
-extern volatile unsigned int        AD1CSSL __attribute__((section("sfrs")));
+#define AD1CSSL AD1CSSL
+extern volatile unsigned int   AD1CSSL __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CSSL0:1;
@@ -2764,7 +2924,8 @@ extern volatile __AD1CSSLbits_t AD1CSSLbits __asm__ ("AD1CSSL") __attribute__((s
 extern volatile unsigned int        AD1CSSLCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        AD1CSSLSET __attribute__((section("sfrs")));
 extern volatile unsigned int        AD1CSSLINV __attribute__((section("sfrs")));
-extern volatile unsigned int        AD1CSSL2 __attribute__((section("sfrs")));
+#define AD1CSSL2 AD1CSSL2
+extern volatile unsigned int   AD1CSSL2 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CSSL32:1;
@@ -2801,23 +2962,40 @@ extern volatile __AD1CSSL2bits_t AD1CSSL2bits __asm__ ("AD1CSSL2") __attribute__
 extern volatile unsigned int        AD1CSSL2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        AD1CSSL2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        AD1CSSL2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC1BUF0 __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC1BUF1 __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC1BUF2 __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC1BUF3 __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC1BUF4 __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC1BUF5 __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC1BUF6 __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC1BUF7 __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC1BUF8 __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC1BUF9 __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC1BUFA __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC1BUFB __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC1BUFC __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC1BUFD __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC1BUFE __attribute__((section("sfrs")));
-extern volatile unsigned int        ADC1BUFF __attribute__((section("sfrs")));
-extern volatile unsigned int        CVRCON __attribute__((section("sfrs")));
+#define ADC1BUF0 ADC1BUF0
+extern volatile unsigned int   ADC1BUF0 __attribute__((section("sfrs")));
+#define ADC1BUF1 ADC1BUF1
+extern volatile unsigned int   ADC1BUF1 __attribute__((section("sfrs")));
+#define ADC1BUF2 ADC1BUF2
+extern volatile unsigned int   ADC1BUF2 __attribute__((section("sfrs")));
+#define ADC1BUF3 ADC1BUF3
+extern volatile unsigned int   ADC1BUF3 __attribute__((section("sfrs")));
+#define ADC1BUF4 ADC1BUF4
+extern volatile unsigned int   ADC1BUF4 __attribute__((section("sfrs")));
+#define ADC1BUF5 ADC1BUF5
+extern volatile unsigned int   ADC1BUF5 __attribute__((section("sfrs")));
+#define ADC1BUF6 ADC1BUF6
+extern volatile unsigned int   ADC1BUF6 __attribute__((section("sfrs")));
+#define ADC1BUF7 ADC1BUF7
+extern volatile unsigned int   ADC1BUF7 __attribute__((section("sfrs")));
+#define ADC1BUF8 ADC1BUF8
+extern volatile unsigned int   ADC1BUF8 __attribute__((section("sfrs")));
+#define ADC1BUF9 ADC1BUF9
+extern volatile unsigned int   ADC1BUF9 __attribute__((section("sfrs")));
+#define ADC1BUFA ADC1BUFA
+extern volatile unsigned int   ADC1BUFA __attribute__((section("sfrs")));
+#define ADC1BUFB ADC1BUFB
+extern volatile unsigned int   ADC1BUFB __attribute__((section("sfrs")));
+#define ADC1BUFC ADC1BUFC
+extern volatile unsigned int   ADC1BUFC __attribute__((section("sfrs")));
+#define ADC1BUFD ADC1BUFD
+extern volatile unsigned int   ADC1BUFD __attribute__((section("sfrs")));
+#define ADC1BUFE ADC1BUFE
+extern volatile unsigned int   ADC1BUFE __attribute__((section("sfrs")));
+#define ADC1BUFF ADC1BUFF
+extern volatile unsigned int   ADC1BUFF __attribute__((section("sfrs")));
+#define CVRCON CVRCON
+extern volatile unsigned int   CVRCON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CVR:4;
@@ -2841,7 +3019,8 @@ extern volatile __CVRCONbits_t CVRCONbits __asm__ ("CVRCON") __attribute__((sect
 extern volatile unsigned int        CVRCONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CVRCONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CVRCONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CM1CON __attribute__((section("sfrs")));
+#define CM1CON CM1CON
+extern volatile unsigned int   CM1CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CCH:2;
@@ -2870,7 +3049,8 @@ extern volatile __CM1CONbits_t CM1CONbits __asm__ ("CM1CON") __attribute__((sect
 extern volatile unsigned int        CM1CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CM1CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CM1CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CM2CON __attribute__((section("sfrs")));
+#define CM2CON CM2CON
+extern volatile unsigned int   CM2CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CCH:2;
@@ -2899,7 +3079,8 @@ extern volatile __CM2CONbits_t CM2CONbits __asm__ ("CM2CON") __attribute__((sect
 extern volatile unsigned int        CM2CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CM2CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CM2CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CM3CON __attribute__((section("sfrs")));
+#define CM3CON CM3CON
+extern volatile unsigned int   CM3CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CCH:2;
@@ -2928,7 +3109,8 @@ extern volatile __CM3CONbits_t CM3CONbits __asm__ ("CM3CON") __attribute__((sect
 extern volatile unsigned int        CM3CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CM3CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CM3CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CMSTAT __attribute__((section("sfrs")));
+#define CMSTAT CMSTAT
+extern volatile unsigned int   CMSTAT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned C1OUT:1;
@@ -2945,7 +3127,8 @@ extern volatile __CMSTATbits_t CMSTATbits __asm__ ("CMSTAT") __attribute__((sect
 extern volatile unsigned int        CMSTATCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CMSTATSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CMSTATINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CTMUCON __attribute__((section("sfrs")));
+#define CTMUCON CTMUCON
+extern volatile unsigned int   CTMUCON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned IRNG:2;
@@ -2976,7 +3159,8 @@ extern volatile __CTMUCONbits_t CTMUCONbits __asm__ ("CTMUCON") __attribute__((s
 extern volatile unsigned int        CTMUCONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CTMUCONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CTMUCONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        OSCCON __attribute__((section("sfrs")));
+#define OSCCON OSCCON
+extern volatile unsigned int   OSCCON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned OSWEN:1;
@@ -3030,7 +3214,8 @@ extern volatile __OSCCONbits_t OSCCONbits __asm__ ("OSCCON") __attribute__((sect
 extern volatile unsigned int        OSCCONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        OSCCONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        OSCCONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        OSCTUN __attribute__((section("sfrs")));
+#define OSCTUN OSCTUN
+extern volatile unsigned int   OSCTUN __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TUN:6;
@@ -3051,7 +3236,8 @@ extern volatile __OSCTUNbits_t OSCTUNbits __asm__ ("OSCTUN") __attribute__((sect
 extern volatile unsigned int        OSCTUNCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        OSCTUNSET __attribute__((section("sfrs")));
 extern volatile unsigned int        OSCTUNINV __attribute__((section("sfrs")));
-extern volatile unsigned int        REFOCON __attribute__((section("sfrs")));
+#define REFOCON REFOCON
+extern volatile unsigned int   REFOCON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ROSEL:4;
@@ -3074,7 +3260,8 @@ extern volatile __REFOCONbits_t REFOCONbits __asm__ ("REFOCON") __attribute__((s
 extern volatile unsigned int        REFOCONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        REFOCONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        REFOCONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        REFOTRIM __attribute__((section("sfrs")));
+#define REFOTRIM REFOTRIM
+extern volatile unsigned int   REFOTRIM __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :23;
@@ -3088,7 +3275,8 @@ extern volatile __REFOTRIMbits_t REFOTRIMbits __asm__ ("REFOTRIM") __attribute__
 extern volatile unsigned int        REFOTRIMCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        REFOTRIMSET __attribute__((section("sfrs")));
 extern volatile unsigned int        REFOTRIMINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CFGCON __attribute__((section("sfrs")));
+#define CFGCON CFGCON
+extern volatile unsigned int   CFGCON __attribute__((section("sfrs")));
 typedef struct {
   unsigned TDOEN:1;
   unsigned :1;
@@ -3099,7 +3287,8 @@ typedef struct {
   unsigned IOLOCK:1;
 } __CFGCONbits_t;
 extern volatile __CFGCONbits_t CFGCONbits __asm__ ("CFGCON") __attribute__((section("sfrs")));
-extern volatile unsigned int        DDPCON __attribute__((section("sfrs")));
+#define DDPCON DDPCON
+extern volatile unsigned int   DDPCON __attribute__((section("sfrs")));
 typedef struct {
   unsigned TDOEN:1;
   unsigned :1;
@@ -3110,17 +3299,20 @@ typedef struct {
   unsigned IOLOCK:1;
 } __DDPCONbits_t;
 extern volatile __DDPCONbits_t DDPCONbits __asm__ ("DDPCON") __attribute__((section("sfrs")));
-extern volatile unsigned int        DEVID __attribute__((section("sfrs")));
+#define DEVID DEVID
+extern volatile unsigned int   DEVID __attribute__((section("sfrs")));
 typedef struct {
   unsigned DEVID:28;
   unsigned VER:4;
 } __DEVIDbits_t;
 extern volatile __DEVIDbits_t DEVIDbits __asm__ ("DEVID") __attribute__((section("sfrs")));
-extern volatile unsigned int        SYSKEY __attribute__((section("sfrs")));
+#define SYSKEY SYSKEY
+extern volatile unsigned int   SYSKEY __attribute__((section("sfrs")));
 extern volatile unsigned int        SYSKEYCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        SYSKEYSET __attribute__((section("sfrs")));
 extern volatile unsigned int        SYSKEYINV __attribute__((section("sfrs")));
-extern volatile unsigned int        PMD1 __attribute__((section("sfrs")));
+#define PMD1 PMD1
+extern volatile unsigned int   PMD1 __attribute__((section("sfrs")));
 typedef struct {
   unsigned AD1MD:1;
   unsigned :7;
@@ -3132,7 +3324,8 @@ extern volatile __PMD1bits_t PMD1bits __asm__ ("PMD1") __attribute__((section("s
 extern volatile unsigned int        PMD1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMD1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMD1INV __attribute__((section("sfrs")));
-extern volatile unsigned int        PMD2 __attribute__((section("sfrs")));
+#define PMD2 PMD2
+extern volatile unsigned int   PMD2 __attribute__((section("sfrs")));
 typedef struct {
   unsigned CMP1MD:1;
   unsigned CMP2MD:1;
@@ -3142,7 +3335,8 @@ extern volatile __PMD2bits_t PMD2bits __asm__ ("PMD2") __attribute__((section("s
 extern volatile unsigned int        PMD2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMD2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMD2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        PMD3 __attribute__((section("sfrs")));
+#define PMD3 PMD3
+extern volatile unsigned int   PMD3 __attribute__((section("sfrs")));
 typedef struct {
   unsigned IC1MD:1;
   unsigned IC2MD:1;
@@ -3160,7 +3354,8 @@ extern volatile __PMD3bits_t PMD3bits __asm__ ("PMD3") __attribute__((section("s
 extern volatile unsigned int        PMD3CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMD3SET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMD3INV __attribute__((section("sfrs")));
-extern volatile unsigned int        PMD4 __attribute__((section("sfrs")));
+#define PMD4 PMD4
+extern volatile unsigned int   PMD4 __attribute__((section("sfrs")));
 typedef struct {
   unsigned T1MD:1;
   unsigned T2MD:1;
@@ -3172,7 +3367,8 @@ extern volatile __PMD4bits_t PMD4bits __asm__ ("PMD4") __attribute__((section("s
 extern volatile unsigned int        PMD4CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMD4SET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMD4INV __attribute__((section("sfrs")));
-extern volatile unsigned int        PMD5 __attribute__((section("sfrs")));
+#define PMD5 PMD5
+extern volatile unsigned int   PMD5 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned U1MD:1;
@@ -3202,7 +3398,8 @@ extern volatile __PMD5bits_t PMD5bits __asm__ ("PMD5") __attribute__((section("s
 extern volatile unsigned int        PMD5CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMD5SET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMD5INV __attribute__((section("sfrs")));
-extern volatile unsigned int        PMD6 __attribute__((section("sfrs")));
+#define PMD6 PMD6
+extern volatile unsigned int   PMD6 __attribute__((section("sfrs")));
 typedef struct {
   unsigned RTCCMD:1;
   unsigned REFOMD:1;
@@ -3213,7 +3410,8 @@ extern volatile __PMD6bits_t PMD6bits __asm__ ("PMD6") __attribute__((section("s
 extern volatile unsigned int        PMD6CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PMD6SET __attribute__((section("sfrs")));
 extern volatile unsigned int        PMD6INV __attribute__((section("sfrs")));
-extern volatile unsigned int        NVMCON __attribute__((section("sfrs")));
+#define NVMCON NVMCON
+extern volatile unsigned int   NVMCON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned NVMOP:4;
@@ -3247,14 +3445,19 @@ extern volatile __NVMCONbits_t NVMCONbits __asm__ ("NVMCON") __attribute__((sect
 extern volatile unsigned int        NVMCONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        NVMCONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        NVMCONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        NVMKEY __attribute__((section("sfrs")));
-extern volatile unsigned int        NVMADDR __attribute__((section("sfrs")));
+#define NVMKEY NVMKEY
+extern volatile unsigned int   NVMKEY __attribute__((section("sfrs")));
+#define NVMADDR NVMADDR
+extern volatile unsigned int   NVMADDR __attribute__((section("sfrs")));
 extern volatile unsigned int        NVMADDRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        NVMADDRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        NVMADDRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        NVMDATA __attribute__((section("sfrs")));
-extern volatile unsigned int        NVMSRCADDR __attribute__((section("sfrs")));
-extern volatile unsigned int        RCON __attribute__((section("sfrs")));
+#define NVMDATA NVMDATA
+extern volatile unsigned int   NVMDATA __attribute__((section("sfrs")));
+#define NVMSRCADDR NVMSRCADDR
+extern volatile unsigned int   NVMSRCADDR __attribute__((section("sfrs")));
+#define RCON RCON
+extern volatile unsigned int   RCON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned POR:1;
@@ -3278,7 +3481,8 @@ extern volatile __RCONbits_t RCONbits __asm__ ("RCON") __attribute__((section("s
 extern volatile unsigned int        RCONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        RCONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        RCONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        RSWRST __attribute__((section("sfrs")));
+#define RSWRST RSWRST
+extern volatile unsigned int   RSWRST __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned SWRST:1;
@@ -3291,807 +3495,968 @@ extern volatile __RSWRSTbits_t RSWRSTbits __asm__ ("RSWRST") __attribute__((sect
 extern volatile unsigned int        RSWRSTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        RSWRSTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        RSWRSTINV __attribute__((section("sfrs")));
-extern volatile unsigned int        INT1R __attribute__((section("sfrs")));
+#define INT1R INT1R
+extern volatile unsigned int   INT1R __attribute__((section("sfrs")));
 typedef struct {
   unsigned INT1R:4;
 } __INT1Rbits_t;
 extern volatile __INT1Rbits_t INT1Rbits __asm__ ("INT1R") __attribute__((section("sfrs")));
-extern volatile unsigned int        INT2R __attribute__((section("sfrs")));
+#define INT2R INT2R
+extern volatile unsigned int   INT2R __attribute__((section("sfrs")));
 typedef struct {
   unsigned INT2R:4;
 } __INT2Rbits_t;
 extern volatile __INT2Rbits_t INT2Rbits __asm__ ("INT2R") __attribute__((section("sfrs")));
-extern volatile unsigned int        INT3R __attribute__((section("sfrs")));
+#define INT3R INT3R
+extern volatile unsigned int   INT3R __attribute__((section("sfrs")));
 typedef struct {
   unsigned INT3R:4;
 } __INT3Rbits_t;
 extern volatile __INT3Rbits_t INT3Rbits __asm__ ("INT3R") __attribute__((section("sfrs")));
-extern volatile unsigned int        INT4R __attribute__((section("sfrs")));
+#define INT4R INT4R
+extern volatile unsigned int   INT4R __attribute__((section("sfrs")));
 typedef struct {
   unsigned INT4R:4;
 } __INT4Rbits_t;
 extern volatile __INT4Rbits_t INT4Rbits __asm__ ("INT4R") __attribute__((section("sfrs")));
-extern volatile unsigned int        T2CKR __attribute__((section("sfrs")));
+#define T2CKR T2CKR
+extern volatile unsigned int   T2CKR __attribute__((section("sfrs")));
 typedef struct {
   unsigned T2CKR:4;
 } __T2CKRbits_t;
 extern volatile __T2CKRbits_t T2CKRbits __asm__ ("T2CKR") __attribute__((section("sfrs")));
-extern volatile unsigned int        T3CKR __attribute__((section("sfrs")));
+#define T3CKR T3CKR
+extern volatile unsigned int   T3CKR __attribute__((section("sfrs")));
 typedef struct {
   unsigned T3CKR:4;
 } __T3CKRbits_t;
 extern volatile __T3CKRbits_t T3CKRbits __asm__ ("T3CKR") __attribute__((section("sfrs")));
-extern volatile unsigned int        T4CKR __attribute__((section("sfrs")));
+#define T4CKR T4CKR
+extern volatile unsigned int   T4CKR __attribute__((section("sfrs")));
 typedef struct {
   unsigned T4CKR:4;
 } __T4CKRbits_t;
 extern volatile __T4CKRbits_t T4CKRbits __asm__ ("T4CKR") __attribute__((section("sfrs")));
-extern volatile unsigned int        T5CKR __attribute__((section("sfrs")));
+#define T5CKR T5CKR
+extern volatile unsigned int   T5CKR __attribute__((section("sfrs")));
 typedef struct {
   unsigned T5CKR:4;
 } __T5CKRbits_t;
 extern volatile __T5CKRbits_t T5CKRbits __asm__ ("T5CKR") __attribute__((section("sfrs")));
-extern volatile unsigned int        IC1R __attribute__((section("sfrs")));
+#define IC1R IC1R
+extern volatile unsigned int   IC1R __attribute__((section("sfrs")));
 typedef struct {
   unsigned IC1R:4;
 } __IC1Rbits_t;
 extern volatile __IC1Rbits_t IC1Rbits __asm__ ("IC1R") __attribute__((section("sfrs")));
-extern volatile unsigned int        IC2R __attribute__((section("sfrs")));
+#define IC2R IC2R
+extern volatile unsigned int   IC2R __attribute__((section("sfrs")));
 typedef struct {
   unsigned IC2R:4;
 } __IC2Rbits_t;
 extern volatile __IC2Rbits_t IC2Rbits __asm__ ("IC2R") __attribute__((section("sfrs")));
-extern volatile unsigned int        IC3R __attribute__((section("sfrs")));
+#define IC3R IC3R
+extern volatile unsigned int   IC3R __attribute__((section("sfrs")));
 typedef struct {
   unsigned IC3R:4;
 } __IC3Rbits_t;
 extern volatile __IC3Rbits_t IC3Rbits __asm__ ("IC3R") __attribute__((section("sfrs")));
-extern volatile unsigned int        IC4R __attribute__((section("sfrs")));
+#define IC4R IC4R
+extern volatile unsigned int   IC4R __attribute__((section("sfrs")));
 typedef struct {
   unsigned IC4R:4;
 } __IC4Rbits_t;
 extern volatile __IC4Rbits_t IC4Rbits __asm__ ("IC4R") __attribute__((section("sfrs")));
-extern volatile unsigned int        IC5R __attribute__((section("sfrs")));
+#define IC5R IC5R
+extern volatile unsigned int   IC5R __attribute__((section("sfrs")));
 typedef struct {
   unsigned IC5R:4;
 } __IC5Rbits_t;
 extern volatile __IC5Rbits_t IC5Rbits __asm__ ("IC5R") __attribute__((section("sfrs")));
-extern volatile unsigned int        IC6R __attribute__((section("sfrs")));
+#define IC6R IC6R
+extern volatile unsigned int   IC6R __attribute__((section("sfrs")));
 typedef struct {
   unsigned IC6R:4;
 } __IC6Rbits_t;
 extern volatile __IC6Rbits_t IC6Rbits __asm__ ("IC6R") __attribute__((section("sfrs")));
-extern volatile unsigned int        IC7R __attribute__((section("sfrs")));
+#define IC7R IC7R
+extern volatile unsigned int   IC7R __attribute__((section("sfrs")));
 typedef struct {
   unsigned IC7R:4;
 } __IC7Rbits_t;
 extern volatile __IC7Rbits_t IC7Rbits __asm__ ("IC7R") __attribute__((section("sfrs")));
-extern volatile unsigned int        IC8R __attribute__((section("sfrs")));
+#define IC8R IC8R
+extern volatile unsigned int   IC8R __attribute__((section("sfrs")));
 typedef struct {
   unsigned IC8R:4;
 } __IC8Rbits_t;
 extern volatile __IC8Rbits_t IC8Rbits __asm__ ("IC8R") __attribute__((section("sfrs")));
-extern volatile unsigned int        OCFAR __attribute__((section("sfrs")));
+#define OCFAR OCFAR
+extern volatile unsigned int   OCFAR __attribute__((section("sfrs")));
 typedef struct {
   unsigned OCFAR:4;
 } __OCFARbits_t;
 extern volatile __OCFARbits_t OCFARbits __asm__ ("OCFAR") __attribute__((section("sfrs")));
-extern volatile unsigned int        OCFBR __attribute__((section("sfrs")));
+#define OCFBR OCFBR
+extern volatile unsigned int   OCFBR __attribute__((section("sfrs")));
 typedef struct {
   unsigned OCFBR:4;
 } __OCFBRbits_t;
 extern volatile __OCFBRbits_t OCFBRbits __asm__ ("OCFBR") __attribute__((section("sfrs")));
-extern volatile unsigned int        U1RXR __attribute__((section("sfrs")));
+#define U1RXR U1RXR
+extern volatile unsigned int   U1RXR __attribute__((section("sfrs")));
 typedef struct {
   unsigned U1RXR:4;
 } __U1RXRbits_t;
 extern volatile __U1RXRbits_t U1RXRbits __asm__ ("U1RXR") __attribute__((section("sfrs")));
-extern volatile unsigned int        U1CTSR __attribute__((section("sfrs")));
+#define U1CTSR U1CTSR
+extern volatile unsigned int   U1CTSR __attribute__((section("sfrs")));
 typedef struct {
   unsigned U1CTSR:4;
 } __U1CTSRbits_t;
 extern volatile __U1CTSRbits_t U1CTSRbits __asm__ ("U1CTSR") __attribute__((section("sfrs")));
-extern volatile unsigned int        U2RXR __attribute__((section("sfrs")));
+#define U2RXR U2RXR
+extern volatile unsigned int   U2RXR __attribute__((section("sfrs")));
 typedef struct {
   unsigned U2RXR:4;
 } __U2RXRbits_t;
 extern volatile __U2RXRbits_t U2RXRbits __asm__ ("U2RXR") __attribute__((section("sfrs")));
-extern volatile unsigned int        U2CTSR __attribute__((section("sfrs")));
+#define U2CTSR U2CTSR
+extern volatile unsigned int   U2CTSR __attribute__((section("sfrs")));
 typedef struct {
   unsigned U2CTSR:4;
 } __U2CTSRbits_t;
 extern volatile __U2CTSRbits_t U2CTSRbits __asm__ ("U2CTSR") __attribute__((section("sfrs")));
-extern volatile unsigned int        U3RXR __attribute__((section("sfrs")));
+#define U3RXR U3RXR
+extern volatile unsigned int   U3RXR __attribute__((section("sfrs")));
 typedef struct {
   unsigned U3RXR:4;
 } __U3RXRbits_t;
 extern volatile __U3RXRbits_t U3RXRbits __asm__ ("U3RXR") __attribute__((section("sfrs")));
-extern volatile unsigned int        U3CTSR __attribute__((section("sfrs")));
+#define U3CTSR U3CTSR
+extern volatile unsigned int   U3CTSR __attribute__((section("sfrs")));
 typedef struct {
   unsigned U3CTSR:4;
 } __U3CTSRbits_t;
 extern volatile __U3CTSRbits_t U3CTSRbits __asm__ ("U3CTSR") __attribute__((section("sfrs")));
-extern volatile unsigned int        U4RXR __attribute__((section("sfrs")));
+#define U4RXR U4RXR
+extern volatile unsigned int   U4RXR __attribute__((section("sfrs")));
 typedef struct {
   unsigned U4RXR:4;
 } __U4RXRbits_t;
 extern volatile __U4RXRbits_t U4RXRbits __asm__ ("U4RXR") __attribute__((section("sfrs")));
-extern volatile unsigned int        U4CTSR __attribute__((section("sfrs")));
+#define U4CTSR U4CTSR
+extern volatile unsigned int   U4CTSR __attribute__((section("sfrs")));
 typedef struct {
   unsigned U4CTSR:4;
 } __U4CTSRbits_t;
 extern volatile __U4CTSRbits_t U4CTSRbits __asm__ ("U4CTSR") __attribute__((section("sfrs")));
-extern volatile unsigned int        U5RXR __attribute__((section("sfrs")));
+#define U5RXR U5RXR
+extern volatile unsigned int   U5RXR __attribute__((section("sfrs")));
 typedef struct {
   unsigned U5RXR:4;
 } __U5RXRbits_t;
 extern volatile __U5RXRbits_t U5RXRbits __asm__ ("U5RXR") __attribute__((section("sfrs")));
-extern volatile unsigned int        U5CTSR __attribute__((section("sfrs")));
+#define U5CTSR U5CTSR
+extern volatile unsigned int   U5CTSR __attribute__((section("sfrs")));
 typedef struct {
   unsigned U5CTSR:4;
 } __U5CTSRbits_t;
 extern volatile __U5CTSRbits_t U5CTSRbits __asm__ ("U5CTSR") __attribute__((section("sfrs")));
-extern volatile unsigned int        U6RXR __attribute__((section("sfrs")));
+#define U6RXR U6RXR
+extern volatile unsigned int   U6RXR __attribute__((section("sfrs")));
 typedef struct {
   unsigned U6RXR:4;
 } __U6RXRbits_t;
 extern volatile __U6RXRbits_t U6RXRbits __asm__ ("U6RXR") __attribute__((section("sfrs")));
-extern volatile unsigned int        U6CTSR __attribute__((section("sfrs")));
+#define U6CTSR U6CTSR
+extern volatile unsigned int   U6CTSR __attribute__((section("sfrs")));
 typedef struct {
   unsigned U6CTSR:4;
 } __U6CTSRbits_t;
 extern volatile __U6CTSRbits_t U6CTSRbits __asm__ ("U6CTSR") __attribute__((section("sfrs")));
-extern volatile unsigned int        SDI1R __attribute__((section("sfrs")));
+#define SDI1R SDI1R
+extern volatile unsigned int   SDI1R __attribute__((section("sfrs")));
 typedef struct {
   unsigned SDI1R:4;
 } __SDI1Rbits_t;
 extern volatile __SDI1Rbits_t SDI1Rbits __asm__ ("SDI1R") __attribute__((section("sfrs")));
-extern volatile unsigned int        SS1R __attribute__((section("sfrs")));
+#define SS1R SS1R
+extern volatile unsigned int   SS1R __attribute__((section("sfrs")));
 typedef struct {
   unsigned SS1R:4;
 } __SS1Rbits_t;
 extern volatile __SS1Rbits_t SS1Rbits __asm__ ("SS1R") __attribute__((section("sfrs")));
-extern volatile unsigned int        SDI2R __attribute__((section("sfrs")));
+#define SDI2R SDI2R
+extern volatile unsigned int   SDI2R __attribute__((section("sfrs")));
 typedef struct {
   unsigned SDI2R:4;
 } __SDI2Rbits_t;
 extern volatile __SDI2Rbits_t SDI2Rbits __asm__ ("SDI2R") __attribute__((section("sfrs")));
-extern volatile unsigned int        SS2R __attribute__((section("sfrs")));
+#define SS2R SS2R
+extern volatile unsigned int   SS2R __attribute__((section("sfrs")));
 typedef struct {
   unsigned SS2R:4;
 } __SS2Rbits_t;
 extern volatile __SS2Rbits_t SS2Rbits __asm__ ("SS2R") __attribute__((section("sfrs")));
-extern volatile unsigned int        SDI3R __attribute__((section("sfrs")));
+#define SDI3R SDI3R
+extern volatile unsigned int   SDI3R __attribute__((section("sfrs")));
 typedef struct {
   unsigned SDI3R:4;
 } __SDI3Rbits_t;
 extern volatile __SDI3Rbits_t SDI3Rbits __asm__ ("SDI3R") __attribute__((section("sfrs")));
-extern volatile unsigned int        SS3R __attribute__((section("sfrs")));
+#define SS3R SS3R
+extern volatile unsigned int   SS3R __attribute__((section("sfrs")));
 typedef struct {
   unsigned SS3R:4;
 } __SS3Rbits_t;
 extern volatile __SS3Rbits_t SS3Rbits __asm__ ("SS3R") __attribute__((section("sfrs")));
-extern volatile unsigned int        SDI4R __attribute__((section("sfrs")));
+#define SDI4R SDI4R
+extern volatile unsigned int   SDI4R __attribute__((section("sfrs")));
 typedef struct {
   unsigned SDI4R:4;
 } __SDI4Rbits_t;
 extern volatile __SDI4Rbits_t SDI4Rbits __asm__ ("SDI4R") __attribute__((section("sfrs")));
-extern volatile unsigned int        SS4R __attribute__((section("sfrs")));
+#define SS4R SS4R
+extern volatile unsigned int   SS4R __attribute__((section("sfrs")));
 typedef struct {
   unsigned SS4R:4;
 } __SS4Rbits_t;
 extern volatile __SS4Rbits_t SS4Rbits __asm__ ("SS4R") __attribute__((section("sfrs")));
-extern volatile unsigned int        SDI5R __attribute__((section("sfrs")));
+#define SDI5R SDI5R
+extern volatile unsigned int   SDI5R __attribute__((section("sfrs")));
 typedef struct {
   unsigned SDI5R:4;
 } __SDI5Rbits_t;
 extern volatile __SDI5Rbits_t SDI5Rbits __asm__ ("SDI5R") __attribute__((section("sfrs")));
-extern volatile unsigned int        SS5R __attribute__((section("sfrs")));
+#define SS5R SS5R
+extern volatile unsigned int   SS5R __attribute__((section("sfrs")));
 typedef struct {
   unsigned SS5R:4;
 } __SS5Rbits_t;
 extern volatile __SS5Rbits_t SS5Rbits __asm__ ("SS5R") __attribute__((section("sfrs")));
-extern volatile unsigned int        SDI6R __attribute__((section("sfrs")));
+#define SDI6R SDI6R
+extern volatile unsigned int   SDI6R __attribute__((section("sfrs")));
 typedef struct {
   unsigned SDI6R:4;
 } __SDI6Rbits_t;
 extern volatile __SDI6Rbits_t SDI6Rbits __asm__ ("SDI6R") __attribute__((section("sfrs")));
-extern volatile unsigned int        SS6R __attribute__((section("sfrs")));
+#define SS6R SS6R
+extern volatile unsigned int   SS6R __attribute__((section("sfrs")));
 typedef struct {
   unsigned SS6R:4;
 } __SS6Rbits_t;
 extern volatile __SS6Rbits_t SS6Rbits __asm__ ("SS6R") __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXR __attribute__((section("sfrs")));
+#define C1RXR C1RXR
+extern volatile unsigned int   C1RXR __attribute__((section("sfrs")));
 typedef struct {
   unsigned C1RXR:4;
 } __C1RXRbits_t;
 extern volatile __C1RXRbits_t C1RXRbits __asm__ ("C1RXR") __attribute__((section("sfrs")));
-extern volatile unsigned int        C2RXR __attribute__((section("sfrs")));
+#define C2RXR C2RXR
+extern volatile unsigned int   C2RXR __attribute__((section("sfrs")));
 typedef struct {
   unsigned C2RXR:4;
 } __C2RXRbits_t;
 extern volatile __C2RXRbits_t C2RXRbits __asm__ ("C2RXR") __attribute__((section("sfrs")));
-extern volatile unsigned int        REFCLKIR __attribute__((section("sfrs")));
+#define REFCLKIR REFCLKIR
+extern volatile unsigned int   REFCLKIR __attribute__((section("sfrs")));
 typedef struct {
   unsigned REFCLKIR:4;
 } __REFCLKIRbits_t;
 extern volatile __REFCLKIRbits_t REFCLKIRbits __asm__ ("REFCLKIR") __attribute__((section("sfrs")));
-extern volatile unsigned int        REFI2R __attribute__((section("sfrs")));
+#define REFI2R REFI2R
+extern volatile unsigned int   REFI2R __attribute__((section("sfrs")));
 typedef struct {
   unsigned REFI2R:4;
 } __REFI2Rbits_t;
 extern volatile __REFI2Rbits_t REFI2Rbits __asm__ ("REFI2R") __attribute__((section("sfrs")));
-extern volatile unsigned int        REFI3R __attribute__((section("sfrs")));
+#define REFI3R REFI3R
+extern volatile unsigned int   REFI3R __attribute__((section("sfrs")));
 typedef struct {
   unsigned REFI3R:4;
 } __REFI3Rbits_t;
 extern volatile __REFI3Rbits_t REFI3Rbits __asm__ ("REFI3R") __attribute__((section("sfrs")));
-extern volatile unsigned int        REFI4R __attribute__((section("sfrs")));
+#define REFI4R REFI4R
+extern volatile unsigned int   REFI4R __attribute__((section("sfrs")));
 typedef struct {
   unsigned REFI4R:4;
 } __REFI4Rbits_t;
 extern volatile __REFI4Rbits_t REFI4Rbits __asm__ ("REFI4R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPA0R __attribute__((section("sfrs")));
+#define RPA0R RPA0R
+extern volatile unsigned int   RPA0R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPA0R:4;
 } __RPA0Rbits_t;
 extern volatile __RPA0Rbits_t RPA0Rbits __asm__ ("RPA0R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPA1R __attribute__((section("sfrs")));
+#define RPA1R RPA1R
+extern volatile unsigned int   RPA1R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPA1R:4;
 } __RPA1Rbits_t;
 extern volatile __RPA1Rbits_t RPA1Rbits __asm__ ("RPA1R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPA2R __attribute__((section("sfrs")));
+#define RPA2R RPA2R
+extern volatile unsigned int   RPA2R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPA2R:4;
 } __RPA2Rbits_t;
 extern volatile __RPA2Rbits_t RPA2Rbits __asm__ ("RPA2R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPA3R __attribute__((section("sfrs")));
+#define RPA3R RPA3R
+extern volatile unsigned int   RPA3R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPA3R:4;
 } __RPA3Rbits_t;
 extern volatile __RPA3Rbits_t RPA3Rbits __asm__ ("RPA3R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPA4R __attribute__((section("sfrs")));
+#define RPA4R RPA4R
+extern volatile unsigned int   RPA4R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPA4R:4;
 } __RPA4Rbits_t;
 extern volatile __RPA4Rbits_t RPA4Rbits __asm__ ("RPA4R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPA5R __attribute__((section("sfrs")));
+#define RPA5R RPA5R
+extern volatile unsigned int   RPA5R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPA5R:4;
 } __RPA5Rbits_t;
 extern volatile __RPA5Rbits_t RPA5Rbits __asm__ ("RPA5R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPA6R __attribute__((section("sfrs")));
+#define RPA6R RPA6R
+extern volatile unsigned int   RPA6R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPA6R:4;
 } __RPA6Rbits_t;
 extern volatile __RPA6Rbits_t RPA6Rbits __asm__ ("RPA6R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPA7R __attribute__((section("sfrs")));
+#define RPA7R RPA7R
+extern volatile unsigned int   RPA7R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPA7R:4;
 } __RPA7Rbits_t;
 extern volatile __RPA7Rbits_t RPA7Rbits __asm__ ("RPA7R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPA8R __attribute__((section("sfrs")));
+#define RPA8R RPA8R
+extern volatile unsigned int   RPA8R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPA8R:4;
 } __RPA8Rbits_t;
 extern volatile __RPA8Rbits_t RPA8Rbits __asm__ ("RPA8R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPA9R __attribute__((section("sfrs")));
+#define RPA9R RPA9R
+extern volatile unsigned int   RPA9R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPA9R:4;
 } __RPA9Rbits_t;
 extern volatile __RPA9Rbits_t RPA9Rbits __asm__ ("RPA9R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPA10R __attribute__((section("sfrs")));
+#define RPA10R RPA10R
+extern volatile unsigned int   RPA10R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPA10R:4;
 } __RPA10Rbits_t;
 extern volatile __RPA10Rbits_t RPA10Rbits __asm__ ("RPA10R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPA11R __attribute__((section("sfrs")));
+#define RPA11R RPA11R
+extern volatile unsigned int   RPA11R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPA11R:4;
 } __RPA11Rbits_t;
 extern volatile __RPA11Rbits_t RPA11Rbits __asm__ ("RPA11R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPA12R __attribute__((section("sfrs")));
+#define RPA12R RPA12R
+extern volatile unsigned int   RPA12R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPA12R:4;
 } __RPA12Rbits_t;
 extern volatile __RPA12Rbits_t RPA12Rbits __asm__ ("RPA12R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPA13R __attribute__((section("sfrs")));
+#define RPA13R RPA13R
+extern volatile unsigned int   RPA13R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPA13R:4;
 } __RPA13Rbits_t;
 extern volatile __RPA13Rbits_t RPA13Rbits __asm__ ("RPA13R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPA14R __attribute__((section("sfrs")));
+#define RPA14R RPA14R
+extern volatile unsigned int   RPA14R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPA14R:4;
 } __RPA14Rbits_t;
 extern volatile __RPA14Rbits_t RPA14Rbits __asm__ ("RPA14R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPA15R __attribute__((section("sfrs")));
+#define RPA15R RPA15R
+extern volatile unsigned int   RPA15R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPA15R:4;
 } __RPA15Rbits_t;
 extern volatile __RPA15Rbits_t RPA15Rbits __asm__ ("RPA15R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPB0R __attribute__((section("sfrs")));
+#define RPB0R RPB0R
+extern volatile unsigned int   RPB0R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPB0R:4;
 } __RPB0Rbits_t;
 extern volatile __RPB0Rbits_t RPB0Rbits __asm__ ("RPB0R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPB1R __attribute__((section("sfrs")));
+#define RPB1R RPB1R
+extern volatile unsigned int   RPB1R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPB1R:4;
 } __RPB1Rbits_t;
 extern volatile __RPB1Rbits_t RPB1Rbits __asm__ ("RPB1R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPB2R __attribute__((section("sfrs")));
+#define RPB2R RPB2R
+extern volatile unsigned int   RPB2R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPB2R:4;
 } __RPB2Rbits_t;
 extern volatile __RPB2Rbits_t RPB2Rbits __asm__ ("RPB2R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPB3R __attribute__((section("sfrs")));
+#define RPB3R RPB3R
+extern volatile unsigned int   RPB3R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPB3R:4;
 } __RPB3Rbits_t;
 extern volatile __RPB3Rbits_t RPB3Rbits __asm__ ("RPB3R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPB4R __attribute__((section("sfrs")));
+#define RPB4R RPB4R
+extern volatile unsigned int   RPB4R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPB4R:4;
 } __RPB4Rbits_t;
 extern volatile __RPB4Rbits_t RPB4Rbits __asm__ ("RPB4R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPB5R __attribute__((section("sfrs")));
+#define RPB5R RPB5R
+extern volatile unsigned int   RPB5R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPB5R:4;
 } __RPB5Rbits_t;
 extern volatile __RPB5Rbits_t RPB5Rbits __asm__ ("RPB5R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPB6R __attribute__((section("sfrs")));
+#define RPB6R RPB6R
+extern volatile unsigned int   RPB6R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPB6R:4;
 } __RPB6Rbits_t;
 extern volatile __RPB6Rbits_t RPB6Rbits __asm__ ("RPB6R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPB7R __attribute__((section("sfrs")));
+#define RPB7R RPB7R
+extern volatile unsigned int   RPB7R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPB7R:4;
 } __RPB7Rbits_t;
 extern volatile __RPB7Rbits_t RPB7Rbits __asm__ ("RPB7R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPB8R __attribute__((section("sfrs")));
+#define RPB8R RPB8R
+extern volatile unsigned int   RPB8R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPB8R:4;
 } __RPB8Rbits_t;
 extern volatile __RPB8Rbits_t RPB8Rbits __asm__ ("RPB8R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPB9R __attribute__((section("sfrs")));
+#define RPB9R RPB9R
+extern volatile unsigned int   RPB9R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPB9R:4;
 } __RPB9Rbits_t;
 extern volatile __RPB9Rbits_t RPB9Rbits __asm__ ("RPB9R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPB10R __attribute__((section("sfrs")));
+#define RPB10R RPB10R
+extern volatile unsigned int   RPB10R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPB10R:4;
 } __RPB10Rbits_t;
 extern volatile __RPB10Rbits_t RPB10Rbits __asm__ ("RPB10R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPB11R __attribute__((section("sfrs")));
+#define RPB11R RPB11R
+extern volatile unsigned int   RPB11R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPB11R:4;
 } __RPB11Rbits_t;
 extern volatile __RPB11Rbits_t RPB11Rbits __asm__ ("RPB11R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPB12R __attribute__((section("sfrs")));
+#define RPB12R RPB12R
+extern volatile unsigned int   RPB12R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPB12R:4;
 } __RPB12Rbits_t;
 extern volatile __RPB12Rbits_t RPB12Rbits __asm__ ("RPB12R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPB13R __attribute__((section("sfrs")));
+#define RPB13R RPB13R
+extern volatile unsigned int   RPB13R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPB13R:4;
 } __RPB13Rbits_t;
 extern volatile __RPB13Rbits_t RPB13Rbits __asm__ ("RPB13R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPB14R __attribute__((section("sfrs")));
+#define RPB14R RPB14R
+extern volatile unsigned int   RPB14R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPB14R:4;
 } __RPB14Rbits_t;
 extern volatile __RPB14Rbits_t RPB14Rbits __asm__ ("RPB14R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPB15R __attribute__((section("sfrs")));
+#define RPB15R RPB15R
+extern volatile unsigned int   RPB15R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPB15R:4;
 } __RPB15Rbits_t;
 extern volatile __RPB15Rbits_t RPB15Rbits __asm__ ("RPB15R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPC0R __attribute__((section("sfrs")));
+#define RPC0R RPC0R
+extern volatile unsigned int   RPC0R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPC0R:4;
 } __RPC0Rbits_t;
 extern volatile __RPC0Rbits_t RPC0Rbits __asm__ ("RPC0R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPC1R __attribute__((section("sfrs")));
+#define RPC1R RPC1R
+extern volatile unsigned int   RPC1R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPC1R:4;
 } __RPC1Rbits_t;
 extern volatile __RPC1Rbits_t RPC1Rbits __asm__ ("RPC1R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPC2R __attribute__((section("sfrs")));
+#define RPC2R RPC2R
+extern volatile unsigned int   RPC2R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPC2R:4;
 } __RPC2Rbits_t;
 extern volatile __RPC2Rbits_t RPC2Rbits __asm__ ("RPC2R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPC3R __attribute__((section("sfrs")));
+#define RPC3R RPC3R
+extern volatile unsigned int   RPC3R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPC3R:4;
 } __RPC3Rbits_t;
 extern volatile __RPC3Rbits_t RPC3Rbits __asm__ ("RPC3R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPC4R __attribute__((section("sfrs")));
+#define RPC4R RPC4R
+extern volatile unsigned int   RPC4R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPC4R:4;
 } __RPC4Rbits_t;
 extern volatile __RPC4Rbits_t RPC4Rbits __asm__ ("RPC4R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPC5R __attribute__((section("sfrs")));
+#define RPC5R RPC5R
+extern volatile unsigned int   RPC5R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPC5R:4;
 } __RPC5Rbits_t;
 extern volatile __RPC5Rbits_t RPC5Rbits __asm__ ("RPC5R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPC6R __attribute__((section("sfrs")));
+#define RPC6R RPC6R
+extern volatile unsigned int   RPC6R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPC6R:4;
 } __RPC6Rbits_t;
 extern volatile __RPC6Rbits_t RPC6Rbits __asm__ ("RPC6R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPC7R __attribute__((section("sfrs")));
+#define RPC7R RPC7R
+extern volatile unsigned int   RPC7R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPC7R:4;
 } __RPC7Rbits_t;
 extern volatile __RPC7Rbits_t RPC7Rbits __asm__ ("RPC7R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPC8R __attribute__((section("sfrs")));
+#define RPC8R RPC8R
+extern volatile unsigned int   RPC8R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPC8R:4;
 } __RPC8Rbits_t;
 extern volatile __RPC8Rbits_t RPC8Rbits __asm__ ("RPC8R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPC9R __attribute__((section("sfrs")));
+#define RPC9R RPC9R
+extern volatile unsigned int   RPC9R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPC9R:4;
 } __RPC9Rbits_t;
 extern volatile __RPC9Rbits_t RPC9Rbits __asm__ ("RPC9R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPC10R __attribute__((section("sfrs")));
+#define RPC10R RPC10R
+extern volatile unsigned int   RPC10R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPC10R:4;
 } __RPC10Rbits_t;
 extern volatile __RPC10Rbits_t RPC10Rbits __asm__ ("RPC10R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPC11R __attribute__((section("sfrs")));
+#define RPC11R RPC11R
+extern volatile unsigned int   RPC11R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPC11R:4;
 } __RPC11Rbits_t;
 extern volatile __RPC11Rbits_t RPC11Rbits __asm__ ("RPC11R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPC12R __attribute__((section("sfrs")));
+#define RPC12R RPC12R
+extern volatile unsigned int   RPC12R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPC12R:4;
 } __RPC12Rbits_t;
 extern volatile __RPC12Rbits_t RPC12Rbits __asm__ ("RPC12R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPC13R __attribute__((section("sfrs")));
+#define RPC13R RPC13R
+extern volatile unsigned int   RPC13R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPC13R:4;
 } __RPC13Rbits_t;
 extern volatile __RPC13Rbits_t RPC13Rbits __asm__ ("RPC13R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPC14R __attribute__((section("sfrs")));
+#define RPC14R RPC14R
+extern volatile unsigned int   RPC14R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPC14R:4;
 } __RPC14Rbits_t;
 extern volatile __RPC14Rbits_t RPC14Rbits __asm__ ("RPC14R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPC15R __attribute__((section("sfrs")));
+#define RPC15R RPC15R
+extern volatile unsigned int   RPC15R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPC15R:4;
 } __RPC15Rbits_t;
 extern volatile __RPC15Rbits_t RPC15Rbits __asm__ ("RPC15R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPD0R __attribute__((section("sfrs")));
+#define RPD0R RPD0R
+extern volatile unsigned int   RPD0R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPD0R:4;
 } __RPD0Rbits_t;
 extern volatile __RPD0Rbits_t RPD0Rbits __asm__ ("RPD0R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPD1R __attribute__((section("sfrs")));
+#define RPD1R RPD1R
+extern volatile unsigned int   RPD1R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPD1R:4;
 } __RPD1Rbits_t;
 extern volatile __RPD1Rbits_t RPD1Rbits __asm__ ("RPD1R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPD2R __attribute__((section("sfrs")));
+#define RPD2R RPD2R
+extern volatile unsigned int   RPD2R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPD2R:4;
 } __RPD2Rbits_t;
 extern volatile __RPD2Rbits_t RPD2Rbits __asm__ ("RPD2R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPD3R __attribute__((section("sfrs")));
+#define RPD3R RPD3R
+extern volatile unsigned int   RPD3R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPD3R:4;
 } __RPD3Rbits_t;
 extern volatile __RPD3Rbits_t RPD3Rbits __asm__ ("RPD3R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPD4R __attribute__((section("sfrs")));
+#define RPD4R RPD4R
+extern volatile unsigned int   RPD4R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPD4R:4;
 } __RPD4Rbits_t;
 extern volatile __RPD4Rbits_t RPD4Rbits __asm__ ("RPD4R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPD5R __attribute__((section("sfrs")));
+#define RPD5R RPD5R
+extern volatile unsigned int   RPD5R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPD5R:4;
 } __RPD5Rbits_t;
 extern volatile __RPD5Rbits_t RPD5Rbits __asm__ ("RPD5R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPD6R __attribute__((section("sfrs")));
+#define RPD6R RPD6R
+extern volatile unsigned int   RPD6R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPD6R:4;
 } __RPD6Rbits_t;
 extern volatile __RPD6Rbits_t RPD6Rbits __asm__ ("RPD6R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPD7R __attribute__((section("sfrs")));
+#define RPD7R RPD7R
+extern volatile unsigned int   RPD7R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPD7R:4;
 } __RPD7Rbits_t;
 extern volatile __RPD7Rbits_t RPD7Rbits __asm__ ("RPD7R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPD8R __attribute__((section("sfrs")));
+#define RPD8R RPD8R
+extern volatile unsigned int   RPD8R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPD8R:4;
 } __RPD8Rbits_t;
 extern volatile __RPD8Rbits_t RPD8Rbits __asm__ ("RPD8R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPD9R __attribute__((section("sfrs")));
+#define RPD9R RPD9R
+extern volatile unsigned int   RPD9R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPD9R:4;
 } __RPD9Rbits_t;
 extern volatile __RPD9Rbits_t RPD9Rbits __asm__ ("RPD9R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPD10R __attribute__((section("sfrs")));
+#define RPD10R RPD10R
+extern volatile unsigned int   RPD10R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPD10R:4;
 } __RPD10Rbits_t;
 extern volatile __RPD10Rbits_t RPD10Rbits __asm__ ("RPD10R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPD11R __attribute__((section("sfrs")));
+#define RPD11R RPD11R
+extern volatile unsigned int   RPD11R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPD11R:4;
 } __RPD11Rbits_t;
 extern volatile __RPD11Rbits_t RPD11Rbits __asm__ ("RPD11R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPD12R __attribute__((section("sfrs")));
+#define RPD12R RPD12R
+extern volatile unsigned int   RPD12R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPD12R:4;
 } __RPD12Rbits_t;
 extern volatile __RPD12Rbits_t RPD12Rbits __asm__ ("RPD12R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPD13R __attribute__((section("sfrs")));
+#define RPD13R RPD13R
+extern volatile unsigned int   RPD13R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPD13R:4;
 } __RPD13Rbits_t;
 extern volatile __RPD13Rbits_t RPD13Rbits __asm__ ("RPD13R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPD14R __attribute__((section("sfrs")));
+#define RPD14R RPD14R
+extern volatile unsigned int   RPD14R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPD14R:4;
 } __RPD14Rbits_t;
 extern volatile __RPD14Rbits_t RPD14Rbits __asm__ ("RPD14R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPD15R __attribute__((section("sfrs")));
+#define RPD15R RPD15R
+extern volatile unsigned int   RPD15R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPD15R:4;
 } __RPD15Rbits_t;
 extern volatile __RPD15Rbits_t RPD15Rbits __asm__ ("RPD15R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPE0R __attribute__((section("sfrs")));
+#define RPE0R RPE0R
+extern volatile unsigned int   RPE0R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPE0R:4;
 } __RPE0Rbits_t;
 extern volatile __RPE0Rbits_t RPE0Rbits __asm__ ("RPE0R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPE1R __attribute__((section("sfrs")));
+#define RPE1R RPE1R
+extern volatile unsigned int   RPE1R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPE1R:4;
 } __RPE1Rbits_t;
 extern volatile __RPE1Rbits_t RPE1Rbits __asm__ ("RPE1R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPE2R __attribute__((section("sfrs")));
+#define RPE2R RPE2R
+extern volatile unsigned int   RPE2R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPE2R:4;
 } __RPE2Rbits_t;
 extern volatile __RPE2Rbits_t RPE2Rbits __asm__ ("RPE2R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPE3R __attribute__((section("sfrs")));
+#define RPE3R RPE3R
+extern volatile unsigned int   RPE3R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPE3R:4;
 } __RPE3Rbits_t;
 extern volatile __RPE3Rbits_t RPE3Rbits __asm__ ("RPE3R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPE4R __attribute__((section("sfrs")));
+#define RPE4R RPE4R
+extern volatile unsigned int   RPE4R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPE4R:4;
 } __RPE4Rbits_t;
 extern volatile __RPE4Rbits_t RPE4Rbits __asm__ ("RPE4R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPE5R __attribute__((section("sfrs")));
+#define RPE5R RPE5R
+extern volatile unsigned int   RPE5R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPE5R:4;
 } __RPE5Rbits_t;
 extern volatile __RPE5Rbits_t RPE5Rbits __asm__ ("RPE5R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPE6R __attribute__((section("sfrs")));
+#define RPE6R RPE6R
+extern volatile unsigned int   RPE6R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPE6R:4;
 } __RPE6Rbits_t;
 extern volatile __RPE6Rbits_t RPE6Rbits __asm__ ("RPE6R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPE7R __attribute__((section("sfrs")));
+#define RPE7R RPE7R
+extern volatile unsigned int   RPE7R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPE7R:4;
 } __RPE7Rbits_t;
 extern volatile __RPE7Rbits_t RPE7Rbits __asm__ ("RPE7R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPE8R __attribute__((section("sfrs")));
+#define RPE8R RPE8R
+extern volatile unsigned int   RPE8R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPE8R:4;
 } __RPE8Rbits_t;
 extern volatile __RPE8Rbits_t RPE8Rbits __asm__ ("RPE8R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPE9R __attribute__((section("sfrs")));
+#define RPE9R RPE9R
+extern volatile unsigned int   RPE9R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPE9R:4;
 } __RPE9Rbits_t;
 extern volatile __RPE9Rbits_t RPE9Rbits __asm__ ("RPE9R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPE10R __attribute__((section("sfrs")));
+#define RPE10R RPE10R
+extern volatile unsigned int   RPE10R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPE10R:4;
 } __RPE10Rbits_t;
 extern volatile __RPE10Rbits_t RPE10Rbits __asm__ ("RPE10R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPE11R __attribute__((section("sfrs")));
+#define RPE11R RPE11R
+extern volatile unsigned int   RPE11R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPE11R:4;
 } __RPE11Rbits_t;
 extern volatile __RPE11Rbits_t RPE11Rbits __asm__ ("RPE11R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPE12R __attribute__((section("sfrs")));
+#define RPE12R RPE12R
+extern volatile unsigned int   RPE12R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPE12R:4;
 } __RPE12Rbits_t;
 extern volatile __RPE12Rbits_t RPE12Rbits __asm__ ("RPE12R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPE13R __attribute__((section("sfrs")));
+#define RPE13R RPE13R
+extern volatile unsigned int   RPE13R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPE13R:4;
 } __RPE13Rbits_t;
 extern volatile __RPE13Rbits_t RPE13Rbits __asm__ ("RPE13R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPE14R __attribute__((section("sfrs")));
+#define RPE14R RPE14R
+extern volatile unsigned int   RPE14R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPE14R:4;
 } __RPE14Rbits_t;
 extern volatile __RPE14Rbits_t RPE14Rbits __asm__ ("RPE14R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPE15R __attribute__((section("sfrs")));
+#define RPE15R RPE15R
+extern volatile unsigned int   RPE15R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPE15R:4;
 } __RPE15Rbits_t;
 extern volatile __RPE15Rbits_t RPE15Rbits __asm__ ("RPE15R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPF0R __attribute__((section("sfrs")));
+#define RPF0R RPF0R
+extern volatile unsigned int   RPF0R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPF0R:4;
 } __RPF0Rbits_t;
 extern volatile __RPF0Rbits_t RPF0Rbits __asm__ ("RPF0R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPF1R __attribute__((section("sfrs")));
+#define RPF1R RPF1R
+extern volatile unsigned int   RPF1R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPF1R:4;
 } __RPF1Rbits_t;
 extern volatile __RPF1Rbits_t RPF1Rbits __asm__ ("RPF1R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPF2R __attribute__((section("sfrs")));
+#define RPF2R RPF2R
+extern volatile unsigned int   RPF2R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPF2R:4;
 } __RPF2Rbits_t;
 extern volatile __RPF2Rbits_t RPF2Rbits __asm__ ("RPF2R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPF3R __attribute__((section("sfrs")));
+#define RPF3R RPF3R
+extern volatile unsigned int   RPF3R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPF3R:4;
 } __RPF3Rbits_t;
 extern volatile __RPF3Rbits_t RPF3Rbits __asm__ ("RPF3R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPF4R __attribute__((section("sfrs")));
+#define RPF4R RPF4R
+extern volatile unsigned int   RPF4R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPF4R:4;
 } __RPF4Rbits_t;
 extern volatile __RPF4Rbits_t RPF4Rbits __asm__ ("RPF4R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPF5R __attribute__((section("sfrs")));
+#define RPF5R RPF5R
+extern volatile unsigned int   RPF5R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPF5R:4;
 } __RPF5Rbits_t;
 extern volatile __RPF5Rbits_t RPF5Rbits __asm__ ("RPF5R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPF6R __attribute__((section("sfrs")));
+#define RPF6R RPF6R
+extern volatile unsigned int   RPF6R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPF6R:4;
 } __RPF6Rbits_t;
 extern volatile __RPF6Rbits_t RPF6Rbits __asm__ ("RPF6R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPF7R __attribute__((section("sfrs")));
+#define RPF7R RPF7R
+extern volatile unsigned int   RPF7R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPF7R:4;
 } __RPF7Rbits_t;
 extern volatile __RPF7Rbits_t RPF7Rbits __asm__ ("RPF7R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPF8R __attribute__((section("sfrs")));
+#define RPF8R RPF8R
+extern volatile unsigned int   RPF8R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPF8R:4;
 } __RPF8Rbits_t;
 extern volatile __RPF8Rbits_t RPF8Rbits __asm__ ("RPF8R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPF9R __attribute__((section("sfrs")));
+#define RPF9R RPF9R
+extern volatile unsigned int   RPF9R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPF9R:4;
 } __RPF9Rbits_t;
 extern volatile __RPF9Rbits_t RPF9Rbits __asm__ ("RPF9R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPF10R __attribute__((section("sfrs")));
+#define RPF10R RPF10R
+extern volatile unsigned int   RPF10R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPF10R:4;
 } __RPF10Rbits_t;
 extern volatile __RPF10Rbits_t RPF10Rbits __asm__ ("RPF10R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPF11R __attribute__((section("sfrs")));
+#define RPF11R RPF11R
+extern volatile unsigned int   RPF11R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPF11R:4;
 } __RPF11Rbits_t;
 extern volatile __RPF11Rbits_t RPF11Rbits __asm__ ("RPF11R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPF12R __attribute__((section("sfrs")));
+#define RPF12R RPF12R
+extern volatile unsigned int   RPF12R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPF12R:4;
 } __RPF12Rbits_t;
 extern volatile __RPF12Rbits_t RPF12Rbits __asm__ ("RPF12R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPF13R __attribute__((section("sfrs")));
+#define RPF13R RPF13R
+extern volatile unsigned int   RPF13R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPF13R:4;
 } __RPF13Rbits_t;
 extern volatile __RPF13Rbits_t RPF13Rbits __asm__ ("RPF13R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPF14R __attribute__((section("sfrs")));
+#define RPF14R RPF14R
+extern volatile unsigned int   RPF14R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPF14R:4;
 } __RPF14Rbits_t;
 extern volatile __RPF14Rbits_t RPF14Rbits __asm__ ("RPF14R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPF15R __attribute__((section("sfrs")));
+#define RPF15R RPF15R
+extern volatile unsigned int   RPF15R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPF15R:4;
 } __RPF15Rbits_t;
 extern volatile __RPF15Rbits_t RPF15Rbits __asm__ ("RPF15R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPG0R __attribute__((section("sfrs")));
+#define RPG0R RPG0R
+extern volatile unsigned int   RPG0R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPG0R:4;
 } __RPG0Rbits_t;
 extern volatile __RPG0Rbits_t RPG0Rbits __asm__ ("RPG0R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPG1R __attribute__((section("sfrs")));
+#define RPG1R RPG1R
+extern volatile unsigned int   RPG1R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPG1R:4;
 } __RPG1Rbits_t;
 extern volatile __RPG1Rbits_t RPG1Rbits __asm__ ("RPG1R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPG2R __attribute__((section("sfrs")));
+#define RPG2R RPG2R
+extern volatile unsigned int   RPG2R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPG2R:4;
 } __RPG2Rbits_t;
 extern volatile __RPG2Rbits_t RPG2Rbits __asm__ ("RPG2R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPG3R __attribute__((section("sfrs")));
+#define RPG3R RPG3R
+extern volatile unsigned int   RPG3R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPG3R:4;
 } __RPG3Rbits_t;
 extern volatile __RPG3Rbits_t RPG3Rbits __asm__ ("RPG3R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPG4R __attribute__((section("sfrs")));
+#define RPG4R RPG4R
+extern volatile unsigned int   RPG4R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPG4R:4;
 } __RPG4Rbits_t;
 extern volatile __RPG4Rbits_t RPG4Rbits __asm__ ("RPG4R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPG5R __attribute__((section("sfrs")));
+#define RPG5R RPG5R
+extern volatile unsigned int   RPG5R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPG5R:4;
 } __RPG5Rbits_t;
 extern volatile __RPG5Rbits_t RPG5Rbits __asm__ ("RPG5R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPG6R __attribute__((section("sfrs")));
+#define RPG6R RPG6R
+extern volatile unsigned int   RPG6R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPG6R:4;
 } __RPG6Rbits_t;
 extern volatile __RPG6Rbits_t RPG6Rbits __asm__ ("RPG6R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPG7R __attribute__((section("sfrs")));
+#define RPG7R RPG7R
+extern volatile unsigned int   RPG7R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPG7R:4;
 } __RPG7Rbits_t;
 extern volatile __RPG7Rbits_t RPG7Rbits __asm__ ("RPG7R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPG8R __attribute__((section("sfrs")));
+#define RPG8R RPG8R
+extern volatile unsigned int   RPG8R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPG8R:4;
 } __RPG8Rbits_t;
 extern volatile __RPG8Rbits_t RPG8Rbits __asm__ ("RPG8R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPG9R __attribute__((section("sfrs")));
+#define RPG9R RPG9R
+extern volatile unsigned int   RPG9R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPG9R:4;
 } __RPG9Rbits_t;
 extern volatile __RPG9Rbits_t RPG9Rbits __asm__ ("RPG9R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPG10R __attribute__((section("sfrs")));
+#define RPG10R RPG10R
+extern volatile unsigned int   RPG10R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPG10R:4;
 } __RPG10Rbits_t;
 extern volatile __RPG10Rbits_t RPG10Rbits __asm__ ("RPG10R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPG11R __attribute__((section("sfrs")));
+#define RPG11R RPG11R
+extern volatile unsigned int   RPG11R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPG11R:4;
 } __RPG11Rbits_t;
 extern volatile __RPG11Rbits_t RPG11Rbits __asm__ ("RPG11R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPG12R __attribute__((section("sfrs")));
+#define RPG12R RPG12R
+extern volatile unsigned int   RPG12R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPG12R:4;
 } __RPG12Rbits_t;
 extern volatile __RPG12Rbits_t RPG12Rbits __asm__ ("RPG12R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPG13R __attribute__((section("sfrs")));
+#define RPG13R RPG13R
+extern volatile unsigned int   RPG13R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPG13R:4;
 } __RPG13Rbits_t;
 extern volatile __RPG13Rbits_t RPG13Rbits __asm__ ("RPG13R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPG14R __attribute__((section("sfrs")));
+#define RPG14R RPG14R
+extern volatile unsigned int   RPG14R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPG14R:4;
 } __RPG14Rbits_t;
 extern volatile __RPG14Rbits_t RPG14Rbits __asm__ ("RPG14R") __attribute__((section("sfrs")));
-extern volatile unsigned int        RPG15R __attribute__((section("sfrs")));
+#define RPG15R RPG15R
+extern volatile unsigned int   RPG15R __attribute__((section("sfrs")));
 typedef struct {
   unsigned RPG15R:4;
 } __RPG15Rbits_t;
 extern volatile __RPG15Rbits_t RPG15Rbits __asm__ ("RPG15R") __attribute__((section("sfrs")));
-extern volatile unsigned int        INTCON __attribute__((section("sfrs")));
+#define INTCON INTCON
+extern volatile unsigned int   INTCON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned INT0EP:1;
@@ -4114,18 +4479,21 @@ extern volatile __INTCONbits_t INTCONbits __asm__ ("INTCON") __attribute__((sect
 extern volatile unsigned int        INTCONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        INTCONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        INTCONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        INTSTAT __attribute__((section("sfrs")));
+#define INTSTAT INTSTAT
+extern volatile unsigned int   INTSTAT __attribute__((section("sfrs")));
 typedef struct {
   unsigned VEC:6;
   unsigned :2;
   unsigned SRIPL:3;
 } __INTSTATbits_t;
 extern volatile __INTSTATbits_t INTSTATbits __asm__ ("INTSTAT") __attribute__((section("sfrs")));
-extern volatile unsigned int        IPTMR __attribute__((section("sfrs")));
+#define IPTMR IPTMR
+extern volatile unsigned int   IPTMR __attribute__((section("sfrs")));
 extern volatile unsigned int        IPTMRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IPTMRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        IPTMRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        IFS0 __attribute__((section("sfrs")));
+#define IFS0 IFS0
+extern volatile unsigned int   IFS0 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CTIF:1;
@@ -4169,7 +4537,8 @@ extern volatile __IFS0bits_t IFS0bits __asm__ ("IFS0") __attribute__((section("s
 extern volatile unsigned int        IFS0CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IFS0SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IFS0INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IFS1 __attribute__((section("sfrs")));
+#define IFS1 IFS1
+extern volatile unsigned int   IFS1 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CMP1IF:1;
@@ -4213,7 +4582,8 @@ extern volatile __IFS1bits_t IFS1bits __asm__ ("IFS1") __attribute__((section("s
 extern volatile unsigned int        IFS1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IFS1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IFS1INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IFS2 __attribute__((section("sfrs")));
+#define IFS2 IFS2
+extern volatile unsigned int   IFS2 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned U3TXIF:1;
@@ -4245,7 +4615,8 @@ extern volatile __IFS2bits_t IFS2bits __asm__ ("IFS2") __attribute__((section("s
 extern volatile unsigned int        IFS2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IFS2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IFS2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IEC0 __attribute__((section("sfrs")));
+#define IEC0 IEC0
+extern volatile unsigned int   IEC0 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CTIE:1;
@@ -4289,7 +4660,8 @@ extern volatile __IEC0bits_t IEC0bits __asm__ ("IEC0") __attribute__((section("s
 extern volatile unsigned int        IEC0CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IEC0SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IEC0INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IEC1 __attribute__((section("sfrs")));
+#define IEC1 IEC1
+extern volatile unsigned int   IEC1 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CMP1IE:1;
@@ -4333,7 +4705,8 @@ extern volatile __IEC1bits_t IEC1bits __asm__ ("IEC1") __attribute__((section("s
 extern volatile unsigned int        IEC1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IEC1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IEC1INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IEC2 __attribute__((section("sfrs")));
+#define IEC2 IEC2
+extern volatile unsigned int   IEC2 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned U3TXIE:1;
@@ -4365,7 +4738,8 @@ extern volatile __IEC2bits_t IEC2bits __asm__ ("IEC2") __attribute__((section("s
 extern volatile unsigned int        IEC2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IEC2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IEC2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IPC0 __attribute__((section("sfrs")));
+#define IPC0 IPC0
+extern volatile unsigned int   IPC0 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CTIS:2;
@@ -4388,7 +4762,8 @@ extern volatile __IPC0bits_t IPC0bits __asm__ ("IPC0") __attribute__((section("s
 extern volatile unsigned int        IPC0CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC0SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC0INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IPC1 __attribute__((section("sfrs")));
+#define IPC1 IPC1
+extern volatile unsigned int   IPC1 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned T1IS:2;
@@ -4411,7 +4786,8 @@ extern volatile __IPC1bits_t IPC1bits __asm__ ("IPC1") __attribute__((section("s
 extern volatile unsigned int        IPC1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC1INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IPC2 __attribute__((section("sfrs")));
+#define IPC2 IPC2
+extern volatile unsigned int   IPC2 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned T2IS:2;
@@ -4434,7 +4810,8 @@ extern volatile __IPC2bits_t IPC2bits __asm__ ("IPC2") __attribute__((section("s
 extern volatile unsigned int        IPC2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IPC3 __attribute__((section("sfrs")));
+#define IPC3 IPC3
+extern volatile unsigned int   IPC3 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned T3IS:2;
@@ -4457,7 +4834,8 @@ extern volatile __IPC3bits_t IPC3bits __asm__ ("IPC3") __attribute__((section("s
 extern volatile unsigned int        IPC3CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC3SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC3INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IPC4 __attribute__((section("sfrs")));
+#define IPC4 IPC4
+extern volatile unsigned int   IPC4 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned T4IS:2;
@@ -4480,7 +4858,8 @@ extern volatile __IPC4bits_t IPC4bits __asm__ ("IPC4") __attribute__((section("s
 extern volatile unsigned int        IPC4CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC4SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC4INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IPC5 __attribute__((section("sfrs")));
+#define IPC5 IPC5
+extern volatile unsigned int   IPC5 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned T5IS:2;
@@ -4503,7 +4882,8 @@ extern volatile __IPC5bits_t IPC5bits __asm__ ("IPC5") __attribute__((section("s
 extern volatile unsigned int        IPC5CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC5SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC5INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IPC6 __attribute__((section("sfrs")));
+#define IPC6 IPC6
+extern volatile unsigned int   IPC6 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned FSCMIS:2;
@@ -4526,7 +4906,8 @@ extern volatile __IPC6bits_t IPC6bits __asm__ ("IPC6") __attribute__((section("s
 extern volatile unsigned int        IPC6CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC6SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC6INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IPC7 __attribute__((section("sfrs")));
+#define IPC7 IPC7
+extern volatile unsigned int   IPC7 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CMP2IS:2;
@@ -4549,7 +4930,8 @@ extern volatile __IPC7bits_t IPC7bits __asm__ ("IPC7") __attribute__((section("s
 extern volatile unsigned int        IPC7CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC7SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC7INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IPC8 __attribute__((section("sfrs")));
+#define IPC8 IPC8
+extern volatile unsigned int   IPC8 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned I2C1IS:2;
@@ -4572,7 +4954,8 @@ extern volatile __IPC8bits_t IPC8bits __asm__ ("IPC8") __attribute__((section("s
 extern volatile unsigned int        IPC8CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC8SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC8INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IPC9 __attribute__((section("sfrs")));
+#define IPC9 IPC9
+extern volatile unsigned int   IPC9 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned U2IS:2;
@@ -4595,7 +4978,8 @@ extern volatile __IPC9bits_t IPC9bits __asm__ ("IPC9") __attribute__((section("s
 extern volatile unsigned int        IPC9CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC9SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC9INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IPC10 __attribute__((section("sfrs")));
+#define IPC10 IPC10
+extern volatile unsigned int   IPC10 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned U5IS:2;
@@ -4618,7 +5002,8 @@ extern volatile __IPC10bits_t IPC10bits __asm__ ("IPC10") __attribute__((section
 extern volatile unsigned int        IPC10CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC10SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC10INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IPC11 __attribute__((section("sfrs")));
+#define IPC11 IPC11
+extern volatile unsigned int   IPC11 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned DMA2IS:2;
@@ -4641,7 +5026,8 @@ extern volatile __IPC11bits_t IPC11bits __asm__ ("IPC11") __attribute__((section
 extern volatile unsigned int        IPC11CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC11SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC11INV __attribute__((section("sfrs")));
-extern volatile unsigned int        IPC12 __attribute__((section("sfrs")));
+#define IPC12 IPC12
+extern volatile unsigned int   IPC12 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned SPI3IS:2;
@@ -4658,7 +5044,8 @@ extern volatile __IPC12bits_t IPC12bits __asm__ ("IPC12") __attribute__((section
 extern volatile unsigned int        IPC12CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC12SET __attribute__((section("sfrs")));
 extern volatile unsigned int        IPC12INV __attribute__((section("sfrs")));
-extern volatile unsigned int        BMXCON __attribute__((section("sfrs")));
+#define BMXCON BMXCON
+extern volatile unsigned int   BMXCON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned BMXARB:3;
@@ -4681,26 +5068,34 @@ extern volatile __BMXCONbits_t BMXCONbits __asm__ ("BMXCON") __attribute__((sect
 extern volatile unsigned int        BMXCONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        BMXCONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        BMXCONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        BMXDKPBA __attribute__((section("sfrs")));
+#define BMXDKPBA BMXDKPBA
+extern volatile unsigned int   BMXDKPBA __attribute__((section("sfrs")));
 extern volatile unsigned int        BMXDKPBACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        BMXDKPBASET __attribute__((section("sfrs")));
 extern volatile unsigned int        BMXDKPBAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        BMXDUDBA __attribute__((section("sfrs")));
+#define BMXDUDBA BMXDUDBA
+extern volatile unsigned int   BMXDUDBA __attribute__((section("sfrs")));
 extern volatile unsigned int        BMXDUDBACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        BMXDUDBASET __attribute__((section("sfrs")));
 extern volatile unsigned int        BMXDUDBAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        BMXDUPBA __attribute__((section("sfrs")));
+#define BMXDUPBA BMXDUPBA
+extern volatile unsigned int   BMXDUPBA __attribute__((section("sfrs")));
 extern volatile unsigned int        BMXDUPBACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        BMXDUPBASET __attribute__((section("sfrs")));
 extern volatile unsigned int        BMXDUPBAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        BMXDRMSZ __attribute__((section("sfrs")));
-extern volatile unsigned int        BMXPUPBA __attribute__((section("sfrs")));
+#define BMXDRMSZ BMXDRMSZ
+extern volatile unsigned int   BMXDRMSZ __attribute__((section("sfrs")));
+#define BMXPUPBA BMXPUPBA
+extern volatile unsigned int   BMXPUPBA __attribute__((section("sfrs")));
 extern volatile unsigned int        BMXPUPBACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        BMXPUPBASET __attribute__((section("sfrs")));
 extern volatile unsigned int        BMXPUPBAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        BMXPFMSZ __attribute__((section("sfrs")));
-extern volatile unsigned int        BMXBOOTSZ __attribute__((section("sfrs")));
-extern volatile unsigned int        DMACON __attribute__((section("sfrs")));
+#define BMXPFMSZ BMXPFMSZ
+extern volatile unsigned int   BMXPFMSZ __attribute__((section("sfrs")));
+#define BMXBOOTSZ BMXBOOTSZ
+extern volatile unsigned int   BMXBOOTSZ __attribute__((section("sfrs")));
+#define DMACON DMACON
+extern volatile unsigned int   DMACON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :11;
@@ -4717,7 +5112,8 @@ extern volatile __DMACONbits_t DMACONbits __asm__ ("DMACON") __attribute__((sect
 extern volatile unsigned int        DMACONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DMACONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DMACONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DMASTAT __attribute__((section("sfrs")));
+#define DMASTAT DMASTAT
+extern volatile unsigned int   DMASTAT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned DMACH:3;
@@ -4731,11 +5127,13 @@ extern volatile __DMASTATbits_t DMASTATbits __asm__ ("DMASTAT") __attribute__((s
 extern volatile unsigned int        DMASTATCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DMASTATSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DMASTATINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DMAADDR __attribute__((section("sfrs")));
+#define DMAADDR DMAADDR
+extern volatile unsigned int   DMAADDR __attribute__((section("sfrs")));
 extern volatile unsigned int        DMAADDRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DMAADDRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DMAADDRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCRCCON __attribute__((section("sfrs")));
+#define DCRCCON DCRCCON
+extern volatile unsigned int   DCRCCON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CRCCH:3;
@@ -4758,15 +5156,18 @@ extern volatile __DCRCCONbits_t DCRCCONbits __asm__ ("DCRCCON") __attribute__((s
 extern volatile unsigned int        DCRCCONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCRCCONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCRCCONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCRCDATA __attribute__((section("sfrs")));
+#define DCRCDATA DCRCDATA
+extern volatile unsigned int   DCRCDATA __attribute__((section("sfrs")));
 extern volatile unsigned int        DCRCDATACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCRCDATASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCRCDATAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCRCXOR __attribute__((section("sfrs")));
+#define DCRCXOR DCRCXOR
+extern volatile unsigned int   DCRCXOR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCRCXORCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCRCXORSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCRCXORINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH0CON __attribute__((section("sfrs")));
+#define DCH0CON DCH0CON
+extern volatile unsigned int   DCH0CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CHPRI:2;
@@ -4788,7 +5189,8 @@ extern volatile __DCH0CONbits_t DCH0CONbits __asm__ ("DCH0CON") __attribute__((s
 extern volatile unsigned int        DCH0CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH0ECON __attribute__((section("sfrs")));
+#define DCH0ECON DCH0ECON
+extern volatile unsigned int   DCH0ECON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :3;
@@ -4808,7 +5210,8 @@ extern volatile __DCH0ECONbits_t DCH0ECONbits __asm__ ("DCH0ECON") __attribute__
 extern volatile unsigned int        DCH0ECONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0ECONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0ECONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH0INT __attribute__((section("sfrs")));
+#define DCH0INT DCH0INT
+extern volatile unsigned int   DCH0INT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CHERIF:1;
@@ -4837,7 +5240,8 @@ extern volatile __DCH0INTbits_t DCH0INTbits __asm__ ("DCH0INT") __attribute__((s
 extern volatile unsigned int        DCH0INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0INTINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH0SSA __attribute__((section("sfrs")));
+#define DCH0SSA DCH0SSA
+extern volatile unsigned int   DCH0SSA __attribute__((section("sfrs")));
 typedef struct {
   unsigned CHSSA:32;
 } __DCH0SSAbits_t;
@@ -4845,7 +5249,8 @@ extern volatile __DCH0SSAbits_t DCH0SSAbits __asm__ ("DCH0SSA") __attribute__((s
 extern volatile unsigned int        DCH0SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SSAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH0DSA __attribute__((section("sfrs")));
+#define DCH0DSA DCH0DSA
+extern volatile unsigned int   DCH0DSA __attribute__((section("sfrs")));
 typedef struct {
   unsigned CHDSA:32;
 } __DCH0DSAbits_t;
@@ -4853,35 +5258,43 @@ extern volatile __DCH0DSAbits_t DCH0DSAbits __asm__ ("DCH0DSA") __attribute__((s
 extern volatile unsigned int        DCH0DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DSAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH0SSIZ __attribute__((section("sfrs")));
+#define DCH0SSIZ DCH0SSIZ
+extern volatile unsigned int   DCH0SSIZ __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SSIZINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH0DSIZ __attribute__((section("sfrs")));
+#define DCH0DSIZ DCH0DSIZ
+extern volatile unsigned int   DCH0DSIZ __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DSIZINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH0SPTR __attribute__((section("sfrs")));
+#define DCH0SPTR DCH0SPTR
+extern volatile unsigned int   DCH0SPTR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0SPTRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH0DPTR __attribute__((section("sfrs")));
+#define DCH0DPTR DCH0DPTR
+extern volatile unsigned int   DCH0DPTR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DPTRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH0CSIZ __attribute__((section("sfrs")));
+#define DCH0CSIZ DCH0CSIZ
+extern volatile unsigned int   DCH0CSIZ __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0CSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0CSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0CSIZINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH0CPTR __attribute__((section("sfrs")));
+#define DCH0CPTR DCH0CPTR
+extern volatile unsigned int   DCH0CPTR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0CPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0CPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0CPTRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH0DAT __attribute__((section("sfrs")));
+#define DCH0DAT DCH0DAT
+extern volatile unsigned int   DCH0DAT __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DATCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DATSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH0DATINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH1CON __attribute__((section("sfrs")));
+#define DCH1CON DCH1CON
+extern volatile unsigned int   DCH1CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CHPRI:2;
@@ -4903,7 +5316,8 @@ extern volatile __DCH1CONbits_t DCH1CONbits __asm__ ("DCH1CON") __attribute__((s
 extern volatile unsigned int        DCH1CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH1ECON __attribute__((section("sfrs")));
+#define DCH1ECON DCH1ECON
+extern volatile unsigned int   DCH1ECON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :3;
@@ -4923,7 +5337,8 @@ extern volatile __DCH1ECONbits_t DCH1ECONbits __asm__ ("DCH1ECON") __attribute__
 extern volatile unsigned int        DCH1ECONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1ECONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1ECONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH1INT __attribute__((section("sfrs")));
+#define DCH1INT DCH1INT
+extern volatile unsigned int   DCH1INT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CHERIF:1;
@@ -4952,7 +5367,8 @@ extern volatile __DCH1INTbits_t DCH1INTbits __asm__ ("DCH1INT") __attribute__((s
 extern volatile unsigned int        DCH1INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1INTINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH1SSA __attribute__((section("sfrs")));
+#define DCH1SSA DCH1SSA
+extern volatile unsigned int   DCH1SSA __attribute__((section("sfrs")));
 typedef struct {
   unsigned CHSSA:32;
 } __DCH1SSAbits_t;
@@ -4960,7 +5376,8 @@ extern volatile __DCH1SSAbits_t DCH1SSAbits __asm__ ("DCH1SSA") __attribute__((s
 extern volatile unsigned int        DCH1SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SSAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH1DSA __attribute__((section("sfrs")));
+#define DCH1DSA DCH1DSA
+extern volatile unsigned int   DCH1DSA __attribute__((section("sfrs")));
 typedef struct {
   unsigned CHDSA:32;
 } __DCH1DSAbits_t;
@@ -4968,35 +5385,43 @@ extern volatile __DCH1DSAbits_t DCH1DSAbits __asm__ ("DCH1DSA") __attribute__((s
 extern volatile unsigned int        DCH1DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DSAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH1SSIZ __attribute__((section("sfrs")));
+#define DCH1SSIZ DCH1SSIZ
+extern volatile unsigned int   DCH1SSIZ __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SSIZINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH1DSIZ __attribute__((section("sfrs")));
+#define DCH1DSIZ DCH1DSIZ
+extern volatile unsigned int   DCH1DSIZ __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DSIZINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH1SPTR __attribute__((section("sfrs")));
+#define DCH1SPTR DCH1SPTR
+extern volatile unsigned int   DCH1SPTR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1SPTRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH1DPTR __attribute__((section("sfrs")));
+#define DCH1DPTR DCH1DPTR
+extern volatile unsigned int   DCH1DPTR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DPTRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH1CSIZ __attribute__((section("sfrs")));
+#define DCH1CSIZ DCH1CSIZ
+extern volatile unsigned int   DCH1CSIZ __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1CSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1CSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1CSIZINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH1CPTR __attribute__((section("sfrs")));
+#define DCH1CPTR DCH1CPTR
+extern volatile unsigned int   DCH1CPTR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1CPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1CPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1CPTRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH1DAT __attribute__((section("sfrs")));
+#define DCH1DAT DCH1DAT
+extern volatile unsigned int   DCH1DAT __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DATCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DATSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH1DATINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH2CON __attribute__((section("sfrs")));
+#define DCH2CON DCH2CON
+extern volatile unsigned int   DCH2CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CHPRI:2;
@@ -5018,7 +5443,8 @@ extern volatile __DCH2CONbits_t DCH2CONbits __asm__ ("DCH2CON") __attribute__((s
 extern volatile unsigned int        DCH2CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH2ECON __attribute__((section("sfrs")));
+#define DCH2ECON DCH2ECON
+extern volatile unsigned int   DCH2ECON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :3;
@@ -5038,7 +5464,8 @@ extern volatile __DCH2ECONbits_t DCH2ECONbits __asm__ ("DCH2ECON") __attribute__
 extern volatile unsigned int        DCH2ECONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2ECONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2ECONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH2INT __attribute__((section("sfrs")));
+#define DCH2INT DCH2INT
+extern volatile unsigned int   DCH2INT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CHERIF:1;
@@ -5067,7 +5494,8 @@ extern volatile __DCH2INTbits_t DCH2INTbits __asm__ ("DCH2INT") __attribute__((s
 extern volatile unsigned int        DCH2INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2INTINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH2SSA __attribute__((section("sfrs")));
+#define DCH2SSA DCH2SSA
+extern volatile unsigned int   DCH2SSA __attribute__((section("sfrs")));
 typedef struct {
   unsigned CHSSA:32;
 } __DCH2SSAbits_t;
@@ -5075,7 +5503,8 @@ extern volatile __DCH2SSAbits_t DCH2SSAbits __asm__ ("DCH2SSA") __attribute__((s
 extern volatile unsigned int        DCH2SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SSAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH2DSA __attribute__((section("sfrs")));
+#define DCH2DSA DCH2DSA
+extern volatile unsigned int   DCH2DSA __attribute__((section("sfrs")));
 typedef struct {
   unsigned CHDSA:32;
 } __DCH2DSAbits_t;
@@ -5083,35 +5512,43 @@ extern volatile __DCH2DSAbits_t DCH2DSAbits __asm__ ("DCH2DSA") __attribute__((s
 extern volatile unsigned int        DCH2DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DSAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH2SSIZ __attribute__((section("sfrs")));
+#define DCH2SSIZ DCH2SSIZ
+extern volatile unsigned int   DCH2SSIZ __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SSIZINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH2DSIZ __attribute__((section("sfrs")));
+#define DCH2DSIZ DCH2DSIZ
+extern volatile unsigned int   DCH2DSIZ __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DSIZINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH2SPTR __attribute__((section("sfrs")));
+#define DCH2SPTR DCH2SPTR
+extern volatile unsigned int   DCH2SPTR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2SPTRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH2DPTR __attribute__((section("sfrs")));
+#define DCH2DPTR DCH2DPTR
+extern volatile unsigned int   DCH2DPTR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DPTRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH2CSIZ __attribute__((section("sfrs")));
+#define DCH2CSIZ DCH2CSIZ
+extern volatile unsigned int   DCH2CSIZ __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2CSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2CSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2CSIZINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH2CPTR __attribute__((section("sfrs")));
+#define DCH2CPTR DCH2CPTR
+extern volatile unsigned int   DCH2CPTR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2CPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2CPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2CPTRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH2DAT __attribute__((section("sfrs")));
+#define DCH2DAT DCH2DAT
+extern volatile unsigned int   DCH2DAT __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DATCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DATSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH2DATINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH3CON __attribute__((section("sfrs")));
+#define DCH3CON DCH3CON
+extern volatile unsigned int   DCH3CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CHPRI:2;
@@ -5133,7 +5570,8 @@ extern volatile __DCH3CONbits_t DCH3CONbits __asm__ ("DCH3CON") __attribute__((s
 extern volatile unsigned int        DCH3CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH3ECON __attribute__((section("sfrs")));
+#define DCH3ECON DCH3ECON
+extern volatile unsigned int   DCH3ECON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :3;
@@ -5153,7 +5591,8 @@ extern volatile __DCH3ECONbits_t DCH3ECONbits __asm__ ("DCH3ECON") __attribute__
 extern volatile unsigned int        DCH3ECONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3ECONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3ECONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH3INT __attribute__((section("sfrs")));
+#define DCH3INT DCH3INT
+extern volatile unsigned int   DCH3INT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CHERIF:1;
@@ -5182,7 +5621,8 @@ extern volatile __DCH3INTbits_t DCH3INTbits __asm__ ("DCH3INT") __attribute__((s
 extern volatile unsigned int        DCH3INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3INTINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH3SSA __attribute__((section("sfrs")));
+#define DCH3SSA DCH3SSA
+extern volatile unsigned int   DCH3SSA __attribute__((section("sfrs")));
 typedef struct {
   unsigned CHSSA:32;
 } __DCH3SSAbits_t;
@@ -5190,7 +5630,8 @@ extern volatile __DCH3SSAbits_t DCH3SSAbits __asm__ ("DCH3SSA") __attribute__((s
 extern volatile unsigned int        DCH3SSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SSAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH3DSA __attribute__((section("sfrs")));
+#define DCH3DSA DCH3DSA
+extern volatile unsigned int   DCH3DSA __attribute__((section("sfrs")));
 typedef struct {
   unsigned CHDSA:32;
 } __DCH3DSAbits_t;
@@ -5198,35 +5639,43 @@ extern volatile __DCH3DSAbits_t DCH3DSAbits __asm__ ("DCH3DSA") __attribute__((s
 extern volatile unsigned int        DCH3DSACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DSASET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DSAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH3SSIZ __attribute__((section("sfrs")));
+#define DCH3SSIZ DCH3SSIZ
+extern volatile unsigned int   DCH3SSIZ __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SSIZINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH3DSIZ __attribute__((section("sfrs")));
+#define DCH3DSIZ DCH3DSIZ
+extern volatile unsigned int   DCH3DSIZ __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DSIZINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH3SPTR __attribute__((section("sfrs")));
+#define DCH3SPTR DCH3SPTR
+extern volatile unsigned int   DCH3SPTR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3SPTRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH3DPTR __attribute__((section("sfrs")));
+#define DCH3DPTR DCH3DPTR
+extern volatile unsigned int   DCH3DPTR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DPTRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH3CSIZ __attribute__((section("sfrs")));
+#define DCH3CSIZ DCH3CSIZ
+extern volatile unsigned int   DCH3CSIZ __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3CSIZCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3CSIZSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3CSIZINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH3CPTR __attribute__((section("sfrs")));
+#define DCH3CPTR DCH3CPTR
+extern volatile unsigned int   DCH3CPTR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3CPTRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3CPTRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3CPTRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        DCH3DAT __attribute__((section("sfrs")));
+#define DCH3DAT DCH3DAT
+extern volatile unsigned int   DCH3DAT __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DATCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DATSET __attribute__((section("sfrs")));
 extern volatile unsigned int        DCH3DATINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1OTGIR __attribute__((section("sfrs")));
+#define U1OTGIR U1OTGIR
+extern volatile unsigned int   U1OTGIR __attribute__((section("sfrs")));
 typedef struct {
   unsigned VBUSVDIF:1;
   unsigned :1;
@@ -5239,7 +5688,8 @@ typedef struct {
 } __U1OTGIRbits_t;
 extern volatile __U1OTGIRbits_t U1OTGIRbits __asm__ ("U1OTGIR") __attribute__((section("sfrs")));
 extern volatile unsigned int        U1OTGIRCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        U1OTGIE __attribute__((section("sfrs")));
+#define U1OTGIE U1OTGIE
+extern volatile unsigned int   U1OTGIE __attribute__((section("sfrs")));
 typedef struct {
   unsigned VBUSVDIE:1;
   unsigned :1;
@@ -5254,7 +5704,8 @@ extern volatile __U1OTGIEbits_t U1OTGIEbits __asm__ ("U1OTGIE") __attribute__((s
 extern volatile unsigned int        U1OTGIECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1OTGIESET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1OTGIEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1OTGSTAT __attribute__((section("sfrs")));
+#define U1OTGSTAT U1OTGSTAT
+extern volatile unsigned int   U1OTGSTAT __attribute__((section("sfrs")));
 typedef struct {
   unsigned VBUSVD:1;
   unsigned :1;
@@ -5266,7 +5717,8 @@ typedef struct {
   unsigned ID:1;
 } __U1OTGSTATbits_t;
 extern volatile __U1OTGSTATbits_t U1OTGSTATbits __asm__ ("U1OTGSTAT") __attribute__((section("sfrs")));
-extern volatile unsigned int        U1OTGCON __attribute__((section("sfrs")));
+#define U1OTGCON U1OTGCON
+extern volatile unsigned int   U1OTGCON __attribute__((section("sfrs")));
 typedef struct {
   unsigned VBUSDIS:1;
   unsigned VBUSCHG:1;
@@ -5281,7 +5733,8 @@ extern volatile __U1OTGCONbits_t U1OTGCONbits __asm__ ("U1OTGCON") __attribute__
 extern volatile unsigned int        U1OTGCONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1OTGCONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1OTGCONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1PWRC __attribute__((section("sfrs")));
+#define U1PWRC U1PWRC
+extern volatile unsigned int   U1PWRC __attribute__((section("sfrs")));
 typedef struct {
   unsigned USBPWR:1;
   unsigned USUSPEND:1;
@@ -5295,7 +5748,8 @@ extern volatile __U1PWRCbits_t U1PWRCbits __asm__ ("U1PWRC") __attribute__((sect
 extern volatile unsigned int        U1PWRCCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1PWRCSET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1PWRCINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1IR __attribute__((section("sfrs")));
+#define U1IR U1IR
+extern volatile unsigned int   U1IR __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned URSTIF_DETACHIF:1;
@@ -5316,7 +5770,8 @@ typedef union {
 } __U1IRbits_t;
 extern volatile __U1IRbits_t U1IRbits __asm__ ("U1IR") __attribute__((section("sfrs")));
 extern volatile unsigned int        U1IRCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        U1IE __attribute__((section("sfrs")));
+#define U1IE U1IE
+extern volatile unsigned int   U1IE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned URSTIE_DETACHIE:1;
@@ -5339,7 +5794,8 @@ extern volatile __U1IEbits_t U1IEbits __asm__ ("U1IE") __attribute__((section("s
 extern volatile unsigned int        U1IECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1IESET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1IEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EIR __attribute__((section("sfrs")));
+#define U1EIR U1EIR
+extern volatile unsigned int   U1EIR __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned PIDEF:1;
@@ -5362,7 +5818,8 @@ typedef union {
 } __U1EIRbits_t;
 extern volatile __U1EIRbits_t U1EIRbits __asm__ ("U1EIR") __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EIRCLR __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EIE __attribute__((section("sfrs")));
+#define U1EIE U1EIE
+extern volatile unsigned int   U1EIE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned PIDEE:1;
@@ -5387,7 +5844,8 @@ extern volatile __U1EIEbits_t U1EIEbits __asm__ ("U1EIE") __attribute__((section
 extern volatile unsigned int        U1EIECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EIESET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EIEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1STAT __attribute__((section("sfrs")));
+#define U1STAT U1STAT
+extern volatile unsigned int   U1STAT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :2;
@@ -5404,7 +5862,8 @@ typedef union {
   };
 } __U1STATbits_t;
 extern volatile __U1STATbits_t U1STATbits __asm__ ("U1STAT") __attribute__((section("sfrs")));
-extern volatile unsigned int        U1CON __attribute__((section("sfrs")));
+#define U1CON U1CON
+extern volatile unsigned int   U1CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned USBEN_SOFEN:1;
@@ -5433,7 +5892,8 @@ extern volatile __U1CONbits_t U1CONbits __asm__ ("U1CON") __attribute__((section
 extern volatile unsigned int        U1CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1ADDR __attribute__((section("sfrs")));
+#define U1ADDR U1ADDR
+extern volatile unsigned int   U1ADDR __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned DEVADDR:7;
@@ -5453,7 +5913,8 @@ extern volatile __U1ADDRbits_t U1ADDRbits __asm__ ("U1ADDR") __attribute__((sect
 extern volatile unsigned int        U1ADDRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1ADDRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1ADDRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1BDTP1 __attribute__((section("sfrs")));
+#define U1BDTP1 U1BDTP1
+extern volatile unsigned int   U1BDTP1 __attribute__((section("sfrs")));
 typedef struct {
   unsigned :1;
   unsigned BDTPTRL:7;
@@ -5462,7 +5923,8 @@ extern volatile __U1BDTP1bits_t U1BDTP1bits __asm__ ("U1BDTP1") __attribute__((s
 extern volatile unsigned int        U1BDTP1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1BDTP1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1BDTP1INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1FRML __attribute__((section("sfrs")));
+#define U1FRML U1FRML
+extern volatile unsigned int   U1FRML __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned FRML:8;
@@ -5479,7 +5941,8 @@ typedef union {
   };
 } __U1FRMLbits_t;
 extern volatile __U1FRMLbits_t U1FRMLbits __asm__ ("U1FRML") __attribute__((section("sfrs")));
-extern volatile unsigned int        U1FRMH __attribute__((section("sfrs")));
+#define U1FRMH U1FRMH
+extern volatile unsigned int   U1FRMH __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned FRMH:3;
@@ -5491,7 +5954,8 @@ typedef union {
   };
 } __U1FRMHbits_t;
 extern volatile __U1FRMHbits_t U1FRMHbits __asm__ ("U1FRMH") __attribute__((section("sfrs")));
-extern volatile unsigned int        U1TOK __attribute__((section("sfrs")));
+#define U1TOK U1TOK
+extern volatile unsigned int   U1TOK __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EP:4;
@@ -5518,7 +5982,8 @@ extern volatile __U1TOKbits_t U1TOKbits __asm__ ("U1TOK") __attribute__((section
 extern volatile unsigned int        U1TOKCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1TOKSET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1TOKINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1SOF __attribute__((section("sfrs")));
+#define U1SOF U1SOF
+extern volatile unsigned int   U1SOF __attribute__((section("sfrs")));
 typedef struct {
   unsigned CNT:8;
 } __U1SOFbits_t;
@@ -5526,7 +5991,8 @@ extern volatile __U1SOFbits_t U1SOFbits __asm__ ("U1SOF") __attribute__((section
 extern volatile unsigned int        U1SOFCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1SOFSET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1SOFINV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1BDTP2 __attribute__((section("sfrs")));
+#define U1BDTP2 U1BDTP2
+extern volatile unsigned int   U1BDTP2 __attribute__((section("sfrs")));
 typedef struct {
   unsigned BDTPTRH:8;
 } __U1BDTP2bits_t;
@@ -5534,7 +6000,8 @@ extern volatile __U1BDTP2bits_t U1BDTP2bits __asm__ ("U1BDTP2") __attribute__((s
 extern volatile unsigned int        U1BDTP2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1BDTP2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1BDTP2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1BDTP3 __attribute__((section("sfrs")));
+#define U1BDTP3 U1BDTP3
+extern volatile unsigned int   U1BDTP3 __attribute__((section("sfrs")));
 typedef struct {
   unsigned BDTPTRU:8;
 } __U1BDTP3bits_t;
@@ -5542,7 +6009,8 @@ extern volatile __U1BDTP3bits_t U1BDTP3bits __asm__ ("U1BDTP3") __attribute__((s
 extern volatile unsigned int        U1BDTP3CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1BDTP3SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1BDTP3INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1CNFG1 __attribute__((section("sfrs")));
+#define U1CNFG1 U1CNFG1
+extern volatile unsigned int   U1CNFG1 __attribute__((section("sfrs")));
 typedef struct {
   unsigned UASUSPND:1;
   unsigned :3;
@@ -5555,7 +6023,8 @@ extern volatile __U1CNFG1bits_t U1CNFG1bits __asm__ ("U1CNFG1") __attribute__((s
 extern volatile unsigned int        U1CNFG1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1CNFG1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1CNFG1INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EP0 __attribute__((section("sfrs")));
+#define U1EP0 U1EP0
+extern volatile unsigned int   U1EP0 __attribute__((section("sfrs")));
 typedef struct {
   unsigned EPHSHK:1;
   unsigned EPSTALL:1;
@@ -5570,7 +6039,8 @@ extern volatile __U1EP0bits_t U1EP0bits __asm__ ("U1EP0") __attribute__((section
 extern volatile unsigned int        U1EP0CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP0SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP0INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EP1 __attribute__((section("sfrs")));
+#define U1EP1 U1EP1
+extern volatile unsigned int   U1EP1 __attribute__((section("sfrs")));
 typedef struct {
   unsigned EPHSHK:1;
   unsigned EPSTALL:1;
@@ -5582,7 +6052,8 @@ extern volatile __U1EP1bits_t U1EP1bits __asm__ ("U1EP1") __attribute__((section
 extern volatile unsigned int        U1EP1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP1INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EP2 __attribute__((section("sfrs")));
+#define U1EP2 U1EP2
+extern volatile unsigned int   U1EP2 __attribute__((section("sfrs")));
 typedef struct {
   unsigned EPHSHK:1;
   unsigned EPSTALL:1;
@@ -5594,7 +6065,8 @@ extern volatile __U1EP2bits_t U1EP2bits __asm__ ("U1EP2") __attribute__((section
 extern volatile unsigned int        U1EP2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EP3 __attribute__((section("sfrs")));
+#define U1EP3 U1EP3
+extern volatile unsigned int   U1EP3 __attribute__((section("sfrs")));
 typedef struct {
   unsigned EPHSHK:1;
   unsigned EPSTALL:1;
@@ -5606,7 +6078,8 @@ extern volatile __U1EP3bits_t U1EP3bits __asm__ ("U1EP3") __attribute__((section
 extern volatile unsigned int        U1EP3CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP3SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP3INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EP4 __attribute__((section("sfrs")));
+#define U1EP4 U1EP4
+extern volatile unsigned int   U1EP4 __attribute__((section("sfrs")));
 typedef struct {
   unsigned EPHSHK:1;
   unsigned EPSTALL:1;
@@ -5618,7 +6091,8 @@ extern volatile __U1EP4bits_t U1EP4bits __asm__ ("U1EP4") __attribute__((section
 extern volatile unsigned int        U1EP4CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP4SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP4INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EP5 __attribute__((section("sfrs")));
+#define U1EP5 U1EP5
+extern volatile unsigned int   U1EP5 __attribute__((section("sfrs")));
 typedef struct {
   unsigned EPHSHK:1;
   unsigned EPSTALL:1;
@@ -5630,7 +6104,8 @@ extern volatile __U1EP5bits_t U1EP5bits __asm__ ("U1EP5") __attribute__((section
 extern volatile unsigned int        U1EP5CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP5SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP5INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EP6 __attribute__((section("sfrs")));
+#define U1EP6 U1EP6
+extern volatile unsigned int   U1EP6 __attribute__((section("sfrs")));
 typedef struct {
   unsigned EPHSHK:1;
   unsigned EPSTALL:1;
@@ -5642,7 +6117,8 @@ extern volatile __U1EP6bits_t U1EP6bits __asm__ ("U1EP6") __attribute__((section
 extern volatile unsigned int        U1EP6CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP6SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP6INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EP7 __attribute__((section("sfrs")));
+#define U1EP7 U1EP7
+extern volatile unsigned int   U1EP7 __attribute__((section("sfrs")));
 typedef struct {
   unsigned EPHSHK:1;
   unsigned EPSTALL:1;
@@ -5654,7 +6130,8 @@ extern volatile __U1EP7bits_t U1EP7bits __asm__ ("U1EP7") __attribute__((section
 extern volatile unsigned int        U1EP7CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP7SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP7INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EP8 __attribute__((section("sfrs")));
+#define U1EP8 U1EP8
+extern volatile unsigned int   U1EP8 __attribute__((section("sfrs")));
 typedef struct {
   unsigned EPHSHK:1;
   unsigned EPSTALL:1;
@@ -5666,7 +6143,8 @@ extern volatile __U1EP8bits_t U1EP8bits __asm__ ("U1EP8") __attribute__((section
 extern volatile unsigned int        U1EP8CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP8SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP8INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EP9 __attribute__((section("sfrs")));
+#define U1EP9 U1EP9
+extern volatile unsigned int   U1EP9 __attribute__((section("sfrs")));
 typedef struct {
   unsigned EPHSHK:1;
   unsigned EPSTALL:1;
@@ -5678,7 +6156,8 @@ extern volatile __U1EP9bits_t U1EP9bits __asm__ ("U1EP9") __attribute__((section
 extern volatile unsigned int        U1EP9CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP9SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP9INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EP10 __attribute__((section("sfrs")));
+#define U1EP10 U1EP10
+extern volatile unsigned int   U1EP10 __attribute__((section("sfrs")));
 typedef struct {
   unsigned EPHSHK:1;
   unsigned EPSTALL:1;
@@ -5690,7 +6169,8 @@ extern volatile __U1EP10bits_t U1EP10bits __asm__ ("U1EP10") __attribute__((sect
 extern volatile unsigned int        U1EP10CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP10SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP10INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EP11 __attribute__((section("sfrs")));
+#define U1EP11 U1EP11
+extern volatile unsigned int   U1EP11 __attribute__((section("sfrs")));
 typedef struct {
   unsigned EPHSHK:1;
   unsigned EPSTALL:1;
@@ -5702,7 +6182,8 @@ extern volatile __U1EP11bits_t U1EP11bits __asm__ ("U1EP11") __attribute__((sect
 extern volatile unsigned int        U1EP11CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP11SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP11INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EP12 __attribute__((section("sfrs")));
+#define U1EP12 U1EP12
+extern volatile unsigned int   U1EP12 __attribute__((section("sfrs")));
 typedef struct {
   unsigned EPHSHK:1;
   unsigned EPSTALL:1;
@@ -5714,7 +6195,8 @@ extern volatile __U1EP12bits_t U1EP12bits __asm__ ("U1EP12") __attribute__((sect
 extern volatile unsigned int        U1EP12CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP12SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP12INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EP13 __attribute__((section("sfrs")));
+#define U1EP13 U1EP13
+extern volatile unsigned int   U1EP13 __attribute__((section("sfrs")));
 typedef struct {
   unsigned EPHSHK:1;
   unsigned EPSTALL:1;
@@ -5726,7 +6208,8 @@ extern volatile __U1EP13bits_t U1EP13bits __asm__ ("U1EP13") __attribute__((sect
 extern volatile unsigned int        U1EP13CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP13SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP13INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EP14 __attribute__((section("sfrs")));
+#define U1EP14 U1EP14
+extern volatile unsigned int   U1EP14 __attribute__((section("sfrs")));
 typedef struct {
   unsigned EPHSHK:1;
   unsigned EPSTALL:1;
@@ -5738,7 +6221,8 @@ extern volatile __U1EP14bits_t U1EP14bits __asm__ ("U1EP14") __attribute__((sect
 extern volatile unsigned int        U1EP14CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP14SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP14INV __attribute__((section("sfrs")));
-extern volatile unsigned int        U1EP15 __attribute__((section("sfrs")));
+#define U1EP15 U1EP15
+extern volatile unsigned int   U1EP15 __attribute__((section("sfrs")));
 typedef struct {
   unsigned EPHSHK:1;
   unsigned EPSTALL:1;
@@ -5750,7 +6234,8 @@ extern volatile __U1EP15bits_t U1EP15bits __asm__ ("U1EP15") __attribute__((sect
 extern volatile unsigned int        U1EP15CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP15SET __attribute__((section("sfrs")));
 extern volatile unsigned int        U1EP15INV __attribute__((section("sfrs")));
-extern volatile unsigned int        ANSELA __attribute__((section("sfrs")));
+#define ANSELA ANSELA
+extern volatile unsigned int   ANSELA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :9;
@@ -5765,7 +6250,8 @@ extern volatile __ANSELAbits_t ANSELAbits __asm__ ("ANSELA") __attribute__((sect
 extern volatile unsigned int        ANSELACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELASET __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        TRISA __attribute__((section("sfrs")));
+#define TRISA TRISA
+extern volatile unsigned int   TRISA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TRISA0:1;
@@ -5791,7 +6277,8 @@ extern volatile __TRISAbits_t TRISAbits __asm__ ("TRISA") __attribute__((section
 extern volatile unsigned int        TRISACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        TRISASET __attribute__((section("sfrs")));
 extern volatile unsigned int        TRISAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        PORTA __attribute__((section("sfrs")));
+#define PORTA PORTA
+extern volatile unsigned int   PORTA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RA0:1;
@@ -5817,7 +6304,8 @@ extern volatile __PORTAbits_t PORTAbits __asm__ ("PORTA") __attribute__((section
 extern volatile unsigned int        PORTACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PORTASET __attribute__((section("sfrs")));
 extern volatile unsigned int        PORTAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        LATA __attribute__((section("sfrs")));
+#define LATA LATA
+extern volatile unsigned int   LATA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned LATA0:1;
@@ -5843,7 +6331,8 @@ extern volatile __LATAbits_t LATAbits __asm__ ("LATA") __attribute__((section("s
 extern volatile unsigned int        LATACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        LATASET __attribute__((section("sfrs")));
 extern volatile unsigned int        LATAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        ODCA __attribute__((section("sfrs")));
+#define ODCA ODCA
+extern volatile unsigned int   ODCA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ODCA0:1;
@@ -5869,7 +6358,8 @@ extern volatile __ODCAbits_t ODCAbits __asm__ ("ODCA") __attribute__((section("s
 extern volatile unsigned int        ODCACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        ODCASET __attribute__((section("sfrs")));
 extern volatile unsigned int        ODCAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPUA __attribute__((section("sfrs")));
+#define CNPUA CNPUA
+extern volatile unsigned int   CNPUA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNPUA0:1;
@@ -5895,7 +6385,8 @@ extern volatile __CNPUAbits_t CNPUAbits __asm__ ("CNPUA") __attribute__((section
 extern volatile unsigned int        CNPUACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPUASET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPUAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPDA __attribute__((section("sfrs")));
+#define CNPDA CNPDA
+extern volatile unsigned int   CNPDA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNPDA0:1;
@@ -5921,7 +6412,8 @@ extern volatile __CNPDAbits_t CNPDAbits __asm__ ("CNPDA") __attribute__((section
 extern volatile unsigned int        CNPDACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPDASET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPDAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNCONA __attribute__((section("sfrs")));
+#define CNCONA CNCONA
+extern volatile unsigned int   CNCONA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :13;
@@ -5937,7 +6429,8 @@ extern volatile __CNCONAbits_t CNCONAbits __asm__ ("CNCONA") __attribute__((sect
 extern volatile unsigned int        CNCONACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONASET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNENA __attribute__((section("sfrs")));
+#define CNENA CNENA
+extern volatile unsigned int   CNENA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNIEA0:1;
@@ -5963,7 +6456,8 @@ extern volatile __CNENAbits_t CNENAbits __asm__ ("CNENA") __attribute__((section
 extern volatile unsigned int        CNENACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNENASET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNENAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNSTATA __attribute__((section("sfrs")));
+#define CNSTATA CNSTATA
+extern volatile unsigned int   CNSTATA __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNSTATA0:1;
@@ -5989,7 +6483,8 @@ extern volatile __CNSTATAbits_t CNSTATAbits __asm__ ("CNSTATA") __attribute__((s
 extern volatile unsigned int        CNSTATACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATASET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        ANSELB __attribute__((section("sfrs")));
+#define ANSELB ANSELB
+extern volatile unsigned int   ANSELB __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ANSB0:1;
@@ -6017,7 +6512,8 @@ extern volatile __ANSELBbits_t ANSELBbits __asm__ ("ANSELB") __attribute__((sect
 extern volatile unsigned int        ANSELBCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELBSET __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELBINV __attribute__((section("sfrs")));
-extern volatile unsigned int        TRISB __attribute__((section("sfrs")));
+#define TRISB TRISB
+extern volatile unsigned int   TRISB __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TRISB0:1;
@@ -6045,7 +6541,8 @@ extern volatile __TRISBbits_t TRISBbits __asm__ ("TRISB") __attribute__((section
 extern volatile unsigned int        TRISBCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        TRISBSET __attribute__((section("sfrs")));
 extern volatile unsigned int        TRISBINV __attribute__((section("sfrs")));
-extern volatile unsigned int        PORTB __attribute__((section("sfrs")));
+#define PORTB PORTB
+extern volatile unsigned int   PORTB __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RB0:1;
@@ -6073,7 +6570,8 @@ extern volatile __PORTBbits_t PORTBbits __asm__ ("PORTB") __attribute__((section
 extern volatile unsigned int        PORTBCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PORTBSET __attribute__((section("sfrs")));
 extern volatile unsigned int        PORTBINV __attribute__((section("sfrs")));
-extern volatile unsigned int        LATB __attribute__((section("sfrs")));
+#define LATB LATB
+extern volatile unsigned int   LATB __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned LATB0:1;
@@ -6101,7 +6599,8 @@ extern volatile __LATBbits_t LATBbits __asm__ ("LATB") __attribute__((section("s
 extern volatile unsigned int        LATBCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        LATBSET __attribute__((section("sfrs")));
 extern volatile unsigned int        LATBINV __attribute__((section("sfrs")));
-extern volatile unsigned int        ODCB __attribute__((section("sfrs")));
+#define ODCB ODCB
+extern volatile unsigned int   ODCB __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ODCB0:1;
@@ -6129,7 +6628,8 @@ extern volatile __ODCBbits_t ODCBbits __asm__ ("ODCB") __attribute__((section("s
 extern volatile unsigned int        ODCBCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        ODCBSET __attribute__((section("sfrs")));
 extern volatile unsigned int        ODCBINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPUB __attribute__((section("sfrs")));
+#define CNPUB CNPUB
+extern volatile unsigned int   CNPUB __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNPUB0:1;
@@ -6157,7 +6657,8 @@ extern volatile __CNPUBbits_t CNPUBbits __asm__ ("CNPUB") __attribute__((section
 extern volatile unsigned int        CNPUBCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPUBSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPUBINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPDB __attribute__((section("sfrs")));
+#define CNPDB CNPDB
+extern volatile unsigned int   CNPDB __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNPDB0:1;
@@ -6185,7 +6686,8 @@ extern volatile __CNPDBbits_t CNPDBbits __asm__ ("CNPDB") __attribute__((section
 extern volatile unsigned int        CNPDBCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPDBSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPDBINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNCONB __attribute__((section("sfrs")));
+#define CNCONB CNCONB
+extern volatile unsigned int   CNCONB __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :13;
@@ -6201,7 +6703,8 @@ extern volatile __CNCONBbits_t CNCONBbits __asm__ ("CNCONB") __attribute__((sect
 extern volatile unsigned int        CNCONBCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONBSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONBINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNENB __attribute__((section("sfrs")));
+#define CNENB CNENB
+extern volatile unsigned int   CNENB __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNIEB0:1;
@@ -6229,7 +6732,8 @@ extern volatile __CNENBbits_t CNENBbits __asm__ ("CNENB") __attribute__((section
 extern volatile unsigned int        CNENBCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNENBSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNENBINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNSTATB __attribute__((section("sfrs")));
+#define CNSTATB CNSTATB
+extern volatile unsigned int   CNSTATB __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNSTATB0:1;
@@ -6257,7 +6761,8 @@ extern volatile __CNSTATBbits_t CNSTATBbits __asm__ ("CNSTATB") __attribute__((s
 extern volatile unsigned int        CNSTATBCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATBSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATBINV __attribute__((section("sfrs")));
-extern volatile unsigned int        ANSELC __attribute__((section("sfrs")));
+#define ANSELC ANSELC
+extern volatile unsigned int   ANSELC __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :1;
@@ -6273,10 +6778,11 @@ extern volatile __ANSELCbits_t ANSELCbits __asm__ ("ANSELC") __attribute__((sect
 extern volatile unsigned int        ANSELCCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELCSET __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELCINV __attribute__((section("sfrs")));
-extern volatile unsigned int        TRISC __attribute__((section("sfrs")));
+#define TRISC TRISC
+extern volatile unsigned int   TRISC __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned TRISC0:1;
+    unsigned :1;
     unsigned TRISC1:1;
     unsigned TRISC2:1;
     unsigned TRISC3:1;
@@ -6295,10 +6801,11 @@ extern volatile __TRISCbits_t TRISCbits __asm__ ("TRISC") __attribute__((section
 extern volatile unsigned int        TRISCCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        TRISCSET __attribute__((section("sfrs")));
 extern volatile unsigned int        TRISCINV __attribute__((section("sfrs")));
-extern volatile unsigned int        PORTC __attribute__((section("sfrs")));
+#define PORTC PORTC
+extern volatile unsigned int   PORTC __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned RC0:1;
+    unsigned :1;
     unsigned RC1:1;
     unsigned RC2:1;
     unsigned RC3:1;
@@ -6317,10 +6824,11 @@ extern volatile __PORTCbits_t PORTCbits __asm__ ("PORTC") __attribute__((section
 extern volatile unsigned int        PORTCCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PORTCSET __attribute__((section("sfrs")));
 extern volatile unsigned int        PORTCINV __attribute__((section("sfrs")));
-extern volatile unsigned int        LATC __attribute__((section("sfrs")));
+#define LATC LATC
+extern volatile unsigned int   LATC __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned LATC0:1;
+    unsigned :1;
     unsigned LATC1:1;
     unsigned LATC2:1;
     unsigned LATC3:1;
@@ -6339,10 +6847,11 @@ extern volatile __LATCbits_t LATCbits __asm__ ("LATC") __attribute__((section("s
 extern volatile unsigned int        LATCCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        LATCSET __attribute__((section("sfrs")));
 extern volatile unsigned int        LATCINV __attribute__((section("sfrs")));
-extern volatile unsigned int        ODCC __attribute__((section("sfrs")));
+#define ODCC ODCC
+extern volatile unsigned int   ODCC __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned ODCC0:1;
+    unsigned :1;
     unsigned ODCC1:1;
     unsigned ODCC2:1;
     unsigned ODCC3:1;
@@ -6361,10 +6870,11 @@ extern volatile __ODCCbits_t ODCCbits __asm__ ("ODCC") __attribute__((section("s
 extern volatile unsigned int        ODCCCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        ODCCSET __attribute__((section("sfrs")));
 extern volatile unsigned int        ODCCINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPUC __attribute__((section("sfrs")));
+#define CNPUC CNPUC
+extern volatile unsigned int   CNPUC __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned CNPUC0:1;
+    unsigned :1;
     unsigned CNPUC1:1;
     unsigned CNPUC2:1;
     unsigned CNPUC3:1;
@@ -6383,10 +6893,11 @@ extern volatile __CNPUCbits_t CNPUCbits __asm__ ("CNPUC") __attribute__((section
 extern volatile unsigned int        CNPUCCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPUCSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPUCINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPDC __attribute__((section("sfrs")));
+#define CNPDC CNPDC
+extern volatile unsigned int   CNPDC __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned CNPDC0:1;
+    unsigned :1;
     unsigned CNPDC1:1;
     unsigned CNPDC2:1;
     unsigned CNPDC3:1;
@@ -6405,7 +6916,8 @@ extern volatile __CNPDCbits_t CNPDCbits __asm__ ("CNPDC") __attribute__((section
 extern volatile unsigned int        CNPDCCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPDCSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPDCINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNCONC __attribute__((section("sfrs")));
+#define CNCONC CNCONC
+extern volatile unsigned int   CNCONC __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :13;
@@ -6421,10 +6933,11 @@ extern volatile __CNCONCbits_t CNCONCbits __asm__ ("CNCONC") __attribute__((sect
 extern volatile unsigned int        CNCONCCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONCSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONCINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNENC __attribute__((section("sfrs")));
+#define CNENC CNENC
+extern volatile unsigned int   CNENC __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned CNIEC0:1;
+    unsigned :1;
     unsigned CNIEC1:1;
     unsigned CNIEC2:1;
     unsigned CNIEC3:1;
@@ -6443,10 +6956,11 @@ extern volatile __CNENCbits_t CNENCbits __asm__ ("CNENC") __attribute__((section
 extern volatile unsigned int        CNENCCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNENCSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNENCINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNSTATC __attribute__((section("sfrs")));
+#define CNSTATC CNSTATC
+extern volatile unsigned int   CNSTATC __attribute__((section("sfrs")));
 typedef union {
   struct {
-    unsigned CNSTATC0:1;
+    unsigned :1;
     unsigned CNSTATC1:1;
     unsigned CNSTATC2:1;
     unsigned CNSTATC3:1;
@@ -6465,7 +6979,8 @@ extern volatile __CNSTATCbits_t CNSTATCbits __asm__ ("CNSTATC") __attribute__((s
 extern volatile unsigned int        CNSTATCCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATCSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATCINV __attribute__((section("sfrs")));
-extern volatile unsigned int        ANSELD __attribute__((section("sfrs")));
+#define ANSELD ANSELD
+extern volatile unsigned int   ANSELD __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :1;
@@ -6489,7 +7004,8 @@ extern volatile __ANSELDbits_t ANSELDbits __asm__ ("ANSELD") __attribute__((sect
 extern volatile unsigned int        ANSELDCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELDSET __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELDINV __attribute__((section("sfrs")));
-extern volatile unsigned int        TRISD __attribute__((section("sfrs")));
+#define TRISD TRISD
+extern volatile unsigned int   TRISD __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TRISD0:1;
@@ -6517,7 +7033,8 @@ extern volatile __TRISDbits_t TRISDbits __asm__ ("TRISD") __attribute__((section
 extern volatile unsigned int        TRISDCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        TRISDSET __attribute__((section("sfrs")));
 extern volatile unsigned int        TRISDINV __attribute__((section("sfrs")));
-extern volatile unsigned int        PORTD __attribute__((section("sfrs")));
+#define PORTD PORTD
+extern volatile unsigned int   PORTD __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RD0:1;
@@ -6545,7 +7062,8 @@ extern volatile __PORTDbits_t PORTDbits __asm__ ("PORTD") __attribute__((section
 extern volatile unsigned int        PORTDCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PORTDSET __attribute__((section("sfrs")));
 extern volatile unsigned int        PORTDINV __attribute__((section("sfrs")));
-extern volatile unsigned int        LATD __attribute__((section("sfrs")));
+#define LATD LATD
+extern volatile unsigned int   LATD __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned LATD0:1;
@@ -6573,7 +7091,8 @@ extern volatile __LATDbits_t LATDbits __asm__ ("LATD") __attribute__((section("s
 extern volatile unsigned int        LATDCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        LATDSET __attribute__((section("sfrs")));
 extern volatile unsigned int        LATDINV __attribute__((section("sfrs")));
-extern volatile unsigned int        ODCD __attribute__((section("sfrs")));
+#define ODCD ODCD
+extern volatile unsigned int   ODCD __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ODCD0:1;
@@ -6601,7 +7120,8 @@ extern volatile __ODCDbits_t ODCDbits __asm__ ("ODCD") __attribute__((section("s
 extern volatile unsigned int        ODCDCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        ODCDSET __attribute__((section("sfrs")));
 extern volatile unsigned int        ODCDINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPUD __attribute__((section("sfrs")));
+#define CNPUD CNPUD
+extern volatile unsigned int   CNPUD __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNPUD0:1;
@@ -6629,7 +7149,8 @@ extern volatile __CNPUDbits_t CNPUDbits __asm__ ("CNPUD") __attribute__((section
 extern volatile unsigned int        CNPUDCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPUDSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPUDINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPDD __attribute__((section("sfrs")));
+#define CNPDD CNPDD
+extern volatile unsigned int   CNPDD __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNPDD0:1;
@@ -6657,7 +7178,8 @@ extern volatile __CNPDDbits_t CNPDDbits __asm__ ("CNPDD") __attribute__((section
 extern volatile unsigned int        CNPDDCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPDDSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPDDINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNCOND __attribute__((section("sfrs")));
+#define CNCOND CNCOND
+extern volatile unsigned int   CNCOND __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :13;
@@ -6673,7 +7195,8 @@ extern volatile __CNCONDbits_t CNCONDbits __asm__ ("CNCOND") __attribute__((sect
 extern volatile unsigned int        CNCONDCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONDSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONDINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNEND __attribute__((section("sfrs")));
+#define CNEND CNEND
+extern volatile unsigned int   CNEND __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNIED0:1;
@@ -6701,7 +7224,8 @@ extern volatile __CNENDbits_t CNENDbits __asm__ ("CNEND") __attribute__((section
 extern volatile unsigned int        CNENDCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNENDSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNENDINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNSTATD __attribute__((section("sfrs")));
+#define CNSTATD CNSTATD
+extern volatile unsigned int   CNSTATD __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNSTATD0:1;
@@ -6729,7 +7253,8 @@ extern volatile __CNSTATDbits_t CNSTATDbits __asm__ ("CNSTATD") __attribute__((s
 extern volatile unsigned int        CNSTATDCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATDSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATDINV __attribute__((section("sfrs")));
-extern volatile unsigned int        ANSELE __attribute__((section("sfrs")));
+#define ANSELE ANSELE
+extern volatile unsigned int   ANSELE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ANSE0:1;
@@ -6751,7 +7276,8 @@ extern volatile __ANSELEbits_t ANSELEbits __asm__ ("ANSELE") __attribute__((sect
 extern volatile unsigned int        ANSELECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELESET __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        TRISE __attribute__((section("sfrs")));
+#define TRISE TRISE
+extern volatile unsigned int   TRISE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TRISE0:1;
@@ -6773,7 +7299,8 @@ extern volatile __TRISEbits_t TRISEbits __asm__ ("TRISE") __attribute__((section
 extern volatile unsigned int        TRISECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        TRISESET __attribute__((section("sfrs")));
 extern volatile unsigned int        TRISEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        PORTE __attribute__((section("sfrs")));
+#define PORTE PORTE
+extern volatile unsigned int   PORTE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RE0:1;
@@ -6795,7 +7322,8 @@ extern volatile __PORTEbits_t PORTEbits __asm__ ("PORTE") __attribute__((section
 extern volatile unsigned int        PORTECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PORTESET __attribute__((section("sfrs")));
 extern volatile unsigned int        PORTEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        LATE __attribute__((section("sfrs")));
+#define LATE LATE
+extern volatile unsigned int   LATE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned LATE0:1;
@@ -6817,7 +7345,8 @@ extern volatile __LATEbits_t LATEbits __asm__ ("LATE") __attribute__((section("s
 extern volatile unsigned int        LATECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        LATESET __attribute__((section("sfrs")));
 extern volatile unsigned int        LATEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        ODCE __attribute__((section("sfrs")));
+#define ODCE ODCE
+extern volatile unsigned int   ODCE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ODCE0:1;
@@ -6839,7 +7368,8 @@ extern volatile __ODCEbits_t ODCEbits __asm__ ("ODCE") __attribute__((section("s
 extern volatile unsigned int        ODCECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        ODCESET __attribute__((section("sfrs")));
 extern volatile unsigned int        ODCEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPUE __attribute__((section("sfrs")));
+#define CNPUE CNPUE
+extern volatile unsigned int   CNPUE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNPUE0:1;
@@ -6861,7 +7391,8 @@ extern volatile __CNPUEbits_t CNPUEbits __asm__ ("CNPUE") __attribute__((section
 extern volatile unsigned int        CNPUECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPUESET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPUEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPDE __attribute__((section("sfrs")));
+#define CNPDE CNPDE
+extern volatile unsigned int   CNPDE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNPDE0:1;
@@ -6883,7 +7414,8 @@ extern volatile __CNPDEbits_t CNPDEbits __asm__ ("CNPDE") __attribute__((section
 extern volatile unsigned int        CNPDECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPDESET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPDEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNCONE __attribute__((section("sfrs")));
+#define CNCONE CNCONE
+extern volatile unsigned int   CNCONE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :13;
@@ -6899,7 +7431,8 @@ extern volatile __CNCONEbits_t CNCONEbits __asm__ ("CNCONE") __attribute__((sect
 extern volatile unsigned int        CNCONECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONESET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNENE __attribute__((section("sfrs")));
+#define CNENE CNENE
+extern volatile unsigned int   CNENE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNIEE0:1;
@@ -6921,7 +7454,8 @@ extern volatile __CNENEbits_t CNENEbits __asm__ ("CNENE") __attribute__((section
 extern volatile unsigned int        CNENECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNENESET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNENEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNSTATE __attribute__((section("sfrs")));
+#define CNSTATE CNSTATE
+extern volatile unsigned int   CNSTATE __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNSTATE0:1;
@@ -6943,7 +7477,8 @@ extern volatile __CNSTATEbits_t CNSTATEbits __asm__ ("CNSTATE") __attribute__((s
 extern volatile unsigned int        CNSTATECLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATESET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATEINV __attribute__((section("sfrs")));
-extern volatile unsigned int        ANSELF __attribute__((section("sfrs")));
+#define ANSELF ANSELF
+extern volatile unsigned int   ANSELF __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ANSF0:1;
@@ -6963,7 +7498,8 @@ extern volatile __ANSELFbits_t ANSELFbits __asm__ ("ANSELF") __attribute__((sect
 extern volatile unsigned int        ANSELFCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELFSET __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELFINV __attribute__((section("sfrs")));
-extern volatile unsigned int        TRISF __attribute__((section("sfrs")));
+#define TRISF TRISF
+extern volatile unsigned int   TRISF __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TRISF0:1;
@@ -6986,7 +7522,8 @@ extern volatile __TRISFbits_t TRISFbits __asm__ ("TRISF") __attribute__((section
 extern volatile unsigned int        TRISFCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        TRISFSET __attribute__((section("sfrs")));
 extern volatile unsigned int        TRISFINV __attribute__((section("sfrs")));
-extern volatile unsigned int        PORTF __attribute__((section("sfrs")));
+#define PORTF PORTF
+extern volatile unsigned int   PORTF __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RF0:1;
@@ -7009,7 +7546,8 @@ extern volatile __PORTFbits_t PORTFbits __asm__ ("PORTF") __attribute__((section
 extern volatile unsigned int        PORTFCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PORTFSET __attribute__((section("sfrs")));
 extern volatile unsigned int        PORTFINV __attribute__((section("sfrs")));
-extern volatile unsigned int        LATF __attribute__((section("sfrs")));
+#define LATF LATF
+extern volatile unsigned int   LATF __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned LATF0:1;
@@ -7032,7 +7570,8 @@ extern volatile __LATFbits_t LATFbits __asm__ ("LATF") __attribute__((section("s
 extern volatile unsigned int        LATFCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        LATFSET __attribute__((section("sfrs")));
 extern volatile unsigned int        LATFINV __attribute__((section("sfrs")));
-extern volatile unsigned int        ODCF __attribute__((section("sfrs")));
+#define ODCF ODCF
+extern volatile unsigned int   ODCF __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ODCF0:1;
@@ -7055,7 +7594,8 @@ extern volatile __ODCFbits_t ODCFbits __asm__ ("ODCF") __attribute__((section("s
 extern volatile unsigned int        ODCFCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        ODCFSET __attribute__((section("sfrs")));
 extern volatile unsigned int        ODCFINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPUF __attribute__((section("sfrs")));
+#define CNPUF CNPUF
+extern volatile unsigned int   CNPUF __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNPUF0:1;
@@ -7078,7 +7618,8 @@ extern volatile __CNPUFbits_t CNPUFbits __asm__ ("CNPUF") __attribute__((section
 extern volatile unsigned int        CNPUFCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPUFSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPUFINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPDF __attribute__((section("sfrs")));
+#define CNPDF CNPDF
+extern volatile unsigned int   CNPDF __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNPDF0:1;
@@ -7101,7 +7642,8 @@ extern volatile __CNPDFbits_t CNPDFbits __asm__ ("CNPDF") __attribute__((section
 extern volatile unsigned int        CNPDFCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPDFSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPDFINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNCONF __attribute__((section("sfrs")));
+#define CNCONF CNCONF
+extern volatile unsigned int   CNCONF __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :13;
@@ -7117,7 +7659,8 @@ extern volatile __CNCONFbits_t CNCONFbits __asm__ ("CNCONF") __attribute__((sect
 extern volatile unsigned int        CNCONFCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONFSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONFINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNENF __attribute__((section("sfrs")));
+#define CNENF CNENF
+extern volatile unsigned int   CNENF __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNIEF0:1;
@@ -7140,7 +7683,8 @@ extern volatile __CNENFbits_t CNENFbits __asm__ ("CNENF") __attribute__((section
 extern volatile unsigned int        CNENFCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNENFSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNENFINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNSTATF __attribute__((section("sfrs")));
+#define CNSTATF CNSTATF
+extern volatile unsigned int   CNSTATF __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNSTATF0:1;
@@ -7163,7 +7707,8 @@ extern volatile __CNSTATFbits_t CNSTATFbits __asm__ ("CNSTATF") __attribute__((s
 extern volatile unsigned int        CNSTATFCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATFSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATFINV __attribute__((section("sfrs")));
-extern volatile unsigned int        ANSELG __attribute__((section("sfrs")));
+#define ANSELG ANSELG
+extern volatile unsigned int   ANSELG __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :6;
@@ -7182,7 +7727,8 @@ extern volatile __ANSELGbits_t ANSELGbits __asm__ ("ANSELG") __attribute__((sect
 extern volatile unsigned int        ANSELGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        ANSELGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        TRISG __attribute__((section("sfrs")));
+#define TRISG TRISG
+extern volatile unsigned int   TRISG __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TRISG0:1;
@@ -7208,7 +7754,8 @@ extern volatile __TRISGbits_t TRISGbits __asm__ ("TRISG") __attribute__((section
 extern volatile unsigned int        TRISGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        TRISGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        TRISGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        PORTG __attribute__((section("sfrs")));
+#define PORTG PORTG
+extern volatile unsigned int   PORTG __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RG0:1;
@@ -7234,7 +7781,8 @@ extern volatile __PORTGbits_t PORTGbits __asm__ ("PORTG") __attribute__((section
 extern volatile unsigned int        PORTGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        PORTGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        PORTGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        LATG __attribute__((section("sfrs")));
+#define LATG LATG
+extern volatile unsigned int   LATG __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned LATG0:1;
@@ -7260,7 +7808,8 @@ extern volatile __LATGbits_t LATGbits __asm__ ("LATG") __attribute__((section("s
 extern volatile unsigned int        LATGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        LATGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        LATGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        ODCG __attribute__((section("sfrs")));
+#define ODCG ODCG
+extern volatile unsigned int   ODCG __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ODCG0:1;
@@ -7286,7 +7835,8 @@ extern volatile __ODCGbits_t ODCGbits __asm__ ("ODCG") __attribute__((section("s
 extern volatile unsigned int        ODCGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        ODCGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        ODCGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPUG __attribute__((section("sfrs")));
+#define CNPUG CNPUG
+extern volatile unsigned int   CNPUG __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNPUG0:1;
@@ -7312,7 +7862,8 @@ extern volatile __CNPUGbits_t CNPUGbits __asm__ ("CNPUG") __attribute__((section
 extern volatile unsigned int        CNPUGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPUGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPUGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNPDG __attribute__((section("sfrs")));
+#define CNPDG CNPDG
+extern volatile unsigned int   CNPDG __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNPDG0:1;
@@ -7338,7 +7889,8 @@ extern volatile __CNPDGbits_t CNPDGbits __asm__ ("CNPDG") __attribute__((section
 extern volatile unsigned int        CNPDGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPDGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNPDGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNCONG __attribute__((section("sfrs")));
+#define CNCONG CNCONG
+extern volatile unsigned int   CNCONG __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned :13;
@@ -7354,7 +7906,8 @@ extern volatile __CNCONGbits_t CNCONGbits __asm__ ("CNCONG") __attribute__((sect
 extern volatile unsigned int        CNCONGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNCONGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNENG __attribute__((section("sfrs")));
+#define CNENG CNENG
+extern volatile unsigned int   CNENG __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNIEG0:1;
@@ -7380,7 +7933,8 @@ extern volatile __CNENGbits_t CNENGbits __asm__ ("CNENG") __attribute__((section
 extern volatile unsigned int        CNENGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNENGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNENGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        CNSTATG __attribute__((section("sfrs")));
+#define CNSTATG CNSTATG
+extern volatile unsigned int   CNSTATG __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CNSTATG0:1;
@@ -7406,7 +7960,8 @@ extern volatile __CNSTATGbits_t CNSTATGbits __asm__ ("CNSTATG") __attribute__((s
 extern volatile unsigned int        CNSTATGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        CNSTATGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1CON __attribute__((section("sfrs")));
+#define C1CON C1CON
+extern volatile unsigned int   C1CON __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned DNCNT:5;
@@ -7430,7 +7985,8 @@ extern volatile __C1CONbits_t C1CONbits __asm__ ("C1CON") __attribute__((section
 extern volatile unsigned int        C1CONCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1CONSET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1CONINV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1CFG __attribute__((section("sfrs")));
+#define C1CFG C1CFG
+extern volatile unsigned int   C1CFG __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned BRP:6;
@@ -7451,7 +8007,8 @@ extern volatile __C1CFGbits_t C1CFGbits __asm__ ("C1CFG") __attribute__((section
 extern volatile unsigned int        C1CFGCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1CFGSET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1CFGINV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1INT __attribute__((section("sfrs")));
+#define C1INT C1INT
+extern volatile unsigned int   C1INT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TBIF:1;
@@ -7483,7 +8040,8 @@ extern volatile __C1INTbits_t C1INTbits __asm__ ("C1INT") __attribute__((section
 extern volatile unsigned int        C1INTCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1INTSET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1INTINV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1VEC __attribute__((section("sfrs")));
+#define C1VEC C1VEC
+extern volatile unsigned int   C1VEC __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned ICODE:7;
@@ -7498,7 +8056,8 @@ extern volatile __C1VECbits_t C1VECbits __asm__ ("C1VEC") __attribute__((section
 extern volatile unsigned int        C1VECCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1VECSET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1VECINV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1TREC __attribute__((section("sfrs")));
+#define C1TREC C1TREC
+extern volatile unsigned int   C1TREC __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RERRCNT:8;
@@ -7518,7 +8077,8 @@ extern volatile __C1TRECbits_t C1TRECbits __asm__ ("C1TREC") __attribute__((sect
 extern volatile unsigned int        C1TRECCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1TRECSET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1TRECINV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FSTAT __attribute__((section("sfrs")));
+#define C1FSTAT C1FSTAT
+extern volatile unsigned int   C1FSTAT __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned FIFOIP:32;
@@ -7565,7 +8125,8 @@ extern volatile __C1FSTATbits_t C1FSTATbits __asm__ ("C1FSTAT") __attribute__((s
 extern volatile unsigned int        C1FSTATCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FSTATSET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FSTATINV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXOVF __attribute__((section("sfrs")));
+#define C1RXOVF C1RXOVF
+extern volatile unsigned int   C1RXOVF __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXOVF:32;
@@ -7612,7 +8173,8 @@ extern volatile __C1RXOVFbits_t C1RXOVFbits __asm__ ("C1RXOVF") __attribute__((s
 extern volatile unsigned int        C1RXOVFCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXOVFSET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXOVFINV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1TMR __attribute__((section("sfrs")));
+#define C1TMR C1TMR
+extern volatile unsigned int   C1TMR __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CANTSPRE:16;
@@ -7626,7 +8188,8 @@ extern volatile __C1TMRbits_t C1TMRbits __asm__ ("C1TMR") __attribute__((section
 extern volatile unsigned int        C1TMRCLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1TMRSET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1TMRINV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXM0 __attribute__((section("sfrs")));
+#define C1RXM0 C1RXM0
+extern volatile unsigned int   C1RXM0 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -7643,7 +8206,8 @@ extern volatile __C1RXM0bits_t C1RXM0bits __asm__ ("C1RXM0") __attribute__((sect
 extern volatile unsigned int        C1RXM0CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXM0SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXM0INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXM1 __attribute__((section("sfrs")));
+#define C1RXM1 C1RXM1
+extern volatile unsigned int   C1RXM1 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -7660,7 +8224,8 @@ extern volatile __C1RXM1bits_t C1RXM1bits __asm__ ("C1RXM1") __attribute__((sect
 extern volatile unsigned int        C1RXM1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXM1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXM1INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXM2 __attribute__((section("sfrs")));
+#define C1RXM2 C1RXM2
+extern volatile unsigned int   C1RXM2 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -7677,7 +8242,8 @@ extern volatile __C1RXM2bits_t C1RXM2bits __asm__ ("C1RXM2") __attribute__((sect
 extern volatile unsigned int        C1RXM2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXM2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXM2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXM3 __attribute__((section("sfrs")));
+#define C1RXM3 C1RXM3
+extern volatile unsigned int   C1RXM3 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -7694,7 +8260,8 @@ extern volatile __C1RXM3bits_t C1RXM3bits __asm__ ("C1RXM3") __attribute__((sect
 extern volatile unsigned int        C1RXM3CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXM3SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXM3INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FLTCON0 __attribute__((section("sfrs")));
+#define C1FLTCON0 C1FLTCON0
+extern volatile unsigned int   C1FLTCON0 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned FSEL0:5;
@@ -7718,7 +8285,8 @@ extern volatile __C1FLTCON0bits_t C1FLTCON0bits __asm__ ("C1FLTCON0") __attribut
 extern volatile unsigned int        C1FLTCON0CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FLTCON0SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FLTCON0INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FLTCON1 __attribute__((section("sfrs")));
+#define C1FLTCON1 C1FLTCON1
+extern volatile unsigned int   C1FLTCON1 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned FSEL4:5;
@@ -7742,7 +8310,8 @@ extern volatile __C1FLTCON1bits_t C1FLTCON1bits __asm__ ("C1FLTCON1") __attribut
 extern volatile unsigned int        C1FLTCON1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FLTCON1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FLTCON1INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FLTCON2 __attribute__((section("sfrs")));
+#define C1FLTCON2 C1FLTCON2
+extern volatile unsigned int   C1FLTCON2 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned FSEL8:5;
@@ -7766,7 +8335,8 @@ extern volatile __C1FLTCON2bits_t C1FLTCON2bits __asm__ ("C1FLTCON2") __attribut
 extern volatile unsigned int        C1FLTCON2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FLTCON2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FLTCON2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FLTCON3 __attribute__((section("sfrs")));
+#define C1FLTCON3 C1FLTCON3
+extern volatile unsigned int   C1FLTCON3 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned FSEL12:5;
@@ -7790,7 +8360,8 @@ extern volatile __C1FLTCON3bits_t C1FLTCON3bits __asm__ ("C1FLTCON3") __attribut
 extern volatile unsigned int        C1FLTCON3CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FLTCON3SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FLTCON3INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FLTCON4 __attribute__((section("sfrs")));
+#define C1FLTCON4 C1FLTCON4
+extern volatile unsigned int   C1FLTCON4 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned FSEL16:5;
@@ -7814,7 +8385,8 @@ extern volatile __C1FLTCON4bits_t C1FLTCON4bits __asm__ ("C1FLTCON4") __attribut
 extern volatile unsigned int        C1FLTCON4CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FLTCON4SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FLTCON4INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FLTCON5 __attribute__((section("sfrs")));
+#define C1FLTCON5 C1FLTCON5
+extern volatile unsigned int   C1FLTCON5 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned FSEL20:5;
@@ -7838,7 +8410,8 @@ extern volatile __C1FLTCON5bits_t C1FLTCON5bits __asm__ ("C1FLTCON5") __attribut
 extern volatile unsigned int        C1FLTCON5CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FLTCON5SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FLTCON5INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FLTCON6 __attribute__((section("sfrs")));
+#define C1FLTCON6 C1FLTCON6
+extern volatile unsigned int   C1FLTCON6 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned FSEL24:5;
@@ -7862,7 +8435,8 @@ extern volatile __C1FLTCON6bits_t C1FLTCON6bits __asm__ ("C1FLTCON6") __attribut
 extern volatile unsigned int        C1FLTCON6CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FLTCON6SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FLTCON6INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FLTCON7 __attribute__((section("sfrs")));
+#define C1FLTCON7 C1FLTCON7
+extern volatile unsigned int   C1FLTCON7 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned FSEL28:5;
@@ -7886,7 +8460,8 @@ extern volatile __C1FLTCON7bits_t C1FLTCON7bits __asm__ ("C1FLTCON7") __attribut
 extern volatile unsigned int        C1FLTCON7CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FLTCON7SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FLTCON7INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF0 __attribute__((section("sfrs")));
+#define C1RXF0 C1RXF0
+extern volatile unsigned int   C1RXF0 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -7903,7 +8478,8 @@ extern volatile __C1RXF0bits_t C1RXF0bits __asm__ ("C1RXF0") __attribute__((sect
 extern volatile unsigned int        C1RXF0CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF0SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF0INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF1 __attribute__((section("sfrs")));
+#define C1RXF1 C1RXF1
+extern volatile unsigned int   C1RXF1 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -7920,7 +8496,8 @@ extern volatile __C1RXF1bits_t C1RXF1bits __asm__ ("C1RXF1") __attribute__((sect
 extern volatile unsigned int        C1RXF1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF1INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF2 __attribute__((section("sfrs")));
+#define C1RXF2 C1RXF2
+extern volatile unsigned int   C1RXF2 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -7937,7 +8514,8 @@ extern volatile __C1RXF2bits_t C1RXF2bits __asm__ ("C1RXF2") __attribute__((sect
 extern volatile unsigned int        C1RXF2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF3 __attribute__((section("sfrs")));
+#define C1RXF3 C1RXF3
+extern volatile unsigned int   C1RXF3 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -7954,7 +8532,8 @@ extern volatile __C1RXF3bits_t C1RXF3bits __asm__ ("C1RXF3") __attribute__((sect
 extern volatile unsigned int        C1RXF3CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF3SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF3INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF4 __attribute__((section("sfrs")));
+#define C1RXF4 C1RXF4
+extern volatile unsigned int   C1RXF4 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -7971,7 +8550,8 @@ extern volatile __C1RXF4bits_t C1RXF4bits __asm__ ("C1RXF4") __attribute__((sect
 extern volatile unsigned int        C1RXF4CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF4SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF4INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF5 __attribute__((section("sfrs")));
+#define C1RXF5 C1RXF5
+extern volatile unsigned int   C1RXF5 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -7988,7 +8568,8 @@ extern volatile __C1RXF5bits_t C1RXF5bits __asm__ ("C1RXF5") __attribute__((sect
 extern volatile unsigned int        C1RXF5CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF5SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF5INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF6 __attribute__((section("sfrs")));
+#define C1RXF6 C1RXF6
+extern volatile unsigned int   C1RXF6 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8005,7 +8586,8 @@ extern volatile __C1RXF6bits_t C1RXF6bits __asm__ ("C1RXF6") __attribute__((sect
 extern volatile unsigned int        C1RXF6CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF6SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF6INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF7 __attribute__((section("sfrs")));
+#define C1RXF7 C1RXF7
+extern volatile unsigned int   C1RXF7 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8022,7 +8604,8 @@ extern volatile __C1RXF7bits_t C1RXF7bits __asm__ ("C1RXF7") __attribute__((sect
 extern volatile unsigned int        C1RXF7CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF7SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF7INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF8 __attribute__((section("sfrs")));
+#define C1RXF8 C1RXF8
+extern volatile unsigned int   C1RXF8 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8039,7 +8622,8 @@ extern volatile __C1RXF8bits_t C1RXF8bits __asm__ ("C1RXF8") __attribute__((sect
 extern volatile unsigned int        C1RXF8CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF8SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF8INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF9 __attribute__((section("sfrs")));
+#define C1RXF9 C1RXF9
+extern volatile unsigned int   C1RXF9 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8056,7 +8640,8 @@ extern volatile __C1RXF9bits_t C1RXF9bits __asm__ ("C1RXF9") __attribute__((sect
 extern volatile unsigned int        C1RXF9CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF9SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF9INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF10 __attribute__((section("sfrs")));
+#define C1RXF10 C1RXF10
+extern volatile unsigned int   C1RXF10 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8073,7 +8658,8 @@ extern volatile __C1RXF10bits_t C1RXF10bits __asm__ ("C1RXF10") __attribute__((s
 extern volatile unsigned int        C1RXF10CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF10SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF10INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF11 __attribute__((section("sfrs")));
+#define C1RXF11 C1RXF11
+extern volatile unsigned int   C1RXF11 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8090,7 +8676,8 @@ extern volatile __C1RXF11bits_t C1RXF11bits __asm__ ("C1RXF11") __attribute__((s
 extern volatile unsigned int        C1RXF11CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF11SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF11INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF12 __attribute__((section("sfrs")));
+#define C1RXF12 C1RXF12
+extern volatile unsigned int   C1RXF12 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8107,7 +8694,8 @@ extern volatile __C1RXF12bits_t C1RXF12bits __asm__ ("C1RXF12") __attribute__((s
 extern volatile unsigned int        C1RXF12CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF12SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF12INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF13 __attribute__((section("sfrs")));
+#define C1RXF13 C1RXF13
+extern volatile unsigned int   C1RXF13 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8124,7 +8712,8 @@ extern volatile __C1RXF13bits_t C1RXF13bits __asm__ ("C1RXF13") __attribute__((s
 extern volatile unsigned int        C1RXF13CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF13SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF13INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF14 __attribute__((section("sfrs")));
+#define C1RXF14 C1RXF14
+extern volatile unsigned int   C1RXF14 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8141,7 +8730,8 @@ extern volatile __C1RXF14bits_t C1RXF14bits __asm__ ("C1RXF14") __attribute__((s
 extern volatile unsigned int        C1RXF14CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF14SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF14INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF15 __attribute__((section("sfrs")));
+#define C1RXF15 C1RXF15
+extern volatile unsigned int   C1RXF15 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8158,7 +8748,8 @@ extern volatile __C1RXF15bits_t C1RXF15bits __asm__ ("C1RXF15") __attribute__((s
 extern volatile unsigned int        C1RXF15CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF15SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF15INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF16 __attribute__((section("sfrs")));
+#define C1RXF16 C1RXF16
+extern volatile unsigned int   C1RXF16 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8175,7 +8766,8 @@ extern volatile __C1RXF16bits_t C1RXF16bits __asm__ ("C1RXF16") __attribute__((s
 extern volatile unsigned int        C1RXF16CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF16SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF16INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF17 __attribute__((section("sfrs")));
+#define C1RXF17 C1RXF17
+extern volatile unsigned int   C1RXF17 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8192,7 +8784,8 @@ extern volatile __C1RXF17bits_t C1RXF17bits __asm__ ("C1RXF17") __attribute__((s
 extern volatile unsigned int        C1RXF17CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF17SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF17INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF18 __attribute__((section("sfrs")));
+#define C1RXF18 C1RXF18
+extern volatile unsigned int   C1RXF18 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8209,7 +8802,8 @@ extern volatile __C1RXF18bits_t C1RXF18bits __asm__ ("C1RXF18") __attribute__((s
 extern volatile unsigned int        C1RXF18CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF18SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF18INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF19 __attribute__((section("sfrs")));
+#define C1RXF19 C1RXF19
+extern volatile unsigned int   C1RXF19 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8226,7 +8820,8 @@ extern volatile __C1RXF19bits_t C1RXF19bits __asm__ ("C1RXF19") __attribute__((s
 extern volatile unsigned int        C1RXF19CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF19SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF19INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF20 __attribute__((section("sfrs")));
+#define C1RXF20 C1RXF20
+extern volatile unsigned int   C1RXF20 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8243,7 +8838,8 @@ extern volatile __C1RXF20bits_t C1RXF20bits __asm__ ("C1RXF20") __attribute__((s
 extern volatile unsigned int        C1RXF20CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF20SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF20INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF21 __attribute__((section("sfrs")));
+#define C1RXF21 C1RXF21
+extern volatile unsigned int   C1RXF21 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8260,7 +8856,8 @@ extern volatile __C1RXF21bits_t C1RXF21bits __asm__ ("C1RXF21") __attribute__((s
 extern volatile unsigned int        C1RXF21CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF21SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF21INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF22 __attribute__((section("sfrs")));
+#define C1RXF22 C1RXF22
+extern volatile unsigned int   C1RXF22 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8277,7 +8874,8 @@ extern volatile __C1RXF22bits_t C1RXF22bits __asm__ ("C1RXF22") __attribute__((s
 extern volatile unsigned int        C1RXF22CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF22SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF22INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF23 __attribute__((section("sfrs")));
+#define C1RXF23 C1RXF23
+extern volatile unsigned int   C1RXF23 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8294,7 +8892,8 @@ extern volatile __C1RXF23bits_t C1RXF23bits __asm__ ("C1RXF23") __attribute__((s
 extern volatile unsigned int        C1RXF23CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF23SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF23INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF24 __attribute__((section("sfrs")));
+#define C1RXF24 C1RXF24
+extern volatile unsigned int   C1RXF24 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8311,7 +8910,8 @@ extern volatile __C1RXF24bits_t C1RXF24bits __asm__ ("C1RXF24") __attribute__((s
 extern volatile unsigned int        C1RXF24CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF24SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF24INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF25 __attribute__((section("sfrs")));
+#define C1RXF25 C1RXF25
+extern volatile unsigned int   C1RXF25 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8328,7 +8928,8 @@ extern volatile __C1RXF25bits_t C1RXF25bits __asm__ ("C1RXF25") __attribute__((s
 extern volatile unsigned int        C1RXF25CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF25SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF25INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF26 __attribute__((section("sfrs")));
+#define C1RXF26 C1RXF26
+extern volatile unsigned int   C1RXF26 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8345,7 +8946,8 @@ extern volatile __C1RXF26bits_t C1RXF26bits __asm__ ("C1RXF26") __attribute__((s
 extern volatile unsigned int        C1RXF26CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF26SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF26INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF27 __attribute__((section("sfrs")));
+#define C1RXF27 C1RXF27
+extern volatile unsigned int   C1RXF27 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8362,7 +8964,8 @@ extern volatile __C1RXF27bits_t C1RXF27bits __asm__ ("C1RXF27") __attribute__((s
 extern volatile unsigned int        C1RXF27CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF27SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF27INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF28 __attribute__((section("sfrs")));
+#define C1RXF28 C1RXF28
+extern volatile unsigned int   C1RXF28 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8379,7 +8982,8 @@ extern volatile __C1RXF28bits_t C1RXF28bits __asm__ ("C1RXF28") __attribute__((s
 extern volatile unsigned int        C1RXF28CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF28SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF28INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF29 __attribute__((section("sfrs")));
+#define C1RXF29 C1RXF29
+extern volatile unsigned int   C1RXF29 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8396,7 +9000,8 @@ extern volatile __C1RXF29bits_t C1RXF29bits __asm__ ("C1RXF29") __attribute__((s
 extern volatile unsigned int        C1RXF29CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF29SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF29INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF30 __attribute__((section("sfrs")));
+#define C1RXF30 C1RXF30
+extern volatile unsigned int   C1RXF30 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8413,7 +9018,8 @@ extern volatile __C1RXF30bits_t C1RXF30bits __asm__ ("C1RXF30") __attribute__((s
 extern volatile unsigned int        C1RXF30CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF30SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF30INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1RXF31 __attribute__((section("sfrs")));
+#define C1RXF31 C1RXF31
+extern volatile unsigned int   C1RXF31 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned EID:18;
@@ -8430,11 +9036,13 @@ extern volatile __C1RXF31bits_t C1RXF31bits __asm__ ("C1RXF31") __attribute__((s
 extern volatile unsigned int        C1RXF31CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF31SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1RXF31INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOBA __attribute__((section("sfrs")));
+#define C1FIFOBA C1FIFOBA
+extern volatile unsigned int   C1FIFOBA __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOBACLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOBASET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOBAINV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON0 __attribute__((section("sfrs")));
+#define C1FIFOCON0 C1FIFOCON0
+extern volatile unsigned int   C1FIFOCON0 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -8459,7 +9067,8 @@ extern volatile __C1FIFOCON0bits_t C1FIFOCON0bits __asm__ ("C1FIFOCON0") __attri
 extern volatile unsigned int        C1FIFOCON0CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON0SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON0INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT0 __attribute__((section("sfrs")));
+#define C1FIFOINT0 C1FIFOINT0
+extern volatile unsigned int   C1FIFOINT0 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -8488,11 +9097,13 @@ extern volatile __C1FIFOINT0bits_t C1FIFOINT0bits __asm__ ("C1FIFOINT0") __attri
 extern volatile unsigned int        C1FIFOINT0CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT0SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT0INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA0 __attribute__((section("sfrs")));
+#define C1FIFOUA0 C1FIFOUA0
+extern volatile unsigned int   C1FIFOUA0 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA0CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA0SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA0INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI0 __attribute__((section("sfrs")));
+#define C1FIFOCI0 C1FIFOCI0
+extern volatile unsigned int   C1FIFOCI0 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -8505,7 +9116,8 @@ extern volatile __C1FIFOCI0bits_t C1FIFOCI0bits __asm__ ("C1FIFOCI0") __attribut
 extern volatile unsigned int        C1FIFOCI0CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI0SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI0INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON1 __attribute__((section("sfrs")));
+#define C1FIFOCON1 C1FIFOCON1
+extern volatile unsigned int   C1FIFOCON1 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -8530,7 +9142,8 @@ extern volatile __C1FIFOCON1bits_t C1FIFOCON1bits __asm__ ("C1FIFOCON1") __attri
 extern volatile unsigned int        C1FIFOCON1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON1INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT1 __attribute__((section("sfrs")));
+#define C1FIFOINT1 C1FIFOINT1
+extern volatile unsigned int   C1FIFOINT1 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -8559,11 +9172,13 @@ extern volatile __C1FIFOINT1bits_t C1FIFOINT1bits __asm__ ("C1FIFOINT1") __attri
 extern volatile unsigned int        C1FIFOINT1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT1INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA1 __attribute__((section("sfrs")));
+#define C1FIFOUA1 C1FIFOUA1
+extern volatile unsigned int   C1FIFOUA1 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA1INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI1 __attribute__((section("sfrs")));
+#define C1FIFOCI1 C1FIFOCI1
+extern volatile unsigned int   C1FIFOCI1 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -8576,7 +9191,8 @@ extern volatile __C1FIFOCI1bits_t C1FIFOCI1bits __asm__ ("C1FIFOCI1") __attribut
 extern volatile unsigned int        C1FIFOCI1CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI1SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI1INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON2 __attribute__((section("sfrs")));
+#define C1FIFOCON2 C1FIFOCON2
+extern volatile unsigned int   C1FIFOCON2 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -8601,7 +9217,8 @@ extern volatile __C1FIFOCON2bits_t C1FIFOCON2bits __asm__ ("C1FIFOCON2") __attri
 extern volatile unsigned int        C1FIFOCON2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT2 __attribute__((section("sfrs")));
+#define C1FIFOINT2 C1FIFOINT2
+extern volatile unsigned int   C1FIFOINT2 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -8630,11 +9247,13 @@ extern volatile __C1FIFOINT2bits_t C1FIFOINT2bits __asm__ ("C1FIFOINT2") __attri
 extern volatile unsigned int        C1FIFOINT2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA2 __attribute__((section("sfrs")));
+#define C1FIFOUA2 C1FIFOUA2
+extern volatile unsigned int   C1FIFOUA2 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI2 __attribute__((section("sfrs")));
+#define C1FIFOCI2 C1FIFOCI2
+extern volatile unsigned int   C1FIFOCI2 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -8647,7 +9266,8 @@ extern volatile __C1FIFOCI2bits_t C1FIFOCI2bits __asm__ ("C1FIFOCI2") __attribut
 extern volatile unsigned int        C1FIFOCI2CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI2SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI2INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON3 __attribute__((section("sfrs")));
+#define C1FIFOCON3 C1FIFOCON3
+extern volatile unsigned int   C1FIFOCON3 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -8672,7 +9292,8 @@ extern volatile __C1FIFOCON3bits_t C1FIFOCON3bits __asm__ ("C1FIFOCON3") __attri
 extern volatile unsigned int        C1FIFOCON3CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON3SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON3INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT3 __attribute__((section("sfrs")));
+#define C1FIFOINT3 C1FIFOINT3
+extern volatile unsigned int   C1FIFOINT3 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -8701,11 +9322,13 @@ extern volatile __C1FIFOINT3bits_t C1FIFOINT3bits __asm__ ("C1FIFOINT3") __attri
 extern volatile unsigned int        C1FIFOINT3CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT3SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT3INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA3 __attribute__((section("sfrs")));
+#define C1FIFOUA3 C1FIFOUA3
+extern volatile unsigned int   C1FIFOUA3 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA3CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA3SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA3INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI3 __attribute__((section("sfrs")));
+#define C1FIFOCI3 C1FIFOCI3
+extern volatile unsigned int   C1FIFOCI3 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -8718,7 +9341,8 @@ extern volatile __C1FIFOCI3bits_t C1FIFOCI3bits __asm__ ("C1FIFOCI3") __attribut
 extern volatile unsigned int        C1FIFOCI3CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI3SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI3INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON4 __attribute__((section("sfrs")));
+#define C1FIFOCON4 C1FIFOCON4
+extern volatile unsigned int   C1FIFOCON4 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -8743,7 +9367,8 @@ extern volatile __C1FIFOCON4bits_t C1FIFOCON4bits __asm__ ("C1FIFOCON4") __attri
 extern volatile unsigned int        C1FIFOCON4CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON4SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON4INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT4 __attribute__((section("sfrs")));
+#define C1FIFOINT4 C1FIFOINT4
+extern volatile unsigned int   C1FIFOINT4 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -8772,11 +9397,13 @@ extern volatile __C1FIFOINT4bits_t C1FIFOINT4bits __asm__ ("C1FIFOINT4") __attri
 extern volatile unsigned int        C1FIFOINT4CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT4SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT4INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA4 __attribute__((section("sfrs")));
+#define C1FIFOUA4 C1FIFOUA4
+extern volatile unsigned int   C1FIFOUA4 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA4CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA4SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA4INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI4 __attribute__((section("sfrs")));
+#define C1FIFOCI4 C1FIFOCI4
+extern volatile unsigned int   C1FIFOCI4 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -8789,7 +9416,8 @@ extern volatile __C1FIFOCI4bits_t C1FIFOCI4bits __asm__ ("C1FIFOCI4") __attribut
 extern volatile unsigned int        C1FIFOCI4CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI4SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI4INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON5 __attribute__((section("sfrs")));
+#define C1FIFOCON5 C1FIFOCON5
+extern volatile unsigned int   C1FIFOCON5 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -8814,7 +9442,8 @@ extern volatile __C1FIFOCON5bits_t C1FIFOCON5bits __asm__ ("C1FIFOCON5") __attri
 extern volatile unsigned int        C1FIFOCON5CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON5SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON5INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT5 __attribute__((section("sfrs")));
+#define C1FIFOINT5 C1FIFOINT5
+extern volatile unsigned int   C1FIFOINT5 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -8843,11 +9472,13 @@ extern volatile __C1FIFOINT5bits_t C1FIFOINT5bits __asm__ ("C1FIFOINT5") __attri
 extern volatile unsigned int        C1FIFOINT5CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT5SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT5INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA5 __attribute__((section("sfrs")));
+#define C1FIFOUA5 C1FIFOUA5
+extern volatile unsigned int   C1FIFOUA5 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA5CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA5SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA5INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI5 __attribute__((section("sfrs")));
+#define C1FIFOCI5 C1FIFOCI5
+extern volatile unsigned int   C1FIFOCI5 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -8860,7 +9491,8 @@ extern volatile __C1FIFOCI5bits_t C1FIFOCI5bits __asm__ ("C1FIFOCI5") __attribut
 extern volatile unsigned int        C1FIFOCI5CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI5SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI5INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON6 __attribute__((section("sfrs")));
+#define C1FIFOCON6 C1FIFOCON6
+extern volatile unsigned int   C1FIFOCON6 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -8885,7 +9517,8 @@ extern volatile __C1FIFOCON6bits_t C1FIFOCON6bits __asm__ ("C1FIFOCON6") __attri
 extern volatile unsigned int        C1FIFOCON6CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON6SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON6INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT6 __attribute__((section("sfrs")));
+#define C1FIFOINT6 C1FIFOINT6
+extern volatile unsigned int   C1FIFOINT6 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -8914,11 +9547,13 @@ extern volatile __C1FIFOINT6bits_t C1FIFOINT6bits __asm__ ("C1FIFOINT6") __attri
 extern volatile unsigned int        C1FIFOINT6CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT6SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT6INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA6 __attribute__((section("sfrs")));
+#define C1FIFOUA6 C1FIFOUA6
+extern volatile unsigned int   C1FIFOUA6 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA6CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA6SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA6INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI6 __attribute__((section("sfrs")));
+#define C1FIFOCI6 C1FIFOCI6
+extern volatile unsigned int   C1FIFOCI6 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -8931,7 +9566,8 @@ extern volatile __C1FIFOCI6bits_t C1FIFOCI6bits __asm__ ("C1FIFOCI6") __attribut
 extern volatile unsigned int        C1FIFOCI6CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI6SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI6INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON7 __attribute__((section("sfrs")));
+#define C1FIFOCON7 C1FIFOCON7
+extern volatile unsigned int   C1FIFOCON7 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -8956,7 +9592,8 @@ extern volatile __C1FIFOCON7bits_t C1FIFOCON7bits __asm__ ("C1FIFOCON7") __attri
 extern volatile unsigned int        C1FIFOCON7CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON7SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON7INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT7 __attribute__((section("sfrs")));
+#define C1FIFOINT7 C1FIFOINT7
+extern volatile unsigned int   C1FIFOINT7 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -8985,11 +9622,13 @@ extern volatile __C1FIFOINT7bits_t C1FIFOINT7bits __asm__ ("C1FIFOINT7") __attri
 extern volatile unsigned int        C1FIFOINT7CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT7SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT7INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA7 __attribute__((section("sfrs")));
+#define C1FIFOUA7 C1FIFOUA7
+extern volatile unsigned int   C1FIFOUA7 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA7CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA7SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA7INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI7 __attribute__((section("sfrs")));
+#define C1FIFOCI7 C1FIFOCI7
+extern volatile unsigned int   C1FIFOCI7 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -9002,7 +9641,8 @@ extern volatile __C1FIFOCI7bits_t C1FIFOCI7bits __asm__ ("C1FIFOCI7") __attribut
 extern volatile unsigned int        C1FIFOCI7CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI7SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI7INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON8 __attribute__((section("sfrs")));
+#define C1FIFOCON8 C1FIFOCON8
+extern volatile unsigned int   C1FIFOCON8 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -9027,7 +9667,8 @@ extern volatile __C1FIFOCON8bits_t C1FIFOCON8bits __asm__ ("C1FIFOCON8") __attri
 extern volatile unsigned int        C1FIFOCON8CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON8SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON8INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT8 __attribute__((section("sfrs")));
+#define C1FIFOINT8 C1FIFOINT8
+extern volatile unsigned int   C1FIFOINT8 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -9056,11 +9697,13 @@ extern volatile __C1FIFOINT8bits_t C1FIFOINT8bits __asm__ ("C1FIFOINT8") __attri
 extern volatile unsigned int        C1FIFOINT8CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT8SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT8INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA8 __attribute__((section("sfrs")));
+#define C1FIFOUA8 C1FIFOUA8
+extern volatile unsigned int   C1FIFOUA8 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA8CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA8SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA8INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI8 __attribute__((section("sfrs")));
+#define C1FIFOCI8 C1FIFOCI8
+extern volatile unsigned int   C1FIFOCI8 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -9073,7 +9716,8 @@ extern volatile __C1FIFOCI8bits_t C1FIFOCI8bits __asm__ ("C1FIFOCI8") __attribut
 extern volatile unsigned int        C1FIFOCI8CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI8SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI8INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON9 __attribute__((section("sfrs")));
+#define C1FIFOCON9 C1FIFOCON9
+extern volatile unsigned int   C1FIFOCON9 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -9098,7 +9742,8 @@ extern volatile __C1FIFOCON9bits_t C1FIFOCON9bits __asm__ ("C1FIFOCON9") __attri
 extern volatile unsigned int        C1FIFOCON9CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON9SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON9INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT9 __attribute__((section("sfrs")));
+#define C1FIFOINT9 C1FIFOINT9
+extern volatile unsigned int   C1FIFOINT9 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -9127,11 +9772,13 @@ extern volatile __C1FIFOINT9bits_t C1FIFOINT9bits __asm__ ("C1FIFOINT9") __attri
 extern volatile unsigned int        C1FIFOINT9CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT9SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT9INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA9 __attribute__((section("sfrs")));
+#define C1FIFOUA9 C1FIFOUA9
+extern volatile unsigned int   C1FIFOUA9 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA9CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA9SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA9INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI9 __attribute__((section("sfrs")));
+#define C1FIFOCI9 C1FIFOCI9
+extern volatile unsigned int   C1FIFOCI9 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -9144,7 +9791,8 @@ extern volatile __C1FIFOCI9bits_t C1FIFOCI9bits __asm__ ("C1FIFOCI9") __attribut
 extern volatile unsigned int        C1FIFOCI9CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI9SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI9INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON10 __attribute__((section("sfrs")));
+#define C1FIFOCON10 C1FIFOCON10
+extern volatile unsigned int   C1FIFOCON10 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -9169,7 +9817,8 @@ extern volatile __C1FIFOCON10bits_t C1FIFOCON10bits __asm__ ("C1FIFOCON10") __at
 extern volatile unsigned int        C1FIFOCON10CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON10SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON10INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT10 __attribute__((section("sfrs")));
+#define C1FIFOINT10 C1FIFOINT10
+extern volatile unsigned int   C1FIFOINT10 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -9198,11 +9847,13 @@ extern volatile __C1FIFOINT10bits_t C1FIFOINT10bits __asm__ ("C1FIFOINT10") __at
 extern volatile unsigned int        C1FIFOINT10CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT10SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT10INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA10 __attribute__((section("sfrs")));
+#define C1FIFOUA10 C1FIFOUA10
+extern volatile unsigned int   C1FIFOUA10 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA10CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA10SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA10INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI10 __attribute__((section("sfrs")));
+#define C1FIFOCI10 C1FIFOCI10
+extern volatile unsigned int   C1FIFOCI10 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -9215,7 +9866,8 @@ extern volatile __C1FIFOCI10bits_t C1FIFOCI10bits __asm__ ("C1FIFOCI10") __attri
 extern volatile unsigned int        C1FIFOCI10CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI10SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI10INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON11 __attribute__((section("sfrs")));
+#define C1FIFOCON11 C1FIFOCON11
+extern volatile unsigned int   C1FIFOCON11 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -9240,7 +9892,8 @@ extern volatile __C1FIFOCON11bits_t C1FIFOCON11bits __asm__ ("C1FIFOCON11") __at
 extern volatile unsigned int        C1FIFOCON11CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON11SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON11INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT11 __attribute__((section("sfrs")));
+#define C1FIFOINT11 C1FIFOINT11
+extern volatile unsigned int   C1FIFOINT11 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -9269,11 +9922,13 @@ extern volatile __C1FIFOINT11bits_t C1FIFOINT11bits __asm__ ("C1FIFOINT11") __at
 extern volatile unsigned int        C1FIFOINT11CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT11SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT11INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA11 __attribute__((section("sfrs")));
+#define C1FIFOUA11 C1FIFOUA11
+extern volatile unsigned int   C1FIFOUA11 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA11CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA11SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA11INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI11 __attribute__((section("sfrs")));
+#define C1FIFOCI11 C1FIFOCI11
+extern volatile unsigned int   C1FIFOCI11 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -9286,7 +9941,8 @@ extern volatile __C1FIFOCI11bits_t C1FIFOCI11bits __asm__ ("C1FIFOCI11") __attri
 extern volatile unsigned int        C1FIFOCI11CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI11SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI11INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON12 __attribute__((section("sfrs")));
+#define C1FIFOCON12 C1FIFOCON12
+extern volatile unsigned int   C1FIFOCON12 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -9311,7 +9967,8 @@ extern volatile __C1FIFOCON12bits_t C1FIFOCON12bits __asm__ ("C1FIFOCON12") __at
 extern volatile unsigned int        C1FIFOCON12CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON12SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON12INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT12 __attribute__((section("sfrs")));
+#define C1FIFOINT12 C1FIFOINT12
+extern volatile unsigned int   C1FIFOINT12 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -9340,11 +9997,13 @@ extern volatile __C1FIFOINT12bits_t C1FIFOINT12bits __asm__ ("C1FIFOINT12") __at
 extern volatile unsigned int        C1FIFOINT12CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT12SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT12INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA12 __attribute__((section("sfrs")));
+#define C1FIFOUA12 C1FIFOUA12
+extern volatile unsigned int   C1FIFOUA12 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA12CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA12SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA12INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI12 __attribute__((section("sfrs")));
+#define C1FIFOCI12 C1FIFOCI12
+extern volatile unsigned int   C1FIFOCI12 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -9357,7 +10016,8 @@ extern volatile __C1FIFOCI12bits_t C1FIFOCI12bits __asm__ ("C1FIFOCI12") __attri
 extern volatile unsigned int        C1FIFOCI12CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI12SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI12INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON13 __attribute__((section("sfrs")));
+#define C1FIFOCON13 C1FIFOCON13
+extern volatile unsigned int   C1FIFOCON13 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -9382,7 +10042,8 @@ extern volatile __C1FIFOCON13bits_t C1FIFOCON13bits __asm__ ("C1FIFOCON13") __at
 extern volatile unsigned int        C1FIFOCON13CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON13SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON13INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT13 __attribute__((section("sfrs")));
+#define C1FIFOINT13 C1FIFOINT13
+extern volatile unsigned int   C1FIFOINT13 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -9411,11 +10072,13 @@ extern volatile __C1FIFOINT13bits_t C1FIFOINT13bits __asm__ ("C1FIFOINT13") __at
 extern volatile unsigned int        C1FIFOINT13CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT13SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT13INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA13 __attribute__((section("sfrs")));
+#define C1FIFOUA13 C1FIFOUA13
+extern volatile unsigned int   C1FIFOUA13 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA13CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA13SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA13INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI13 __attribute__((section("sfrs")));
+#define C1FIFOCI13 C1FIFOCI13
+extern volatile unsigned int   C1FIFOCI13 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -9428,7 +10091,8 @@ extern volatile __C1FIFOCI13bits_t C1FIFOCI13bits __asm__ ("C1FIFOCI13") __attri
 extern volatile unsigned int        C1FIFOCI13CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI13SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI13INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON14 __attribute__((section("sfrs")));
+#define C1FIFOCON14 C1FIFOCON14
+extern volatile unsigned int   C1FIFOCON14 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -9453,7 +10117,8 @@ extern volatile __C1FIFOCON14bits_t C1FIFOCON14bits __asm__ ("C1FIFOCON14") __at
 extern volatile unsigned int        C1FIFOCON14CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON14SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON14INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT14 __attribute__((section("sfrs")));
+#define C1FIFOINT14 C1FIFOINT14
+extern volatile unsigned int   C1FIFOINT14 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -9482,11 +10147,13 @@ extern volatile __C1FIFOINT14bits_t C1FIFOINT14bits __asm__ ("C1FIFOINT14") __at
 extern volatile unsigned int        C1FIFOINT14CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT14SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT14INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA14 __attribute__((section("sfrs")));
+#define C1FIFOUA14 C1FIFOUA14
+extern volatile unsigned int   C1FIFOUA14 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA14CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA14SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA14INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI14 __attribute__((section("sfrs")));
+#define C1FIFOCI14 C1FIFOCI14
+extern volatile unsigned int   C1FIFOCI14 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -9499,7 +10166,8 @@ extern volatile __C1FIFOCI14bits_t C1FIFOCI14bits __asm__ ("C1FIFOCI14") __attri
 extern volatile unsigned int        C1FIFOCI14CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI14SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI14INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON15 __attribute__((section("sfrs")));
+#define C1FIFOCON15 C1FIFOCON15
+extern volatile unsigned int   C1FIFOCON15 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -9524,7 +10192,8 @@ extern volatile __C1FIFOCON15bits_t C1FIFOCON15bits __asm__ ("C1FIFOCON15") __at
 extern volatile unsigned int        C1FIFOCON15CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON15SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON15INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT15 __attribute__((section("sfrs")));
+#define C1FIFOINT15 C1FIFOINT15
+extern volatile unsigned int   C1FIFOINT15 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -9553,11 +10222,13 @@ extern volatile __C1FIFOINT15bits_t C1FIFOINT15bits __asm__ ("C1FIFOINT15") __at
 extern volatile unsigned int        C1FIFOINT15CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT15SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT15INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA15 __attribute__((section("sfrs")));
+#define C1FIFOUA15 C1FIFOUA15
+extern volatile unsigned int   C1FIFOUA15 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA15CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA15SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA15INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI15 __attribute__((section("sfrs")));
+#define C1FIFOCI15 C1FIFOCI15
+extern volatile unsigned int   C1FIFOCI15 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -9570,7 +10241,8 @@ extern volatile __C1FIFOCI15bits_t C1FIFOCI15bits __asm__ ("C1FIFOCI15") __attri
 extern volatile unsigned int        C1FIFOCI15CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI15SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI15INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON16 __attribute__((section("sfrs")));
+#define C1FIFOCON16 C1FIFOCON16
+extern volatile unsigned int   C1FIFOCON16 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -9595,7 +10267,8 @@ extern volatile __C1FIFOCON16bits_t C1FIFOCON16bits __asm__ ("C1FIFOCON16") __at
 extern volatile unsigned int        C1FIFOCON16CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON16SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON16INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT16 __attribute__((section("sfrs")));
+#define C1FIFOINT16 C1FIFOINT16
+extern volatile unsigned int   C1FIFOINT16 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -9624,11 +10297,13 @@ extern volatile __C1FIFOINT16bits_t C1FIFOINT16bits __asm__ ("C1FIFOINT16") __at
 extern volatile unsigned int        C1FIFOINT16CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT16SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT16INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA16 __attribute__((section("sfrs")));
+#define C1FIFOUA16 C1FIFOUA16
+extern volatile unsigned int   C1FIFOUA16 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA16CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA16SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA16INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI16 __attribute__((section("sfrs")));
+#define C1FIFOCI16 C1FIFOCI16
+extern volatile unsigned int   C1FIFOCI16 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -9641,7 +10316,8 @@ extern volatile __C1FIFOCI16bits_t C1FIFOCI16bits __asm__ ("C1FIFOCI16") __attri
 extern volatile unsigned int        C1FIFOCI16CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI16SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI16INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON17 __attribute__((section("sfrs")));
+#define C1FIFOCON17 C1FIFOCON17
+extern volatile unsigned int   C1FIFOCON17 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -9666,7 +10342,8 @@ extern volatile __C1FIFOCON17bits_t C1FIFOCON17bits __asm__ ("C1FIFOCON17") __at
 extern volatile unsigned int        C1FIFOCON17CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON17SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON17INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT17 __attribute__((section("sfrs")));
+#define C1FIFOINT17 C1FIFOINT17
+extern volatile unsigned int   C1FIFOINT17 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -9695,11 +10372,13 @@ extern volatile __C1FIFOINT17bits_t C1FIFOINT17bits __asm__ ("C1FIFOINT17") __at
 extern volatile unsigned int        C1FIFOINT17CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT17SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT17INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA17 __attribute__((section("sfrs")));
+#define C1FIFOUA17 C1FIFOUA17
+extern volatile unsigned int   C1FIFOUA17 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA17CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA17SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA17INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI17 __attribute__((section("sfrs")));
+#define C1FIFOCI17 C1FIFOCI17
+extern volatile unsigned int   C1FIFOCI17 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -9712,7 +10391,8 @@ extern volatile __C1FIFOCI17bits_t C1FIFOCI17bits __asm__ ("C1FIFOCI17") __attri
 extern volatile unsigned int        C1FIFOCI17CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI17SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI17INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON18 __attribute__((section("sfrs")));
+#define C1FIFOCON18 C1FIFOCON18
+extern volatile unsigned int   C1FIFOCON18 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -9737,7 +10417,8 @@ extern volatile __C1FIFOCON18bits_t C1FIFOCON18bits __asm__ ("C1FIFOCON18") __at
 extern volatile unsigned int        C1FIFOCON18CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON18SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON18INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT18 __attribute__((section("sfrs")));
+#define C1FIFOINT18 C1FIFOINT18
+extern volatile unsigned int   C1FIFOINT18 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -9766,11 +10447,13 @@ extern volatile __C1FIFOINT18bits_t C1FIFOINT18bits __asm__ ("C1FIFOINT18") __at
 extern volatile unsigned int        C1FIFOINT18CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT18SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT18INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA18 __attribute__((section("sfrs")));
+#define C1FIFOUA18 C1FIFOUA18
+extern volatile unsigned int   C1FIFOUA18 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA18CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA18SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA18INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI18 __attribute__((section("sfrs")));
+#define C1FIFOCI18 C1FIFOCI18
+extern volatile unsigned int   C1FIFOCI18 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -9783,7 +10466,8 @@ extern volatile __C1FIFOCI18bits_t C1FIFOCI18bits __asm__ ("C1FIFOCI18") __attri
 extern volatile unsigned int        C1FIFOCI18CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI18SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI18INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON19 __attribute__((section("sfrs")));
+#define C1FIFOCON19 C1FIFOCON19
+extern volatile unsigned int   C1FIFOCON19 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -9808,7 +10492,8 @@ extern volatile __C1FIFOCON19bits_t C1FIFOCON19bits __asm__ ("C1FIFOCON19") __at
 extern volatile unsigned int        C1FIFOCON19CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON19SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON19INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT19 __attribute__((section("sfrs")));
+#define C1FIFOINT19 C1FIFOINT19
+extern volatile unsigned int   C1FIFOINT19 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -9837,11 +10522,13 @@ extern volatile __C1FIFOINT19bits_t C1FIFOINT19bits __asm__ ("C1FIFOINT19") __at
 extern volatile unsigned int        C1FIFOINT19CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT19SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT19INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA19 __attribute__((section("sfrs")));
+#define C1FIFOUA19 C1FIFOUA19
+extern volatile unsigned int   C1FIFOUA19 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA19CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA19SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA19INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI19 __attribute__((section("sfrs")));
+#define C1FIFOCI19 C1FIFOCI19
+extern volatile unsigned int   C1FIFOCI19 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -9854,7 +10541,8 @@ extern volatile __C1FIFOCI19bits_t C1FIFOCI19bits __asm__ ("C1FIFOCI19") __attri
 extern volatile unsigned int        C1FIFOCI19CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI19SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI19INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON20 __attribute__((section("sfrs")));
+#define C1FIFOCON20 C1FIFOCON20
+extern volatile unsigned int   C1FIFOCON20 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -9879,7 +10567,8 @@ extern volatile __C1FIFOCON20bits_t C1FIFOCON20bits __asm__ ("C1FIFOCON20") __at
 extern volatile unsigned int        C1FIFOCON20CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON20SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON20INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT20 __attribute__((section("sfrs")));
+#define C1FIFOINT20 C1FIFOINT20
+extern volatile unsigned int   C1FIFOINT20 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -9908,11 +10597,13 @@ extern volatile __C1FIFOINT20bits_t C1FIFOINT20bits __asm__ ("C1FIFOINT20") __at
 extern volatile unsigned int        C1FIFOINT20CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT20SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT20INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA20 __attribute__((section("sfrs")));
+#define C1FIFOUA20 C1FIFOUA20
+extern volatile unsigned int   C1FIFOUA20 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA20CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA20SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA20INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI20 __attribute__((section("sfrs")));
+#define C1FIFOCI20 C1FIFOCI20
+extern volatile unsigned int   C1FIFOCI20 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -9925,7 +10616,8 @@ extern volatile __C1FIFOCI20bits_t C1FIFOCI20bits __asm__ ("C1FIFOCI20") __attri
 extern volatile unsigned int        C1FIFOCI20CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI20SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI20INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON21 __attribute__((section("sfrs")));
+#define C1FIFOCON21 C1FIFOCON21
+extern volatile unsigned int   C1FIFOCON21 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -9950,7 +10642,8 @@ extern volatile __C1FIFOCON21bits_t C1FIFOCON21bits __asm__ ("C1FIFOCON21") __at
 extern volatile unsigned int        C1FIFOCON21CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON21SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON21INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT21 __attribute__((section("sfrs")));
+#define C1FIFOINT21 C1FIFOINT21
+extern volatile unsigned int   C1FIFOINT21 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -9979,11 +10672,13 @@ extern volatile __C1FIFOINT21bits_t C1FIFOINT21bits __asm__ ("C1FIFOINT21") __at
 extern volatile unsigned int        C1FIFOINT21CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT21SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT21INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA21 __attribute__((section("sfrs")));
+#define C1FIFOUA21 C1FIFOUA21
+extern volatile unsigned int   C1FIFOUA21 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA21CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA21SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA21INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI21 __attribute__((section("sfrs")));
+#define C1FIFOCI21 C1FIFOCI21
+extern volatile unsigned int   C1FIFOCI21 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -9996,7 +10691,8 @@ extern volatile __C1FIFOCI21bits_t C1FIFOCI21bits __asm__ ("C1FIFOCI21") __attri
 extern volatile unsigned int        C1FIFOCI21CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI21SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI21INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON22 __attribute__((section("sfrs")));
+#define C1FIFOCON22 C1FIFOCON22
+extern volatile unsigned int   C1FIFOCON22 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -10021,7 +10717,8 @@ extern volatile __C1FIFOCON22bits_t C1FIFOCON22bits __asm__ ("C1FIFOCON22") __at
 extern volatile unsigned int        C1FIFOCON22CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON22SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON22INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT22 __attribute__((section("sfrs")));
+#define C1FIFOINT22 C1FIFOINT22
+extern volatile unsigned int   C1FIFOINT22 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -10050,11 +10747,13 @@ extern volatile __C1FIFOINT22bits_t C1FIFOINT22bits __asm__ ("C1FIFOINT22") __at
 extern volatile unsigned int        C1FIFOINT22CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT22SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT22INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA22 __attribute__((section("sfrs")));
+#define C1FIFOUA22 C1FIFOUA22
+extern volatile unsigned int   C1FIFOUA22 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA22CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA22SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA22INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI22 __attribute__((section("sfrs")));
+#define C1FIFOCI22 C1FIFOCI22
+extern volatile unsigned int   C1FIFOCI22 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -10067,7 +10766,8 @@ extern volatile __C1FIFOCI22bits_t C1FIFOCI22bits __asm__ ("C1FIFOCI22") __attri
 extern volatile unsigned int        C1FIFOCI22CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI22SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI22INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON23 __attribute__((section("sfrs")));
+#define C1FIFOCON23 C1FIFOCON23
+extern volatile unsigned int   C1FIFOCON23 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -10092,7 +10792,8 @@ extern volatile __C1FIFOCON23bits_t C1FIFOCON23bits __asm__ ("C1FIFOCON23") __at
 extern volatile unsigned int        C1FIFOCON23CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON23SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON23INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT23 __attribute__((section("sfrs")));
+#define C1FIFOINT23 C1FIFOINT23
+extern volatile unsigned int   C1FIFOINT23 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -10121,11 +10822,13 @@ extern volatile __C1FIFOINT23bits_t C1FIFOINT23bits __asm__ ("C1FIFOINT23") __at
 extern volatile unsigned int        C1FIFOINT23CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT23SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT23INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA23 __attribute__((section("sfrs")));
+#define C1FIFOUA23 C1FIFOUA23
+extern volatile unsigned int   C1FIFOUA23 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA23CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA23SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA23INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI23 __attribute__((section("sfrs")));
+#define C1FIFOCI23 C1FIFOCI23
+extern volatile unsigned int   C1FIFOCI23 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -10138,7 +10841,8 @@ extern volatile __C1FIFOCI23bits_t C1FIFOCI23bits __asm__ ("C1FIFOCI23") __attri
 extern volatile unsigned int        C1FIFOCI23CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI23SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI23INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON24 __attribute__((section("sfrs")));
+#define C1FIFOCON24 C1FIFOCON24
+extern volatile unsigned int   C1FIFOCON24 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -10163,7 +10867,8 @@ extern volatile __C1FIFOCON24bits_t C1FIFOCON24bits __asm__ ("C1FIFOCON24") __at
 extern volatile unsigned int        C1FIFOCON24CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON24SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON24INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT24 __attribute__((section("sfrs")));
+#define C1FIFOINT24 C1FIFOINT24
+extern volatile unsigned int   C1FIFOINT24 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -10192,11 +10897,13 @@ extern volatile __C1FIFOINT24bits_t C1FIFOINT24bits __asm__ ("C1FIFOINT24") __at
 extern volatile unsigned int        C1FIFOINT24CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT24SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT24INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA24 __attribute__((section("sfrs")));
+#define C1FIFOUA24 C1FIFOUA24
+extern volatile unsigned int   C1FIFOUA24 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA24CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA24SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA24INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI24 __attribute__((section("sfrs")));
+#define C1FIFOCI24 C1FIFOCI24
+extern volatile unsigned int   C1FIFOCI24 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -10209,7 +10916,8 @@ extern volatile __C1FIFOCI24bits_t C1FIFOCI24bits __asm__ ("C1FIFOCI24") __attri
 extern volatile unsigned int        C1FIFOCI24CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI24SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI24INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON25 __attribute__((section("sfrs")));
+#define C1FIFOCON25 C1FIFOCON25
+extern volatile unsigned int   C1FIFOCON25 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -10234,7 +10942,8 @@ extern volatile __C1FIFOCON25bits_t C1FIFOCON25bits __asm__ ("C1FIFOCON25") __at
 extern volatile unsigned int        C1FIFOCON25CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON25SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON25INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT25 __attribute__((section("sfrs")));
+#define C1FIFOINT25 C1FIFOINT25
+extern volatile unsigned int   C1FIFOINT25 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -10263,11 +10972,13 @@ extern volatile __C1FIFOINT25bits_t C1FIFOINT25bits __asm__ ("C1FIFOINT25") __at
 extern volatile unsigned int        C1FIFOINT25CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT25SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT25INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA25 __attribute__((section("sfrs")));
+#define C1FIFOUA25 C1FIFOUA25
+extern volatile unsigned int   C1FIFOUA25 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA25CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA25SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA25INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI25 __attribute__((section("sfrs")));
+#define C1FIFOCI25 C1FIFOCI25
+extern volatile unsigned int   C1FIFOCI25 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -10280,7 +10991,8 @@ extern volatile __C1FIFOCI25bits_t C1FIFOCI25bits __asm__ ("C1FIFOCI25") __attri
 extern volatile unsigned int        C1FIFOCI25CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI25SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI25INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON26 __attribute__((section("sfrs")));
+#define C1FIFOCON26 C1FIFOCON26
+extern volatile unsigned int   C1FIFOCON26 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -10305,7 +11017,8 @@ extern volatile __C1FIFOCON26bits_t C1FIFOCON26bits __asm__ ("C1FIFOCON26") __at
 extern volatile unsigned int        C1FIFOCON26CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON26SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON26INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT26 __attribute__((section("sfrs")));
+#define C1FIFOINT26 C1FIFOINT26
+extern volatile unsigned int   C1FIFOINT26 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -10334,11 +11047,13 @@ extern volatile __C1FIFOINT26bits_t C1FIFOINT26bits __asm__ ("C1FIFOINT26") __at
 extern volatile unsigned int        C1FIFOINT26CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT26SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT26INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA26 __attribute__((section("sfrs")));
+#define C1FIFOUA26 C1FIFOUA26
+extern volatile unsigned int   C1FIFOUA26 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA26CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA26SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA26INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI26 __attribute__((section("sfrs")));
+#define C1FIFOCI26 C1FIFOCI26
+extern volatile unsigned int   C1FIFOCI26 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -10351,7 +11066,8 @@ extern volatile __C1FIFOCI26bits_t C1FIFOCI26bits __asm__ ("C1FIFOCI26") __attri
 extern volatile unsigned int        C1FIFOCI26CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI26SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI26INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON27 __attribute__((section("sfrs")));
+#define C1FIFOCON27 C1FIFOCON27
+extern volatile unsigned int   C1FIFOCON27 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -10376,7 +11092,8 @@ extern volatile __C1FIFOCON27bits_t C1FIFOCON27bits __asm__ ("C1FIFOCON27") __at
 extern volatile unsigned int        C1FIFOCON27CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON27SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON27INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT27 __attribute__((section("sfrs")));
+#define C1FIFOINT27 C1FIFOINT27
+extern volatile unsigned int   C1FIFOINT27 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -10405,11 +11122,13 @@ extern volatile __C1FIFOINT27bits_t C1FIFOINT27bits __asm__ ("C1FIFOINT27") __at
 extern volatile unsigned int        C1FIFOINT27CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT27SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT27INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA27 __attribute__((section("sfrs")));
+#define C1FIFOUA27 C1FIFOUA27
+extern volatile unsigned int   C1FIFOUA27 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA27CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA27SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA27INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI27 __attribute__((section("sfrs")));
+#define C1FIFOCI27 C1FIFOCI27
+extern volatile unsigned int   C1FIFOCI27 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -10422,7 +11141,8 @@ extern volatile __C1FIFOCI27bits_t C1FIFOCI27bits __asm__ ("C1FIFOCI27") __attri
 extern volatile unsigned int        C1FIFOCI27CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI27SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI27INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON28 __attribute__((section("sfrs")));
+#define C1FIFOCON28 C1FIFOCON28
+extern volatile unsigned int   C1FIFOCON28 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -10447,7 +11167,8 @@ extern volatile __C1FIFOCON28bits_t C1FIFOCON28bits __asm__ ("C1FIFOCON28") __at
 extern volatile unsigned int        C1FIFOCON28CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON28SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON28INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT28 __attribute__((section("sfrs")));
+#define C1FIFOINT28 C1FIFOINT28
+extern volatile unsigned int   C1FIFOINT28 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -10476,11 +11197,13 @@ extern volatile __C1FIFOINT28bits_t C1FIFOINT28bits __asm__ ("C1FIFOINT28") __at
 extern volatile unsigned int        C1FIFOINT28CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT28SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT28INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA28 __attribute__((section("sfrs")));
+#define C1FIFOUA28 C1FIFOUA28
+extern volatile unsigned int   C1FIFOUA28 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA28CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA28SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA28INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI28 __attribute__((section("sfrs")));
+#define C1FIFOCI28 C1FIFOCI28
+extern volatile unsigned int   C1FIFOCI28 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -10493,7 +11216,8 @@ extern volatile __C1FIFOCI28bits_t C1FIFOCI28bits __asm__ ("C1FIFOCI28") __attri
 extern volatile unsigned int        C1FIFOCI28CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI28SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI28INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON29 __attribute__((section("sfrs")));
+#define C1FIFOCON29 C1FIFOCON29
+extern volatile unsigned int   C1FIFOCON29 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -10518,7 +11242,8 @@ extern volatile __C1FIFOCON29bits_t C1FIFOCON29bits __asm__ ("C1FIFOCON29") __at
 extern volatile unsigned int        C1FIFOCON29CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON29SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON29INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT29 __attribute__((section("sfrs")));
+#define C1FIFOINT29 C1FIFOINT29
+extern volatile unsigned int   C1FIFOINT29 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -10547,11 +11272,13 @@ extern volatile __C1FIFOINT29bits_t C1FIFOINT29bits __asm__ ("C1FIFOINT29") __at
 extern volatile unsigned int        C1FIFOINT29CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT29SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT29INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA29 __attribute__((section("sfrs")));
+#define C1FIFOUA29 C1FIFOUA29
+extern volatile unsigned int   C1FIFOUA29 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA29CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA29SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA29INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI29 __attribute__((section("sfrs")));
+#define C1FIFOCI29 C1FIFOCI29
+extern volatile unsigned int   C1FIFOCI29 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -10564,7 +11291,8 @@ extern volatile __C1FIFOCI29bits_t C1FIFOCI29bits __asm__ ("C1FIFOCI29") __attri
 extern volatile unsigned int        C1FIFOCI29CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI29SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI29INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON30 __attribute__((section("sfrs")));
+#define C1FIFOCON30 C1FIFOCON30
+extern volatile unsigned int   C1FIFOCON30 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -10589,7 +11317,8 @@ extern volatile __C1FIFOCON30bits_t C1FIFOCON30bits __asm__ ("C1FIFOCON30") __at
 extern volatile unsigned int        C1FIFOCON30CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON30SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON30INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT30 __attribute__((section("sfrs")));
+#define C1FIFOINT30 C1FIFOINT30
+extern volatile unsigned int   C1FIFOINT30 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -10618,11 +11347,13 @@ extern volatile __C1FIFOINT30bits_t C1FIFOINT30bits __asm__ ("C1FIFOINT30") __at
 extern volatile unsigned int        C1FIFOINT30CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT30SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT30INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA30 __attribute__((section("sfrs")));
+#define C1FIFOUA30 C1FIFOUA30
+extern volatile unsigned int   C1FIFOUA30 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA30CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA30SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA30INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI30 __attribute__((section("sfrs")));
+#define C1FIFOCI30 C1FIFOCI30
+extern volatile unsigned int   C1FIFOCI30 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -10635,7 +11366,8 @@ extern volatile __C1FIFOCI30bits_t C1FIFOCI30bits __asm__ ("C1FIFOCI30") __attri
 extern volatile unsigned int        C1FIFOCI30CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI30SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI30INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCON31 __attribute__((section("sfrs")));
+#define C1FIFOCON31 C1FIFOCON31
+extern volatile unsigned int   C1FIFOCON31 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned TXPRI:2;
@@ -10660,7 +11392,8 @@ extern volatile __C1FIFOCON31bits_t C1FIFOCON31bits __asm__ ("C1FIFOCON31") __at
 extern volatile unsigned int        C1FIFOCON31CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON31SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCON31INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOINT31 __attribute__((section("sfrs")));
+#define C1FIFOINT31 C1FIFOINT31
+extern volatile unsigned int   C1FIFOINT31 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned RXNEMPTYIF:1;
@@ -10689,11 +11422,13 @@ extern volatile __C1FIFOINT31bits_t C1FIFOINT31bits __asm__ ("C1FIFOINT31") __at
 extern volatile unsigned int        C1FIFOINT31CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT31SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOINT31INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOUA31 __attribute__((section("sfrs")));
+#define C1FIFOUA31 C1FIFOUA31
+extern volatile unsigned int   C1FIFOUA31 __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA31CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA31SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOUA31INV __attribute__((section("sfrs")));
-extern volatile unsigned int        C1FIFOCI31 __attribute__((section("sfrs")));
+#define C1FIFOCI31 C1FIFOCI31
+extern volatile unsigned int   C1FIFOCI31 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned CFIFOCI:5;
@@ -10706,7 +11441,8 @@ extern volatile __C1FIFOCI31bits_t C1FIFOCI31bits __asm__ ("C1FIFOCI31") __attri
 extern volatile unsigned int        C1FIFOCI31CLR __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI31SET __attribute__((section("sfrs")));
 extern volatile unsigned int        C1FIFOCI31INV __attribute__((section("sfrs")));
-extern volatile unsigned int        DEVCFG3 __attribute__((section("sfrs")));
+#define DEVCFG3 DEVCFG3
+extern volatile unsigned int   DEVCFG3 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned USERID:16;
@@ -10721,7 +11457,8 @@ typedef union {
   };
 } __DEVCFG3bits_t;
 extern volatile __DEVCFG3bits_t DEVCFG3bits __asm__ ("DEVCFG3") __attribute__((section("sfrs")));
-extern volatile unsigned int        DEVCFG2 __attribute__((section("sfrs")));
+#define DEVCFG2 DEVCFG2
+extern volatile unsigned int   DEVCFG2 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned FPLLIDIV:3;
@@ -10738,7 +11475,8 @@ typedef union {
   };
 } __DEVCFG2bits_t;
 extern volatile __DEVCFG2bits_t DEVCFG2bits __asm__ ("DEVCFG2") __attribute__((section("sfrs")));
-extern volatile unsigned int        DEVCFG1 __attribute__((section("sfrs")));
+#define DEVCFG1 DEVCFG1
+extern volatile unsigned int   DEVCFG1 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned FNOSC:3;
@@ -10762,7 +11500,8 @@ typedef union {
   };
 } __DEVCFG1bits_t;
 extern volatile __DEVCFG1bits_t DEVCFG1bits __asm__ ("DEVCFG1") __attribute__((section("sfrs")));
-extern volatile unsigned int        DEVCFG0 __attribute__((section("sfrs")));
+#define DEVCFG0 DEVCFG0
+extern volatile unsigned int   DEVCFG0 __attribute__((section("sfrs")));
 typedef union {
   struct {
     unsigned DEBUG:2;
@@ -23077,10 +23816,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _ANSELC_w_MASK                           0xFFFFFFFF
 #define _ANSELC_w_LENGTH                         0x00000020
 
-#define _TRISC_TRISC0_POSITION                   0x00000000
-#define _TRISC_TRISC0_MASK                       0x00000001
-#define _TRISC_TRISC0_LENGTH                     0x00000001
-
 #define _TRISC_TRISC1_POSITION                   0x00000001
 #define _TRISC_TRISC1_MASK                       0x00000002
 #define _TRISC_TRISC1_LENGTH                     0x00000001
@@ -23116,10 +23851,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _TRISC_w_POSITION                        0x00000000
 #define _TRISC_w_MASK                            0xFFFFFFFF
 #define _TRISC_w_LENGTH                          0x00000020
-
-#define _PORTC_RC0_POSITION                      0x00000000
-#define _PORTC_RC0_MASK                          0x00000001
-#define _PORTC_RC0_LENGTH                        0x00000001
 
 #define _PORTC_RC1_POSITION                      0x00000001
 #define _PORTC_RC1_MASK                          0x00000002
@@ -23157,10 +23888,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _PORTC_w_MASK                            0xFFFFFFFF
 #define _PORTC_w_LENGTH                          0x00000020
 
-#define _LATC_LATC0_POSITION                     0x00000000
-#define _LATC_LATC0_MASK                         0x00000001
-#define _LATC_LATC0_LENGTH                       0x00000001
-
 #define _LATC_LATC1_POSITION                     0x00000001
 #define _LATC_LATC1_MASK                         0x00000002
 #define _LATC_LATC1_LENGTH                       0x00000001
@@ -23196,10 +23923,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _LATC_w_POSITION                         0x00000000
 #define _LATC_w_MASK                             0xFFFFFFFF
 #define _LATC_w_LENGTH                           0x00000020
-
-#define _ODCC_ODCC0_POSITION                     0x00000000
-#define _ODCC_ODCC0_MASK                         0x00000001
-#define _ODCC_ODCC0_LENGTH                       0x00000001
 
 #define _ODCC_ODCC1_POSITION                     0x00000001
 #define _ODCC_ODCC1_MASK                         0x00000002
@@ -23237,10 +23960,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _ODCC_w_MASK                             0xFFFFFFFF
 #define _ODCC_w_LENGTH                           0x00000020
 
-#define _CNPUC_CNPUC0_POSITION                   0x00000000
-#define _CNPUC_CNPUC0_MASK                       0x00000001
-#define _CNPUC_CNPUC0_LENGTH                     0x00000001
-
 #define _CNPUC_CNPUC1_POSITION                   0x00000001
 #define _CNPUC_CNPUC1_MASK                       0x00000002
 #define _CNPUC_CNPUC1_LENGTH                     0x00000001
@@ -23276,10 +23995,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _CNPUC_w_POSITION                        0x00000000
 #define _CNPUC_w_MASK                            0xFFFFFFFF
 #define _CNPUC_w_LENGTH                          0x00000020
-
-#define _CNPDC_CNPDC0_POSITION                   0x00000000
-#define _CNPDC_CNPDC0_MASK                       0x00000001
-#define _CNPDC_CNPDC0_LENGTH                     0x00000001
 
 #define _CNPDC_CNPDC1_POSITION                   0x00000001
 #define _CNPDC_CNPDC1_MASK                       0x00000002
@@ -23329,10 +24044,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _CNCONC_w_MASK                           0xFFFFFFFF
 #define _CNCONC_w_LENGTH                         0x00000020
 
-#define _CNENC_CNIEC0_POSITION                   0x00000000
-#define _CNENC_CNIEC0_MASK                       0x00000001
-#define _CNENC_CNIEC0_LENGTH                     0x00000001
-
 #define _CNENC_CNIEC1_POSITION                   0x00000001
 #define _CNENC_CNIEC1_MASK                       0x00000002
 #define _CNENC_CNIEC1_LENGTH                     0x00000001
@@ -23368,10 +24079,6 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _CNENC_w_POSITION                        0x00000000
 #define _CNENC_w_MASK                            0xFFFFFFFF
 #define _CNENC_w_LENGTH                          0x00000020
-
-#define _CNSTATC_CNSTATC0_POSITION               0x00000000
-#define _CNSTATC_CNSTATC0_MASK                   0x00000001
-#define _CNSTATC_CNSTATC0_LENGTH                 0x00000001
 
 #define _CNSTATC_CNSTATC1_POSITION               0x00000001
 #define _CNSTATC_CNSTATC1_MASK                   0x00000002
@@ -30803,7 +31510,23 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #define _USB_BASE_ADDRESS                        0xBF885040
 #define _WDT_BASE_ADDRESS                        0xBF800000
 
-/*  The following device macros are predefined by the chipKIT
+/* Default Memory-region macros */
+#define __EXCEPTION_MEM_BASE                     0x9D01F000
+#define __EXCEPTION_MEM_LENGTH                   0x1000
+#define __KSEG0_PROGRAM_MEM_BASE                 0x9D000000
+#define __KSEG0_PROGRAM_MEM_LENGTH               0x1F000
+#define __DEBUG_EXEC_MEM_BASE                    0x9FC00490
+#define __DEBUG_EXEC_MEM_LENGTH                  0x760
+#define __KSEG1_BOOT_MEM_BASE                    0xBFC00000
+#define __KSEG1_BOOT_MEM_LENGTH                  0x490
+#define __KSEG1_DATA_MEM_BASE                    0xA0000000
+#define __KSEG1_DATA_MEM_LENGTH                  0x4000
+#define __CONFIGSFRS_BASE                        0xBFC00BF0
+#define __CONFIGSFRS_LENGTH                      0x10
+#define __SFRS_BASE                              0xBF800000
+#define __SFRS_LENGTH                            0x100000
+
+/*  The following device macros are predefined by the MPLAB XC32
  *  compiler when compiling with the -mprocessor=<device> option.
  *  We also define them here to help the MPLAB X editor evaluate
  *  them correctly.
@@ -30860,6 +31583,12 @@ extern volatile __DEVCFG0bits_t DEVCFG0bits __asm__ ("DEVCFG0") __attribute__((s
 #endif
 #ifndef __PIC32_HAS_MIPS16
 # define __PIC32_HAS_MIPS16 1
+#endif
+#ifndef __PIC32_HAS_INIT_DATA
+# define __PIC32_HAS_INIT_DATA 1
+#endif
+#ifndef __PIC32_SRS_SET_COUNT
+# define __PIC32_SRS_SET_COUNT 1
 #endif
 
 /* include generic header file for backwards compatibility with old C32 v1.xx code */

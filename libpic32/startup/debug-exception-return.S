@@ -7,8 +7,8 @@
  *
  * Processor:       PIC32
  *
- * Compiler:        chipKIT v1.30
- *                  MPLAB X IDE
+ * Compiler:        chipKIT
+ 
  * Company:         Microchip Technology Inc.
  *
  * Software License Agreement
@@ -74,8 +74,14 @@ __DbgExecReturn:
         mtc0      k1, _CP0_DESAVE               # preserve the k1 register
         ehb
         
+#if defined(__PIC__)
+        lw        t9, %call16(__pic32_software_reset)(gp)    # use __pic32_software_reset as new DEPC
+        move      k1, t9
+        beq       t9, $0, 1f
+#else
         la        k1, __pic32_software_reset    # use __pic32_software_reset as new DEPC
         beq       k1, $0, 1f
+#endif
         nop
 
         mtc0      k1, _CP0_DEPC                 # store new DEPC

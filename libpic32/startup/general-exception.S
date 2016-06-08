@@ -7,8 +7,8 @@
  *
  * Processor:       PIC32
  *
- * Compiler:        chipKIT v1.00
- *                  MPLAB X IDE
+ * Compiler:        chipKIT
+ 
  * Company:         Microchip Technology Inc.
  *
  * Software License Agreement
@@ -90,6 +90,15 @@ _general_exception_context:
    mfhi t0
    sw t0, 80(sp)
 
+#if defined(__PIC__)
+   lw      t9,%call16(_general_exception_handler)(gp)
+   nop
+   # Pass Cause and Status to the handler function
+   mfc0 a0, _CP0_CAUSE
+   mfc0 a1, _CP0_STATUS
+   jalr    t9
+   nop
+#else
    la      k0,_general_exception_handler
    nop
    
@@ -98,6 +107,7 @@ _general_exception_context:
    mfc0 a1, _CP0_STATUS
    jalr    k0
    nop
+#endif
 
    lw t0, 80(sp)
    mthi t0

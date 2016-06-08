@@ -1,8 +1,8 @@
 /*--------------------------------------------------------------------------
  * MPLAB XC Compiler -  MGC3431 linker script
- * Build date : Apr 29 2015
+ * Build date : Feb 18 2016
  * 
- * Copyright (c) 2015, Microchip Technology Inc. and its subsidiaries ("Microchip")
+ * Copyright (c) 2016, Microchip Technology Inc. and its subsidiaries ("Microchip")
  * All rights reserved.
  * 
  * This software is developed by Microchip Technology Inc. and its
@@ -58,20 +58,28 @@ PROVIDE(_min_stack_size = 0x400) ;
 INPUT("processor.o")
 
 /*************************************************************************
- * Processor-specific peripheral libraries are optional
+ * Processor-specific legacy peripheral libraries are optional.
+ * These plibs are available as a separate download from
+ * http://www.microchip.com/mplabxc
+ * Use MPLAB Harmony for new projects.
+ * http://www.microchip.com/mplabharmony
  *************************************************************************/
 OPTIONAL("libmchp_peripheral.a")
 OPTIONAL("libmchp_peripheral_MGC3431.a")
 
 /*************************************************************************
- * For interrupt vector handling
+ * Symbols used for interrupt-vector table generation
+ * To override the defaults, define the _vector_spacing & _ebase_address
+ * symbols using the --defsym linker opt as shown in these examples:
+ *   xc32-gcc src.c -Wl,--defsym=_vector_spacing=2
+ *   xc32-gcc src.c -Wl,--defsym=_ebase_address=0x9D001000
  *************************************************************************/
-PROVIDE(_vector_spacing = 0x00000001);
-_ebase_address = 0x9D01F000;
+PROVIDE(_vector_spacing = 0x0001);
+PROVIDE(_ebase_address = 0x9D01F000);
 
 /*************************************************************************
  * Memory Address Equates
- * _RESET_ADDR                    -- Reset Vector
+ * _RESET_ADDR                    -- Reset Vector or entry point
  * _BEV_EXCPT_ADDR                -- Boot exception Vector
  * _DBG_EXCPT_ADDR                -- In-circuit Debugging Exception Vector
  * _DBG_CODE_ADDR                 -- In-circuit Debug Executive address
@@ -97,6 +105,8 @@ _GEN_EXCPT_ADDR                = _ebase_address + 0x180;
  * The config_<address> sections are used to locate the config words at
  * their absolute addresses.
  *************************************************************************/
+
+
 MEMORY
 {
   kseg0_program_mem     (rx)  : ORIGIN = 0x9D000000, LENGTH = 0x1F000
@@ -543,7 +553,7 @@ SECTIONS
   } >kseg0_program_mem
   .ctors   :
   {
-    /* chipKIT uses crtbegin.o to find the start of
+    /* XC32 uses crtbegin.o to find the start of
        the constructors, so we make sure it is
        first.  Because this is a wildcard, it
        doesn't matter if the user does not
