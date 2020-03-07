@@ -236,7 +236,7 @@ _sbrk_init (void)
     else {
 	/* kuseg: use virtual addresses */
 	_minbrk = (void *) min;
-	_minbrk = (void *) max;
+	_maxbrk = (void *) max;
     }
     
     curbrk = _minbrk;
@@ -267,7 +267,7 @@ static inline void calculate_maxbrk() {
         _maxbrk = PA_TO_KVA0 (max);
     } else {
         /* kuseg: use virtual addresses */
-        _minbrk = (void *) max;
+        _maxbrk = (void *) max;
     }
 }
 
