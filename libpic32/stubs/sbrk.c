@@ -242,12 +242,42 @@ _sbrk_init (void)
     curbrk = _minbrk;
 }
 
+/* Recalculate the maxbrk value based on the current stack pointer, with
+ * 1kB of leeway for safety.  This means that it is possible for the stack
+ * to smash into the heap, but the heap should never smash into the stack.
+ * Code copied almost verbatim from above.
+ */
+static inline void calculate_maxbrk() {
+    char * sp;
+    _paddr_t max;
+    __asm__ ("move %0,$sp" : "=d" (sp));
+    void *maxva = sp - 1024;
+
+    if (IS_KVA01 (maxva))
+        max = KVA_TO_PA (maxva);
+    else
+        max = (_paddr_t) maxva;
+
+    /* put minbrk/maxbrk in same kernel virtual segment as data */
+        if (IS_KVA1 (_end)) {
+        /* kseg1: uncached data segment */
+        _maxbrk = PA_TO_KVA1 (max);
+    } else if (IS_KVA0 (_end)) {
+        /* kseg0: cached data segmnt */
+        _maxbrk = PA_TO_KVA0 (max);
+    } else {
+        /* kuseg: use virtual addresses */
+        _minbrk = (void *) max;
+    }
+}
 
 void *
 _sbrk (int n)
 {
     void *newbrk, *p;
-    
+
+    calculate_maxbrk();
+
 #if 0
     pthread_mutex_lock (&sbmx);
 #endif
